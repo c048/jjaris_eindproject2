@@ -15,9 +15,8 @@ import javax.persistence.*;
 public class Team implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String naam;
 	private int code;
+	private String naam;
 	private boolean HR;
 	private List<Werknemer> teamleden;
 	private Werknemer teamverantwoordelijke;

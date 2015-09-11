@@ -18,9 +18,11 @@ public class Werknemer implements Serializable {
 	private String email;
 	private LocalDate geboortedatum;
 	private String passwoord;
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
 	private List<VerlofAanvraag> verlofaanvragen;
 	private Team team;
+	@OneToOne(cascade = CascadeType.ALL)
 	private Adres adres;
 	private static final long serialVersionUID = 1L;
 
@@ -95,5 +97,44 @@ public class Werknemer implements Serializable {
 	public void setVerlofaanvragen(List<VerlofAanvraag> verlofaanvragen) {
 		this.verlofaanvragen = verlofaanvragen;
 	}
-   
+
+	public boolean isVerantwoordelijke() {
+		return false;
+	}
+	
+	public boolean isHR() {
+		return false;
+	}
+	
+	public int getAantalBeschikBareVerlofDagen() {
+		return 0;
+	}
+	
+	public void voegVerlofAanvroegToe(LocalDate startdatum, LocalDate einddatum) {
+		
+	}
+	
+	public void annuleerVerlofAanvraag(int verlofaanvraagId) {
+		
+	}
+	
+	public List<VerlofAanvraag> getLopendeVerlofAanvragen() {
+		return null;
+	}
+	
+	public int getJaarlijksVerlof(LocalDate jaartal) {
+		return 0;
+	}
+	
+	public List<VerlofAanvraag> getAlleVerlofAanvragen(int begindatum, LocalDate einddatum, Toestand toestand) {
+		return null;
+	}
+	
+	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
+		return null;
+	}
+	
+	public List<VerlofAanvraag> getAlleVerlofAanvragen(int begindatum, LocalDate einddatum) {
+		return null;
+	}
 }
