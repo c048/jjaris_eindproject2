@@ -24,14 +24,7 @@ public class Team implements Serializable {
 
 	public Team() {
 		super();
-	}   
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}   
+	} 
 	public String getNaam() {
 		return this.naam;
 	}
