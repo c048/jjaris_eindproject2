@@ -2,11 +2,11 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="jjaris">
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>program.Werknemer</class>
-		<class>program.Team</class>
-		<class>program.Adres</class>
-		<class>program.VerlofAanvraag</class>
-		<class>program.JaarlijksVerlof</class>
+		<class>entities.Werknemer</class>
+		<class>entities.Team</class>
+		<class>entities.Adres</class>
+		<class>entities.VerlofAanvraag</class>
+		<class>entities.JaarlijksVerlof</class>
 		
 
 		<properties>
