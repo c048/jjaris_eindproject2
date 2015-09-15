@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 
 /**
@@ -27,7 +28,13 @@ public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Team() {
-		super();
+		
+	}
+	
+	//toegevoegd door iris - kreeg nullpointerex op voegTeamlidToe
+	@PostConstruct
+	public void init(){
+		teamleden = new ArrayList<Werknemer>();
 	}
 
 	public String getNaam() {
@@ -69,7 +76,7 @@ public class Team implements Serializable {
 	public void setTeamverantwoordelijke(Werknemer teamverantwoordelijke) {
 		this.teamverantwoordelijke = teamverantwoordelijke;
 		teamverantwoordelijke.setTeam(this);
-		voegTeamlidToe(teamverantwoordelijke);
+		//voegTeamlidToe(teamverantwoordelijke);
 	}
 
 	// vanaf hier Stef, nog geen foutafhandeling!!
