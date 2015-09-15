@@ -53,7 +53,7 @@ public class VerlofAanvraag implements Serializable{
 		setAanvraagdatum(now);		
 	}
 	/**
-	 * 
+	 * constructor met start en einddatum verlofperiode
 	 * @param startDatum
 	 * @param eindDatum
 	 * @return
@@ -109,10 +109,9 @@ public class VerlofAanvraag implements Serializable{
 	/**
 	 * Verlofaanvraag wordt geannuleerd 
 	 */
-	public void annuleren(VerlofAanvraag aanvraag){
+	public void annuleren(){
 		setToestand(Toestand.GEANNULEERD);
 	}
-	
 	
 	public int getId() {
 		return id;
@@ -141,6 +140,21 @@ public class VerlofAanvraag implements Serializable{
 	public Calendar getReactiedatum() {
 		return reactiedatum;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void setReactiedatum(GregorianCalendar reactiedatum) {
 		this.reactiedatum = reactiedatum;
 	}
@@ -168,7 +182,7 @@ public class VerlofAanvraag implements Serializable{
 	 * @param EindDatum
 	 * @return
 	 */
-	public int weekDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+	static int weekDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
 	    
 	    int w1 = startDatum.get(Calendar.DAY_OF_WEEK);
 	    startDatum.add(Calendar.DAY_OF_WEEK, -w1);
