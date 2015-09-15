@@ -1,6 +1,7 @@
 package programs;
 
 import java.time.LocalDate;
+import java.util.GregorianCalendar;
 
 import daos.WerknemerDAO;
 import entities.Adres;
@@ -18,7 +19,7 @@ public class MainWerknemer {
 		adres1.setStraat("Emiel Vanderveldestraat");
 		werknemer1.setAdres(adres1);
 		werknemer1.setEmail("irisdelvaux@hotmail.com");
-		werknemer1.setGeboortedatum(LocalDate.of(76, 7, 21));
+		werknemer1.setGeboortedatum(new GregorianCalendar(76, 7, 21));
 		werknemer1.setNaam("Delvaux");
 		werknemer1.setVoornaam("Iris");
 		werknemer1.setPasswoord("lol24");

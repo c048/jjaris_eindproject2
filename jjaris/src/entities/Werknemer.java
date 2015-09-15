@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
