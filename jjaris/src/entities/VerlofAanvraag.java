@@ -45,22 +45,16 @@ public class VerlofAanvraag implements Serializable{
 	 * toestand op INGEDIEND
 	 * aanvraagdatum op now
 	 */
-	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum);
-	
-	//TODO
-	/**
-	 * enkel weekdagen 
-	 * 
-	 * NOG GEEN REKENING GEHOUDEN MET FEESTDAGEN OF 
-	 * 
-	 * @return aantal dagen die deze verlofaanvraag bevat 
-	 */
-	public int getOpTeNemenDagen(){
+	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
+		GregorianCalendar now = new GregorianCalendar();
+		setPeriode(startDatum, eindDatum);
+		setToestand(Toestand.INGEDIEND);
+		setAanvraagdatum(now);
 		
-		
-		//TODO
-		return 0;	
 	}
+		
+		
+
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
@@ -68,7 +62,10 @@ public class VerlofAanvraag implements Serializable{
 	 * @param eindDatum
 	 */
 	public void setPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum){
-		//TODO
+		if(geldigVerlof(startDatum, eindDatum)){
+			this.startdatum = startDatum;
+			this.einddatum = eindDatum;
+		}	
 	}
 	
 	/**
