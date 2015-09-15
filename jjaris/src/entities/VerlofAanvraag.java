@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;
-import java.time.GregorianCalendar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -86,8 +85,7 @@ public class VerlofAanvraag implements Serializable{
 		if(startDatum.before(eindDatum) && startDatum.before(now)){	
 			return true;
 		}	
-		return false;
-		
+		return false;		
 	}
 	
 	/**
@@ -95,8 +93,7 @@ public class VerlofAanvraag implements Serializable{
 	 */
 	public void goedkeuren(){
 		setToestand(Toestand.GOEDGEKEURD);
-		}
-	
+		}	
 	/**
 	 *Verlofaanvraag wordt afgekeurd door teamleader 
 	 */
