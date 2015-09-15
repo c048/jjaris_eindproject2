@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import entities.Team;
 import entities.Toestand;
 import entities.VerlofAanvraag;
+import entities.Werknemer;
 
 public class VerlofAanvraagDAO {
 	
@@ -41,23 +42,35 @@ public class VerlofAanvraagDAO {
 	
 	}
 	
-//	@Transactional
-//	public static List<VerlofAanvraag> getVerlofAanvragen(int teamCode){
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//	}
+	@Transactional
+	public static List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
+		
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM verlofaanvraag c "
+				+ "WHERE c.code = :teamcode ",VerlofAanvraag.class);
+		
+		
+		
+		return (List<VerlofAanvraag>) query.setParameter("code", teamCode).getResultList();
+		
+		
+		
+		
+		
+	}
 	
 	
-//	@Transactional
-//	public static List<VerlofAanvraag> getVerlofAanvragen(int personeelnr){
-//		
-//		
-//	}
+	@Transactional
+	public static List<VerlofAanvraag> getVerlofAanvragenWerknemer(int personeelnr){
+		
+//		Werknemer werknemer = em.find(Werknemer.class, personeelnr);
+		
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM verlofaanvraag c "
+				+ "WHERE c.personeelsnummer = :personeelnr ",VerlofAanvraag.class);
+		
+		
+		
+		return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr).getResultList();
+	}
 	
 //	public static List<VerlofAanvraag> getVerlofAanvragen(LocalDate startdatum, LocalDate einddatum, Toestand toestand,int teamCode,int personeelnr){
 //		
