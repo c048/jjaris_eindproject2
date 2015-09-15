@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.lang.String;
 import java.time.LocalDate;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -16,7 +17,8 @@ public class Werknemer implements Serializable {
 	private String naam;
 	private String Voornaam;
 	private String email;
-	private LocalDate geboortedatum;
+	@Temporal(TemporalType.DATE)
+	private GregorianCalendar geboortedatum;
 	private String passwoord;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
@@ -59,11 +61,11 @@ public class Werknemer implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}   
-	public LocalDate getGeboortedatum() {
+	public GregorianCalendar getGeboortedatum() {
 		return this.geboortedatum;
 	}
 
-	public void setGeboortedatum(LocalDate geboortedatum) {
+	public void setGeboortedatum(GregorianCalendar geboortedatum) {
 		this.geboortedatum = geboortedatum;
 	}   
 	public String getPasswoord() {
@@ -112,7 +114,7 @@ public class Werknemer implements Serializable {
 		return 0;
 	}
 	
-	public void voegVerlofAanvroegToe(LocalDate startdatum, LocalDate einddatum) {
+	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
 		
 	}
 	
@@ -124,11 +126,11 @@ public class Werknemer implements Serializable {
 		return null;
 	}
 	
-	public int getJaarlijksVerlof(LocalDate jaartal) {
+	public int getJaarlijksVerlof(int jaartal) {
 		return 0;
 	}
 	
-	public List<VerlofAanvraag> getAlleVerlofAanvragen(int begindatum, LocalDate einddatum, Toestand toestand) {
+	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
 		return null;
 	}
 	
@@ -136,7 +138,7 @@ public class Werknemer implements Serializable {
 		return null;
 	}
 	
-	public List<VerlofAanvraag> getAlleVerlofAanvragen(int begindatum, LocalDate einddatum) {
+	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
 		return null;
 	}
 }
