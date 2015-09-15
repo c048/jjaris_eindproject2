@@ -3,15 +3,20 @@ package programs;
 
 import java.util.GregorianCalendar;
 
-import daos.TeamDAO;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
+//import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Adres;
 import entities.Team;
 import entities.Werknemer;
 
+@Named
+@RequestScoped
 public class MainWerknemer {
 
-	public static void main(String[] args) {
+	public static void main() {
 		Werknemer werknemer1 = new Werknemer();
 		Adres adres1 = new Adres();
 		adres1.setGemeente("Hoboken");

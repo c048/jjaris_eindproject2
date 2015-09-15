@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Embeddable
 public class Adres implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id;
 	private static final long serialVersionUID = 1L;
 	private String straat;
