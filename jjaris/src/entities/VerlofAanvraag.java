@@ -31,12 +31,9 @@ public class VerlofAanvraag implements Serializable{
 	private String reden;
 	@ManyToOne
 	private Werknemer werknemer;
-	
-	
-	
+		
 	/**
-	 * Lege Constructor
-	 * 
+	 *  Lege Constructor
 	 */
 	public VerlofAanvraag() {
 	}
@@ -60,8 +57,7 @@ public class VerlofAanvraag implements Serializable{
 	 */
 	public int getPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum){
 		return weekDagen(startDatum, eindDatum);
-	}
-			
+	}			
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
@@ -90,8 +86,7 @@ public class VerlofAanvraag implements Serializable{
 			return true;
 		}	
 		return false;		
-	}
-	
+	}	
 	/**
 	 * Verlofaanvraag wordt goedgekeurd door teamleader
 	 */
@@ -112,7 +107,6 @@ public class VerlofAanvraag implements Serializable{
 	public void annuleren(){
 		setToestand(Toestand.GEANNULEERD);
 	}
-	
 	public int getId() {
 		return id;
 	}
@@ -140,21 +134,6 @@ public class VerlofAanvraag implements Serializable{
 	public Calendar getReactiedatum() {
 		return reactiedatum;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void setReactiedatum(GregorianCalendar reactiedatum) {
 		this.reactiedatum = reactiedatum;
 	}
