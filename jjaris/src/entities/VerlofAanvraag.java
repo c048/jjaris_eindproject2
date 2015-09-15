@@ -1,7 +1,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -21,13 +20,13 @@ public class VerlofAanvraag implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar startdatum;
+	private Calendar startdatum;
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar einddatum;
+	private Calendar einddatum;
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar aanvraagdatum;
+	private Calendar aanvraagdatum;
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar reactiedatum;
+	private Calendar reactiedatum;
 	private Toestand toestand;
 	private String reden;
 	@ManyToOne
@@ -51,12 +50,20 @@ public class VerlofAanvraag implements Serializable{
 		GregorianCalendar now = new GregorianCalendar();
 		setPeriode(startDatum, eindDatum);
 		setToestand(Toestand.INGEDIEND);
-		setAanvraagdatum(now);
-		
+		setAanvraagdatum(now);		
 	}
-		
-		
-
+	/**
+	 * 
+	 * @param startDatum
+	 * @param eindDatum
+	 * @return
+	 */
+//	public int getPeriodeInWerkDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+//		int workDays = 0;
+//		
+//		
+//		return 0;
+	
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
@@ -92,6 +99,7 @@ public class VerlofAanvraag implements Serializable{
 	 */
 	public void goedkeuren(){
 		setToestand(Toestand.GOEDGEKEURD);
+		
 		}	
 	/**
 	 *Verlofaanvraag wordt afgekeurd door teamleader 
@@ -114,25 +122,25 @@ public class VerlofAanvraag implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public GregorianCalendar getStartdatum() {
+	public Calendar getStartdatum() {
 		return startdatum;
 	}
 //	public void setStartdatum(GregorianCalendar startdatum) {
 //		this.startdatum = startdatum;
 //	}
-	public GregorianCalendar getEinddatum() {
+	public Calendar getEinddatum() {
 		return einddatum;
 	}
 //	public void setEinddatum(GregorianCalendar einddatum) {
 //		this.einddatum = einddatum;
 //	}
-	public GregorianCalendar getAanvraagdatum() {
+	public Calendar getAanvraagdatum() {
 		return aanvraagdatum;
 	}
 	public void setAanvraagdatum(GregorianCalendar aanvraagdatum) {
 		this.aanvraagdatum = aanvraagdatum;
 	}
-	public GregorianCalendar getReactiedatum() {
+	public Calendar getReactiedatum() {
 		return reactiedatum;
 	}
 	public void setReactiedatum(GregorianCalendar reactiedatum) {
@@ -156,6 +164,35 @@ public class VerlofAanvraag implements Serializable{
 	public void setWerknemer(Werknemer werknemer) {
 		this.werknemer = werknemer;
 	}
-	
+	/**
+	 * Bereken Het aantal dagen tussen begen en einddatum zonder feestdagen
+	 * @param StartDatum
+	 * @param EindDatum
+	 * @return
+	 */
+	static long days(GregorianCalendar StartDatum, GregorianCalendar EindDatum){
+	    //Ignore argument check 
+	    int w1 = StartDatum.get(Calendar.DAY_OF_WEEK);
+	    StartDatum.add(Calendar.DAY_OF_WEEK, -w1);
+
+	    int w2 = EindDatum.get(Calendar.DAY_OF_WEEK);
+	    EindDatum.add(Calendar.DAY_OF_WEEK, -w2);
+
+	    //end Saturday to start Saturday 
+	    long days = (EindDatum.getTimeInMillis()-StartDatum.getTimeInMillis())/(1000*60*60*24);
+	    long daysWithoutWeekendDays = days-(days*2/7);
+
+	    // Adjust w1 or w2 to 0 since we only want a count of *weekdays*
+	    // to add onto our daysWithoutWeekendDays
+	    if (w1 == Calendar.SUNDAY) {
+	        w1 = Calendar.MONDAY;
+	    }
+
+	    if (w2 == Calendar.SUNDAY) {
+	        w2 = Calendar.MONDAY;
+	    }
+
+	    return daysWithoutWeekendDays-w1+w2;
+	}
 	
 }
