@@ -1,6 +1,7 @@
 package untils;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 
 import daos.CollectieveSluitingDAO;
@@ -13,9 +14,20 @@ public class ControleerVerlofAanvraag {
 		if(begindatum.compareTo(einddatum) >= 0) {
 			throw new InputMismatchException("Startdatum ligt na einddatum");
 		}
-//		if(werknemer.getAantalBeschikBareVerlofDagen(jaartal)getCollectieveDagen(begindatum, einddatum) {
-//			return true;
-//		}
+		if(begindatum.get(Calendar.YEAR) == einddatum.get(Calendar.YEAR)) {
+			begindatum.get(Calendar.YEAR);
+			if(werknemer.getAantalBeschikBareVerlofDagen(begindatum.get(Calendar.YEAR)) == getCollectieveDagen(begindatum, einddatum)) {
+				return true;
+			}
+		} else {
+			Calendar tmpYearCal = new GregorianCalendar(begindatum.get(Calendar.YEAR), 12, 31);
+			if(werknemer.getAantalBeschikBareVerlofDagen(begindatum.get(Calendar.YEAR)) == getCollectieveDagen(begindatum, tmpYearCal)) {
+				tmpYearCal.set(einddatum.get(Calendar.YEAR), 12, 31);
+				if(werknemer.getAantalBeschikBareVerlofDagen(begindatum.get(Calendar.YEAR)) == getCollectieveDagen(begindatum, tmpYearCal)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 	
