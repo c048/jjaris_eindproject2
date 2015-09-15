@@ -94,8 +94,8 @@ public class Team implements Serializable {
 			persoonlijkeaanvraag.addAll(w.getVerlofaanvragen());
 		}
 		for (VerlofAanvraag verlofAanvraag : persoonlijkeaanvraag) {
-			if (verlofAanvraag.getStartdatum() == startdatum
-					&& verlofAanvraag.getEinddatum() == einddatum) {
+			if (verlofAanvraag.getStartdatum().equals(startdatum)
+					&& verlofAanvraag.getEinddatum().equals(einddatum)) {
 				TeamAanVraag.add(verlofAanvraag);
 			}
 
@@ -147,8 +147,8 @@ public class Team implements Serializable {
 				tmpList.addAll(w.getVerlofaanvragen());
 			}
 			for (VerlofAanvraag verlofAanvraag : tmpList) {
-				if (verlofAanvraag.getStartdatum() == startdatum
-						&& verlofAanvraag.getEinddatum() == einddatum
+				if (verlofAanvraag.getStartdatum().equals(startdatum)
+						&& verlofAanvraag.getEinddatum().equals(einddatum)
 						&& verlofAanvraag.getToestand() == toestand) {
 					TeamAanVraag.add(verlofAanvraag);
 				}
