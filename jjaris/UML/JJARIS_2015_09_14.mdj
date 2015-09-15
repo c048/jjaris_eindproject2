@@ -6501,7 +6501,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 143,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6570,7 +6570,7 @@
 									"containerExtending": false,
 									"left": 368,
 									"top": 136,
-									"width": 542,
+									"width": 572.8798828125,
 									"height": 23,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -6616,7 +6616,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 164,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6644,7 +6644,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 177,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6672,7 +6672,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 190,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6700,11 +6700,11 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 203,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "-geboortedatum: LocalDate",
+											"text": "-geboortedatum: Calendar",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -6728,7 +6728,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 216,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6756,7 +6756,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 229,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6776,7 +6776,7 @@
 									"containerExtending": false,
 									"left": 368,
 									"top": 159,
-									"width": 542,
+									"width": 572.8798828125,
 									"height": 86,
 									"autoResize": false
 								},
@@ -6810,7 +6810,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 250,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6838,7 +6838,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 263,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6866,11 +6866,11 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 276,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAantalBeschikbareVerlofdagen(): int",
+											"text": "+getAantalBeschikbareVerlofdagen(jaartal: int): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -6894,11 +6894,11 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 289,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "+voegVerlofAanvraagToe(startdatum: LocalDate, einddatum: LocalDate): void",
+											"text": "+voegVerlofAanvraagToe(startdatum: Calendar, einddatum: Calendar): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -6922,7 +6922,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 302,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6950,7 +6950,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 315,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -6978,7 +6978,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 328,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -7006,11 +7006,11 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 341,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAlleVerlofAanvragen(begindatum: int, einddatum: LocalDate, toestand: Toestand): List<VerlofAanvraag>",
+											"text": "+getAlleVerlofAanvragen(begindatum: Calendar, einddatum: Calendar, toestand: Toestand): List<VerlofAanvraag>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -7034,7 +7034,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 354,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -7062,11 +7062,11 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 367,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAlleVerlofAanvragen(begindatum, einddatum: LocalDate): List<VerlofAanvraag>",
+											"text": "+getAlleVerlofAanvragen(begindatum: Calendar, einddatum: Calendar): List<VerlofAanvraag>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -7090,7 +7090,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 380,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -7118,7 +7118,7 @@
 											"containerExtending": false,
 											"left": 373,
 											"top": 393,
-											"width": 532,
+											"width": 562.8798828125,
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
@@ -7138,7 +7138,7 @@
 									"containerExtending": false,
 									"left": 368,
 									"top": 245,
-									"width": 542,
+									"width": 572.8798828125,
 									"height": 164,
 									"autoResize": false
 								},
@@ -7178,7 +7178,7 @@
 							"containerExtending": false,
 							"left": 368,
 							"top": 136,
-							"width": 542,
+							"width": 572.8798828125,
 							"height": 273,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
@@ -7550,7 +7550,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getVerlofAanvragen(startdatum: LocalDate, einddatum: LocalDate, toestand: Toestand, personeelnr: int): List<VerlofAanvraag>",
+											"text": "+getVerlofAanvragen(startdatum: Calendar, einddatum: Calendar, toestand: Toestand, personeelnr: int): List<VerlofAanvraag>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -7609,6 +7609,146 @@
 											"text": "+VoegTeamlidToe(teamlid: Werknemer): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0N3kr+0DDWw=",
+											"_parent": {
+												"$ref": "D/DYY8dd3kiFG25hmxr/egAA"
+											},
+											"model": {
+												"$ref": "AAAAAAFP0N3kg+0AMQw="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#800000",
+											"fillColor": "#FFFFB9",
+											"fontColor": "#000000",
+											"font": "Arial;11;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1021,
+											"top": 255,
+											"width": 630,
+											"height": 11,
+											"autoResize": false,
+											"underline": false,
+											"text": "+getVerlofAanvragen(toestand: Toestand): List<VerlofAanvraag>",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0OOeDwGmF/8=",
+											"_parent": {
+												"$ref": "D/DYY8dd3kiFG25hmxr/egAA"
+											},
+											"model": {
+												"$ref": "AAAAAAFP0OOd5wGjulo="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#800000",
+											"fillColor": "#FFFFB9",
+											"fontColor": "#000000",
+											"font": "Arial;11;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1021,
+											"top": 268,
+											"width": 630,
+											"height": 11,
+											"autoResize": false,
+											"underline": false,
+											"text": "+zitWerknemerInTeam(werknemer: Werknemer): boolean",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0OTcEQRLDw0=",
+											"_parent": {
+												"$ref": "D/DYY8dd3kiFG25hmxr/egAA"
+											},
+											"model": {
+												"$ref": "AAAAAAFP0OTb6QRIzKc="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#800000",
+											"fillColor": "#FFFFB9",
+											"fontColor": "#000000",
+											"font": "Arial;11;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1021,
+											"top": 281,
+											"width": 630,
+											"height": 11,
+											"autoResize": false,
+											"underline": false,
+											"text": "+verwijderTeamlid(werknemer: Werknemer): void",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0OhWJwbDu2U=",
+											"_parent": {
+												"$ref": "D/DYY8dd3kiFG25hmxr/egAA"
+											},
+											"model": {
+												"$ref": "AAAAAAFP0OhV+wbAxvg="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#800000",
+											"fillColor": "#FFFFB9",
+											"fontColor": "#000000",
+											"font": "Arial;11;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1021,
+											"top": 294,
+											"width": 630,
+											"height": 11,
+											"autoResize": false,
+											"underline": false,
+											"text": "+maakTeamLeeg()",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0PqfvheD4fI=",
+											"_parent": {
+												"$ref": "D/DYY8dd3kiFG25hmxr/egAA"
+											},
+											"model": {
+												"$ref": "AAAAAAFP0PqflheA5P8="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#800000",
+											"fillColor": "#FFFFB9",
+											"fontColor": "#000000",
+											"font": "Arial;11;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 1021,
+											"top": 307,
+											"width": 630,
+											"height": 11,
+											"autoResize": false,
+											"underline": false,
+											"text": "+getVerlofAanvragen(begindatum: Calendar, einddatum: Calendar): List<VerlofAanvraag>",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
 										}
 									],
 									"visible": true,
@@ -7623,7 +7763,7 @@
 									"left": 1016,
 									"top": 198,
 									"width": 640,
-									"height": 60,
+									"height": 125,
 									"autoResize": false
 								},
 								{
@@ -7663,7 +7803,7 @@
 							"left": 1016,
 							"top": 128,
 							"width": 640,
-							"height": 130,
+							"height": 195,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
@@ -7720,8 +7860,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 975,
-									"top": 203,
+									"left": 992,
+									"top": 217,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -7750,8 +7890,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 934,
-									"top": 201,
+									"left": 952,
+									"top": 215,
 									"width": 59.017578125,
 									"height": 11,
 									"autoResize": false,
@@ -7781,8 +7921,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 971,
-									"top": 241,
+									"left": 986,
+									"top": 256,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -7812,7 +7952,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 985,
-									"top": 227,
+									"top": 244,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -7841,8 +7981,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 939,
-									"top": 232,
+									"left": 970,
+									"top": 244,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -7872,7 +8012,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 1006,
-									"top": 233,
+									"top": 251,
 									"width": 6.11767578125,
 									"height": 11,
 									"autoResize": false,
@@ -7902,8 +8042,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 914,
-									"top": 247,
+									"left": 945,
+									"top": 258,
 									"width": 4.28076171875,
 									"height": 11,
 									"autoResize": false,
@@ -7934,7 +8074,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 975,
-									"top": 228,
+									"top": 244,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -7963,8 +8103,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 949,
-									"top": 231,
+									"left": 980,
+									"top": 244,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8040,7 +8180,7 @@
 								"$ref": "EV4xiyZRq06j6S4qvI6t/wAA"
 							},
 							"lineStyle": 1,
-							"points": "910:241;1015:229",
+							"points": "941:252;1015:247",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": false,
@@ -8198,8 +8338,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1056,
-									"top": 36,
+									"left": 1014,
+									"top": 41,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8228,13 +8368,13 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 571,
-									"top": 63,
+									"left": 544,
+									"top": 64,
 									"width": 113.716796875,
 									"height": 11,
 									"autoResize": false,
-									"alpha": 4.941096831790288,
-									"distance": 96.20810776644555,
+									"alpha": 5.18749042725262,
+									"distance": 75.66372975210778,
 									"edgePosition": 2,
 									"underline": false,
 									"text": "-teamverantwoordelijke",
@@ -8259,8 +8399,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1036,
-									"top": 116,
+									"left": 990,
+									"top": 120,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8289,7 +8429,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 554,
+									"left": 558,
 									"top": 104,
 									"width": 6.11767578125,
 									"height": 11,
@@ -8320,8 +8460,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1022,
-									"top": 112,
+									"left": 976,
+									"top": 115,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8350,8 +8490,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 537,
-									"top": 95,
+									"left": 540,
+									"top": 96,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8427,7 +8567,7 @@
 								"$ref": "EV4xiyZRq06j6S4qvI6t/wAA"
 							},
 							"lineStyle": 1,
-							"points": "558:135;516:64;712:44;1061:127",
+							"points": "563:135;516:64;712:44;1015:132",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": false,
@@ -8865,8 +9005,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 254,
-									"top": 146,
+									"left": 255,
+									"top": 145,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8895,8 +9035,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 266,
-									"top": 137,
+									"left": 267,
+									"top": 136,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8926,7 +9066,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 275,
-									"top": 114,
+									"top": 112,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -8955,7 +9095,7 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 218,
+									"left": 219,
 									"top": 105,
 									"width": 0,
 									"height": 11,
@@ -8985,8 +9125,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 339,
-									"top": 152,
+									"left": 338,
+									"top": 149,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -9015,13 +9155,13 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 212,
-									"top": 104,
+									"left": 211,
+									"top": 88,
 									"width": 4.28076171875,
 									"height": 11,
 									"autoResize": false,
-									"alpha": 0,
-									"distance": 25,
+									"alpha": 0.6618327003842577,
+									"distance": 23.08679276123039,
 									"edgePosition": 0,
 									"underline": false,
 									"text": "*",
@@ -9047,7 +9187,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 343,
-									"top": 153,
+									"top": 151,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -9077,7 +9217,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 228,
-									"top": 109,
+									"top": 108,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -9107,7 +9247,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 329,
-									"top": 148,
+									"top": 146,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -9183,7 +9323,7 @@
 								"$ref": "EV4xiyZRq06j6S4qvI6t/wAA"
 							},
 							"lineStyle": 1,
-							"points": "367:168;191:100",
+							"points": "367:165;191:100",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": false,
@@ -10141,7 +10281,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "-startdatum: LocalDate",
+											"text": "-startdatum: Calendar",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -10169,7 +10309,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "-einddatum: LocalDate",
+											"text": "-einddatum: Calendar",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -10197,7 +10337,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "-aanvraagdatum: LocalDate",
+											"text": "-aanvraagdatum: Calendar",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -10281,7 +10421,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": false,
-											"text": "-reactiedatum: LocalDate",
+											"text": "-reactiedatum: Calendar",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -10474,8 +10614,8 @@
 											"width": 264,
 											"height": 11,
 											"autoResize": false,
-											"underline": true,
-											"text": "+getPeriode(begindatum: Calendar): int",
+											"underline": false,
+											"text": "+getPeriode(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -11884,7 +12024,7 @@
 											"lineColor": "#800000",
 											"fillColor": "#FFFFB9",
 											"fontColor": "#000000",
-											"font": "Arial;11;2",
+											"font": "Arial;11;0",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -11978,348 +12118,6 @@
 							},
 							"templateParameterCompartment": {
 								"$ref": "gxGwgjj2/Eac5DwaqKbmhQAA"
-							}
-						},
-						{
-							"_type": "UMLClassView",
-							"_id": "C6x0RTzDe0G1rt2A2hAMXAAA",
-							"_parent": {
-								"$ref": "bC8/SozJ4EGz7W6iGiSqtAAA"
-							},
-							"model": {
-								"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-							},
-							"subViews": [
-								{
-									"_type": "UMLReceptionCompartmentView",
-									"_id": "AAAAAAFPyzprxqb1iVU=",
-									"_parent": {
-										"$ref": "C6x0RTzDe0G1rt2A2hAMXAAA"
-									},
-									"model": {
-										"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-									},
-									"visible": false,
-									"enabled": true,
-									"lineColor": "#800000",
-									"fillColor": "#FFFFB9",
-									"fontColor": "#000000",
-									"font": "Arial;11;0",
-									"showShadow": true,
-									"containerChangeable": false,
-									"containerExtending": false,
-									"left": 0,
-									"top": 0,
-									"width": 10,
-									"height": 10,
-									"autoResize": false
-								},
-								{
-									"_type": "UMLNameCompartmentView",
-									"_id": "rysKS09H0UGLkaQPbId6qQAA",
-									"_parent": {
-										"$ref": "C6x0RTzDe0G1rt2A2hAMXAAA"
-									},
-									"model": {
-										"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-									},
-									"subViews": [
-										{
-											"_type": "LabelView",
-											"_id": "Tgpzs9Xxxkqy2Jcf73kHEgAA",
-											"_parent": {
-												"$ref": "rysKS09H0UGLkaQPbId6qQAA"
-											},
-											"visible": false,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 0,
-											"top": 0,
-											"width": 0,
-											"height": 11,
-											"autoResize": false,
-											"underline": false,
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5
-										},
-										{
-											"_type": "LabelView",
-											"_id": "LDVLh4umsECe/+CCxxEKGQAA",
-											"_parent": {
-												"$ref": "rysKS09H0UGLkaQPbId6qQAA"
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;1",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 549,
-											"top": 483,
-											"width": 225,
-											"height": 11,
-											"autoResize": false,
-											"underline": false,
-											"text": "DatumConvertor",
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5
-										},
-										{
-											"_type": "LabelView",
-											"_id": "AAAAAAFPyzprWipqFZ0=",
-											"_parent": {
-												"$ref": "rysKS09H0UGLkaQPbId6qQAA"
-											},
-											"visible": false,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 0,
-											"top": 0,
-											"width": 106.3583984375,
-											"height": 11,
-											"autoResize": false,
-											"underline": false,
-											"text": "(from Analysis Model)",
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5
-										},
-										{
-											"_type": "LabelView",
-											"_id": "vs5J5MtuuUWaZfVFHAMQ6wAA",
-											"_parent": {
-												"$ref": "rysKS09H0UGLkaQPbId6qQAA"
-											},
-											"visible": false,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 0,
-											"top": 0,
-											"width": 0,
-											"height": 11,
-											"autoResize": false,
-											"underline": false,
-											"horizontalAlignment": 2,
-											"verticalAlignment": 5
-										}
-									],
-									"visible": true,
-									"enabled": true,
-									"lineColor": "#800000",
-									"fillColor": "#FFFFB9",
-									"fontColor": "#000000",
-									"font": "Arial;11;0",
-									"showShadow": true,
-									"containerChangeable": false,
-									"containerExtending": false,
-									"left": 544,
-									"top": 476,
-									"width": 235,
-									"height": 23,
-									"autoResize": false,
-									"stereotypeLabel": {
-										"$ref": "Tgpzs9Xxxkqy2Jcf73kHEgAA"
-									},
-									"nameLabel": {
-										"$ref": "LDVLh4umsECe/+CCxxEKGQAA"
-									},
-									"namespaceLabel": {
-										"$ref": "AAAAAAFPyzprWipqFZ0="
-									},
-									"propertyLabel": {
-										"$ref": "vs5J5MtuuUWaZfVFHAMQ6wAA"
-									}
-								},
-								{
-									"_type": "UMLAttributeCompartmentView",
-									"_id": "KgMffhtNm0G8dipyYM/1wgAA",
-									"_parent": {
-										"$ref": "C6x0RTzDe0G1rt2A2hAMXAAA"
-									},
-									"model": {
-										"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-									},
-									"visible": true,
-									"enabled": true,
-									"lineColor": "#800000",
-									"fillColor": "#FFFFB9",
-									"fontColor": "#000000",
-									"font": "Arial;11;0",
-									"showShadow": true,
-									"containerChangeable": false,
-									"containerExtending": false,
-									"left": 544,
-									"top": 499,
-									"width": 235,
-									"height": 10,
-									"autoResize": false
-								},
-								{
-									"_type": "UMLOperationCompartmentView",
-									"_id": "AnDoBzDQ8kerw08mbMNmSQAA",
-									"_parent": {
-										"$ref": "C6x0RTzDe0G1rt2A2hAMXAAA"
-									},
-									"model": {
-										"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAFPyzptdKnlvEI=",
-											"_parent": {
-												"$ref": "AnDoBzDQ8kerw08mbMNmSQAA"
-											},
-											"model": {
-												"$ref": "yPi/25jyXkijhNk3CmZo9gAA"
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 549,
-											"top": 514,
-											"width": 225,
-											"height": 11,
-											"autoResize": false,
-											"underline": true,
-											"text": "+toLocalDate(date: Date): LocalDate",
-											"horizontalAlignment": 0,
-											"verticalAlignment": 5
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAFPyzptdanonbA=",
-											"_parent": {
-												"$ref": "AnDoBzDQ8kerw08mbMNmSQAA"
-											},
-											"model": {
-												"$ref": "2eFQgs48lECY0CSONjAxgQAA"
-											},
-											"visible": true,
-											"enabled": true,
-											"lineColor": "#800000",
-											"fillColor": "#FFFFB9",
-											"fontColor": "#000000",
-											"font": "Arial;11;0",
-											"showShadow": true,
-											"containerChangeable": false,
-											"containerExtending": false,
-											"left": 549,
-											"top": 527,
-											"width": 225,
-											"height": 11,
-											"autoResize": false,
-											"underline": true,
-											"text": "+toDate(localDate: LocalDate): Date",
-											"horizontalAlignment": 0,
-											"verticalAlignment": 5
-										}
-									],
-									"visible": true,
-									"enabled": true,
-									"lineColor": "#800000",
-									"fillColor": "#FFFFB9",
-									"fontColor": "#000000",
-									"font": "Arial;11;0",
-									"showShadow": true,
-									"containerChangeable": false,
-									"containerExtending": false,
-									"left": 544,
-									"top": 509,
-									"width": 235,
-									"height": 34,
-									"autoResize": false
-								},
-								{
-									"_type": "UMLTemplateParameterCompartmentView",
-									"_id": "OfMg3Si3RUap+W8GEzR8awAA",
-									"_parent": {
-										"$ref": "C6x0RTzDe0G1rt2A2hAMXAAA"
-									},
-									"model": {
-										"$ref": "iyRMm+st10iM0DB1F8VIOwAA"
-									},
-									"visible": false,
-									"enabled": true,
-									"lineColor": "#800000",
-									"fillColor": "#FFFFB9",
-									"fontColor": "#000000",
-									"font": "Arial;11;0",
-									"showShadow": true,
-									"containerChangeable": false,
-									"containerExtending": false,
-									"left": 0,
-									"top": 0,
-									"width": 10,
-									"height": 10,
-									"autoResize": false
-								}
-							],
-							"visible": true,
-							"enabled": true,
-							"lineColor": "#800000",
-							"fillColor": "#FFFFB9",
-							"fontColor": "#000000",
-							"font": "Arial;11;0",
-							"showShadow": true,
-							"containerChangeable": true,
-							"containerExtending": false,
-							"left": 544,
-							"top": 476,
-							"width": 235,
-							"height": 78,
-							"autoResize": false,
-							"stereotypeDisplay": "label",
-							"showVisibility": true,
-							"showNamespace": false,
-							"showProperty": false,
-							"showType": true,
-							"nameCompartment": {
-								"$ref": "rysKS09H0UGLkaQPbId6qQAA"
-							},
-							"wordWrap": false,
-							"suppressAttributes": false,
-							"suppressOperations": false,
-							"suppressReceptions": true,
-							"showMultiplicity": true,
-							"showOperationSignature": true,
-							"attributeCompartment": {
-								"$ref": "KgMffhtNm0G8dipyYM/1wgAA"
-							},
-							"operationCompartment": {
-								"$ref": "AnDoBzDQ8kerw08mbMNmSQAA"
-							},
-							"receptionCompartment": {
-								"$ref": "AAAAAAFPyzprxqb1iVU="
-							},
-							"templateParameterCompartment": {
-								"$ref": "OfMg3Si3RUap+W8GEzR8awAA"
 							}
 						},
 						{
@@ -12777,8 +12575,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 993,
-									"top": 393,
+									"left": 1009,
+									"top": 397,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12807,8 +12605,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1004,
-									"top": 383,
+									"left": 1020,
+									"top": 387,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12837,8 +12635,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1011,
-									"top": 359,
+									"left": 1027,
+									"top": 363,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12867,8 +12665,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 938,
-									"top": 352,
+									"left": 969,
+									"top": 359,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12927,8 +12725,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 934,
-									"top": 350,
+									"left": 964,
+									"top": 358,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12957,8 +12755,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 1098,
-									"top": 398,
+									"left": 1099,
+									"top": 397,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -12987,8 +12785,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 948,
-									"top": 355,
+									"left": 979,
+									"top": 362,
 									"width": 0,
 									"height": 11,
 									"autoResize": false,
@@ -13094,7 +12892,7 @@
 								"$ref": "ChPyGkQgf02aGr81/xdTFQAA"
 							},
 							"lineStyle": 1,
-							"points": "1123:410;910:349",
+							"points": "1123:410;941:356",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": false,
@@ -13156,6 +12954,432 @@
 							"autoResize": false,
 							"text": "Opgelet: er mag geen getPaswoord() zijn!! Wie mag er setPaswoord gebruiken? Hoe beveiligen?",
 							"wordWrap": true
+						},
+						{
+							"_type": "UMLClassView",
+							"_id": "AAAAAAFP0LMbOcL7oa0=",
+							"_parent": {
+								"$ref": "bC8/SozJ4EGz7W6iGiSqtAAA"
+							},
+							"model": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"subViews": [
+								{
+									"_type": "UMLNameCompartmentView",
+									"_id": "AAAAAAFP0LMbOcL8RjE=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LMbOcL7oa0="
+									},
+									"model": {
+										"$ref": "AAAAAAFP0LMbOcL5ltQ="
+									},
+									"subViews": [
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFP0LMbOcL9XKU=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcL8RjE="
+											},
+											"visible": false,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": -576,
+											"top": -192,
+											"width": 0,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"horizontalAlignment": 2,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFP0LMbOcL+8Rc=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcL8RjE="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;1",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 431,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "ControleerVerlofAanvraag",
+											"horizontalAlignment": 2,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFP0LMbOcL/1Is=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcL8RjE="
+											},
+											"visible": false,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": -576,
+											"top": -192,
+											"width": 125.6962890625,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "(from Analysis Model)",
+											"horizontalAlignment": 2,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "LabelView",
+											"_id": "AAAAAAFP0LMbOcMAWOM=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcL8RjE="
+											},
+											"visible": false,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": -576,
+											"top": -192,
+											"width": 0,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"horizontalAlignment": 1,
+											"verticalAlignment": 5
+										}
+									],
+									"visible": true,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 448,
+									"top": 424,
+									"width": 636.107421875,
+									"height": 25,
+									"autoResize": false,
+									"stereotypeLabel": {
+										"$ref": "AAAAAAFP0LMbOcL9XKU="
+									},
+									"nameLabel": {
+										"$ref": "AAAAAAFP0LMbOcL+8Rc="
+									},
+									"namespaceLabel": {
+										"$ref": "AAAAAAFP0LMbOcL/1Is="
+									},
+									"propertyLabel": {
+										"$ref": "AAAAAAFP0LMbOcMAWOM="
+									}
+								},
+								{
+									"_type": "UMLAttributeCompartmentView",
+									"_id": "AAAAAAFP0LMbOcMB3kY=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LMbOcL7oa0="
+									},
+									"model": {
+										"$ref": "AAAAAAFP0LMbOcL5ltQ="
+									},
+									"visible": true,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 448,
+									"top": 449,
+									"width": 636.107421875,
+									"height": 10,
+									"autoResize": false
+								},
+								{
+									"_type": "UMLOperationCompartmentView",
+									"_id": "AAAAAAFP0LMbOcMCu04=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LMbOcL7oa0="
+									},
+									"model": {
+										"$ref": "AAAAAAFP0LMbOcL5ltQ="
+									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0LPfi8PL8hg=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcMCu04="
+											},
+											"model": {
+												"$ref": "AAAAAAFP0LPfXMO5kgc="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 464,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": true,
+											"text": "+isGeldigeVerlofPeriode(werknemer: Werknemer, begindatum: Calendar, einddatum: Calendar): boolean",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0LbTl8hrKrM=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcMCu04="
+											},
+											"model": {
+												"$ref": "AAAAAAFP0LbTashZCT4="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 479,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": true,
+											"text": "+getAantalOpTeNemenDagen(verlofAanvraag: VerlofAanvraag): int",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0L9KcswD1OQ=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcMCu04="
+											},
+											"model": {
+												"$ref": "AAAAAAFP0L9KRcvxvLs="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 494,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": true,
+											"text": "+getCollectieveDagen(begindatum: Calendar, einddatum: Calendar): int",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0MSrxM+eGho=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcMCu04="
+											},
+											"model": {
+												"$ref": "AAAAAAFP0MSrls+MnfY="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 509,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": true,
+											"text": "+getAantalFeestdagenOpWeekdag(begindatum: Calendar, einddatum: Calendar): int",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFP0Nfjh+U2p70=",
+											"_parent": {
+												"$ref": "AAAAAAFP0LMbOcMCu04="
+											},
+											"model": {
+												"$ref": "AAAAAAFP0NfjU+UkEk4="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffffff",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 453,
+											"top": 524,
+											"width": 626.107421875,
+											"height": 13,
+											"autoResize": false,
+											"underline": true,
+											"text": "+getAantalCollectieve Dagen(jaartal: int): int",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										}
+									],
+									"visible": true,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": 448,
+									"top": 459,
+									"width": 636.107421875,
+									"height": 83,
+									"autoResize": false
+								},
+								{
+									"_type": "UMLReceptionCompartmentView",
+									"_id": "AAAAAAFP0LMbOsMD2Ic=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LMbOcL7oa0="
+									},
+									"model": {
+										"$ref": "AAAAAAFP0LMbOcL5ltQ="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": -384,
+									"top": -128,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								},
+								{
+									"_type": "UMLTemplateParameterCompartmentView",
+									"_id": "AAAAAAFP0LMbOsMEsGA=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LMbOcL7oa0="
+									},
+									"model": {
+										"$ref": "AAAAAAFP0LMbOcL5ltQ="
+									},
+									"visible": false,
+									"enabled": true,
+									"lineColor": "#000000",
+									"fillColor": "#ffffff",
+									"fontColor": "#000000",
+									"font": "Arial;13;0",
+									"showShadow": true,
+									"containerChangeable": false,
+									"containerExtending": false,
+									"left": -384,
+									"top": -128,
+									"width": 10,
+									"height": 10,
+									"autoResize": false
+								}
+							],
+							"visible": true,
+							"enabled": true,
+							"lineColor": "#000000",
+							"fillColor": "#ffffff",
+							"fontColor": "#000000",
+							"font": "Arial;13;0",
+							"showShadow": true,
+							"containerChangeable": true,
+							"containerExtending": false,
+							"left": 448,
+							"top": 424,
+							"width": 636.107421875,
+							"height": 118,
+							"autoResize": false,
+							"stereotypeDisplay": "label",
+							"showVisibility": true,
+							"showNamespace": false,
+							"showProperty": true,
+							"showType": true,
+							"nameCompartment": {
+								"$ref": "AAAAAAFP0LMbOcL8RjE="
+							},
+							"wordWrap": false,
+							"suppressAttributes": false,
+							"suppressOperations": false,
+							"suppressReceptions": true,
+							"showMultiplicity": true,
+							"showOperationSignature": true,
+							"attributeCompartment": {
+								"$ref": "AAAAAAFP0LMbOcMB3kY="
+							},
+							"operationCompartment": {
+								"$ref": "AAAAAAFP0LMbOcMCu04="
+							},
+							"receptionCompartment": {
+								"$ref": "AAAAAAFP0LMbOsMD2Ic="
+							},
+							"templateParameterCompartment": {
+								"$ref": "AAAAAAFP0LMbOsMEsGA="
+							}
 						}
 					]
 				},
@@ -14591,7 +14815,7 @@
 											"height": 11,
 											"autoResize": false,
 											"underline": true,
-											"text": "+getVerlofAanvragen(startdatum: LocalDate, einddatum: LocalDate, toestand: Toestand, teamCode: int, personeelnr: int): List<VerlofAanvraag>",
+											"text": "+getVerlofAanvragen(startdatum: Calendar, einddatum: Calendar, toestand: Toestand, teamCode: int, personeelnr: int): List<VerlofAanvraag>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -14758,8 +14982,8 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -24,
-											"top": -168,
+											"left": -744,
+											"top": -144,
 											"width": 0,
 											"height": 13,
 											"autoResize": false,
@@ -14782,9 +15006,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 631,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 639,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
@@ -14807,8 +15031,8 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -24,
-											"top": -168,
+											"left": -744,
+											"top": -144,
 											"width": 125.6962890625,
 											"height": 13,
 											"autoResize": false,
@@ -14832,8 +15056,8 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": -24,
-											"top": -168,
+											"left": -744,
+											"top": -144,
 											"width": 0,
 											"height": 13,
 											"autoResize": false,
@@ -14851,9 +15075,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 304,
-									"top": 624,
-									"width": 537.89013671875,
+									"left": 64,
+									"top": 632,
+									"width": 545.107421875,
 									"height": 25,
 									"autoResize": false,
 									"stereotypeLabel": {
@@ -14897,9 +15121,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 654,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 662,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
@@ -14917,9 +15141,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 304,
-									"top": 649,
-									"width": 537.89013671875,
+									"left": 64,
+									"top": 657,
+									"width": 545.107421875,
 									"height": 23,
 									"autoResize": false
 								},
@@ -14951,13 +15175,13 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 677,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 685,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+getAantalFeestdagen(begindatum: Calendar, einddatum: Calendar): int",
+											"text": "+getFeestdagen(begindatum: Calendar, einddatum: Calendar): List<Feestdag>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -14979,13 +15203,13 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 692,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 700,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+getAantalDagenCollectiefVerlof(begindatum: Calendar, einddatum: Calendar): int",
+											"text": "+getCollectieveVerloven(begindatum: Calendar, einddatum: Calendar): List<CollectiefVerlof>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -15007,9 +15231,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 707,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 715,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
@@ -15035,9 +15259,9 @@
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
-											"left": 309,
-											"top": 722,
-											"width": 527.89013671875,
+											"left": 69,
+											"top": 730,
+											"width": 535.107421875,
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
@@ -15055,9 +15279,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 304,
-									"top": 672,
-									"width": 537.89013671875,
+									"left": 64,
+									"top": 680,
+									"width": 545.107421875,
 									"height": 68,
 									"autoResize": false
 								},
@@ -15079,8 +15303,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": -16,
-									"top": -112,
+									"left": -496,
+									"top": -96,
 									"width": 10,
 									"height": 10,
 									"autoResize": false
@@ -15103,8 +15327,8 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": -16,
-									"top": -112,
+									"left": -496,
+									"top": -96,
 									"width": 10,
 									"height": 10,
 									"autoResize": false
@@ -15119,10 +15343,10 @@
 							"showShadow": true,
 							"containerChangeable": true,
 							"containerExtending": false,
-							"left": 304,
-							"top": 624,
-							"width": 537.89013671875,
-							"height": 129,
+							"left": 64,
+							"top": 632,
+							"width": 545.107421875,
+							"height": 131,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
@@ -17918,7 +18142,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "LocalDate",
+							"type": "Calendar",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -18054,6 +18278,22 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0HU7c8EYCBs=",
+									"_parent": {
+										"$ref": "k05SggjruEqs+BkN9jyfWgAA"
+									},
+									"name": "jaartal",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -18081,7 +18321,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18097,7 +18337,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18273,7 +18513,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18305,7 +18545,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18403,7 +18643,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18419,7 +18659,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18668,7 +18908,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18684,7 +18924,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -18823,6 +19063,234 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0N3kg+0AMQw=",
+							"_parent": {
+								"$ref": "k1832TCqqUGRUNqp9wAsIwAA"
+							},
+							"name": "getVerlofAanvragen",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0N48c+27JJQ=",
+									"_parent": {
+										"$ref": "AAAAAAFP0N3kg+0AMQw="
+									},
+									"name": "toestand",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": {
+										"$ref": "0I2lf3OMg0+4eHNci82oewAA"
+									},
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0N6sne5W/+E=",
+									"_parent": {
+										"$ref": "AAAAAAFP0N3kg+0AMQw="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "List<VerlofAanvraag>",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0OOd5wGjulo=",
+							"_parent": {
+								"$ref": "k1832TCqqUGRUNqp9wAsIwAA"
+							},
+							"name": "zitWerknemerInTeam",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0OPrnQJeJ1s=",
+									"_parent": {
+										"$ref": "AAAAAAFP0OOd5wGjulo="
+									},
+									"name": "werknemer",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": {
+										"$ref": "xpqbUm3piU6zJRgU5S9U1wAA"
+									},
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0OQdvQL5td8=",
+									"_parent": {
+										"$ref": "AAAAAAFP0OOd5wGjulo="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "boolean",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0OTb6QRIzKc=",
+							"_parent": {
+								"$ref": "k1832TCqqUGRUNqp9wAsIwAA"
+							},
+							"name": "verwijderTeamlid",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0OYjFQUDz+Y=",
+									"_parent": {
+										"$ref": "AAAAAAFP0OTb6QRIzKc="
+									},
+									"name": "werknemer",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": {
+										"$ref": "xpqbUm3piU6zJRgU5S9U1wAA"
+									},
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0OZtrQWeAgw=",
+									"_parent": {
+										"$ref": "AAAAAAFP0OTb6QRIzKc="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "void",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0OhV+wbAxvg=",
+							"_parent": {
+								"$ref": "k1832TCqqUGRUNqp9wAsIwAA"
+							},
+							"name": "maakTeamLeeg",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0PqflheA5P8=",
+							"_parent": {
+								"$ref": "k1832TCqqUGRUNqp9wAsIwAA"
+							},
+							"name": "getVerlofAanvragen",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0PrYNBg7iqY=",
+									"_parent": {
+										"$ref": "AAAAAAFP0PqflheA5P8="
+									},
+									"name": "begindatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0PsObBjWt/4=",
+									"_parent": {
+										"$ref": "AAAAAAFP0PqflheA5P8="
+									},
+									"name": "einddatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0PtMKRlx3yc=",
+									"_parent": {
+										"$ref": "AAAAAAFP0PqflheA5P8="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "List<VerlofAanvraag>",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
 								}
 							],
 							"concurrency": "sequential",
@@ -19200,7 +19668,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "LocalDate",
+							"type": "Calendar",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -19218,7 +19686,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "LocalDate",
+							"type": "Calendar",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -19236,7 +19704,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "LocalDate",
+							"type": "Calendar",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -19292,7 +19760,7 @@
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "LocalDate",
+							"type": "Calendar",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -19490,7 +19958,7 @@
 							},
 							"name": "getPeriode",
 							"visibility": "public",
-							"isStatic": true,
+							"isStatic": false,
 							"isLeaf": false,
 							"parameters": [
 								{
@@ -19508,22 +19976,6 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFP0FcMSrqIWKQ=",
-									"_parent": {
-										"$ref": "AAAAAAFP0Cn00akgOaE="
-									},
-									"name": "begindatum",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": "Calendar",
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -19789,7 +20241,7 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": true
+							"isAbstract": false
 						}
 					],
 					"isAbstract": false,
@@ -21430,7 +21882,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -21446,7 +21898,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "LocalDate",
+									"type": "Calendar",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -21696,7 +22148,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFP0GDQvL2vi2k="
 							},
-							"name": "getAantalFeestdagen",
+							"name": "getFeestdagen",
 							"visibility": "public",
 							"isStatic": true,
 							"isLeaf": false,
@@ -21743,7 +22195,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int",
+									"type": "List<Feestdag>",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -21760,7 +22212,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFP0GDQvL2vi2k="
 							},
-							"name": "getAantalDagenCollectiefVerlof",
+							"name": "getCollectieveVerloven",
 							"visibility": "public",
 							"isStatic": true,
 							"isLeaf": false,
@@ -21807,7 +22259,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int",
+									"type": "List<CollectiefVerlof>",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -21908,6 +22360,329 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						}
+					],
+					"isAbstract": false,
+					"isFinalSpecialization": false,
+					"isLeaf": false,
+					"isActive": false
+				},
+				{
+					"_type": "UMLClass",
+					"_id": "AAAAAAFP0LMbOcL5ltQ=",
+					"_parent": {
+						"$ref": "zI5bTuAky0mhTPoocPkDGQAA"
+					},
+					"name": "ControleerVerlofAanvraag",
+					"visibility": "public",
+					"operations": [
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0LPfXMO5kgc=",
+							"_parent": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"name": "isGeldigeVerlofPeriode",
+							"visibility": "public",
+							"isStatic": true,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LR/78R06LU=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LPfXMO5kgc="
+									},
+									"name": "werknemer",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": {
+										"$ref": "xpqbUm3piU6zJRgU5S9U1wAA"
+									},
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LTT9sUPuho=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LPfXMO5kgc="
+									},
+									"name": "begindatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LUNtcWqmP4=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LPfXMO5kgc="
+									},
+									"name": "einddatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LWGTMagg98=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LPfXMO5kgc="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "boolean",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0LbTashZCT4=",
+							"_parent": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"name": "getAantalOpTeNemenDagen",
+							"visibility": "public",
+							"isStatic": true,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LeA/MkUFuw=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LbTashZCT4="
+									},
+									"name": "verlofAanvraag",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": {
+										"$ref": "Le9w1wf3YkOs0SMYpnnM8gAA"
+									},
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0LgHU8mvYiw=",
+									"_parent": {
+										"$ref": "AAAAAAFP0LbTashZCT4="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0L9KRcvxvLs=",
+							"_parent": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"name": "getCollectieveDagen",
+							"visibility": "public",
+							"isStatic": true,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MARtMzpCJw=",
+									"_parent": {
+										"$ref": "AAAAAAFP0L9KRcvxvLs="
+									},
+									"name": "begindatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MBNJ82Erj8=",
+									"_parent": {
+										"$ref": "AAAAAAFP0L9KRcvxvLs="
+									},
+									"name": "einddatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MCjBM4fwXs=",
+									"_parent": {
+										"$ref": "AAAAAAFP0L9KRcvxvLs="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0MSrls+MnfY=",
+							"_parent": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"name": "getAantalFeestdagenOpWeekdag",
+							"visibility": "public",
+							"isStatic": true,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MUUntBH4H8=",
+									"_parent": {
+										"$ref": "AAAAAAFP0MSrls+MnfY="
+									},
+									"name": "begindatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MVR59DiL7o=",
+									"_parent": {
+										"$ref": "AAAAAAFP0MSrls+MnfY="
+									},
+									"name": "einddatum",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "Calendar",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0MWjUtF9O9Q=",
+									"_parent": {
+										"$ref": "AAAAAAFP0MSrls+MnfY="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFP0NfjU+UkEk4=",
+							"_parent": {
+								"$ref": "AAAAAAFP0LMbOcL5ltQ="
+							},
+							"name": "getAantalCollectieve Dagen",
+							"visibility": "public",
+							"isStatic": true,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0NhwW+XfV6o=",
+									"_parent": {
+										"$ref": "AAAAAAFP0NfjU+UkEk4="
+									},
+									"name": "jaartal",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFP0Nj+aea2STQ=",
+									"_parent": {
+										"$ref": "AAAAAAFP0NfjU+UkEk4="
+									},
+									"name": "Parameter1",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "int",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "return"
 								}
 							],
 							"concurrency": "sequential",
