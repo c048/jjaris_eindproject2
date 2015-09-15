@@ -71,52 +71,120 @@ public class Team implements Serializable {
 	}
 
 	// vanaf hier Stef, nog geen foutafhandeling!!
-
-	// -- isHr?
+	/**
+	 * is het team een team van HR?
+	 *
+	 */
 	public boolean isHr() {
 		return this.getHR();
 	}
 
-	// Lijst van verlofaanvragen tussen 2 datums aanvragen
+	/**
+	 * Lijst van verlofaanvragen tussen 2 datums aanvragen -- te testen
+	 * 
+	 * @param startdatum
+	 * @param einddatum
+	 * @return
+	 */
 	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum,
 			Calendar einddatum) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
-		List<VerlofAanvraag> aanvragenperpersoon = new ArrayList<VerlofAanvraag>();
-		
+		List<VerlofAanvraag> persoonlijkeaanvraag = new ArrayList<VerlofAanvraag>();
+		for (Werknemer w : teamleden) {
+			persoonlijkeaanvraag.addAll(w.getVerlofaanvragen());
+		}
+		for (VerlofAanvraag verlofAanvraag : persoonlijkeaanvraag) {
+			if (verlofAanvraag.getStartdatum() == startdatum
+					&& verlofAanvraag.getEinddatum() == einddatum) {
+				TeamAanVraag.add(verlofAanvraag);
+			}
+
+		}
+
 		return TeamAanVraag;
 
 	}
 
-	// Lijst van verlofaanvragen met bepaalde status
+	/**
+	 * Lijst van verlofaanvragen met bepaalde status-- te testen
+	 * 
+	 * @param toestand
+	 * @return
+	 */
 	public List<VerlofAanvraag> getVerlofAanvragen(Toestand toestand) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
+		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
+		for (Werknemer w : teamleden) {
+			tmpList.addAll(w.getVerlofaanvragen());
+
+		}
+		for (VerlofAanvraag verlofAanvraag : tmpList) {
+			if (verlofAanvraag.getToestand() == toestand) {
+				TeamAanVraag.add(verlofAanvraag);
+			}
+
+		}
 
 		return TeamAanVraag;
 
 	}
 
-	// Lijst van verlofaanvragen
+	/**
+	 * Lijst van verlofaanvragen -- te testen
+	 * 
+	 * @param startdatum
+	 * @param einddatum
+	 * @param toestand
+	 * @param personeelsnummer
+	 * @return
+	 */
 	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum,
-			Calendar einddatum, Toestand toestand, Werknemer werknemer) {
+			Calendar einddatum, Toestand toestand, int personeelsnummer) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
+		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
+		for (Werknemer w : teamleden) {
+			if (w.getPersoneelsnummer() == personeelsnummer) {
+				tmpList.addAll(w.getVerlofaanvragen());
+			}
+			for (VerlofAanvraag verlofAanvraag : tmpList) {
+				if (verlofAanvraag.getStartdatum() == startdatum
+						&& verlofAanvraag.getEinddatum() == einddatum
+						&& verlofAanvraag.getToestand() == toestand) {
+					TeamAanVraag.add(verlofAanvraag);
+				}
+			}
+		}
 
 		return TeamAanVraag;
 
 	}
 
-	// voeg een teamlid toe
+	/**
+	 * voeg een teamlid toe
+	 * 
+	 * @param teamlid
+	 */
 	public void voegTeamlidToe(Werknemer teamlid) {
 		teamleden.add(teamlid);
 
 	}
 
-	// verwijder een teamlid
+	/**
+	 * verwijder een teamlid
+	 * 
+	 * @param teamlid
+	 */
 	public void verwijderTeamlid(Werknemer teamlid) {
 
 		teamleden.remove(teamlid);
 	}
 
-	// zit een bepaalde werknemer in dit team?
+	/**
+	 * zit een bepaalde werknemer in dit team?
+	 * 
+	 * @param werknemer
+	 * @return
+	 */
 	public boolean zitWerknemerInTeam(Werknemer werknemer) {
 		if (teamleden.contains(werknemer)) {
 			return true;
@@ -127,7 +195,9 @@ public class Team implements Serializable {
 
 	}
 
-	// maak dit team leeg.
+	/**
+	 * maak dit team leeg.
+	 */
 	public void maakTeamLeeg() {
 		teamleden.clear();
 	}
