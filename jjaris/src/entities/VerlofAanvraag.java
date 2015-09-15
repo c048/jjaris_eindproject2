@@ -58,12 +58,10 @@ public class VerlofAanvraag implements Serializable{
 	 * @param eindDatum
 	 * @return
 	 */
-//	public int getPeriodeInWerkDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
-//		int workDays = 0;
-//		
-//		
-//		return 0;
-	
+	public int getPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+		return weekDagen(startDatum, eindDatum);
+	}
+			
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
@@ -170,29 +168,23 @@ public class VerlofAanvraag implements Serializable{
 	 * @param EindDatum
 	 * @return
 	 */
-	static long days(GregorianCalendar StartDatum, GregorianCalendar EindDatum){
-	    //Ignore argument check 
-	    int w1 = StartDatum.get(Calendar.DAY_OF_WEEK);
-	    StartDatum.add(Calendar.DAY_OF_WEEK, -w1);
-
-	    int w2 = EindDatum.get(Calendar.DAY_OF_WEEK);
-	    EindDatum.add(Calendar.DAY_OF_WEEK, -w2);
-
-	    //end Saturday to start Saturday 
-	    long days = (EindDatum.getTimeInMillis()-StartDatum.getTimeInMillis())/(1000*60*60*24);
+	public int weekDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+	    
+	    int w1 = startDatum.get(Calendar.DAY_OF_WEEK);
+	    startDatum.add(Calendar.DAY_OF_WEEK, -w1);
+	    int w2 = eindDatum.get(Calendar.DAY_OF_WEEK);
+	    eindDatum.add(Calendar.DAY_OF_WEEK, -w2);
+	    //einde zaterdag begin zaterdag 
+	    long days = (eindDatum.getTimeInMillis()-startDatum.getTimeInMillis())/(1000*60*60*24);
 	    long daysWithoutWeekendDays = days-(days*2/7);
-
-	    // Adjust w1 or w2 to 0 since we only want a count of *weekdays*
-	    // to add onto our daysWithoutWeekendDays
+	    // Aanpassen W1 en W2 naar 0 om alleen weekdagen te tellen
 	    if (w1 == Calendar.SUNDAY) {
 	        w1 = Calendar.MONDAY;
 	    }
-
 	    if (w2 == Calendar.SUNDAY) {
 	        w2 = Calendar.MONDAY;
 	    }
-
-	    return daysWithoutWeekendDays-w1+w2;
+	    return (int) (daysWithoutWeekendDays-w1+w2);
 	}
 	
 }
