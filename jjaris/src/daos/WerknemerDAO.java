@@ -1,6 +1,9 @@
 package daos;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,9 +24,17 @@ private static EntityManager em ;
  */
 	@Transactional
 	public static void voegWerknemerToe(Werknemer werknemer){
-		
-		em.persist(werknemer);
-		
-		
+			em.persist(werknemer);
 	}
+	
+	/**
+	 * 
+	 * @return List<Werknemer>
+	 */
+	public static List<Werknemer> getAlleWerknemers(){
+		List<Werknemer> werknemers = new ArrayList<Werknemer>();
+		return werknemers;
+	}
+	
+	
 }
