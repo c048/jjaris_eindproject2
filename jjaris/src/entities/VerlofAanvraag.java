@@ -49,15 +49,31 @@ public class VerlofAanvraag implements Serializable{
 		setToestand(Toestand.INGEDIEND);
 		setAanvraagdatum(now);		
 	}
-	/**
-	 * constructor met start en einddatum verlofperiode
-	 * @param startDatum
-	 * @param eindDatum
-	 * @return
-	 */
-	public int getPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum){
-		return weekDagen(startDatum, eindDatum);
-	}			
+
+		/**
+		 * Bereken Het aantal dagen tussen begin en einddatum zonder feestdagen
+		 * @param StartDatum
+		 * @param EindDatum
+		 * @return
+		 */
+		public int getPeriode(){
+		    
+		    int w1 = startdatum.get(Calendar.DAY_OF_WEEK);
+		    startdatum.add(Calendar.DAY_OF_WEEK, -w1);
+		    int w2 = einddatum.get(Calendar.DAY_OF_WEEK);
+		    einddatum.add(Calendar.DAY_OF_WEEK, -w2);
+		    //einde zaterdag begin zaterdag 
+		    long days = (einddatum.getTimeInMillis()-startdatum.getTimeInMillis())/(1000*60*60*24);
+		    long daysWithoutWeekendDays = days-(days*2/7);
+		    // Aanpassen W1 en W2 naar 0 om alleen weekdagen te tellen
+		    if (w1 == Calendar.SUNDAY) {
+		        w1 = Calendar.MONDAY;
+		    }
+		    if (w2 == Calendar.SUNDAY) {
+		        w2 = Calendar.MONDAY;
+		    }
+		    return (int) (daysWithoutWeekendDays-w1+w2);
+		}		
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
@@ -154,30 +170,6 @@ public class VerlofAanvraag implements Serializable{
 	}
 	public void setWerknemer(Werknemer werknemer) {
 		this.werknemer = werknemer;
-	}
-	/**
-	 * Bereken Het aantal dagen tussen begen en einddatum zonder feestdagen
-	 * @param StartDatum
-	 * @param EindDatum
-	 * @return
-	 */
-	static int weekDagen(GregorianCalendar startDatum, GregorianCalendar eindDatum){
-	    
-	    int w1 = startDatum.get(Calendar.DAY_OF_WEEK);
-	    startDatum.add(Calendar.DAY_OF_WEEK, -w1);
-	    int w2 = eindDatum.get(Calendar.DAY_OF_WEEK);
-	    eindDatum.add(Calendar.DAY_OF_WEEK, -w2);
-	    //einde zaterdag begin zaterdag 
-	    long days = (eindDatum.getTimeInMillis()-startDatum.getTimeInMillis())/(1000*60*60*24);
-	    long daysWithoutWeekendDays = days-(days*2/7);
-	    // Aanpassen W1 en W2 naar 0 om alleen weekdagen te tellen
-	    if (w1 == Calendar.SUNDAY) {
-	        w1 = Calendar.MONDAY;
-	    }
-	    if (w2 == Calendar.SUNDAY) {
-	        w2 = Calendar.MONDAY;
-	    }
-	    return (int) (daysWithoutWeekendDays-w1+w2);
 	}
 	
 }
