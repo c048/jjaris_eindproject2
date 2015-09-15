@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class JaarlijksVerlof implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id;
 	private static final long serialVersionUID = 1L;
 	private int jaar;
