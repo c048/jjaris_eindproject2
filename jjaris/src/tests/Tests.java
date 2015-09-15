@@ -10,6 +10,9 @@ import entities.Werknemer;
 
 public class Tests {
 	
+	/**
+	 * test werknemer
+	 */
 	@Test
 	public void test(){
 		Werknemer werknemer = new Werknemer();
@@ -17,31 +20,19 @@ public class Tests {
 		assertTrue(werknemer.getNaam().equals("Frans"));
 	}
 	/**
-	 * test periode midden in week
+	 * test periode midden in Weekends en feestdagen
 	 */
 	@Test
 	public void testGetPeriode1(){
-		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(01, 01, 2015), new GregorianCalendar(15, month, dayOfMonth))
+		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,01,01), new GregorianCalendar(2015, 01, 15));
+		assertTrue(verlofaanvraag.getPeriode() == 11);
+	
 	}
 	/**
-	 * test periode midden in week
+	 * 
 	 */
 	@Test
-	public void testGetPeriode2(){
-		
-	}
-	/**
-	 * test periode overlappend met weekend
-	 */
-	@Test
-	public void testGetPeriode3(){
-		
-	}
-	/**
-	 * test periode overlappend met weekend en feestdag
-	 */
-	@Test
-	public void testGetPeriode4(){
+	public void testGeldigVerlof(){
 		
 	}
 	
