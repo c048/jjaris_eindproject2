@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Werknemer implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int personeelsnummer;
 	private String naam;
 	private String Voornaam;
