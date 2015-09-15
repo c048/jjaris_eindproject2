@@ -68,6 +68,8 @@ public class Team implements Serializable {
 
 	public void setTeamverantwoordelijke(Werknemer teamverantwoordelijke) {
 		this.teamverantwoordelijke = teamverantwoordelijke;
+		teamverantwoordelijke.setTeam(this);
+		voegTeamlidToe(teamverantwoordelijke);
 	}
 
 	// vanaf hier Stef, nog geen foutafhandeling!!

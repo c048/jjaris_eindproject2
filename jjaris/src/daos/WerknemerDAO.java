@@ -47,8 +47,10 @@ private EntityManager em  ;
 		Team team = werknemer.getTeam();
 		
 		if (team != null){
-		em.find(Team.class, team.getCode());
-		em.persist(team);
+			if (team.getCode() != 0){
+				em.find(Team.class, team.getCode());
+			}
+				em.persist(team);
 		}
 		em.persist(werknemer);
 			
