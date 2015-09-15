@@ -61,12 +61,12 @@ public class Werknemer implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}   
-	public GregorianCalendar getGeboortedatum() {
+	public Calendar getGeboortedatum() {
 		return this.geboortedatum;
 	}
 
-	public void setGeboortedatum(GregorianCalendar geboortedatum) {
-		this.geboortedatum = geboortedatum;
+	public void setGeboortedatum(Calendar geboortedatum) {
+		this.geboortedatum = (GregorianCalendar) geboortedatum;
 	}   
 	public String getPasswoord() {
 		return this.passwoord;
