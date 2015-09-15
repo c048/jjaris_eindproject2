@@ -5,6 +5,7 @@ import java.lang.String;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 
@@ -103,15 +104,19 @@ public class Werknemer implements Serializable {
 	}
 
 	public boolean isVerantwoordelijke() {
-		return false;
+		return team.getTeamverantwoordelijke().personeelsnummer == this.personeelsnummer;
 	}
 	
 	public boolean isHR() {
-		return false;
+		return team.getNaam().equalsIgnoreCase("hr");
 	}
 	
-	public int getAantalBeschikBareVerlofDagen() {
-		return 0;
+	public int getAantalBeschikBareVerlofDagen(int jaartal) {
+		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
+		if(tmpJaar == null) {
+			throw new NullPointerException();
+		}
+		return tmpJaar.getAantalDagen();
 	}
 	
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
@@ -119,27 +124,35 @@ public class Werknemer implements Serializable {
 		getVerlofaanvragen().add(tmpAanvraag);
 	}
 	
-	public void annuleerVerlofAanvraag(int verlofaanvraagId) {
-		verlofaanvragen.stream().filter(v -> v.getId() == verlofaanvraagId);
+	public void annuleerVerlofAanvraag(int verlofaanvraagId) throws NullPointerException {
+		VerlofAanvraag tmpAanvraag = verlofaanvragen.stream().filter(v -> v.getId() == verlofaanvraagId).findFirst().orElse(null);
+		if(tmpAanvraag == null) {
+			throw new NullPointerException();
+		}
+		tmpAanvraag.annuleren();
 	}
 	
 	public List<VerlofAanvraag> getLopendeVerlofAanvragen() {
-		return null;
+		return verlofaanvragen.stream().filter(v -> v.getToestand().equals(Toestand.INGEDIEND)).collect(Collectors.toList());
 	}
 	
-	public int getJaarlijksVerlof(int jaartal) {
-		return 0;
+	public int getJaarlijksVerlof(int jaartal) throws NullPointerException {
+		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
+		if(tmpJaar == null) {
+			throw new NullPointerException();
+		}
+		return tmpJaar.getJaar();
 	}
 	
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
-		return null;
+		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum)) && v.getToestand() == toestand).collect(Collectors.toList());
 	}
 	
 	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
-		return null;
+		return verlofaanvragen;
 	}
 	
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
-		return null;
+		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum))).collect(Collectors.toList());
 	}
 }
