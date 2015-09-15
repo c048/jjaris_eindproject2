@@ -1,11 +1,25 @@
 package programs;
 
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-import javax.enterprise.context.RequestScoped;
+
+
+
+
+//import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+
+//import javax.transaction.Transactional;
+
+
+
+
+import daos.TeamDAO;
 //import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Adres;
@@ -13,10 +27,13 @@ import entities.Team;
 import entities.Werknemer;
 
 @Named
-@RequestScoped
-public class MainWerknemer {
-
-	public static void main() {
+@SessionScoped
+public class MainWerknemer implements Serializable{
+private static final long serialVersionUID = 1L;
+@Inject
+private WerknemerDAO testdoa; 
+//@Transactional
+public void main() {
 		Werknemer werknemer1 = new Werknemer();
 		Adres adres1 = new Adres();
 		adres1.setGemeente("Hoboken");
@@ -38,7 +55,7 @@ public class MainWerknemer {
 		System.out.println(werknemer1);
 		System.out.println(team1);
 		
-		WerknemerDAO.voegWerknemerToe(werknemer1);//schrijft werknemer in database
+		testdoa.voegWerknemerToe(werknemer1);//schrijft werknemer in database
 		//TeamDAO.voegTeamToe(team1);
 
 	}

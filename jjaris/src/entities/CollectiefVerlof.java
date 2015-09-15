@@ -16,7 +16,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 	private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar einddatum;
+	private Calendar einddatum;
 	
 	
 	
@@ -31,7 +31,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 
 	}
 
-	public GregorianCalendar getEinddatum() {
+	public Calendar getEinddatum() {
 		return einddatum;
 	}
 
