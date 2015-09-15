@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Werknemer implements Serializable {
 	private String Voornaam;
 	private String email;
 	@Temporal(TemporalType.DATE)
-	private GregorianCalendar geboortedatum;
+	private Calendar geboortedatum;
 	private String passwoord;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
@@ -114,11 +115,12 @@ public class Werknemer implements Serializable {
 	}
 	
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
-		
+		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum);
+		getVerlofaanvragen().add(tmpAanvraag);
 	}
 	
 	public void annuleerVerlofAanvraag(int verlofaanvraagId) {
-		
+		verlofaanvragen.stream().filter(v -> v.getId() == verlofaanvraagId);
 	}
 	
 	public List<VerlofAanvraag> getLopendeVerlofAanvragen() {
