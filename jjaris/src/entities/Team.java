@@ -81,7 +81,8 @@ public class Team implements Serializable {
 	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum,
 			Calendar einddatum) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
-		List<VerlofAanvraag> persoonlijkeaan
+		List<VerlofAanvraag> aanvragenperpersoon = new ArrayList<VerlofAanvraag>();
+		
 		return TeamAanVraag;
 
 	}
