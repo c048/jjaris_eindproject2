@@ -18,17 +18,17 @@ public class VerlofAanvraagDAO {
 	
 	
 	@PersistenceContext(unitName = "jjaris")
-	private static EntityManager em;
+	private EntityManager em;
 	
 	@Transactional
-	public static void voegVerlofAanvraagToe(VerlofAanvraag verlofAanvraag){
+	public void voegVerlofAanvraagToe(VerlofAanvraag verlofAanvraag){
 		
 		em.persist(verlofAanvraag);
 		
 	}
 	
 	@Transactional
-	public static void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){
+	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){
 		
 		VerlofAanvraag tmp = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
 		tmp.setWerknemer(verlofAanvraag.getWerknemer());
@@ -43,24 +43,18 @@ public class VerlofAanvraagDAO {
 	}
 	
 	@Transactional
-	public static List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
+	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM verlofaanvraag c "
 				+ "WHERE c.code = :teamcode ",VerlofAanvraag.class);
 		
-		
-		
 		return (List<VerlofAanvraag>) query.setParameter("code", teamCode).getResultList();
-		
-		
-		
-		
 		
 	}
 	
 	
 	@Transactional
-	public static List<VerlofAanvraag> getVerlofAanvragenWerknemer(int personeelnr){
+	public List<VerlofAanvraag> getVerlofAanvragenWerknemer(int personeelnr){
 		
 //		Werknemer werknemer = em.find(Werknemer.class, personeelnr);
 		
@@ -72,8 +66,93 @@ public class VerlofAanvraagDAO {
 		return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr).getResultList();
 	}
 	
-//	public static List<VerlofAanvraag> getVerlofAanvragen(LocalDate startdatum, LocalDate einddatum, Toestand toestand,int teamCode,int personeelnr){
+	
+//	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum, Toestand toestand,int teamCode,int personeelnr){
 //		
 //	}
-
+//	
+	
 }
+	//Niet doen dus
+//	public static List<VerlofAanvraag> getVerlofAanvragen(LocalDate startdatum, LocalDate einddatum, Toestand toestand,int teamCode,int personeelnr){
+//		String querystring = "SELECT c FROM verlofaanvraag c WHERE c.startdatum <= :startdatum AND c.einddatum <= :einddatum";
+//		
+//		if(startdatum != null){
+//			querystring = querystring + " AND c.startdatum <= :startdatum";
+//			
+//		}
+//		
+//		if(einddatum != null){
+//			querystring = querystring + " AND c.einddatum <= :einddatum";
+//		}
+//		
+//		if(toestand != null){
+//			querystring = querystring + " AND c.toestand = :toestand";
+//		}
+//		
+//		TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
+//		
+//		
+//		if(startdatum == null){
+//			if(einddatum == null){
+//				if(toestand == null){
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.getResultList();
+//				}else{
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("toestand", toestand)
+//							.getResultList();
+//				}
+//			}else{
+//				if(toestand == null){
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("einddatum", einddatum)
+//							.getResultList();
+//				}else{
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("toestand", toestand)
+//							.setParameter("einddatum", einddatum)
+//							.getResultList();
+//				}
+//				
+//			}
+//			}else{
+//			if(einddatum == null){
+//				if(toestand == null){
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("startdatum", startdatum)
+//							.getResultList();
+//				}else{
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("toestand", toestand)
+//							.setParameter("startdatum", startdatum)
+//							.getResultList();
+//				}
+//			}else{
+//				if(toestand == null){
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("einddatum", einddatum)
+//							.setParameter("startdatum", startdatum)
+//							.getResultList();
+//				}else{
+//					return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr)
+//							.setParameter("teamCode", teamCode)
+//							.setParameter("toestand", toestand)
+//							.setParameter("einddatum", einddatum)
+//							.setParameter("startdatum", startdatum)
+//							.getResultList();
+//				}
+//				
+//			}
+//			
+//	
+//	}
+//
+//}
