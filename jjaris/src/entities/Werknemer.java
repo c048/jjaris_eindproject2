@@ -20,7 +20,9 @@ public class Werknemer implements Serializable {
 	private String passwoord;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
+	@OneToMany(mappedBy="werknemer")
 	private List<VerlofAanvraag> verlofaanvragen;
+	@ManyToOne
 	private Team team;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Adres adres;

@@ -18,7 +18,9 @@ public class Team implements Serializable {
 	private int code;
 	private String naam;
 	private boolean HR;
+	@OneToMany(mappedBy="team")
 	private List<Werknemer> teamleden;
+	@OneToOne
 	private Werknemer teamverantwoordelijke;
 	private static final long serialVersionUID = 1L;
 
