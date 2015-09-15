@@ -1,8 +1,9 @@
 package programs;
 
-import java.time.LocalDate;
+
 import java.util.GregorianCalendar;
 
+import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Adres;
 import entities.Team;
@@ -33,6 +34,7 @@ public class MainWerknemer {
 		System.out.println(team1);
 		
 		WerknemerDAO.voegWerknemerToe(werknemer1);//schrijft werknemer in database
+		//TeamDAO.voegTeamToe(team1);
 
 	}
 
