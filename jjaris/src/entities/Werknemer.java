@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,9 +22,9 @@ public class Werknemer implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar geboortedatum;
 	private String passwoord;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
-	@OneToMany(mappedBy = "werknemer")
+	@OneToMany(mappedBy = "werknemer",fetch=FetchType.EAGER)
 	private List<VerlofAanvraag> verlofaanvragen;
 	@ManyToOne
 	private Team team;
@@ -89,7 +90,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setTeam(Team team) {
-		System.out.println(team);
+		//System.out.println(team);
 		this.team = team;
 		if(!getTeam().zitWerknemerInTeam(this)) {
 			getTeam().voegTeamlidToe(this);

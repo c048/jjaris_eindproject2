@@ -20,7 +20,7 @@ public class Team implements Serializable {
 	private int code;
 	private String naam;
 	private boolean HR;
-	@OneToMany(mappedBy = "team")
+	@OneToMany(mappedBy = "team", fetch=FetchType.EAGER)
 	private List<Werknemer> teamleden;
 	@OneToOne
 	private Werknemer teamverantwoordelijke;
@@ -187,8 +187,6 @@ public class Team implements Serializable {
 	 * @return
 	 */
 	public boolean zitWerknemerInTeam(Werknemer werknemer) {
-		System.out.println(werknemer);
-		System.out.println("teamleden " + teamleden);
 		if (teamleden != null && !teamleden.isEmpty() && teamleden.contains(werknemer)) {
 			return true;
 		} else {
