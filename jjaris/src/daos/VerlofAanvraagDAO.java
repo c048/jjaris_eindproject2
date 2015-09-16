@@ -1,6 +1,5 @@
 package daos;
 
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +11,8 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import utils.Filter;
-import entities.Team;
-import entities.Toestand;
 import entities.VerlofAanvraag;
-import entities.Werknemer;
+
 
 @ApplicationScoped
 public class VerlofAanvraagDAO {
@@ -68,7 +65,7 @@ public class VerlofAanvraagDAO {
 	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
-				+ "WHERE c.werknemer.team.code LIKE :teamcode ",VerlofAanvraag.class);
+				+ "WHERE c.werknemer.team.code = :teamcode ",VerlofAanvraag.class);
 		
 		return (List<VerlofAanvraag>) query.setParameter("code", teamCode).getResultList();
 		
@@ -86,11 +83,11 @@ public class VerlofAanvraagDAO {
 //		Werknemer werknemer = em.find(Werknemer.class, personeelnr);
 		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
-				+ "WHERE c.werknemer.personeelsnummer LIKE :personeelnr ",VerlofAanvraag.class);
+				+ "WHERE c.werknemer.personeelsnummer = :personeelnr ",VerlofAanvraag.class);
 		
 		
 		
-		return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr).getResultList();
+		return query.setParameter("personeelnr", personeelnr).getResultList();
 	}
 	
 	/**
@@ -124,6 +121,10 @@ public class VerlofAanvraagDAO {
 					aantal++;
 					querystring = querystring + " c."+entry.getKey()+">= :" + entry.getKey();
 					
+				}
+				if(entry.getKey().contains("c.werknemer.personeelsnummer") || entry.getKey().contains("c.werknemer.team.code")){
+					aantal++;
+					querystring = querystring + " c."+entry.getKey()+"= :" + entry.getKey();
 				}
 				else{
 					aantal++;
