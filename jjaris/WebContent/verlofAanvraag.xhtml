@@ -8,8 +8,9 @@
 	<title>Verlof Aanvraag</title>
 </h:head>
 <h:body>
+	<h2>Nieuwe verlofaanvraag indienen</h2>
 	<h:form>
-		<h2>Nieuwe verlofaanvraag indienen</h2>
+		
 			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel>
 			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
@@ -20,7 +21,7 @@
 				</h:inputText>
 			<h:commandButton value="Aanvragen"></h:commandButton>
 	</h:form>
-		<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
+	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 	<h:form>
 <h:dataTable value="#{}" var="entry">
     			<h:column>

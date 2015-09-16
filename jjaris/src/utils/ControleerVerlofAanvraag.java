@@ -3,10 +3,12 @@ package utils;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import daos.CollectieveSluitingDAO;
+import entities.Feestdag;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
@@ -42,9 +44,16 @@ public class ControleerVerlofAanvraag {
 	public int getCollectieveDagen(Calendar begindatum, Calendar einddatum) {
 		return sluitingDao.getCollectieveVerloven(begindatum, einddatum).size();
 	}
-	
-	public int getAantalFeestdagenOpWeekdag(Calendar begindatum, Calendar einddatum) {
-		return sluitingDao.getFeestdagen(begindatum, einddatum).size();
+	/**
+	 *Vraagt aantal feestdagen op en telt enkel de feestdagen die niet op zaterdag en zondag vallen INC
+	 * @param begindatum
+	 * @param einddatum
+	 * @return int met aantal dagen
+	 */
+	public int getAantalFeestdagenOpWeekdag(Calendar begindatum, Calendar einddatum) {	
+		List<Feestdag> feestdagen = sluitingDao.getFeestdagen(begindatum, einddatum);
+		long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();		
+		return (int) aantal;
 	}
 	
 	public int getAantalCollectieveDagen(int jaartal) {
