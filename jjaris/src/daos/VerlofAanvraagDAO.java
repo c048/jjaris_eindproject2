@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -14,6 +15,7 @@ import entities.Toestand;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
+@ApplicationScoped
 public class VerlofAanvraagDAO {
 	
 	
