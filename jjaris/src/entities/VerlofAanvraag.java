@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import utils.ControleerVerlofAanvraag;
 import entities.*;
 import daos.CollectieveSluitingDAO;
 
@@ -78,11 +79,10 @@ public class VerlofAanvraag implements Serializable{
 			if(einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY ){
 				weekdagTeller++;
 			}
-			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
-			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
-			
+			ControleerVerlofAanvraag aanvraag = new ControleerVerlofAanvraag();
+			int aantal = aanvraag.getAantalFeestdagenOpWeekdag(startdatum, einddatum);
 			//return weekdagTeller;
-			return  (weekdagTeller - (int)aantal);
+			return  weekdagTeller - aantal;
 		}
 			
 	/**
