@@ -21,13 +21,35 @@
 			<h:commandButton value="Aanvragen"></h:commandButton>
 	</h:form>
 		<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
-		
-			
-
-
-
-
-
-
+	<h:form>
+<h:dataTable value="#{}" var="entry">
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">ID</f:facet>
+    				<!-- row record -->
+    				#{entry.}
+    			</h:column>		
+    			<h:column>
+    				<f:facet name="header">Startdatum</f:facet>
+    				#{entry.}
+    			</h:column>		
+    			<h:column>
+    				<f:facet name="header">Einddatum</f:facet>
+    				#{entry.}
+    			</h:column>	
+    			<h:column>
+    				<f:facet name="header">Toestand</f:facet>
+    				#{entry.}
+    			</h:column>	
+    			<h:column>
+    				<f:facet name="header">Reden</f:facet>
+    				#{entry.}
+    			</h:column>
+    			<h:column>
+    				<f:facet name="header">Annuleren</f:facet>
+    				#{entry.}
+    			</h:column>
+    		</h:dataTable>		
+	</h:form>			
 </h:body>
 </html>
