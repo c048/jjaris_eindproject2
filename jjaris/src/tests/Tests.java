@@ -1,11 +1,13 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.eclipse.persistence.jpa.jpql.Assert.AssertException;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
@@ -27,15 +29,25 @@ public class Tests {
 	 */
 	@Test
 	public void testGetPeriode1(){
-		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,01), new GregorianCalendar(2015, 0, 15));
+		System.out.println("nr van zaterdag: "+Calendar.SATURDAY);
+		System.out.println("nr van zondag: "+Calendar.SUNDAY);
+		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 0, 15));
 		assertEquals(11, verlofaanvraag.getPeriode());
 		System.out.println("************************");
-		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,01), new GregorianCalendar(2015, 0, 31));
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 0, 18));
+		assertEquals(12, verlofaanvraag.getPeriode());
+		System.out.println("************************");
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 0, 30));
 		assertEquals(22, verlofaanvraag.getPeriode());
 		System.out.println("************************");
-		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,01), new GregorianCalendar(2015, 2, 31));
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 0, 31));
+		assertEquals(22, verlofaanvraag.getPeriode());
+		System.out.println("************************");
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 2, 31));
 		assertEquals(64, verlofaanvraag.getPeriode());
-		
+		System.out.println("************************");
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,3), new GregorianCalendar(2015, 0, 31));
+		assertEquals(20, verlofaanvraag.getPeriode());
 	}
 	/**
 	 * 

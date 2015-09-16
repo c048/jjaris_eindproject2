@@ -57,26 +57,34 @@ public class VerlofAanvraag implements Serializable{
 
 		/**
 		 * Bereken Het aantal dagen tussen begin en einddatum zonder feestdagen
-		 * @param StartDatum
-		 * @param EindDatum
 		 * @return
 		 */
 		public int getPeriode(){
 			Calendar datum = new GregorianCalendar();
 			datum.setTime(startdatum.getTime());
-			int weekdagTeller = 1;
+			int weekdagTeller = 0;
+			
+			int teller = 0;
 			
 			while(einddatum.after(datum)){
+				System.out.printf( "teller: %1$s%n", ++teller );
+				System.out.printf( "weekdagTeller: %1$s%n", weekdagTeller );
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
-				if(weekdag != (datum.getFirstDayOfWeek() + 5)%7 && weekdag != (datum.getFirstDayOfWeek() + 6)%7 ){
+				if(weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY ){
+					System.out.println(weekdag);
 					weekdagTeller++;
 				}
 				datum.add(Calendar.DAY_OF_YEAR,1);
 			}
-			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
-			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
-
-			return  (weekdagTeller - (int)aantal);
+			
+			if(einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY ){
+				weekdagTeller++;
+			}
+//			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
+//			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
+			
+			return weekdagTeller;
+			//return  (weekdagTeller - (int)aantal);
 		}
 			
 	/**
