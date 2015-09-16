@@ -10,9 +10,7 @@
 		<class>entities.Adres</class>
 		<class>entities.VerlofAanvraag</class>
 		<class>entities.JaarlijksVerlof</class>
-		<class>entities.CollectieveSluiting</class>
-		<class>entities.CollectiefVerlof</class>
-		<class>entities.Feestdag</class>
+
 
 		<properties>
 		<property name="hibernate.transaction.jta.platform"   value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" /> 
