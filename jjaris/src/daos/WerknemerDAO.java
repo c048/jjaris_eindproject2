@@ -1,6 +1,7 @@
 package daos;
 
 import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -8,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+
 import entities.Team;
+import entities.VerlofAanvraag;
 import entities.Werknemer;
 
 @ApplicationScoped
@@ -71,17 +74,96 @@ public class WerknemerDAO {
 		return tqry.getResultList();
 	}
 
+	/**
+	 * update een werknemer in de database (opgelet: de verlofaanvragen worden
+	 * niet automatisch aangepast als er wijzigingen zouden zijn!!)
+	 * 
+	 * @param werknemer
+	 */
 	@Transactional
 	public void updateWerknemer(Werknemer werknemer) {
 		Werknemer tmp = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-		tmp.setGegevens(werknemer);
+		if (tmp != null) {
+			tmp.setGegevens(werknemer);
+		}
+
 	}
 
+	/**
+	 * Verwijdert een werknemer uit de database en ook zijn bijhorende
+	 * verlofaanvragen
+	 * 
+	 * @param werknemer
+	 */
+	@Transactional
 	public void verwijderWerknemer(Werknemer werknemer) {
-		if (!werknemer.isVerantwoordelijke()) {
+
+		if (werknemer != null && !werknemer.isVerantwoordelijke()) {
 			Werknemer w = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
+			List<VerlofAanvraag> verlofaanvragen = werknemer.getAlleVerlofAanvragen();
+			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
+				VerlofAanvraag va = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
+				em.remove(va);
+			}
 			em.remove(w);
+		} else {
+			if (werknemer == null) {
+				throw new NullPointerException("WerknemerDAO.verwijderWerknemer kan niet worden uitgevoerd op null");
+			} else {
+				throw new IllegalArgumentException(
+						"WerknemerDAO.verwijderWerknemer kan niet worden uitgevoerd, omdat de werknemer teamverantwoordelijke is");
+			}
 		}
+	}
+
+	/**
+	 * Geeft een werknemer met een bepaald e-mail adres terug
+	 * 
+	 * @param email
+	 * @return Werknemer
+	 */
+	public Werknemer getWerknemer(String email) {
+		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.email = :email", Werknemer.class);
+		tqry.setParameter("email", email);
+		return tqry.getSingleResult();
+	}
+
+	/**
+	 * Geeft een lijst met werknemers terug met een gedeeltelijke naam en
+	 * gedeeltelijke voornaam
+	 * 
+	 * @param zoekNaam
+	 * @param zoekVoornaam
+	 * @return List<Werknemer>
+	 */
+	public List<Werknemer> getWerknemers(String zoekNaam, String zoekVoornaam) {
+		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.naam = :%naam% AND w.voornaam = :%voornaam%", Werknemer.class);
+		tqry.setParameter("naam", zoekNaam);
+		tqry.setParameter("voornaam", zoekVoornaam);
+		return tqry.getResultList();
+	}
+
+	/**
+	 * Geeft een lijst met werknemers terug met een gedeeltelijke naam en
+	 * gedeeltelijke voornaam en een personeelsnummer. Als het personeelsnr 0 is
+	 * dan zoekt hij enkel op naam en voornaam
+	 * 
+	 * @param zoekNaam
+	 * @param zoekVoornaam
+	 * @param personeelsnr
+	 * @returnList<Werknemer>
+	 */
+	public List<Werknemer> getWerknemers(String zoekNaam, String zoekVoornaam, int personeelsnr) {
+		if (personeelsnr != 0) {
+			TypedQuery<Werknemer> tqry = em.createQuery(
+					"SELECT w FROM Werknemer w WHERE w.naam = :%naam% AND w.voornaam = :%voornaam% AND w.personeelsnummer = :nr", Werknemer.class);
+			tqry.setParameter("naam", zoekNaam);
+			tqry.setParameter("voornaam", zoekVoornaam);
+			tqry.setParameter("nr", personeelsnr);
+			return tqry.getResultList();
+		} else
+			return getWerknemers(zoekNaam, zoekVoornaam);
+
 	}
 
 }

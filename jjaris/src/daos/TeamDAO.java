@@ -35,8 +35,8 @@ public class TeamDAO {
 	public void verwijderTeam(Team team) {
 
 		if (team != null && team.getTeamleden().isEmpty()) {
-			em.find(Team.class, team);
-			em.remove(team);
+			Team t = em.find(Team.class, team);
+			em.remove(t);
 		} else {
 			if (team == null) {
 				throw new NullPointerException("TeamDAO.verwijderTeam kan niet worden uitgevoerd op null");
@@ -48,7 +48,8 @@ public class TeamDAO {
 	}
 
 	/**
-	 *update een team in de database
+	 * update een team in de database
+	 * 
 	 * @param team
 	 */
 	@Transactional
@@ -65,38 +66,56 @@ public class TeamDAO {
 	@Transactional
 	public Team getTeam(int code) {
 		Team team = em.find(Team.class, code);
+
 		return team;
 
 	}
 
-	
+	/**
+	 * Geeft alle teams met een gedeeltelijke naam en een gedeeltelijke zoeknaam
+	 * van de teamverantwoordelijke en een bepaalde teamcode
+	 * 
+	 * @param zoekNaam
+	 * @param zoekVerantwoordelijke
+	 * @param code
+	 * @return
+	 */
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke, int code) {
-
-		TypedQuery<Team> query = em.createQuery("SELECT c FROM team c WHERE c.naam = :%naam% AND " + "c.werknemer = :%leider% AND c.code = :code",
-				Team.class);
-		return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("werknemer", zoekVerantwoordelijke).setParameter("code", code)
-				.getResultList();
+		if (code != 0) {
+			TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam = :%naam% AND "
+					+ "c.teamverantwoordelijke.naam = :%leider% AND c.code = :code", Team.class);
+			return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("leider", zoekVerantwoordelijke).setParameter("code", code)
+					.getResultList();
+		}else return getTeams(zoekNaam, zoekVerantwoordelijke);
 
 	}
 
-	
+	/**
+	 * Geeft alle teams terug met een gedeeltelijke naam en gedeeltelijke naam verantwoordelijke
+	 * @param zoekNaam
+	 * @param zoekVerantwoordelijke
+	 * @return
+	 */
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke) {
 
-		TypedQuery<Team> query = em.createQuery("SELECT c FROM team c WHERE c.naam = :%naam% AND " + "c.werknemer = :%leider%", Team.class);
-		return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("werknemer", zoekVerantwoordelijke).getResultList();
+		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam = :%naam% AND " + "c.teamverantwoordelijke.naam = :%leider%",
+				Team.class);
+		return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("leider", zoekVerantwoordelijke).getResultList();
 
 	}
-	
+
 	/**
-	 * Geeft alle teams uit de database. Geeft null terug als er geen teams aanwezig zijn
+	 * Geeft alle teams uit de database. Geeft null terug als er geen teams
+	 * aanwezig zijn
+	 * 
 	 * @return List<Team>
 	 */
-	public List<Team> getTeams(){
+	public List<Team> getTeams() {
 		List<Team> l = null;
-		
-			TypedQuery<Team> tqry = em.createQuery("SELECT t FROM Team t", Team.class);
-			l = tqry.getResultList();
-		
+
+		TypedQuery<Team> tqry = em.createQuery("SELECT t FROM Team t", Team.class);
+		l = tqry.getResultList();
+
 		return l;
 	}
 
