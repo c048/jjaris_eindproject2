@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import entities.*;
+import daos.CollectieveSluitingDAO;
 
 @Entity
 public class VerlofAanvraag implements Serializable{
@@ -62,18 +67,16 @@ public class VerlofAanvraag implements Serializable{
 			int weekdagTeller = 1;
 			
 			while(einddatum.after(datum)){
-				//System.out.println(datum);
-				System.out.println("first day of week:"+datum.getFirstDayOfWeek());
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
-				//if(weekdag != Calendar.SATURDAY && weekdag !=Calendar.SUNDAY){
 				if(weekdag != (datum.getFirstDayOfWeek() + 5)%7 && weekdag != (datum.getFirstDayOfWeek() + 6)%7 ){
 					weekdagTeller++;
-					System.out.println(weekdag + " : 2015/" + datum.get(Calendar.MONTH) + "/" + datum.get(Calendar.DAY_OF_MONTH) );
 				}
 				datum.add(Calendar.DAY_OF_YEAR,1);
-//				System.out.println("2015 - " + datum.get(Calendar.MONTH) + " - " + datum.get(Calendar.DAY_OF_MONTH) );
 			}
-			return weekdagTeller;
+			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
+			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
+
+			return  (weekdagTeller - (int)aantal);
 		}
 			
 	/**
