@@ -16,7 +16,6 @@ public class WerknemerDAO {
 	@PersistenceContext(unitName = "jjaris")
 	private EntityManager em;
 
-	
 	/**
 	 * Voegt een werknemer toe aan de database. Via Cascade zou ook het adres en
 	 * het Jaarlijks verlof moeten ingevuld worden
@@ -31,11 +30,8 @@ public class WerknemerDAO {
 	@Transactional
 	public void voegWerknemerToe(Werknemer werknemer) {
 		Team team = werknemer.getTeam();
-
-		if (team != null) {
-			if (team.getCode() == 0) {
-				em.persist(team);
-			}
+		if (team != null && team.getCode() == 0) {
+			em.persist(team);
 		}
 		em.persist(werknemer);
 
@@ -52,39 +48,40 @@ public class WerknemerDAO {
 		return tqry.getResultList();
 
 	}
-	
+
 	/**
 	 * Geeft een werknemer terug de opgegeven personeelsnummer
+	 * 
 	 * @param personeelnr
 	 * @return Werknemer
 	 */
-	public Werknemer getWerknemer(int personeelnr){
+	public Werknemer getWerknemer(int personeelnr) {
 		return em.find(Werknemer.class, personeelnr);
 	}
-	
+
 	/**
 	 * Geeft alle werknemers uit een bepaald team terug
+	 * 
 	 * @param teamCode
 	 * @return List<Werknemer>
 	 */
-	public List<Werknemer> getWerknemers (int teamCode){
+	public List<Werknemer> getWerknemers(int teamCode) {
 		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.team.code = :code", Werknemer.class);
 		tqry.setParameter("code", teamCode);
 		return tqry.getResultList();
 	}
-	
-	public void updateWerknemer(Werknemer werknemer){
+
+	@Transactional
+	public void updateWerknemer(Werknemer werknemer) {
 		Werknemer tmp = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-		tmp.setAdres(werknemer.getAdres());
-		tmp.setEmail(werknemer.getEmail());
-		tmp.setGeboortedatum(werknemer.getGeboortedatum());
+		tmp.setGegevens(werknemer);
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public void verwijderWerknemer(Werknemer werknemer) {
+		if (!werknemer.isVerantwoordelijke()) {
+			Werknemer w = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
+			em.remove(w);
+		}
+	}
 
 }
