@@ -57,23 +57,25 @@ public class VerlofAanvraag implements Serializable{
 		 * @return
 		 */
 		public int getPeriode(){
-		    
-		    int w1 = startdatum.get(Calendar.DAY_OF_WEEK);
-		    startdatum.add(Calendar.DAY_OF_WEEK, -w1);
-		    int w2 = einddatum.get(Calendar.DAY_OF_WEEK);
-		    einddatum.add(Calendar.DAY_OF_WEEK, -w2);
-		    //einde zaterdag begin zaterdag 
-		    long days = (einddatum.getTimeInMillis()-startdatum.getTimeInMillis())/(1000*60*60*24);
-		    long daysWithoutWeekendDays = days-(days*2/7);
-		    // Aanpassen W1 en W2 naar 0 om alleen weekdagen te tellen
-		    if (w1 == Calendar.SUNDAY) {
-		        w1 = Calendar.MONDAY;
-		    }
-		    if (w2 == Calendar.SUNDAY) {
-		        w2 = Calendar.MONDAY;
-		    }
-		    return (int) (daysWithoutWeekendDays-w1+w2);
-		}		
+			Calendar datum = new GregorianCalendar();
+			datum.setTime(startdatum.getTime());
+			int weekdagTeller = 1;
+			
+			while(einddatum.after(datum)){
+				//System.out.println(datum);
+				System.out.println("first day of week:"+datum.getFirstDayOfWeek());
+				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
+				//if(weekdag != Calendar.SATURDAY && weekdag !=Calendar.SUNDAY){
+				if(weekdag != (datum.getFirstDayOfWeek() + 5)%7 && weekdag != (datum.getFirstDayOfWeek() + 6)%7 ){
+					weekdagTeller++;
+					System.out.println(weekdag + " : 2015/" + datum.get(Calendar.MONTH) + "/" + datum.get(Calendar.DAY_OF_MONTH) );
+				}
+				datum.add(Calendar.DAY_OF_YEAR,1);
+//				System.out.println("2015 - " + datum.get(Calendar.MONTH) + " - " + datum.get(Calendar.DAY_OF_MONTH) );
+			}
+			return weekdagTeller;
+		}
+			
 	/**
 	 * Methode om start en einddatum in een keer te setten met geîntegreerde check
 	 * 
