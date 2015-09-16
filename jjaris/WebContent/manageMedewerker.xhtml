@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<html 	xmlns="http://www.w3.org/1999/xhtml" 
+			xmlns:h="http://xmlns.jcp.org/jsf/html"
+			xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>Voeg medewerker toe</title>
@@ -8,28 +10,32 @@
 	<h:body>
 		<h:form>
 			<h:outputLabel for="mNaam" value="Naam"></h:outputLabel>
-			<h:inputText id="mNaam" required="true"></h:inputText>
+			<h:inputText id="mNaam" required="true" value="#{managemedewerkerback.voornaam}"></h:inputText>
 			<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
-			<h:inputText id="mAchterNaam" required="true"></h:inputText><br/>
-			<h:selectOneMenu></h:selectOneMenu><br/>
+			<h:inputText id="mAchterNaam" required="true" value="#{managemedewerkerback.naam}"></h:inputText><br/>
+			<h:selectOneMenu value="">
+				<f:selectItems value="#{managemedewerkerback.findAllTeams}"></f:selectItems>
+			</h:selectOneMenu><br/>
 			<h:outputLabel for="gebJaar" value="Geboortedatum"></h:outputLabel>
-			<h:inputText id="gebJaar"></h:inputText>
-			<h:inputText id="gebMaand"></h:inputText>
-			<h:inputText id="gebDag"></h:inputText><br/>
+			<h:inputText id="gebJaar" required="true"></h:inputText>
+			<h:inputText id="gebMaand" required="true"></h:inputText>
+			<h:inputText id="gebDag" required="true"></h:inputText><br/>
 			<h3>Adres</h3>
 			<h:outputLabel for="adresStraat" value="Straat"></h:outputLabel>
-			<h:inputText id="adresStraat" maxlength="5"></h:inputText><br/>
+			<h:inputText id="adresStraat" value="#{managemedewerkerback.straat}"></h:inputText><br/>
 			<h:outputLabel for="adresNr" value="Huisnummer"></h:outputLabel>
-			<h:inputText id="adresNr" maxlength="5"></h:inputText><br/>
-			<h:outputLabel for="adresPost" value="Bus nummer"></h:outputLabel>
-			<h:inputText id="adresPost" maxlength="4"></h:inputText><br/>
+			<h:inputText id="adresNr" maxlength="5" value="#{managemedewerkerback.huisnummer}"></h:inputText>
+			<h:outputLabel for="adresBus" value="Busnummer"></h:outputLabel>
+			<h:inputText id="adresBus" maxlength="5" value="#{managemedewerkerback.busnummer}"></h:inputText><br/>
+			<h:outputLabel for="adresPost" value="Postcode"></h:outputLabel>
+			<h:inputText id="adresPost" maxlength="4" value="#{managemedewerkerback.postcode}"></h:inputText><br/>
 			<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
-			<h:inputText id="adresGemeente"></h:inputText><br/>
+			<h:inputText id="adresGemeente" value="#{managemedewerkerback.gemeente}"></h:inputText><br/>
 			<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
-			<h:inputText id="mEmail" required="true"></h:inputText>
+			<h:inputText id="mEmail" required="true" value="#{managemedewerkerback.email}"></h:inputText>
 			<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
-			<h:inputText id="mPwd" required="true"></h:inputText><br/>
-			<h:commandButton value="Voeg Medewerker Toe" action="HR"></h:commandButton>
+			<h:inputText id="mPwd" required="true" value="#{managemedewerkerback.passwoord}"></h:inputText><br/>
+			<h:commandButton value="Voeg Medewerker Toe" action="#{managemedewerkerback.addMedewerker()}"></h:commandButton>
 		</h:form>
 	</h:body>
 </html>
