@@ -87,6 +87,9 @@ public class Werknemer implements Serializable {
 
 	public void setTeam(Team team) {
 		this.team = team;
+		if(!getTeam().zitWerknemerInTeam(this)) {
+			getTeam().voegTeamlidToe(this);
+		}
 	}
 
 	public Adres getAdres() {

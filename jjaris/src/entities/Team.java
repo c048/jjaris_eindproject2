@@ -23,7 +23,7 @@ public class Team implements Serializable {
 	private String naam;
 	private boolean HR;
 	@OneToMany(mappedBy = "team")
-	private Set<Werknemer> teamleden;
+	private List<Werknemer> teamleden;
 	@OneToOne
 	private Werknemer teamverantwoordelijke;
 	private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class Team implements Serializable {
 	//toegevoegd door iris - kreeg nullpointerex op voegTeamlidToe
 	@PostConstruct
 	public void init(){
-		teamleden = new HashSet<Werknemer>();
+		teamleden = new ArrayList<Werknemer>();
 	}
 
 	public String getNaam() {
@@ -61,11 +61,11 @@ public class Team implements Serializable {
 		this.HR = HR;
 	}
 
-	public Set<Werknemer> getTeamleden() {
+	public List<Werknemer> getTeamleden() {
 		return this.teamleden;
 	}
 
-	public void setTeamleden(Set<Werknemer> teamleden) {
+	public void setTeamleden(List<Werknemer> teamleden) {
 		this.teamleden = teamleden;
 	}
 
@@ -196,7 +196,6 @@ public class Team implements Serializable {
 	public boolean zitWerknemerInTeam(Werknemer werknemer) {
 		if (teamleden.contains(werknemer)) {
 			return true;
-
 		} else {
 			return false;
 		}
