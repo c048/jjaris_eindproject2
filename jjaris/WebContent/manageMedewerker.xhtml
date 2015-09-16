@@ -7,10 +7,29 @@
 	</h:head>
 	<h:body>
 		<h:form>
-			<h:outputLabel for="medewerkerNaam" value="Naam"></h:outputLabel>
-			<h:inputText id="medewerkerNaam" required="true"></h:inputText>
-			<h:outputLabel for="medewerkerAchterNaam" value="Achternaam"></h:outputLabel>
-			<h:inputText id="medewerkerAchterNaam" required="true"></h:inputText>
+			<h:outputLabel for="mNaam" value="Naam"></h:outputLabel>
+			<h:inputText id="mNaam" required="true"></h:inputText>
+			<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
+			<h:inputText id="mAchterNaam" required="true"></h:inputText><br/>
+			<h:selectOneMenu></h:selectOneMenu><br/>
+			<h:outputLabel for="gebJaar" value="Geboortedatum"></h:outputLabel>
+			<h:inputText id="gebJaar"></h:inputText>
+			<h:inputText id="gebMaand"></h:inputText>
+			<h:inputText id="gebDag"></h:inputText><br/>
+			<h3>Adres</h3>
+			<h:outputLabel for="adresStraat" value="Straat"></h:outputLabel>
+			<h:inputText id="adresStraat" maxlength="5"></h:inputText><br/>
+			<h:outputLabel for="adresNr" value="Huisnummer"></h:outputLabel>
+			<h:inputText id="adresNr" maxlength="5"></h:inputText><br/>
+			<h:outputLabel for="adresPost" value="Bus nummer"></h:outputLabel>
+			<h:inputText id="adresPost" maxlength="4"></h:inputText><br/>
+			<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
+			<h:inputText id="adresGemeente"></h:inputText><br/>
+			<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
+			<h:inputText id="mEmail" required="true"></h:inputText>
+			<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
+			<h:inputText id="mPwd" required="true"></h:inputText><br/>
+			<h:commandButton value="Voeg Medewerker Toe"></h:commandButton>
 		</h:form>
 	</h:body>
 </html>
