@@ -2,8 +2,9 @@ package programs;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
-
 import java.util.List;
+
+
 
 //import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -12,11 +13,15 @@ import javax.inject.Named;
 
 //import javax.transaction.Transactional;
 
+
+
 import daos.TeamDAO;
+import daos.VerlofAanvraagDAO;
 //import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Adres;
 import entities.Team;
+import entities.VerlofAanvraag;
 import entities.Werknemer;
 
 @Named
@@ -27,6 +32,8 @@ public class MainWerknemer implements Serializable {
 	private WerknemerDAO testdoa;
 	@Inject
 	private TeamDAO teamdoa;
+	@Inject
+	private VerlofAanvraagDAO verlofDAO;
 
 	public void main() {
 		// Werknemer werknemer1 = new Werknemer();
@@ -41,8 +48,8 @@ public class MainWerknemer implements Serializable {
 		// werknemer1.setNaam("Delvaux");
 		// werknemer1.setVoornaam("Johan");
 		// werknemer1.setPasswoord("lol26");
-		// Team team1 = teamdoa.getTeam(1);
-		// System.out.println(team1);
+	
+	
 		// team1.setNaam("JJaris");
 		// team1.setHR(false);
 		// werknemer1.setTeam(team1);
@@ -64,6 +71,19 @@ public class MainWerknemer implements Serializable {
 		for (Team team : teams) {
 			System.out.println(team);
 		}
+		
+		Team team1 = teamdoa.getTeam(1);
+		
+		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,11,1),new GregorianCalendar(2015, 11, 25));
+		
+		
+		Werknemer w = testdoa.getWerknemer(32768);
+		verlofaanvraag.setWerknemer(w);
+		verlofDAO.voegVerlofAanvraagToe(verlofaanvraag);
+		
+		//w.voegVerlofAanvroegToe(new GregorianCalendar(2015,11,1),new GregorianCalendar(2015, 11, 25));
+		
+		
 
 	}
 

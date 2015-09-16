@@ -44,10 +44,13 @@ public class VerlofAanvraag implements Serializable{
 	public VerlofAanvraag() {
 	}
 	
+	
 	/**
 	 * Constructor met startdatum einddatum 
 	 * toestand op INGEDIEND
 	 * aanvraagdatum op now
+	 * @param startDatum
+	 * @param eindDatum
 	 */
 	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
 		GregorianCalendar now = new GregorianCalendar();
