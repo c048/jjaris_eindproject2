@@ -1,4 +1,4 @@
-package entities;
+ package entities;
 
 import java.io.Serializable;
 import java.lang.String;
@@ -27,12 +27,10 @@ public class Werknemer implements Serializable {
 	private List<VerlofAanvraag> verlofaanvragen;
 	@ManyToOne
 	private Team team;
-	@OneToOne(cascade = CascadeType.ALL)
 	private Adres adres;
 	private static final long serialVersionUID = 1L;
 
 	public Werknemer() {
-		super();
 	}   
 	public int getPersoneelsnummer() {
 		return this.personeelsnummer;
@@ -154,5 +152,21 @@ public class Werknemer implements Serializable {
 	
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
 		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum))).collect(Collectors.toList());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		if(obj.getClass() != this.getClass()) {
+			return false;
+		}
+		return getPersoneelsnummer() == ((Werknemer) obj).getPersoneelsnummer();
+	}
+	
+	@Override
+	public int hashCode() {
+		return (getPersoneelsnummer()+"").hashCode();
 	}
 }

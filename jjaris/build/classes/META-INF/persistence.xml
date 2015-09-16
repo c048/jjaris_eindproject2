@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="jjaris">
-	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="jjaris" transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<jta-data-source>jdbc/JjarisConnection</jta-data-source> 
 		<class>entities.Werknemer</class>
 		<class>entities.Team</class>
 		<class>entities.Adres</class>
 		<class>entities.VerlofAanvraag</class>
 		<class>entities.JaarlijksVerlof</class>
-		
+
 
 		<properties>
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
+		<property name="hibernate.transaction.jta.platform"   value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" /> 
+			<!-- <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/jjaris"></property>
 			<property name="hibernate.connection.username" value="root"></property>
 			<property name="hibernate.connection.password" value="root"></property>
-			<property name="hibernate.connection.pool_size" value="1" />
+			<property name="hibernate.connection.pool_size" value="1" /> -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-		<!-- om problemen met hangende queries te vermijden in MySQL -->	<property name="hibernate.connection.autocommit" value="true"/>
+			<!-- om problemen met hangende queries te vermijden in MySQL -->
+			<!-- <property name="hibernate.connection.autocommit" value="true" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

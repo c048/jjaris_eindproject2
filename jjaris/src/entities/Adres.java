@@ -3,30 +3,15 @@ package entities;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
 @Embeddable
 public class Adres implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
 	private static final long serialVersionUID = 1L;
 	private String straat;
 	private String huisnummer;
 	private String busnummer;
 	private String postcode;
 	private String gemeente;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public String getStraat() {
 		return straat;
