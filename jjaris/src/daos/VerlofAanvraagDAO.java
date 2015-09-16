@@ -122,7 +122,7 @@ public class VerlofAanvraagDAO {
 					querystring = querystring + " c."+entry.getKey()+">= :" + entry.getKey();
 					
 				}
-				if(entry.getKey().contains("c.werknemer.personeelsnummer") || entry.getKey().contains("c.werknemer.team.code")){
+				if(entry.getKey().contains("werknemer.personeelsnummer") || entry.getKey().contains("werknemer.team.code")){
 					aantal++;
 					querystring = querystring + " c."+entry.getKey()+"= :" + entry.getKey();
 				}
