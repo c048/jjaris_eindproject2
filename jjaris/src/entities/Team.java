@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -29,14 +27,10 @@ public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Team() {
-	}
-	
-	//toegevoegd door iris - kreeg nullpointerex op voegTeamlidToe
-	@PostConstruct
-	public void init(){
-		teamleden = new ArrayList<Werknemer>();
+		this.teamleden = new ArrayList<Werknemer>();
 	}
 
+	
 	public String getNaam() {
 		return this.naam;
 	}
@@ -66,7 +60,9 @@ public class Team implements Serializable {
 	}
 
 	public void setTeamleden(List<Werknemer> teamleden) {
-		this.teamleden = teamleden;
+		if (teamleden != null) {
+			this.teamleden = teamleden;
+		}
 	}
 
 	public Werknemer getTeamverantwoordelijke() {
@@ -75,8 +71,8 @@ public class Team implements Serializable {
 
 	public void setTeamverantwoordelijke(Werknemer teamverantwoordelijke) {
 		this.teamverantwoordelijke = teamverantwoordelijke;
-		teamverantwoordelijke.setTeam(this);
-		//voegTeamlidToe(teamverantwoordelijke);
+		this.teamverantwoordelijke.setTeam(this);
+
 	}
 
 	// vanaf hier Stef, nog geen foutafhandeling!!
@@ -98,14 +94,13 @@ public class Team implements Serializable {
 	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> persoonlijkeaanvraag = new ArrayList<VerlofAanvraag>();
-		
+
 		for (Werknemer w : teamleden) {
 			persoonlijkeaanvraag.addAll(w.getVerlofaanvragen());
 		}
-		
+
 		for (VerlofAanvraag verlofAanvraag : persoonlijkeaanvraag) {
-			if (verlofAanvraag.getStartdatum().equals(startdatum)
-					&& verlofAanvraag.getEinddatum().equals(einddatum)) {
+			if (verlofAanvraag.getStartdatum().equals(startdatum) && verlofAanvraag.getEinddatum().equals(einddatum)) {
 				TeamAanVraag.add(verlofAanvraag);
 			}
 
@@ -123,7 +118,7 @@ public class Team implements Serializable {
 	public List<VerlofAanvraag> getVerlofAanvragen(Toestand toestand) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
-		
+
 		for (Werknemer w : teamleden) {
 			tmpList.addAll(w.getVerlofaanvragen());
 
@@ -147,8 +142,7 @@ public class Team implements Serializable {
 	 * @param personeelsnummer
 	 * @return
 	 */
-	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum,
-			Calendar einddatum, Toestand toestand, int personeelsnummer) {
+	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum, Toestand toestand, int personeelsnummer) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
 		for (Werknemer w : teamleden) {
@@ -156,8 +150,7 @@ public class Team implements Serializable {
 				tmpList.addAll(w.getVerlofaanvragen());
 			}
 			for (VerlofAanvraag verlofAanvraag : tmpList) {
-				if (verlofAanvraag.getStartdatum().equals(startdatum)
-						&& verlofAanvraag.getEinddatum().equals(einddatum)
+				if (verlofAanvraag.getStartdatum().equals(startdatum) && verlofAanvraag.getEinddatum().equals(einddatum)
 						&& verlofAanvraag.getToestand() == toestand) {
 					TeamAanVraag.add(verlofAanvraag);
 				}
@@ -194,7 +187,9 @@ public class Team implements Serializable {
 	 * @return
 	 */
 	public boolean zitWerknemerInTeam(Werknemer werknemer) {
-		if (teamleden.contains(werknemer)) {
+		System.out.println(werknemer);
+		System.out.println("teamleden " + teamleden);
+		if (teamleden != null && !teamleden.isEmpty() && teamleden.contains(werknemer)) {
 			return true;
 		} else {
 			return false;
@@ -207,18 +202,18 @@ public class Team implements Serializable {
 	public void maakTeamLeeg() {
 		teamleden.clear();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null) {
+		if (obj == null) {
 			return false;
 		}
-		if(obj.getClass() != this.getClass()) {
+		if (obj.getClass() != this.getClass()) {
 			return false;
 		}
 		return getCode() == ((Team) obj).getCode();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return (getCode() + "").hashCode();

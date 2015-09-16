@@ -2,12 +2,16 @@ package entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Werknemer implements Serializable {
@@ -27,12 +31,16 @@ public class Werknemer implements Serializable {
 	private List<VerlofAanvraag> verlofaanvragen;
 	@ManyToOne
 	private Team team;
+	@Embedded
 	private Adres adres;
 	private static final long serialVersionUID = 1L;
 
 	public Werknemer() {
+		jaarlijkseverloven = new ArrayList<JaarlijksVerlof>();
+		verlofaanvragen = new ArrayList<VerlofAanvraag>();
 	}
-
+	
+	
 	public int getPersoneelsnummer() {
 		return this.personeelsnummer;
 	}
@@ -86,6 +94,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setTeam(Team team) {
+		System.out.println(team);
 		this.team = team;
 		if(!getTeam().zitWerknemerInTeam(this)) {
 			getTeam().voegTeamlidToe(this);

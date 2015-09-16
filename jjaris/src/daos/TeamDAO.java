@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-import org.jboss.weld.exceptions.IllegalArgumentException;
 
 import entities.Team;
 

@@ -31,8 +31,10 @@ import entities.Werknemer;
 public class MainWerknemer implements Serializable{
 private static final long serialVersionUID = 1L;
 @Inject
-private WerknemerDAO testdoa; 
-//@Transactional
+private WerknemerDAO testdoa;
+@Inject
+private TeamDAO teamdoa;
+
 public void main() {
 		Werknemer werknemer1 = new Werknemer();
 		Adres adres1 = new Adres();
@@ -49,14 +51,15 @@ public void main() {
 		Team team1 = new Team();
 		team1.setNaam("JJaris");
 		team1.setHR(false);
-		team1.setTeamverantwoordelijke(werknemer1);
+		//team1.setTeamverantwoordelijke(werknemer1);
 		werknemer1.setTeam(team1);
-		
+		teamdoa.voegTeamToe(team1);
+		testdoa.voegWerknemerToe(werknemer1);//schrijft werknemer in database
 		System.out.println(werknemer1);
 		System.out.println(team1);
 		
-		testdoa.voegWerknemerToe(werknemer1);//schrijft werknemer in database
-		//TeamDAO.voegTeamToe(team1);
+		
+		
 
 	}
 
