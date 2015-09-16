@@ -67,8 +67,8 @@ public class VerlofAanvraagDAO {
 	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
-		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM verlofaanvraag c "
-				+ "WHERE c.code LIKE :teamcode ",VerlofAanvraag.class);
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
+				+ "WHERE c.werknemer.team.code LIKE :teamcode ",VerlofAanvraag.class);
 		
 		return (List<VerlofAanvraag>) query.setParameter("code", teamCode).getResultList();
 		
@@ -85,8 +85,8 @@ public class VerlofAanvraagDAO {
 		
 //		Werknemer werknemer = em.find(Werknemer.class, personeelnr);
 		
-		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM verlofaanvraag c "
-				+ "WHERE c.personeelsnummer LIKE :personeelnr ",VerlofAanvraag.class);
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
+				+ "WHERE c.werknemer.personeelsnummer LIKE :personeelnr ",VerlofAanvraag.class);
 		
 		
 		
@@ -103,7 +103,7 @@ public class VerlofAanvraagDAO {
 	
 	public List<VerlofAanvraag> getVerlofAanvragen(Filter filter){
 		
-		String querystring = "SELECT c FROM verlofaanvraag c";
+		String querystring = "SELECT c FROM VerlofAanvraag c";
 		if(filter.getFilter().isEmpty()){
 			TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
 			return (List<VerlofAanvraag>) query.getResultList();
