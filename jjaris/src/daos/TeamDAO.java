@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-
 import entities.Team;
 
 @ApplicationScoped
@@ -81,25 +80,33 @@ public class TeamDAO {
 	 */
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke, int code) {
 		if (code != 0) {
-			TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam = :%naam% AND "
-					+ "c.teamverantwoordelijke.naam = :%leider% AND c.code = :code", Team.class);
-			return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("leider", zoekVerantwoordelijke).setParameter("code", code)
-					.getResultList();
-		}else return getTeams(zoekNaam, zoekVerantwoordelijke);
+			TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND "
+					+ "c.teamverantwoordelijke.naam LIKE :leider AND c.code = :code", Team.class);
+			query.setParameter("naam", "%" + zoekNaam + "%");
+			query.setParameter("leider", "%" + zoekVerantwoordelijke + "%");
+			query.setParameter("code", code);
+			return query.getResultList();
+		} else {
+			return getTeams(zoekNaam, zoekVerantwoordelijke);
+		}
 
 	}
 
 	/**
-	 * Geeft alle teams terug met een gedeeltelijke naam en gedeeltelijke naam verantwoordelijke
+	 * Geeft alle teams terug met een gedeeltelijke naam en gedeeltelijke naam
+	 * verantwoordelijke
+	 * 
 	 * @param zoekNaam
 	 * @param zoekVerantwoordelijke
 	 * @return
 	 */
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke) {
 
-		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam = :%naam% AND " + "c.teamverantwoordelijke.naam = :%leider%",
+		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND " + "c.teamverantwoordelijke.naam LIKE :leider",
 				Team.class);
-		return (List<Team>) query.setParameter("naam", zoekNaam).setParameter("leider", zoekVerantwoordelijke).getResultList();
+		query.setParameter("naam", "%"+zoekNaam+"%");
+		query.setParameter("leider", "%"+zoekVerantwoordelijke+"%");
+		return (List<Team>) query.getResultList();
 
 	}
 
