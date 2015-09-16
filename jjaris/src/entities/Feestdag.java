@@ -3,15 +3,12 @@ package entities;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="FEESDAGEN")
 public class Feestdag extends CollectieveSluiting implements Serializable{
 	
 	

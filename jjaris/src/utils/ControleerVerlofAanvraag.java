@@ -9,8 +9,6 @@ import entities.VerlofAanvraag;
 import entities.Werknemer;
 
 public class ControleerVerlofAanvraag {
-	
-	private CollectieveSluitingDAO sluitingDao;
 
 	public static boolean isGeldigeVerlofPeriode(Werknemer werknemer, Calendar begindatum, Calendar einddatum) throws InputMismatchException {
 		if(begindatum.compareTo(einddatum) >= 0) {
@@ -38,14 +36,17 @@ public class ControleerVerlofAanvraag {
 	}
 	
 	public static int getCollectieveDagen(Calendar begindatum, Calendar einddatum) {
-		return CollectieveSluitingDAO.getCollectieveVerloven(begindatum, einddatum).size();
+		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+		return sluitingDao.getCollectieveVerloven(begindatum, einddatum).size();
 	}
 	
 	public static int getAantalFeestdagenOpWeekdag(Calendar begindatum, Calendar einddatum) {
-		return CollectieveSluitingDAO.getFeestdagen(begindatum, einddatum).size();
+		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+		return sluitingDao.getFeestdagen(begindatum, einddatum).size();
 	}
 	
 	public static int getAantalCollectieveDagen(int jaartal) {
-		return CollectieveSluitingDAO.getAlleCollectieveVerloven(jaartal).stream().mapToInt(i -> i.getAantalDagen()).sum();
+		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+		return sluitingDao.getAlleCollectieveVerloven(jaartal).stream().mapToInt(i -> i.getAantalDagen()).sum();
 	}
 }

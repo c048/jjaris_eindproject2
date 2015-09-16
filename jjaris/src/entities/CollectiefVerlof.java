@@ -3,16 +3,14 @@ package entities;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.metamodel.domain.Superclass;
-
 @Entity
+@Table(name="COLLECTIEVEVERLOVEN")
 public class CollectiefVerlof extends CollectieveSluiting implements Serializable{
 
 	

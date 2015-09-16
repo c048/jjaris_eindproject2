@@ -2,9 +2,9 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +14,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class CollectieveSluiting implements Serializable {
@@ -22,6 +23,7 @@ public abstract class CollectieveSluiting implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name="SLUITING_ID")
 	private int id;
 	
 	@Temporal(TemporalType.DATE)
