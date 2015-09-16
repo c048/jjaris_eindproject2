@@ -3,6 +3,7 @@ package daos;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import utils.Filter;
 import entities.Team;
 import entities.Toestand;
 import entities.VerlofAanvraag;
@@ -91,11 +93,56 @@ public class VerlofAanvraagDAO {
 		return (List<VerlofAanvraag>) query.setParameter("personeelnr", personeelnr).getResultList();
 	}
 	
+	/**
+	 * Gebruikt de ingevoerde filter om alle verlofaanvragen te filteren. Geeft dan de lijst met verlofaanvragen 
+	 * terug die voldoen aan de voorwaarden.
+	 * 
+	 * @param filter
+	 * @return List<VerlofAanvraag>
+	 */
 	
-//	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum, Toestand toestand,int teamCode,int personeelnr){
-//		
-//	}
-//	
+	public List<VerlofAanvraag> getVerlofAanvragen(Filter filter){
+		
+		String querystring = "SELECT c FROM verlofaanvraag c";
+		if(filter.getFilter().isEmpty()){
+			TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
+			return (List<VerlofAanvraag>) query.getResultList();
+		}
+		else{
+			int aantal = 0;
+			querystring = querystring + " WHERE";
+			for(Map.Entry<String, Object> entry : filter.getFilter().entrySet()){
+				if(aantal != 0){
+					querystring = querystring + " AND";
+				}
+				if(entry.getKey().contains("startdatum")){
+					aantal++;
+					querystring = querystring + " c."+entry.getKey()+"<= :" + entry.getKey();
+					
+				}
+				if(entry.getKey().contains("einddatum")){
+					aantal++;
+					querystring = querystring + " c."+entry.getKey()+">= :" + entry.getKey();
+					
+				}
+				else{
+					aantal++;
+					querystring = querystring + " c."+entry.getKey()+"= :" + entry.getKey();
+				}
+				
+			}
+			TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
+			
+			for(Map.Entry<String, Object> entry : filter.getFilter().entrySet()){
+				query.setParameter(entry.getKey(), entry.getValue());
+			}
+			
+			return (List<VerlofAanvraag>) query.getResultList();
+		}
+		
+		
+	}
+	
 	
 }
 	//Niet doen dus
