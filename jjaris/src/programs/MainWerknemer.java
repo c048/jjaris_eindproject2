@@ -50,14 +50,19 @@ public class MainWerknemer implements Serializable {
 		// team1.setTeamverantwoordelijke(werknemer1);
 		// testdoa.voegWerknemerToe(werknemer1);//schrijft werknemer in database
 		// teamdoa.updateTeam(team1);
-		List<Team> teams = teamdoa.getTeams();
-		for (Team team : teams) {
-			System.out.println("team");
-		}
+//		List<Team> teams = teamdoa.getTeams();
+//		for (Team team : teams) {
+//			System.out.println(team);
+//		}
 		
-		List<Werknemer> werknemers = testdoa.getAlleWerknemers();
+		List<Werknemer> werknemers = testdoa.getWerknemers("vaux", "");
 		for (Werknemer werknemer : werknemers) {
 			System.out.println(werknemer);
+		}
+		
+		List<Team> teams = teamdoa.getTeams("ar", "el");
+		for (Team team : teams) {
+			System.out.println(team);
 		}
 
 	}
