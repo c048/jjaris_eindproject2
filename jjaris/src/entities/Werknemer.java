@@ -27,8 +27,6 @@ public class Werknemer implements Serializable {
 	private List<VerlofAanvraag> verlofaanvragen;
 	@ManyToOne
 	private Team team;
-	@Embedded
-	@OneToOne(cascade = CascadeType.ALL)
 	private Adres adres;
 	private static final long serialVersionUID = 1L;
 
