@@ -4,18 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 
 import daos.WerknemerDAO;
 import entities.Werknemer;
 @Named("HrManageMedewerker")
 @RequestScoped
-public class HrMedewerkersBack extends WerknemerDAO implements Serializable {
+
+public class HrMedewerkersBack  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Inject
+	private WerknemerDAO em;
 	private List<Werknemer> werknemers ;
 	private Werknemer werknemer;
 	private String naam;
