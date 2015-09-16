@@ -4,13 +4,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 
+import javax.inject.Inject;
+
 import daos.CollectieveSluitingDAO;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
 public class ControleerVerlofAanvraag {
-
-	public static boolean isGeldigeVerlofPeriode(Werknemer werknemer, Calendar begindatum, Calendar einddatum) throws InputMismatchException {
+	@Inject
+	CollectieveSluitingDAO sluitingDao;
+	
+	public boolean isGeldigeVerlofPeriode(Werknemer werknemer, Calendar begindatum, Calendar einddatum) throws InputMismatchException {
 		if(begindatum.compareTo(einddatum) >= 0) {
 			throw new InputMismatchException("Startdatum ligt na einddatum");
 		}
@@ -31,22 +35,19 @@ public class ControleerVerlofAanvraag {
 		return false;
 	}
 	
-	public static int getAantalOpTeNemenDagen(VerlofAanvraag verlofAanvraag) {
+	public int getAantalOpTeNemenDagen(VerlofAanvraag verlofAanvraag) {
 		return getCollectieveDagen(verlofAanvraag.getStartdatum(), verlofAanvraag.getEinddatum());
 	}
 	
-	public static int getCollectieveDagen(Calendar begindatum, Calendar einddatum) {
-		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+	public int getCollectieveDagen(Calendar begindatum, Calendar einddatum) {
 		return sluitingDao.getCollectieveVerloven(begindatum, einddatum).size();
 	}
 	
-	public static int getAantalFeestdagenOpWeekdag(Calendar begindatum, Calendar einddatum) {
-		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+	public int getAantalFeestdagenOpWeekdag(Calendar begindatum, Calendar einddatum) {
 		return sluitingDao.getFeestdagen(begindatum, einddatum).size();
 	}
 	
-	public static int getAantalCollectieveDagen(int jaartal) {
-		CollectieveSluitingDAO sluitingDao = new CollectieveSluitingDAO();
+	public int getAantalCollectieveDagen(int jaartal) {
 		return sluitingDao.getAlleCollectieveVerloven(jaartal).stream().mapToInt(i -> i.getAantalDagen()).sum();
 	}
 }
