@@ -14,7 +14,7 @@ import entities.Werknemer;
 
 public class ControleerVerlofAanvraag {
 	@Inject
-	CollectieveSluitingDAO sluitingDao;
+	private CollectieveSluitingDAO sluitingDao;
 	
 	public boolean isGeldigeVerlofPeriode(Werknemer werknemer, Calendar begindatum, Calendar einddatum) throws InputMismatchException {
 		if(begindatum.compareTo(einddatum) >= 0) {
