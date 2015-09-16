@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -43,12 +44,14 @@ public class Feestdag extends CollectieveSluiting implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Feestdag [getId()=" + getId() + ", getStartdatum()="
-				+ getStartdatum() + ", getOmschrijving()=" + getOmschrijving()
-				+ ", isTerugkerend()=" + isTerugkerend() +  "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd");
+		 
+		return "Feestdag [ datum: " +  sdf.format(super.getStartdatum()) + 
+				", Omschrijving: " + getOmschrijving()
+				+ ", isTerugkerend? " + isTerugkerend() +  "]";
 	}
 	
-
+	
 	
 
 }

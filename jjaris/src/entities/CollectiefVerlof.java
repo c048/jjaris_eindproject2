@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,6 +9,8 @@ import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.metamodel.domain.Superclass;
 
 @Entity
 public class CollectiefVerlof extends CollectieveSluiting implements Serializable{
@@ -24,7 +27,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		super();
 	}
 
-	public CollectiefVerlof(GregorianCalendar startdatum, GregorianCalendar einddatum, String omschrijving,
+	public CollectiefVerlof(Calendar startdatum, Calendar einddatum, String omschrijving,
 			boolean terugkerend) {
 		super(startdatum, omschrijving, terugkerend);
 		this.einddatum=einddatum;
@@ -35,7 +38,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		return einddatum;
 	}
 
-	public void setEinddatum(GregorianCalendar einddatum) {
+	public void setEinddatum(Calendar einddatum) {
 		this.einddatum = einddatum;
 	}
 	
@@ -48,7 +51,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		int aantalDagen=0;
 		int aantalWeekendDagen=0;
 		Calendar startdatum=super.getStartdatum();
-		while(startdatum.after(einddatum)) {
+		while(!startdatum.after(einddatum)) {
 		    if(startdatum.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY || startdatum.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)
 		    	aantalWeekendDagen++;
 		    aantalDagen++;
@@ -62,12 +65,15 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 
 	@Override
 	public String toString() {
-		return 	"CollectiefVerlof [getId()=" + getId() + ", getStartdatum()="
-				+ getStartdatum() + ", getOmschrijving()=" + getOmschrijving()
-				+ ", isTerugkerend()=" + isTerugkerend() +  "]";
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd");
+		 
+		return 	"CollectiefVerlof [ Startdatum: " + sdf.format(super.getStartdatum()) +" Einddatum: "
+				+    sdf.format(einddatum)  + ", Omschrijving: " + getOmschrijving()
+				+ ", isTerugkerend? " + isTerugkerend() +  "]";
 	}
 	
 	
+
 	
 	
 }

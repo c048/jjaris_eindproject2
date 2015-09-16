@@ -28,8 +28,7 @@ public abstract class CollectieveSluiting implements Serializable {
 	private Calendar startdatum;
 	private String omschrijving;
 	private boolean terugkerend;
-	
-	
+
 	
 	
 	public CollectieveSluiting() {
