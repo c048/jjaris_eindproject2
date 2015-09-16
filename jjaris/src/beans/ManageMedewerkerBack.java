@@ -32,6 +32,9 @@ public class ManageMedewerkerBack implements Serializable {
 	private int gebMaand;
 	
 	public ManageMedewerkerBack () {
+		adres = new Adres();
+		werknemer = new Werknemer();
+		team = new Team();
 	}
 	
 	public void setGebDag(int gebDag) {
