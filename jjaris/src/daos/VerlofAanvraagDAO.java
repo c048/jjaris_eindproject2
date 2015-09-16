@@ -22,12 +22,24 @@ public class VerlofAanvraagDAO {
 	@PersistenceContext(unitName = "jjaris")
 	private EntityManager em;
 	
+	
+	/**
+	 *  Voegt een verlofaanvraag toe aan database.
+	 * @param verlofAanvraag:VerlofAanvraag
+	 * 
+	 */
 	@Transactional
 	public void voegVerlofAanvraagToe(VerlofAanvraag verlofAanvraag){
 		
 		em.persist(verlofAanvraag);
 		
 	}
+	
+	/**
+	 * Verandert een verlofaanvraag in de database.
+	 * @param verlofAanvraag:VerlofAanvraag
+	 * 
+	 */
 	
 	@Transactional
 	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){
@@ -44,6 +56,12 @@ public class VerlofAanvraagDAO {
 	
 	}
 	
+	/**
+	 * Geeft een lijst van verlofaanvragen uit de database volgens teamCode.
+	 * @param teamCode:int
+	 * @return List<VerlofAanvraag>
+	 */
+	
 	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
@@ -54,6 +72,11 @@ public class VerlofAanvraagDAO {
 		
 	}
 	
+	/**
+	 * Geeft een lijst van verlofaanvragen uit de database volgens personeelnr.
+	 * @param personeelnr:int
+	 * @return List<VerlofAanvraag>
+	 */
 	
 	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragenWerknemer(int personeelnr){
