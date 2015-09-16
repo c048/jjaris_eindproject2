@@ -7,11 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Werknemer implements Serializable {
@@ -32,6 +28,7 @@ public class Werknemer implements Serializable {
 	@ManyToOne
 	private Team team;
 	@Embedded
+	@OneToOne(cascade = CascadeType.ALL)
 	private Adres adres;
 	private static final long serialVersionUID = 1L;
 
