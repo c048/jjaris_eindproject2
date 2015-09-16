@@ -67,8 +67,6 @@ public class VerlofAanvraag implements Serializable{
 			int teller = 0;
 			
 			while(einddatum.after(datum)){
-				System.out.printf( "teller: %1$s%n", ++teller );
-				System.out.printf( "weekdagTeller: %1$s%n", weekdagTeller );
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
 				if(weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY ){
 					System.out.println(weekdag);
@@ -80,11 +78,11 @@ public class VerlofAanvraag implements Serializable{
 			if(einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY ){
 				weekdagTeller++;
 			}
-//			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
-//			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
+			List<Feestdag> feestdagen = CollectieveSluitingDAO.getFeestdagen(startdatum, einddatum);
+			long aantal = feestdagen.stream().filter(f -> f.isWeekdag()).count();
 			
-			return weekdagTeller;
-			//return  (weekdagTeller - (int)aantal);
+			//return weekdagTeller;
+			return  (weekdagTeller - (int)aantal);
 		}
 			
 	/**
