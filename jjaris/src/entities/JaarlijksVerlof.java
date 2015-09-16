@@ -17,6 +17,12 @@ public class JaarlijksVerlof implements Serializable{
 	private int jaar;
 	private int aantalDagen;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getJaar() {
 		return jaar;
 	}
@@ -30,9 +36,20 @@ public class JaarlijksVerlof implements Serializable{
 		this.aantalDagen = aantalDagen;
 	}
 	
+	@Override
+	public int hashCode() {
+		return (getId() + "").hashCode();
+	}
 	
-	
-	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		if(this.getClass() != obj.getClass()) {
+			return false;
+		}
+		return getId() == ((JaarlijksVerlof) obj).getId();
+	}
 
 }
