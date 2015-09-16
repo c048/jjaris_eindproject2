@@ -53,5 +53,12 @@ public class Adres implements Serializable {
 	public void setGemeente(String gemeente) {
 		this.gemeente = gemeente;
 	}
+
+	@Override
+	public String toString() {
+		return "Adres [straat=" + straat + ", huisnummer=" + huisnummer + ", busnummer=" + busnummer + ", postcode=" + postcode + ", gemeente="
+				+ gemeente + "]";
+	}
+	
 	
 }

@@ -216,4 +216,13 @@ public class Team implements Serializable {
 	public int hashCode() {
 		return (getCode() + "").hashCode();
 	}
+
+
+	@Override
+	public String toString() {
+		return "Team [code=" + code + ", naam=" + naam + ", HR=" + HR + ", teamverantwoordelijke=" + teamverantwoordelijke.getNaam()+teamverantwoordelijke.getVoornaam() + "]";
+	}
+	
+	
+	
 }

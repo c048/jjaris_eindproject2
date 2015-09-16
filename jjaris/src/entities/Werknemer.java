@@ -203,4 +203,13 @@ public class Werknemer implements Serializable {
 	public int hashCode() {
 		return (getPersoneelsnummer() + "").hashCode();
 	}
+
+
+	@Override
+	public String toString() {
+		return "Werknemer [personeelsnummer=" + getPersoneelsnummer() + ", naam=" + getNaam() + ", voornaam=" + voornaam + ", email=" + email
+				+ ", geboortedatum=" + geboortedatum + ", passwoord=" + passwoord + ", team=" + team.getNaam() + ", adres=" + adres + "]";
+	}
+	
+	
 }
