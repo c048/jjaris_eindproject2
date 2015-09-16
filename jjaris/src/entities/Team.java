@@ -20,7 +20,7 @@ public class Team implements Serializable {
 	private int code;
 	private String naam;
 	private boolean HR;
-	@OneToMany(mappedBy = "team", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
 	private List<Werknemer> teamleden;
 	@OneToOne
 	private Werknemer teamverantwoordelijke;
@@ -30,7 +30,6 @@ public class Team implements Serializable {
 		this.teamleden = new ArrayList<Werknemer>();
 	}
 
-	
 	public String getNaam() {
 		return this.naam;
 	}
@@ -217,12 +216,10 @@ public class Team implements Serializable {
 		return (getCode() + "").hashCode();
 	}
 
-
 	@Override
 	public String toString() {
-		return "Team [code=" + code + ", naam=" + naam + ", HR=" + HR + ", teamverantwoordelijke=" + teamverantwoordelijke.getNaam()+teamverantwoordelijke.getVoornaam() + "]";
+		return String.format("Team %s met nr %s met teamverantwoordelijke %s %s%n", getNaam(), getCode(), getTeamverantwoordelijke().getNaam(),
+				getTeamverantwoordelijke().getVoornaam());
 	}
-	
-	
-	
+
 }

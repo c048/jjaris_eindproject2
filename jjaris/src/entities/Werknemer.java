@@ -22,9 +22,9 @@ public class Werknemer implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar geboortedatum;
 	private String passwoord;
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
-	@OneToMany(mappedBy = "werknemer",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "werknemer", fetch = FetchType.EAGER)
 	private List<VerlofAanvraag> verlofaanvragen;
 	@ManyToOne
 	private Team team;
@@ -35,8 +35,7 @@ public class Werknemer implements Serializable {
 		jaarlijkseverloven = new ArrayList<JaarlijksVerlof>();
 		verlofaanvragen = new ArrayList<VerlofAanvraag>();
 	}
-	
-	
+
 	public int getPersoneelsnummer() {
 		return this.personeelsnummer;
 	}
@@ -90,9 +89,9 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setTeam(Team team) {
-		//System.out.println(team);
+		// System.out.println(team);
 		this.team = team;
-		if(!getTeam().zitWerknemerInTeam(this)) {
+		if (!getTeam().zitWerknemerInTeam(this)) {
 			getTeam().voegTeamlidToe(this);
 		}
 	}
@@ -204,12 +203,9 @@ public class Werknemer implements Serializable {
 		return (getPersoneelsnummer() + "").hashCode();
 	}
 
-
 	@Override
 	public String toString() {
-		return "Werknemer [personeelsnummer=" + getPersoneelsnummer() + ", naam=" + getNaam() + ", voornaam=" + voornaam + ", email=" + email
-				+ ", geboortedatum=" + geboortedatum + ", passwoord=" + passwoord + ", team=" + team.getNaam() + ", adres=" + adres + "]";
+		return String.format("Werknemer %s %s met nr %s met adres %s, behoort tot Team %s%n", getVoornaam(), getNaam(), getPersoneelsnummer(),
+				getAdres(), getTeam().getNaam());
 	}
-	
-	
 }
