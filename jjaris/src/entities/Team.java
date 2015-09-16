@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;
@@ -22,19 +23,18 @@ public class Team implements Serializable {
 	private String naam;
 	private boolean HR;
 	@OneToMany(mappedBy = "team")
-	private List<Werknemer> teamleden;
+	private Set<Werknemer> teamleden;
 	@OneToOne
 	private Werknemer teamverantwoordelijke;
 	private static final long serialVersionUID = 1L;
 
 	public Team() {
-		
 	}
 	
 	//toegevoegd door iris - kreeg nullpointerex op voegTeamlidToe
 	@PostConstruct
 	public void init(){
-		teamleden = new ArrayList<Werknemer>();
+		teamleden = new HashSet<Werknemer>();
 	}
 
 	public String getNaam() {
@@ -61,11 +61,11 @@ public class Team implements Serializable {
 		this.HR = HR;
 	}
 
-	public List<Werknemer> getTeamleden() {
+	public Set<Werknemer> getTeamleden() {
 		return this.teamleden;
 	}
 
-	public void setTeamleden(List<Werknemer> teamleden) {
+	public void setTeamleden(Set<Werknemer> teamleden) {
 		this.teamleden = teamleden;
 	}
 
@@ -95,13 +95,14 @@ public class Team implements Serializable {
 	 * @param einddatum
 	 * @return
 	 */
-	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum,
-			Calendar einddatum) {
+	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> persoonlijkeaanvraag = new ArrayList<VerlofAanvraag>();
+		
 		for (Werknemer w : teamleden) {
 			persoonlijkeaanvraag.addAll(w.getVerlofaanvragen());
 		}
+		
 		for (VerlofAanvraag verlofAanvraag : persoonlijkeaanvraag) {
 			if (verlofAanvraag.getStartdatum().equals(startdatum)
 					&& verlofAanvraag.getEinddatum().equals(einddatum)) {
@@ -111,7 +112,6 @@ public class Team implements Serializable {
 		}
 
 		return TeamAanVraag;
-
 	}
 
 	/**
@@ -123,6 +123,7 @@ public class Team implements Serializable {
 	public List<VerlofAanvraag> getVerlofAanvragen(Toestand toestand) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
+		
 		for (Werknemer w : teamleden) {
 			tmpList.addAll(w.getVerlofaanvragen());
 
@@ -135,7 +136,6 @@ public class Team implements Serializable {
 		}
 
 		return TeamAanVraag;
-
 	}
 
 	/**
@@ -165,7 +165,6 @@ public class Team implements Serializable {
 		}
 
 		return TeamAanVraag;
-
 	}
 
 	/**
@@ -201,7 +200,6 @@ public class Team implements Serializable {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
@@ -209,5 +207,21 @@ public class Team implements Serializable {
 	 */
 	public void maakTeamLeeg() {
 		teamleden.clear();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		if(obj.getClass() != this.getClass()) {
+			return false;
+		}
+		return getCode() == ((Team) obj).getCode();
+	}
+	
+	@Override
+	public int hashCode() {
+		return (getCode() + "").hashCode();
 	}
 }
