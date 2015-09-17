@@ -152,8 +152,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
-		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum);
-		tmpAanvraag.setWerknemer(this);
+		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum,this);
 		getVerlofaanvragen().add(tmpAanvraag);
 	}
 
