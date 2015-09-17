@@ -12,43 +12,43 @@
 	<h:form>
 		
 			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{}">
+			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
 				</h:inputText>
 			<h:outputLabel for="txtVerlofAanvraagEindDatum" value="EindDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{}">
+			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
 				</h:inputText>
 			<h:commandButton value="Aanvragen"></h:commandButton>
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 	<h:form>
-<h:dataTable value="#{}" var="entry">
+<h:dataTable value="#{verlofaanvraag.verlofAanvragenWerknemer()}" var="va">
     			<h:column>
     				<!-- column header -->
     				<f:facet name="header">ID</f:facet>
     				<!-- row record -->
-    				Joske<!--#{entry.}  -->
+    				#{va.id}
     			</h:column>		
     			<h:column>
     				<f:facet name="header">Startdatum</f:facet>
-    				Joske<!--#{entry.}  -->
+    				#{va.startdatum}
     			</h:column>		
     			<h:column>
     				<f:facet name="header">Einddatum</f:facet>
-    				Joske<!--#{entry.}  -->
+    				#{va.einddatum}
     			</h:column>	
     			<h:column>
     				<f:facet name="header">Toestand</f:facet>
-    				Joske<!--#{entry.}  -->
+    				#{va.toestand}
     			</h:column>	
     			<h:column>
     				<f:facet name="header">Reden</f:facet>
-    				Joske<!--#{entry.}  -->
+    				#{va.reden}
     			</h:column>
     			<h:column>
     				<f:facet name="header">Annuleren</f:facet>
-    				Joske<!--#{entry.}  -->
+    				#{va.annuleren()}
     			</h:column>
     		</h:dataTable>		
 	</h:form>			
