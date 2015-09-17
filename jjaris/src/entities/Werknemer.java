@@ -139,7 +139,10 @@ public class Werknemer implements Serializable {
 	}
 
 	public boolean isVerantwoordelijke() {
-		return team.getTeamverantwoordelijke().personeelsnummer == this.personeelsnummer;
+		if(team.getTeamverantwoordelijke()!=null){
+			return team.getTeamverantwoordelijke().personeelsnummer == this.personeelsnummer;
+		}
+		return false;
 	}
 
 	public boolean isHR() {
