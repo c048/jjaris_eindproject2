@@ -26,15 +26,15 @@
 		<h:dataTable value="#{HrManageMedewerker.werknemers}" var="Medewerker">
 			<h:column>
 				<f:facet name="ID">ID</f:facet>    				
-      #{Medewerker.ID}
+      #{Medewerker.personeelsnummer}
    </h:column>
 			<h:column>
 				<f:facet name="Naam">Naam</f:facet>
-      #{Medewerker.Naam}
+      #{Medewerker.naam}
    </h:column>
 			<h:column>
 				<f:facet name="Voornaam">Voornaam</f:facet>
-      #{Medewerker.Voornaam}
+      #{Medewerker.voornaam}
    </h:column>
 			<h:column>
 				<f:facet name="Verlofdagen">Verlofdagen</f:facet>
@@ -54,14 +54,25 @@
       #{Medewerker.team}
    </h:column>
 		</h:dataTable>
-		<h:commandButton ID="btnZoek" action="?"></h:commandButton>
+		<h:commandButton ID="btnZoek"
+			action="#{HrManageMedewerker.zoekWerkNemer}"></h:commandButton>
 		<br></br>
 		<br></br>
 		<h:inputText id="txtIdAanpassen"></h:inputText>
-		<h:outputLabel id="lvlIdAanpassen" value="ID" for="txtIdAanpassen">ID</h:outputLabel><h:inputText id="txtIdAanpassen" value="HrManageMedewerker.iD"></h:inputText>
+		<h:outputLabel id="lvlIdAanpassen" value="ID" for="txtIdAanpassen">ID</h:outputLabel>
+		<h:inputText id="txtIdAanpassen" value="HrManageMedewerker.iD"></h:inputText>
 		<h:commandButton id="btnPasMedewerkerAAn" action="?"
 			value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
 	</h:form>
+
+
+
+
+
+
+
+
+
 	<hr></hr>
 	<h:form>
 		<h:outputLabel ID="lblTeams" value="Teams">Teams</h:outputLabel>
@@ -84,13 +95,16 @@
 				<f:facet name="Naam">Naam</f:facet>
 #{Team.naam}
 </h:column>
-			<f:facet name="Verantwoordelijke">Verantwoordelijke</f:facet>
+			<h:column>
+				<f:facet name="Verantwoordelijke">Verantwoordelijke</f:facet>
 #{Team.verantwoordelijke}
 </h:column>
-			<f:facet name="Aantal leden">Aantal leden</f:facet>
+			<h:column>
+				<f:facet name="Aantal leden">Aantal leden</f:facet>
 #{Team.aantal}
 </h:column>
-			<f:facet name="HR">Human resources?</f:facet>
+			<h:column>
+				<f:facet name="HR">Human resources?</f:facet>
 #{Team.hR}
 </h:column>
 		</h:dataTable>

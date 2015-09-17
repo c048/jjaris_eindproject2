@@ -137,9 +137,9 @@ public class WerknemerDAO {
 	 * @return List<Werknemer>
 	 */
 	public List<Werknemer> getWerknemers(String zoekNaam, String zoekVoornaam) {
-		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.naam = :%naam% AND w.voornaam = :%voornaam%", Werknemer.class);
-		tqry.setParameter("naam", zoekNaam);
-		tqry.setParameter("voornaam", zoekVoornaam);
+		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.naam LIKE :naam AND w.voornaam LIKE :voornaam", Werknemer.class);
+		tqry.setParameter("naam", "%"+zoekNaam+"%");
+		tqry.setParameter("voornaam", "%"+zoekVoornaam+"%");
 		return tqry.getResultList();
 	}
 
@@ -156,9 +156,9 @@ public class WerknemerDAO {
 	public List<Werknemer> getWerknemers(String zoekNaam, String zoekVoornaam, int personeelsnr) {
 		if (personeelsnr != 0) {
 			TypedQuery<Werknemer> tqry = em.createQuery(
-					"SELECT w FROM Werknemer w WHERE w.naam = :%naam% AND w.voornaam = :%voornaam% AND w.personeelsnummer = :nr", Werknemer.class);
-			tqry.setParameter("naam", zoekNaam);
-			tqry.setParameter("voornaam", zoekVoornaam);
+					"SELECT w FROM Werknemer w WHERE w.naam LIKE :naam AND w.voornaam LIKE :voornaam AND w.personeelsnummer = :nr", Werknemer.class);
+			tqry.setParameter("naam", "%"+zoekNaam+"%");
+			tqry.setParameter("voornaam","%"+zoekVoornaam+"%");
 			tqry.setParameter("nr", personeelsnr);
 			return tqry.getResultList();
 		} else
