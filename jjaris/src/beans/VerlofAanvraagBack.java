@@ -61,12 +61,14 @@ public class VerlofAanvraagBack implements Serializable{
 	/**
 	 * Verlof aanvragen
 	 */
-	public void aanvragen(){
+	public void toevoegen(){
 		user.getIngelogdeWerknemer();
 		Werknemer werknemer = user.getIngelogdeWerknemer();
-		werknemer.voegVerlofAanvroegToe(converteerDatum(startdatum), converteerDatum(einddatum));		
-		
+		VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
+		verlofaanvraag.updateVerlofAanvraag(verlof);
 	}
+	
+	
 	/**
 	 * hulpmethode datume date-->gregorian
 	 * @param tmp

@@ -19,7 +19,7 @@
 			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.einddatum}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
 				</h:inputText>
-			<h:commandButton value="Aanvragen"></h:commandButton>
+			<h:commandButton value="Aanvragen" action="#{verlofaanvraag.toevoegen()}"></h:commandButton>
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 	<h:form>

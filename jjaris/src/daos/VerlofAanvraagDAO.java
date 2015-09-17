@@ -41,8 +41,7 @@ public class VerlofAanvraagDAO {
 	 */
 	
 	@Transactional
-	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){
-		
+	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){	
 		VerlofAanvraag tmp = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
 		tmp.setWerknemer(verlofAanvraag.getWerknemer());
 		tmp.setAanvraagdatum((GregorianCalendar) verlofAanvraag.getAanvraagdatum());
