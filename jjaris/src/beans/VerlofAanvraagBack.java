@@ -65,7 +65,7 @@ public class VerlofAanvraagBack implements Serializable{
 		user.getIngelogdeWerknemer();
 		Werknemer werknemer = user.getIngelogdeWerknemer();
 		VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
-		verlofaanvraag.updateVerlofAanvraag(verlof);
+		verlofaanvraag.voegVerlofAanvraagToe(verlof);
 	}
 	
 	
