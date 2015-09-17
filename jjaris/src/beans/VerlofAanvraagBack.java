@@ -36,7 +36,9 @@ public class VerlofAanvraagBack implements Serializable{
 	public void annuleren(int id){
 		Werknemer werknemer = user.getIngelogdeWerknemer();
 		werknemer.annuleerVerlofAanvraag(id);
-		verlofaanvraag.updateVerlofAanvraag(verlofAanvraag);
+		verlofaanvraag.updateVerlofAanvraag(verlofaanvraag.getVerlofAanvraag(id));
+		
+		
 	}
 	/**
 	 * Verlof aanvragen
