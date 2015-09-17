@@ -49,18 +49,40 @@ public class CollectieveSluitingBack implements Serializable {
 		Calendar feestdag = new GregorianCalendar();
 
 		feestdag.set(Calendar.YEAR, startdatumFJaar);
-		feestdag.set(Calendar.MONTH, startdatumFMaand);
+		feestdag.set(Calendar.MONTH, startdatumFMaand-1);
 		feestdag.set(Calendar.DAY_OF_MONTH, startdatumFDag);
 		
-		//System.out.println("*********Debug: FeestDatum : " + feestdag.get(Calendar.DAY_OF_MONTH)
-		//				+"-"+feestdag.get(Calendar.MONTH)+"-"+feestdag.get(Calendar.YEAR));
 		dao.voegFeestdagToe(feestdag, omschrijvingF, terugkerendF);
 		
 		return "collectieveSluiting";
 	}
 	
 	public String voegCollectieveVerlofToe() {
-		//TODO
+
+		Calendar csBegindatum = new GregorianCalendar();
+
+		csBegindatum.set(Calendar.YEAR, startdatumCVJaar);
+		csBegindatum.set(Calendar.MONTH, startdatumCVMaand-1);
+		csBegindatum.set(Calendar.DAY_OF_MONTH, startdatumCVJaar);
+		
+		System.out.println("*********Debug:begindatumCV" +csBegindatum.get(Calendar.DAY_OF_MONTH)+
+							"-"+csBegindatum.get(Calendar.MONTH) + 
+							"-" +csBegindatum.get(Calendar.YEAR));
+		
+		Calendar csEinddatum = new GregorianCalendar();
+		
+
+
+		csEinddatum.set(Calendar.YEAR, einddatumCVJaar);
+		csEinddatum.set(Calendar.MONTH, einddatumCVMaand-1);
+		csEinddatum.set(Calendar.DAY_OF_MONTH, einddatumCVMaand);
+		
+		System.out.println("*********Debug:einddatumCV" +csEinddatum.get(Calendar.DAY_OF_MONTH)+
+				"-"+csEinddatum.get(Calendar.MONTH) + 
+				"-" +csEinddatum.get(Calendar.YEAR));
+		
+		dao.voegCollectieveVerlofToe(csBegindatum, csEinddatum,omschrijvingF, terugkerendF);
+		
 		return "collectieveSluiting";
 	}
 
@@ -149,6 +171,7 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingCV(String omschrijvingCV) {
+		System.out.println("*********Debug:omschrijvingCV" +omschrijvingCV );
 		this.omschrijvingCV = omschrijvingCV;
 	}
 
