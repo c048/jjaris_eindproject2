@@ -9,13 +9,15 @@ import javax.inject.Named;
 
 import daos.VerlofAanvraagDAO;
 import entities.VerlofAanvraag;
+import entities.Werknemer;
 
 
 @Named("verlofaanvraag")
 @RequestScoped
 public class VerlofAanvraagBack implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
+	@Inject
+	private LoginBack user;
 	@Inject
 	private VerlofAanvraagDAO verlofaanvraag;
 	
@@ -31,13 +33,15 @@ public class VerlofAanvraagBack implements Serializable{
 	/**
 	 * Anulleer een verlofaanvraag	
 	 */
-	public void annuleerAanvraag(){
-		
+	public void annuleren(int id){
+		Werknemer werknemer = user.getIngelogdeWerknemer();
+		werknemer.annuleerVerlofAanvraag(id);
 	}
 	/**
 	 * Verlof aanvragen
 	 */
 	public void aanvragen(){
+		user.getIngelogdeWerknemer();
 		
 	}
 	
