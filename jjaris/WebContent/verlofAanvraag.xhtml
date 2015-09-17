@@ -12,18 +12,18 @@
 	<h:form>
 		
 			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.}">
+			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.startdatum}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
 				</h:inputText>
 			<h:outputLabel for="txtVerlofAanvraagEindDatum" value="EindDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.}">
+			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.einddatum}">
 				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
 				</h:inputText>
 			<h:commandButton value="Aanvragen"></h:commandButton>
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 	<h:form>
-<h:dataTable value="#{verlofaanvraag.verlofAanvragenWerknemer()}" var="va">
+<h:dataTable value="#{verlofaanvraag.aanvragen}" var="va">
     			<h:column>
     				<!-- column header -->
     				<f:facet name="header">ID</f:facet>
@@ -48,7 +48,7 @@
     			</h:column>
     			<h:column>
     				<f:facet name="header">Annuleren</f:facet>
-    				<h:commandButton value="verwijderen" action="#{verlofaanvraag.annuleren(va.id)};"></h:commandButton>
+    				<h:commandButton value="verwijderen" action="#{verlofaanvraag.annuleren(va.id)}"></h:commandButton>
     			</h:column>
     		</h:dataTable>		
 	</h:form>			
