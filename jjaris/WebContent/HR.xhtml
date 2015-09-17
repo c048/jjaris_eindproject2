@@ -53,14 +53,21 @@
 				<f:facet name="Team">Team</f:facet>
       #{Medewerker.team}
    </h:column>
+   			<h:column>
+				<f:facet name="Verwijderen">verwijderen</f:facet>
+      <h:commandButton value=#{Medewerker.personeelsnummer} action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
+   </h:column>
+      			<h:column>
+				<f:facet name="Aanpassen">Aanpassen</f:facet>
+      <h:commandButton value=#{Medewerker.personeelsnummer} action="#{HrManageMedewerker.Aanpassen}"></h:commandButton>
+   </h:column>
+   
 		</h:dataTable>
 		<h:commandButton ID="btnZoek"
 			action="#{HrManageMedewerker.zoekWerkNemer}"></h:commandButton>
 		<br></br>
 		<br></br>
-		<h:inputText id="txtIdAanpassen"></h:inputText>
-		<h:outputLabel id="lvlIdAanpassen" value="ID" for="txtIdAanpassen">ID</h:outputLabel>
-		<h:inputText id="txtIdAanpassen" value="HrManageMedewerker.iD"></h:inputText>
+		
 		<h:commandButton id="btnPasMedewerkerAAn" action="?"
 			value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
 	</h:form>

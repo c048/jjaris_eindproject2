@@ -85,5 +85,15 @@ return "HR.xhtml";
 		
 
 	}
+	
+	public String verwijderWerknemer(int personeelsnummer){
+		Werknemer tmpw = Dao.getWerknemer(personeelsnummer);
+		Dao.verwijderWerknemer(tmpw);
+		return "hr.xhtml";
+		
+	}
+	
+	
+	
 
 }
