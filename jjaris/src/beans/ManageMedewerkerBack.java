@@ -37,6 +37,14 @@ public class ManageMedewerkerBack implements Serializable {
 		team = new Team();
 	}
 	
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	public void setGebDag(int gebDag) {
 		this.gebDag = gebDag;
 	}
@@ -139,26 +147,31 @@ public class ManageMedewerkerBack implements Serializable {
 	
 	private void createGeboorteJaar() {
 		if(getGebDag() <= 0) {
+			System.out.println(getGebDag());
 			throw new IllegalArgumentException("Geboortedag mag niet leeg zijn!");
 		}
 		if(getGebMaand() <= 0 || getGebMaand() > 12) {
+			System.out.println(getGebMaand());
 			throw new IllegalArgumentException("Geboortemaand moet tussen 1 en 12 liggen!");
 		}
 		if(getGebJaar() <= 0) {
+			System.out.println(getGebJaar());
 			throw new IllegalArgumentException("U bent te oud!");
 		}
 		werknemer.setGeboortedatum(new GregorianCalendar(getGebJaar(), getGebMaand()-1, getGebDag()));
 	}
 	
 	public String addMedewerker() {
-		try {
+//		try {
 			createGeboorteJaar();
 			werknemer.setAdres(adres);
-//			werknemer.setTeam(team);
+			werknemer.setTeam(team);
 			werknemerDAO.voegWerknemerToe(werknemer);
-		} catch (Exception e){
-			return null;
-		}
-		return "HR";
+//		} catch (Exception e){
+//			System.out.println(e.getMessage() + " errortype: " + e.getClass());
+//			return null;
+//		}
+//		return "HR";
+		return null;
 	}
 }
