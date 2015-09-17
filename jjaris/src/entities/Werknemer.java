@@ -83,6 +83,10 @@ public class Werknemer implements Serializable {
 	public void setPasswoord(String passwoord) {
 		this.passwoord = passwoord;
 	}
+	
+	public boolean controleerPasswoord(String teControlerenPaswoord){
+		return teControlerenPaswoord.equals(getPasswoord());
+	}
 
 	public Team getTeam() {
 		return this.team;
