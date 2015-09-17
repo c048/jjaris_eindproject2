@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -19,111 +20,42 @@ public class CollectieveSluitingBack implements Serializable {
 	@Inject
 	private CollectieveSluitingDAO dao;
 	
-	private int startdatumJaar;
-	private int startdatumMaand;
-	private int startdatumDag;
+	private int startdatumFJaar;
+	private int startdatumFMaand;
+	private int startdatumFDag;
 	
-	private int einddatumJaar;
-	private int einddatumMaand;
-	private int einddatumDag;
+	private int startdatumCVJaar;
+	private int startdatumCVMaand;
+	private int startdatumCVDag;
+	
+	private int einddatumCVJaar;
+	private int einddatumCVMaand;
+	private int einddatumCVDag;
 	
 	 // private Calendar startdatum;
 	 // private Calendar einddatum;
 	
-	private String omschrijving;
-	private boolean terugkerend;
+	private String omschrijvingF;
+	private String omschrijvingCV;
+	
+	private boolean terugkerendF;
+	private boolean terugkerendCV;
 	
 
 
-	public int getStartdatumJaar() {
-		return startdatumJaar;
-	}
-
-	public void setStartdatumJaar(int startdatumJaar) {
-		this.startdatumJaar = startdatumJaar;
-	}
-
-	public int getStartdatumMaand() {
-		return startdatumMaand;
-	}
-
-	public void setStartdatumMaand(int startdatumMaand) {
-		this.startdatumMaand = startdatumMaand;
-	}
-
-	public int getStartdatumDag() {
-		return startdatumDag;
-	}
-
-	public void setStartdatumDag(int startdatumDag) {
-		this.startdatumDag = startdatumDag;
-	}
-
-	public int getEinddatumJaar() {
-		return einddatumJaar;
-	}
-
-	public void setEinddatumJaar(int einddatumJaar) {
-		this.einddatumJaar = einddatumJaar;
-	}
-
-	public int getEinddatumMaand() {
-		return einddatumMaand;
-	}
-
-	public void setEinddatumMaand(int einddatumMaand) {
-		this.einddatumMaand = einddatumMaand;
-	}
-
-	public int getEinddatumDag() {
-		return einddatumDag;
-	}
-
-	public void setEinddatumDag(int einddatumDag) {
-		this.einddatumDag = einddatumDag;
-	}
-
-	/*
-	public Calendar getStartdatum() {
-		return startdatum;
-	}
-
-	public void setStartdatum(Calendar startdatum) {
-		this.startdatum = startdatum;
-	}
-
-	public Calendar getEinddatum() {
-		return einddatum;
-	}
-
-	public void setEinddatum(Calendar einddatum) {
-		this.einddatum = einddatum;
-	}
-*/
-	public String getOmschrijving() {
-		return omschrijving;
-	}
-
-	public void setOmschrijving(String omschrijving) {
-		this.omschrijving = omschrijving;
-	}
-
-	public boolean isTerugkerend() {
-		return terugkerend;
-	}
-
-	public void setTerugkerend(boolean terugkerend) {
-		this.terugkerend = terugkerend;
-	}
 
 	public String voegFeestdagToe() {
 	
-		Calendar feestdag = Calendar.getInstance();
-		feestdag.set(Calendar.YEAR, startdatumJaar);
-		feestdag.set(Calendar.MONTH, startdatumMaand);
-		feestdag.set(Calendar.DAY_OF_MONTH, startdatumDag);
+		Calendar feestdag = new GregorianCalendar();
+
+		feestdag.set(Calendar.YEAR, startdatumFJaar);
+		feestdag.set(Calendar.MONTH, startdatumFMaand);
+		feestdag.set(Calendar.DAY_OF_MONTH, startdatumFDag);
 		
-		dao.voegFeestdagToe(feestdag, omschrijving, terugkerend);
+		//System.out.println("*********Debug: FeestDatum : " + feestdag.get(Calendar.DAY_OF_MONTH)
+		//				+"-"+feestdag.get(Calendar.MONTH)+"-"+feestdag.get(Calendar.YEAR));
+		dao.voegFeestdagToe(feestdag, omschrijvingF, terugkerendF);
+		
 		return "collectieveSluiting";
 	}
 	
@@ -131,5 +63,111 @@ public class CollectieveSluitingBack implements Serializable {
 		//TODO
 		return "collectieveSluiting";
 	}
+
+	public int getStartdatumFJaar() {
+		return startdatumFJaar;
+	}
+
+	public void setStartdatumFJaar(int startdatumFJaar) {
+		this.startdatumFJaar = startdatumFJaar;
+	}
+
+	public int getStartdatumFMaand() {
+		return startdatumFMaand;
+	}
+
+	public void setStartdatumFMaand(int startdatumFMaand) {
+		this.startdatumFMaand = startdatumFMaand;
+	}
+
+	public int getStartdatumFDag() {
+		return startdatumFDag;
+	}
+
+	public void setStartdatumFDag(int startdatumFDag) {
+		this.startdatumFDag = startdatumFDag;
+	}
+
+	public int getStartdatumCVJaar() {
+		return startdatumCVJaar;
+	}
+
+	public void setStartdatumCVJaar(int startdatumCVJaar) {
+		this.startdatumCVJaar = startdatumCVJaar;
+	}
+
+	public int getStartdatumCVMaand() {
+		return startdatumCVMaand;
+	}
+
+	public void setStartdatumCVMaand(int startdatumCVMaand) {
+		this.startdatumCVMaand = startdatumCVMaand;
+	}
+
+	public int getStartdatumCVDag() {
+		return startdatumCVDag;
+	}
+
+	public void setStartdatumCVDag(int startdatumCVDag) {
+		this.startdatumCVDag = startdatumCVDag;
+	}
+
+	public int getEinddatumCVJaar() {
+		return einddatumCVJaar;
+	}
+
+	public void setEinddatumCVJaar(int einddatumCVJaar) {
+		this.einddatumCVJaar = einddatumCVJaar;
+	}
+
+	public int getEinddatumCVMaand() {
+		return einddatumCVMaand;
+	}
+
+	public void setEinddatumCVMaand(int einddatumCVMaand) {
+		this.einddatumCVMaand = einddatumCVMaand;
+	}
+
+	public int getEinddatumCVDag() {
+		return einddatumCVDag;
+	}
+
+	public void setEinddatumCVDag(int einddatumCVDag) {
+		this.einddatumCVDag = einddatumCVDag;
+	}
+
+	public String getOmschrijvingF() {
+		return omschrijvingF;
+	}
+
+	public void setOmschrijvingF(String omschrijvingF) {
+		this.omschrijvingF = omschrijvingF;
+	}
+
+	public String getOmschrijvingCV() {
+		return omschrijvingCV;
+	}
+
+	public void setOmschrijvingCV(String omschrijvingCV) {
+		this.omschrijvingCV = omschrijvingCV;
+	}
+
+	public boolean isTerugkerendF() {
+		return terugkerendF;
+	}
+
+	public void setTerugkerendF(boolean terugkerendF) {
+		this.terugkerendF = terugkerendF;
+	}
+
+	public boolean isTerugkerendCV() {
+		return terugkerendCV;
+	}
+
+	public void setTerugkerendCV(boolean terugkerendCV) {
+		this.terugkerendCV = terugkerendCV;
+	}
+	
+	
 	
 }

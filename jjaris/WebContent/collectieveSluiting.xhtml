@@ -8,7 +8,6 @@
 </h:head>
 <h:body>
 <h:form>
-	
 	<!-- Overzicht van de fesstdagen moet bijkomen -->
 		<h:panelGrid id="feestdag" columns="4">	
 			<h1>FEESTDAGEN</h1>
@@ -17,7 +16,7 @@
 			<h:inputHidden value="legeFGrid1-4" id="legeFGrid1-4" />
 			
 			<h:outputLabel for="txtFOmschrijving" value="Omschrijving"></h:outputLabel>
-			<h:inputText id="txtFOmschrijving"  value="#{collectievesluiting.omschrijving}"></h:inputText>
+			<h:inputText id="txtFOmschrijving"  value="#{collectievesluiting.omschrijvingF}"></h:inputText>
 			<h:inputHidden value="legeFGrid2-3" id="legeFGrid2-3" />
 			<h:inputHidden value="legeFGrid2-4" id="legeFGrid2-4" />	
 			
@@ -27,17 +26,15 @@
 			<h:outputLabel for="txtFJaar" value="Jaar"></h:outputLabel>	
 			
 			<h:outputText for="txtFDatum" value="Datum"></h:outputText>
-			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumDag}"></h:inputText>
-			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumMaand}"></h:inputText>
-			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumJaar}"></h:inputText>
+			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumFDag}"></h:inputText>
+			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumFMaand}"></h:inputText>
+			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumFJaar}"></h:inputText>
 			
 			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
-			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerend}"/>
+			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerendF}"/>
 			<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
 			<h:commandButton value="Voeg Feestdag Toe" action="#{collectievesluiting.voegFeestdagToe}"></h:commandButton>
 		</h:panelGrid>
-	
-	
 	
 		<h:panelGrid id="collectieveVerlof" columns="4">	
 			<h1>COLLECTIVE VERLOVEN</h1>
@@ -46,7 +43,7 @@
 			<h:inputHidden value="legeGrid1-4" id="legeGrid1-4" />
 			
 			<h:outputLabel for="txtCVOmschrijving" value="Omschrijving"></h:outputLabel>
-			<h:inputText id="txtCVOmschrijving"  value="#{collectievesluiting.omschrijving}"></h:inputText>
+			<h:inputText id="txtCVOmschrijving"  value="#{collectievesluiting.omschrijvingCV}"></h:inputText>
 			<h:inputHidden value="legeGrid2-3" id="legeGrid2-3" />
 			<h:inputHidden value="legeGrid2-4" id="legeGrid2-4" />	
 			
@@ -56,18 +53,18 @@
 			<h:outputLabel for="txtCVBJaar" value="Jaar"></h:outputLabel>	
 			
 			<h:outputText for="txtCVBeginDatum" value="Begin Datum"></h:outputText>
-			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumDag}"></h:inputText>
-			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumMaand}"></h:inputText>
-			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumJaar}"></h:inputText>
+			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumCVDag}"></h:inputText>
+			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}"></h:inputText>
+			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}"></h:inputText>
 			
 			<h:outputText for="txtCVEindDatum" value="Eind Datum"></h:outputText>
-			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumDag}"></h:inputText>
-			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumMaand}"></h:inputText>
-			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumJaar}"></h:inputText>
+			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumCVDag}"></h:inputText>
+			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumCVMaand}"></h:inputText>
+			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumCVJaar}"></h:inputText>
 			
-			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
-			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerend}"/>
-			<h:inputHidden value="legeGrid5-3" id="legeGrid5-3" />
+			<h:outputText for="txtCVTerugkerend" value="terugkerend?"></h:outputText>
+			<input  id="txtCVTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerendCV}"/>
+			<h:inputHidden value="legeCVGrid5-3" id="legeCVGrid5-3" />
 			<h:commandButton value="Voeg Collectieve Verlof Toe" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
 		</h:panelGrid>
 			
