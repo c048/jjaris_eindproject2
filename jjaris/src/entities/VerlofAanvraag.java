@@ -65,7 +65,6 @@ public class VerlofAanvraag implements Serializable{
 			datum.setTime(startdatum.getTime());
 			int weekdagTeller = 0;
 			
-			int teller = 0;
 			
 			while(einddatum.after(datum)){
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
