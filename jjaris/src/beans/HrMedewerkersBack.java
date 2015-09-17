@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -98,6 +99,16 @@ return "HR.xhtml";
 		return url;
 	}
 	
+	public int beschikbareverlofdagen(int personbeelsnummer){
+		int currentYear = LocalDate.now().getYear();
+		Werknemer tmpw = Dao.getWerknemer(personbeelsnummer);
+		
+		int tmpaantal = tmpw.getAantalBeschikBareVerlofDagen(currentYear);
+		return tmpaantal;
+		
+		
+	}
+	 
 	
 	
 

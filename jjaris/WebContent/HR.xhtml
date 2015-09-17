@@ -14,9 +14,9 @@
 		<h:outputLabel id="lblMedewerkers" value="Medewerkers">Medewerkers</h:outputLabel> *css nog te maken<br />
 
 		<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">Naam:</h:outputLabel>
-		<h:inputText id="txtNaam" value="HrManageMedewerker.naam"></h:inputText>
+		<h:inputText id="txtNaam" value="#{HrManageMedewerker.naam}"></h:inputText>
 		<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">Voornaam:</h:outputLabel>
-		<h:inputText id="txtVoornaam" value="HrManageMedewerker.voornaam"></h:inputText>
+		<h:inputText id="txtVoornaam" value="#{HrManageMedewerker.voornaam}"></h:inputText>
 		<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
 			for="txtPersoneelsnummer">Personeelsnummer:</h:outputLabel>
 		<h:inputText id="txtPersoneelsnummer"></h:inputText>
@@ -38,7 +38,7 @@
    </h:column>
 			<h:column>
 				<f:facet name="header">Verlofdagen</f:facet>
-      #{Medewerker.jaarlijkseverloven}
+      #{Medewerker.aantalBeschikBareVerlofDagen(2015)}
    </h:column>
 
 			<h:column>
@@ -59,7 +59,7 @@
    </h:column>
       			<h:column>
 				<f:facet name="header">Aanpassen</f:facet>
-      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.Aanpassen}"></h:commandButton>
+      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.Editmedewerker}"></h:commandButton>
    </h:column>
    
 		</h:dataTable>
