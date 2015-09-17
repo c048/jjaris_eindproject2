@@ -10,10 +10,10 @@
 <h:form>
 <h:panelGrid columns="2">
 <h:outputLabel value="E-mail adres: "></h:outputLabel>
-<h:inputText value="#{}"></h:inputText>
+<h:inputText value="#{loginBack.email}"></h:inputText>
 <h:outputLabel value="Paswoord: "></h:outputLabel>
-<h:inputSecret value="#{}"></h:inputText>
-<h:commandButton value="login" action="#{}"></h:commandButton>
+<h:inputSecret value="#{loginBack.paswoord}"></h:inputSecret>
+<h:commandButton value="login" action="#{loginBack.login}"></h:commandButton>
 </h:panelGrid>
 </h:form>
 <h:messages style="color:red;"></h:messages>
