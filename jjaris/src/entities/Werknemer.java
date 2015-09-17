@@ -94,10 +94,13 @@ public class Werknemer implements Serializable {
 
 	public void setTeam(Team team) {
 		// System.out.println(team);
-		this.team = team;
-		if (!getTeam().zitWerknemerInTeam(this)) {
-			getTeam().voegTeamlidToe(this);
-		}
+		if (team != null){
+			this.team = team;
+			if (!getTeam().zitWerknemerInTeam(this)) {
+				getTeam().voegTeamlidToe(this);
+			}
+		}else throw new NullPointerException("Werknemer.setTeam niet gelukt: kan geen null invullen");
+		
 	}
 
 	public Adres getAdres() {
