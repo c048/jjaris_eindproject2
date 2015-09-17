@@ -11,12 +11,13 @@
 	<h:form>
 		<h:outputLabel for="teamNaam" value="Naam Team: "></h:outputLabel>
 		<h:inputText id="teamNaam" value="#{manageTeamBack.naam}"></h:inputText>
+		<br></br>
 		<h:outputLabel for="isHR" value="HR? "></h:outputLabel>
-		<h:selectOneRadio value="#{manageTeamBack.HR}" required="true" >
+		<h:selectOneRadio id="isHR" value="#{manageTeamBack.HR}" required="true" >
 			<f:selectItem itemLabel="YES " itemValue="true"></f:selectItem>
 			<f:selectItem itemLabel="NO " itemValue="false"></f:selectItem>
 		</h:selectOneRadio>
-		<h:commandButton value="voeg Team Toe: " action="#{manageTeamBack.voegTeamToe}"></h:commandButton>
+		<h:commandButton value="voeg Team Toe" action="#{manageTeamBack.voegTeamToe}"></h:commandButton>
 		<h:commandButton value="Ga terug naar HR zonder opslaan" action="HR"></h:commandButton>
 	</h:form>
 </h:body>
