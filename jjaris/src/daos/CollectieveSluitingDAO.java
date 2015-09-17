@@ -49,15 +49,20 @@ public class CollectieveSluitingDAO {
 	@Transactional
 	public  List<CollectiefVerlof> getCollectieveVerloven(Calendar begindatum, Calendar einddatum) {
 		
+	//	TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM COLLECTIEVEVERLOVEN c WHERE "+
+	//				"c.startdatum > :begindatum  AND c.einddatum < :einddatum ",CollectiefVerlof.class);
+		
 		TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM COLLECTIEVEVERLOVEN c WHERE "+
-					"c.startdatum > :begindatum  AND c.einddatum < :einddatum ",CollectiefVerlof.class);
+				"((c.startdatum BETWEEN :begindatum  AND :einddatum ) "+
+				"OR (c.einddatum BETWEEN :begindatum  AND :einddatum )) "+
+				"OR (c.startdatum <= :begindatum AND c.einddatum >= :einddatum ) ",CollectiefVerlof.class);
 		
 		return (List<CollectiefVerlof>) query.setParameter("startdatum", begindatum)
 				.setParameter("einddatum", einddatum).getResultList();
 		
 	}
 	
-	@Transactional
+
 	public  List<CollectiefVerlof> getAlleCollectieveVerloven (int jaartal) {
 		
 		Calendar begindatum = GregorianCalendar.getInstance();
