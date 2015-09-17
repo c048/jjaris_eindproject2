@@ -95,7 +95,7 @@ return "HR.xhtml";
 	}
 	
 	public String Editmedewerker(int personeelsnummer){
-		String url = "Update_medewerker.xhtml?"+Integer.toString(personeelsnummer);
+		String url = "Update_medewerker.xhtml?id="+Integer.toString(personeelsnummer);
 		return url;
 	}
 	

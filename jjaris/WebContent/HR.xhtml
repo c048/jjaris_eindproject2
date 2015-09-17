@@ -69,7 +69,7 @@
 		<br></br>
 		<br></br>
 		
-		<h:commandButton id="btnPasMedewerkerAAn" action="#{}"
+		<h:commandButton id="btnPasMedewerkerAAn" action="#{HrManageMedewerker.Editmedewerker}"
 			value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
 	</h:form>
 
@@ -92,9 +92,9 @@
 		<h:outputLabel id="lblVerantwoordelijkeTeam" value="Verantwoordelijke"
 			for="txtVerantwoordelijkeTeam">Verantwoordelijke:</h:outputLabel>
 		<h:inputText id="txtVerantwoordelijkeTeam" value="?"></h:inputText>
-		<h:commandButton id="btnZoekTeam" value="Zoek" action="#{}">Zoek</h:commandButton>
+		<h:commandButton id="btnZoekTeam" value="Zoek" action="#{HrManageTeam.zoek}">Zoek</h:commandButton>
 		<br></br>
-		<h:dataTable value="#{}" var="Team">
+		<h:dataTable value="#{HrManageTeam.teams}" var="Team">
 			<h:column>
 				<f:facet name="header">Code</f:facet>
 #{Team.code}
@@ -121,7 +121,7 @@
 </h:column>
 			<h:column>
 				<f:facet name="header">aanpassen</f:facet>
-#{Team.verwijderen}
+#{Team.editTeam}
 </h:column>
 		</h:dataTable>
 		<h:commandButton ID="btnNieuwTeam" value="#{}">Nieuw Team</h:commandButton>
@@ -129,6 +129,16 @@
 
 	</h:form>
 	<hr></hr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<h:form>
 		<h:outputLabel id="lblJaarlijksverlof" value="Jaarlijks verlof">Jaarlijks verlof</h:outputLabel>
 		<br></br>
@@ -164,12 +174,12 @@
 #{JaarlijksVerlof.aantal}
 </h:column>
 			</h:column>
-			<f:facet name="header">Aantal dagen</f:facet>
-#{JaarlijksVerlof.aantal}
+			<f:facet name="header">aanpassen</f:facet>
+#{JaarlijksVerlof.edit}
 </h:column>
 			</h:column>
-			<f:facet name="header">Aantal dagen</f:facet>
-#{JaarlijksVerlof.aantal}
+			<f:facet name="header">verwijderen</f:facet>
+#{JaarlijksVerlof.remove}
 </h:column>
 		</h:dataTable>
 
@@ -179,7 +189,7 @@
 		<h:outputLabel id="lblIdVerlofEdit" value="Id" for="txtIdVerlofEdit">Id:</h:outputLabel>
 		<h:inputText value="?" id="txtIdVerlofEdit"></h:inputText>
 		<h:commandButton value="Pas Jaarlijks Verlof aan"
-			id="btnPasJaarlijksAan" action="#{}">Pas Jaarlijks Verlof aan</h:commandButton>
+			id="btnPasJaarlijksAan" action="#{JaarlijksVerlof.}">Pas Jaarlijks Verlof aan</h:commandButton>
 
 
 
@@ -187,6 +197,6 @@
 
 
 
-<!-- 	</h:form> -->
+	</h:form>
 </h:body>
 </html>

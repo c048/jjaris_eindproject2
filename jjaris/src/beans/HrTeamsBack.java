@@ -66,5 +66,9 @@ public class HrTeamsBack implements Serializable {
 		return "hr.xhtml";
 		
 	}
+	public String EditTeam(int code){
+		String url = "Update_team.xhtml?code="+Integer.toString(code);
+		return url;
+	}
 	
 }
