@@ -192,12 +192,7 @@ public class Team implements Serializable {
 		}
 	}
 
-	/**
-	 * maak dit team leeg.
-	 */
-	public void maakTeamLeeg() {
-		teamleden.clear();
-	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
