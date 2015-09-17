@@ -81,7 +81,7 @@ public class CollectieveSluitingBack implements Serializable {
 				"-"+csEinddatum.get(Calendar.MONTH) + 
 				"-" +csEinddatum.get(Calendar.YEAR));
 		
-		dao.voegCollectieveVerlofToe(csBegindatum, csEinddatum,omschrijvingF, terugkerendF);
+		dao.voegCollectieveVerlofToe(csBegindatum, csEinddatum,omschrijvingCV, terugkerendCV);
 		
 		return "collectieveSluiting";
 	}

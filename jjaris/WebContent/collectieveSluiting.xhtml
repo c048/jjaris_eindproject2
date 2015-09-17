@@ -57,6 +57,11 @@
 			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}"></h:inputText>
 			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}"></h:inputText>
 			
+			<h:inputHidden value="legeGrid5-1" id="legeGrid5-1" />
+			<h:outputLabel for="txtCVEDag" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtCVEMaand" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtCVEJaar" value="Jaar"></h:outputLabel>	
+			
 			<h:outputText for="txtCVEindDatum" value="Eind Datum"></h:outputText>
 			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumCVDag}"></h:inputText>
 			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumCVMaand}"></h:inputText>
@@ -64,7 +69,7 @@
 			
 			<h:outputText for="txtCVTerugkerend" value="terugkerend?"></h:outputText>
 			<input  id="txtCVTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerendCV}"/>
-			<h:inputHidden value="legeCVGrid5-3" id="legeCVGrid5-3" />
+			<h:inputHidden value="legeCVGrid6-3" id="legeCVGrid6-3" />
 			<h:commandButton value="Voeg Collectieve Verlof Toe" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
 		</h:panelGrid>
 			
