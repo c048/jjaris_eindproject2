@@ -54,6 +54,15 @@ public class VerlofAanvraagDAO {
 		
 	
 	}
+	/**
+	 * Verlofaanvraag opvragen aan de hand van de ID
+	 * @param id
+	 * @return
+	 */
+	public VerlofAanvraag getVerlofAanvraag(int id){
+		return em.find(VerlofAanvraag.class, id);
+		
+	}
 	
 	/**
 	 * Geeft een lijst van verlofaanvragen uit de database volgens teamCode.
