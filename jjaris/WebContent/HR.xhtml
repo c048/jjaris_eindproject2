@@ -25,40 +25,40 @@
 		<br />
 		<h:dataTable value="#{HrManageMedewerker.werknemers}" var="Medewerker">
 			<h:column>
-				<f:facet name="ID">ID</f:facet>    				
+				<f:facet name="header">ID</f:facet>    				
       #{Medewerker.personeelsnummer}
    </h:column>
 			<h:column>
-				<f:facet name="Naam">Naam</f:facet>
+				<f:facet name="header">Naam</f:facet>
       #{Medewerker.naam}
    </h:column>
 			<h:column>
-				<f:facet name="Voornaam">Voornaam</f:facet>
+				<f:facet name="header">Voornaam</f:facet>
       #{Medewerker.voornaam}
    </h:column>
 			<h:column>
-				<f:facet name="Verlofdagen">Verlofdagen</f:facet>
+				<f:facet name="header">Verlofdagen</f:facet>
       #{Medewerker.jaarlijkseverloven}
    </h:column>
 
 			<h:column>
-				<f:facet name="Adres">Adres</f:facet>
+				<f:facet name="header">Adres</f:facet>
       #{Medewerker.adres}
    </h:column>
 			<h:column>
-				<f:facet name="Email">Email</f:facet>
+				<f:facet name="header">Email</f:facet>
       #{Medewerker.email}
    </h:column>
 			<h:column>
-				<f:facet name="Team">Team</f:facet>
+				<f:facet name="header">Team</f:facet>
       #{Medewerker.team}
    </h:column>
    			<h:column>
-				<f:facet name="Verwijderen">verwijderen</f:facet>
+				<f:facet name="header">verwijderen</f:facet>
       <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
    </h:column>
       			<h:column>
-				<f:facet name="Aanpassen">Aanpassen</f:facet>
+				<f:facet name="header">Aanpassen</f:facet>
       <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.Aanpassen}"></h:commandButton>
    </h:column>
    
