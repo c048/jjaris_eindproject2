@@ -1,6 +1,7 @@
 package daos;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
@@ -10,6 +11,7 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import utils.Filter;
 import entities.Team;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
@@ -137,9 +139,10 @@ public class WerknemerDAO {
 	 * @return List<Werknemer>
 	 */
 	public List<Werknemer> getWerknemers(String zoekNaam, String zoekVoornaam) {
-		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.naam LIKE :naam AND w.voornaam LIKE :voornaam", Werknemer.class);
-		tqry.setParameter("naam", "%"+zoekNaam+"%");
-		tqry.setParameter("voornaam", "%"+zoekVoornaam+"%");
+		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.naam LIKE :naam AND w.voornaam LIKE :voornaam",
+				Werknemer.class);
+		tqry.setParameter("naam", "%" + zoekNaam + "%");
+		tqry.setParameter("voornaam", "%" + zoekVoornaam + "%");
 		return tqry.getResultList();
 	}
 
@@ -157,12 +160,40 @@ public class WerknemerDAO {
 		if (personeelsnr != 0) {
 			TypedQuery<Werknemer> tqry = em.createQuery(
 					"SELECT w FROM Werknemer w WHERE w.naam LIKE :naam AND w.voornaam LIKE :voornaam AND w.personeelsnummer = :nr", Werknemer.class);
-			tqry.setParameter("naam", "%"+zoekNaam+"%");
-			tqry.setParameter("voornaam","%"+zoekVoornaam+"%");
+			tqry.setParameter("naam", "%" + zoekNaam + "%");
+			tqry.setParameter("voornaam", "%" + zoekVoornaam + "%");
 			tqry.setParameter("nr", personeelsnr);
 			return tqry.getResultList();
 		} else
 			return getWerknemers(zoekNaam, zoekVoornaam);
+
+	}
+
+	public List<Werknemer> getWerknemers(Filter filter) {
+		String querystring = "SELECT w FROM Werknemer w";
+		if (!filter.isEmpty()) {
+			querystring += " WHERE";
+			int aantal = 0;
+			for (String key : filter) {
+				if (aantal != 0) {
+					querystring = querystring + " AND";
+				}
+				if (key.equals("naam") || key.equals("voornaam")) {
+					querystring += " w." + key + " LIKE :" + key;
+					aantal++;
+				}
+				if (key.equals("personeelsnummer") || key.equals("team.code")) {
+					querystring += " w." + key + " = :" + key;
+					aantal++;
+				}
+			}
+		}
+		TypedQuery<Werknemer> query = em.createQuery(querystring, Werknemer.class);
+		for (String key : filter) {
+			query.setParameter(key, filter.getValue(key));
+		}
+
+		return query.getResultList();
 
 	}
 
