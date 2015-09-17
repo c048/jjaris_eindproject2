@@ -36,7 +36,7 @@ public class LoginBack implements Serializable {
 		this.paswoord = paswoord;
 	}
 
-	private String getPaswoord() {
+	public String getPaswoord() {
 		return paswoord;
 	}
 
