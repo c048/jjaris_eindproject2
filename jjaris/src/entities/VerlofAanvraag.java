@@ -3,9 +3,6 @@ package entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Map;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import utils.ControleerVerlofAanvraag;
-import entities.*;
-import daos.CollectieveSluitingDAO;
 
 @Entity
 public class VerlofAanvraag implements Serializable{
@@ -51,12 +45,14 @@ public class VerlofAanvraag implements Serializable{
 	 * aanvraagdatum op now
 	 * @param startDatum
 	 * @param eindDatum
+	 * @param Werknemer
 	 */
-	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
+	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum,Werknemer werknemer) {
 		GregorianCalendar now = new GregorianCalendar();
 		setPeriode(startDatum, eindDatum);
 		setToestand(Toestand.INGEDIEND);
 		setAanvraagdatum(now);		
+		setWerknemer(werknemer);
 	}
 
 		/**
@@ -68,7 +64,6 @@ public class VerlofAanvraag implements Serializable{
 			datum.setTime(startdatum.getTime());
 			int weekdagTeller = 0;
 			
-			int teller = 0;
 			
 			while(einddatum.after(datum)){
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);

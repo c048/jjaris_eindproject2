@@ -83,6 +83,10 @@ public class Werknemer implements Serializable {
 	public void setPasswoord(String passwoord) {
 		this.passwoord = passwoord;
 	}
+	
+	public boolean controleerPasswoord(String teControlerenPaswoord){
+		return teControlerenPaswoord.equals(getPasswoord());
+	}
 
 	public Team getTeam() {
 		return this.team;
@@ -148,8 +152,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
-		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum);
-		tmpAanvraag.setWerknemer(this);
+		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum,this);
 		getVerlofaanvragen().add(tmpAanvraag);
 	}
 
