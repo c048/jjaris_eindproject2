@@ -55,11 +55,11 @@
    </h:column>
    			<h:column>
 				<f:facet name="Verwijderen">verwijderen</f:facet>
-      <h:commandButton value=#{Medewerker.personeelsnummer} action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
+      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
    </h:column>
       			<h:column>
 				<f:facet name="Aanpassen">Aanpassen</f:facet>
-      <h:commandButton value=#{Medewerker.personeelsnummer} action="#{HrManageMedewerker.Aanpassen}"></h:commandButton>
+      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.Aanpassen}"></h:commandButton>
    </h:column>
    
 		</h:dataTable>
