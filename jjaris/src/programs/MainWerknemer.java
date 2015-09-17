@@ -75,7 +75,7 @@ public class MainWerknemer implements Serializable {
 		
 		team1 = teamdoa.getTeam(1);
 		
-		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,11,1),new GregorianCalendar(2015, 11, 25));
+		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,11,1),new GregorianCalendar(2015, 11, 25),werknemer1);
 		
 		
 //		Werknemer w = testdoa.getWerknemer(32768);
