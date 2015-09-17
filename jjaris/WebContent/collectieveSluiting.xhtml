@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://xmlns.jcp.org/jsf/html" >
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+<h:form>
+	
+	<!-- Overzicht van de fesstdagen moet bijkomen -->
+		<h:panelGrid id="feestdag" columns="4">	
+			<h1>FEESTDAGEN</h1>
+			<h:inputHidden value="legeFGrid1-2" id="legeFGrid1-2" />
+			<h:inputHidden value="legeFGrid1-3" id="legeFGrid1-3" />
+			<h:inputHidden value="legeFGrid1-4" id="legeFGrid1-4" />
+			
+			<h:outputLabel for="txtFOmschrijving" value="Omschrijving"></h:outputLabel>
+			<h:inputText id="txtFOmschrijving"  value="#{collectievesluiting.omschrijving}"></h:inputText>
+			<h:inputHidden value="legeFGrid2-3" id="legeFGrid2-3" />
+			<h:inputHidden value="legeFGrid2-4" id="legeFGrid2-4" />	
+			
+			<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
+			<h:outputLabel for="txtFDag" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtFMaand" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtFJaar" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtFDatum" value="Datum"></h:outputText>
+			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumDag}"></h:inputText>
+			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumMaand}"></h:inputText>
+			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumJaar}"></h:inputText>
+			
+			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
+			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerend}"/>
+			<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
+			<h:commandButton value="Voeg Feestdag Toe" action="#{collectievesluiting.voegFeestdagToe}"></h:commandButton>
+		</h:panelGrid>
+	
+	
+	
+		<h:panelGrid id="collectieveVerlof" columns="4">	
+			<h1>COLLECTIVE VERLOVEN</h1>
+			<h:inputHidden value="legeGrid1-2" id="legeGrid1-2" />
+			<h:inputHidden value="legeGrid1-3" id="legeGrid1-3" />
+			<h:inputHidden value="legeGrid1-4" id="legeGrid1-4" />
+			
+			<h:outputLabel for="txtCVOmschrijving" value="Omschrijving"></h:outputLabel>
+			<h:inputText id="txtCVOmschrijving"  value="#{collectievesluiting.omschrijving}"></h:inputText>
+			<h:inputHidden value="legeGrid2-3" id="legeGrid2-3" />
+			<h:inputHidden value="legeGrid2-4" id="legeGrid2-4" />	
+			
+			<h:inputHidden value="legeGrid3-1" id="legeGrid3-1" />
+			<h:outputLabel for="txtCVBDag" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtCVBMaand" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtCVBJaar" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtCVBeginDatum" value="Begin Datum"></h:outputText>
+			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumDag}"></h:inputText>
+			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumMaand}"></h:inputText>
+			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumJaar}"></h:inputText>
+			
+			<h:outputText for="txtCVEindDatum" value="Eind Datum"></h:outputText>
+			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumDag}"></h:inputText>
+			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumMaand}"></h:inputText>
+			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumJaar}"></h:inputText>
+			
+			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
+			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerend}"/>
+			<h:inputHidden value="legeGrid5-3" id="legeGrid5-3" />
+			<h:commandButton value="Voeg Collectieve Verlof Toe" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
+		</h:panelGrid>
+			
+	<h:commandButton value="Terug" action="HR.xhtml"></h:commandButton>
+</h:form>
+</h:body>
+</html>
