@@ -31,12 +31,16 @@
     				#{va.id}
     			</h:column>		
     			<h:column>
-    				<f:facet name="header">Startdatum</f:facet>
-    				#{va.startdatum}
+    				<f:facet name="header">Startdatum</f:facet>	
+    				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.startdatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>		
     			</h:column>		
     			<h:column>
-    				<f:facet name="header">Einddatum</f:facet>
-    				#{va.einddatum}
+    				<f:facet name="header">EindDatum</f:facet>	
+    				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.einddatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>	
     			</h:column>	
     			<h:column>
     				<f:facet name="header">Toestand</f:facet>

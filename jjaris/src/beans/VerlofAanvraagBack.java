@@ -44,7 +44,10 @@ public class VerlofAanvraagBack implements Serializable{
 	 * @return
 	 */
 	public List<VerlofAanvraag> getAanvragen(){
-		return null;
+		Werknemer werknemer = user.getIngelogdeWerknemer();
+		return verlofaanvraag.getVerlofAanvragenWerknemer(werknemer.getPersoneelsnummer());
+		
+		
 		
 	}
 	/**
@@ -83,6 +86,12 @@ public class VerlofAanvraagBack implements Serializable{
 	}
 	
 	
+	public Date converteerNaarDate(Calendar calendar){
+		return calendar.getTime() ;
+	}
+//	public getEinddatumString(){
+//		converteerDatum(einddatum).
+//	}
 	
 	
 	
