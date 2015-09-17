@@ -12,14 +12,15 @@ import javax.transaction.Transactional;
 
 import entities.CollectiefVerlof;
 import entities.Feestdag;
-
+//.
 
 @ApplicationScoped
 public class CollectieveSluitingDAO {
 	
+	private int i;
 	
-	@PersistenceContext(unitName = "jjaris")
-	private static EntityManager em;
+	@PersistenceContext(unitName = "jjaris")  
+	private EntityManager em;
 	
 	
 	@Transactional
@@ -48,10 +49,7 @@ public class CollectieveSluitingDAO {
 	
 	@Transactional
 	public  List<CollectiefVerlof> getCollectieveVerloven(Calendar begindatum, Calendar einddatum) {
-		
-	//	TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM COLLECTIEVEVERLOVEN c WHERE "+
-	//				"c.startdatum > :begindatum  AND c.einddatum < :einddatum ",CollectiefVerlof.class);
-		
+				
 		TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM COLLECTIEVEVERLOVEN c WHERE "+
 				"((c.startdatum BETWEEN :begindatum  AND :einddatum ) "+
 				"OR (c.einddatum BETWEEN :begindatum  AND :einddatum )) "+
@@ -73,4 +71,34 @@ public class CollectieveSluitingDAO {
 		
 		return getCollectieveVerloven(begindatum,einddatum);
 	}
+	
+	
+	
+	@Transactional
+	public void voegFeestdagToe(Calendar feestdatum , String omschrijving, boolean terugkerend ) {
+		//TODO exception. als alle gegevens zijn niet ingevuld??
+		Feestdag feestdag;
+		
+		if(feestdatum!=null & omschrijving!=null ) {
+			feestdag = new Feestdag(feestdatum, omschrijving, terugkerend);
+			em.persist(feestdag);
+		}
+		
+
+	}
+	
+	@Transactional
+	public void voegCollectieveVerlofToe(Calendar startdatum ,Calendar einddatum,  String omschrijving, boolean terugkerend ) {
+		//TODO exception. als alle gegevens zijn niet ingevuld??
+		CollectiefVerlof collectieveVerlof;
+		
+		if(startdatum!=null & omschrijving!=null  & einddatum!=null) {
+			collectieveVerlof = new CollectiefVerlof(startdatum, einddatum, omschrijving, terugkerend);
+			
+			em.persist(collectieveVerlof);
+		}
+
+
+	}
+	
 }
