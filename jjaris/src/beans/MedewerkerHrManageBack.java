@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,9 +15,9 @@ import entities.Adres;
 import entities.Team;
 import entities.Werknemer;
 
-@Named("managemedewerkerback")
+@Named("medewerkerHrManageBack")
 @RequestScoped
-public class ManageMedewerkerBack implements Serializable {
+public class MedewerkerHrManageBack implements Serializable {
 
 	@Inject
 	private WerknemerDAO werknemerDAO;
@@ -35,7 +34,7 @@ public class ManageMedewerkerBack implements Serializable {
 	private int gebJaar;
 	private int gebMaand;
 	
-	public ManageMedewerkerBack () {
+	public MedewerkerHrManageBack () {
 		adres = new Adres();
 		werknemer = new Werknemer();
 		team = new Team();
