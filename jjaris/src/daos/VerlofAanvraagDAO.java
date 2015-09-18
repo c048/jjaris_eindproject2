@@ -2,7 +2,6 @@ package daos;
 
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -107,53 +106,49 @@ public class VerlofAanvraagDAO {
 	 */
 	
 	public List<VerlofAanvraag> getVerlofAanvragen(Filter filter){
-		
 		String querystring = "SELECT c FROM VerlofAanvraag c";
-		if(filter.getFilter().isEmpty()){
-			TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
-			return (List<VerlofAanvraag>) query.getResultList();
-		}
-		else{
+		if(!filter.isEmpty()){
 			int aantal = 0;
 			querystring = querystring + " WHERE";
-			for(Map.Entry<String, Object> entry : filter.getFilter().entrySet()){
+			for(String key : filter){
 				if(aantal != 0){
 					querystring = querystring + " AND";
 				}
-				if(entry.getKey().contains("startdatum")){
+				if(key.equals("startdatum")){
 					aantal++;
-					querystring = querystring + " c."+entry.getKey()+"<= :" + entry.getKey();
+					querystring +=  " c."+key+"<= :" + key;
 					
 				}
-				if(entry.getKey().contains("einddatum")){
+				if(key.equals("einddatum")){
 					aantal++;
-					querystring = querystring + " c."+entry.getKey()+">= :" + entry.getKey();
+					querystring += " c."+key+">= :" + key;
 					
 				}
-				if(entry.getKey().contains("werknemer.personeelsnummer") || entry.getKey().contains("werknemer.team.code")){
+				if(key.equals("werknemer.personeelsnummer") || key.equals("werknemer.team.code") || key.equals("toestand")){
 					aantal++;
-					querystring = querystring + " c."+entry.getKey()+"= :" + entry.getKey();
+					querystring += " c."+key+"= :" + key;
 				}
-				else{
-					aantal++;
-					querystring = querystring + " c."+entry.getKey()+"LIKE :" + entry.getKey();
-				}
+//				else{
+//	Geen strings	aantal++;
+//					querystring += " c."+entry.getKey()+"LIKE :" + entry.getKey();
+//				}
 				
 			}
-			TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
-			
-			for(Map.Entry<String, Object> entry : filter.getFilter().entrySet()){
-				query.setParameter(entry.getKey(), entry.getValue());
-			}
-			
-			return (List<VerlofAanvraag>) query.getResultList();
+		}
+		TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
+		
+		for(String key : filter){
+			query.setParameter(key, filter.getValue(key));
 		}
 		
-		
+		return (List<VerlofAanvraag>) query.getResultList();
 	}
-	
-	
+		
+		
 }
+	
+	
+
 	//Niet doen dus
 //	public static List<VerlofAanvraag> getVerlofAanvragen(LocalDate startdatum, LocalDate einddatum, Toestand toestand,int teamCode,int personeelnr){
 //		String querystring = "SELECT c FROM verlofaanvraag c WHERE c.startdatum <= :startdatum AND c.einddatum <= :einddatum";
