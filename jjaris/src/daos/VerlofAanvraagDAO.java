@@ -126,8 +126,10 @@ public class VerlofAanvraagDAO {
 				}
 				if(key.equals("werknemer.personeelsnummer") || key.equals("werknemer.team.code") || key.equals("toestand")){
 					aantal++;
+					key.replace(".", "");
 					querystring += " c."+key+"= :" + key;
 				}
+				
 //				else{
 //	Geen strings	aantal++;
 //					querystring += " c."+entry.getKey()+"LIKE :" + entry.getKey();
@@ -138,6 +140,7 @@ public class VerlofAanvraagDAO {
 		TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
 		
 		for(String key : filter){
+			key.replace(".", "");
 			query.setParameter(key, filter.getValue(key));
 		}
 		
