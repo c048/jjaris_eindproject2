@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,93 +21,109 @@ import entities.Werknemer;
 public class HrTeamsBack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Inject	
+	@Inject
 	private TeamDAO tDao;
 	@Inject
 	private ParameterBack parameters;
-	
+
 	private List<Team> teams;
-	
-	private String teamNaam,naamTeamVerantwoordelijke;
+
+	private String teamNaam, naamTeamVerantwoordelijke;
 	private int teamCode;
 	private int aanpasCode;
-	
-	
+
 	public int getAanpasCode() {
 		return aanpasCode;
 	}
+
 	public void setAanpasCode(int aanpasCode) {
 		this.aanpasCode = aanpasCode;
 	}
+
 	public List<Team> getTeams() {
 		return teams;
 	}
+
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-	
+
 	public String getTeamNaam() {
 		return teamNaam;
 	}
+
 	public void setTeamNaam(String teamnaam) {
 		teamNaam = teamnaam;
 	}
+
 	public int getTeamCode() {
 		return teamCode;
 	}
+
 	public void setTeamCode(int teamcode) {
 		teamCode = teamcode;
 	}
+
 	public String getTeamVerantwoordelijke() {
 		return naamTeamVerantwoordelijke;
 	}
+
 	public void setTeamVerantwoordelijke(String teamVerantwoordelijke) {
 		naamTeamVerantwoordelijke = teamVerantwoordelijke;
 	}
-	
-	public String TeamAanpassen(int code){
-		String url = "Update_team.xhtml?"+Integer.toString(code);
+
+	public String TeamAanpassen(int code) {
+		String url = "Update_team.xhtml?" + Integer.toString(code);
 		return url;
-		
+
 	}
-	
-	
-	public String verwijderTeam(){
-		//String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeVerwijder");
-		//System.out.println("in verwijder team van HrTeamsBack");
+
+	public String verwijderTeam() {
+		// String code =
+		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeVerwijder");
+		// System.out.println("in verwijder team van HrTeamsBack");
 		Team team = tDao.getTeam(getAanpasCode());
 		try {
 			tDao.verwijderTeam(team);
 		} catch (NullPointerException npe) {
-			// TODO: handle exception
+			FacesMessage msg = new FacesMessage(npe.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
+		}catch (IllegalArgumentException iae) {
+			FacesMessage msg = new FacesMessage(iae.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
 		}
-		
+
 		return "teamsHr";
-		
+
 	}
-	
-	public String editTeam(){
-		//String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
-		//System.out.println("in edit team van HrTeamsBack");
+
+	public String editTeam() {
+		// String code =
+		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
+		// System.out.println("in edit team van HrTeamsBack");
 		parameters.setCode(getAanpasCode());
 		return "teamHrEdit";
 	}
-	
-	public String zoek(){
+
+	public String zoek() {
 		System.out.println("in zoek() van HrTeamsBack");
 		Filter f = new Filter();
-		if (!getTeamNaam().trim().equals("")){
+		if (!getTeamNaam().trim().equals("")) {
 			f.voegFilterToe("naam", getTeamNaam());
 		}
-		if (!getTeamVerantwoordelijke().trim().equals("")){
+		if (!getTeamVerantwoordelijke().trim().equals("")) {
 			f.voegFilterToe("teamverantwoordelijke.naam", getTeamVerantwoordelijke());
 		}
-		if (getTeamCode() != 0){
+		if (getTeamCode() != 0) {
 			f.voegFilterToe("code", getTeamCode());
 		}
-		
+
 		teams = tDao.getTeams(f);
 		return "teamsHr";
 	}
-	
+
 }

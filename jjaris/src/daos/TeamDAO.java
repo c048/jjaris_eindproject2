@@ -67,7 +67,6 @@ public class TeamDAO {
 	@Transactional
 	public Team getTeam(int code) {
 		Team team = em.find(Team.class, code);
-
 		return team;
 
 	}
