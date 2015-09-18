@@ -136,8 +136,8 @@ public class WerknemerDAO {
 	 * @return Werknemer
 	 */
 	public Werknemer getWerknemer(String email) {
-		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.email = :email", Werknemer.class);
-		tqry.setParameter("email", email);
+		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.email LIKE :email", Werknemer.class);
+		tqry.setParameter("email", "%" + email + "%");
 		return tqry.getSingleResult();
 	}
 
