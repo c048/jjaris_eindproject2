@@ -2,12 +2,14 @@ package beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import utils.Filter;
 import daos.WerknemerDAO;
 import entities.Werknemer;
 
@@ -17,33 +19,50 @@ public class HrMedewerkersBack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private WerknemerDAO Dao;
-	private List<Werknemer> werknemers;
+	private WerknemerDAO dao;
+
 	private Werknemer werknemer;
 	private String naam;
-	private String Voornaam;
+	private String voornaam;
 	private String team;
 	private int ID;
+	private List<Werknemer> delijst;
+	
+	public HrMedewerkersBack() {
+		delijst = new ArrayList<Werknemer>();
+	}
 
-	public int getID() {
-
+	public int getID() { 
 		return ID;
 	}
 
 	public void setID(int iD) {
 		ID = iD;
 	}
-
-	public List<Werknemer> getWerknemers() {
-		return werknemers;
+	
+	public String zoek() {
+		delijst = getWerknemers();
+		return null;
 	}
 
-	public void setWerknemers(List<Werknemer> werknemers) {
-		this.werknemers = werknemers;
+	public List<Werknemer> getWerknemers() {
+		Filter f = new Filter();
+		if (!naam.equalsIgnoreCase("") &&naam != null) {
+			f.voegFilterToe("naam", getNaam());
+		}
 
+		if (!voornaam.equalsIgnoreCase("")&&voornaam != null) {
+			f.voegFilterToe("voornaam", getVoornaam());
+		}
+		if (ID != 0&&naam != null) {
+			f.voegFilterToe("ID", getID());
+		}
+		
+		return dao.getWerknemers(f);
 	}
 
 	public Werknemer getWerknemer() {
+
 		return werknemer;
 	}
 
@@ -60,11 +79,11 @@ public class HrMedewerkersBack implements Serializable {
 	}
 
 	public String getVoornaam() {
-		return Voornaam;
+		return voornaam;
 	}
 
 	public void setVoornaam(String voornaam) {
-		Voornaam = voornaam;
+		this.voornaam = voornaam;
 	}
 
 	public String getTeam() {
@@ -79,37 +98,26 @@ public class HrMedewerkersBack implements Serializable {
 		return serialVersionUID;
 	}
 
-	public String zoekWerkNemer(String naam, String voornaam,
-			int Personeelsnummer) {
-werknemers.addAll( Dao.getWerknemers(naam, voornaam, Personeelsnummer));
-return "HR.xhtml";
-		
+	public String verwijderWerknemer(int personeelsnummer) {
+		Werknemer tmpw = dao.getWerknemer(personeelsnummer);
+		dao.verwijderWerknemer(tmpw);
+		return "hr.xhtml";
 
 	}
-	
-	public String verwijderWerknemer(int personeelsnummer){
-		Werknemer tmpw = Dao.getWerknemer(personeelsnummer);
-		Dao.verwijderWerknemer(tmpw);
-		return "hr.xhtml";
-		
-	}
-	
-	public String Editmedewerker(int personeelsnummer){
-		String url = "Update_medewerker.xhtml?id="+Integer.toString(personeelsnummer);
+
+	public String Editmedewerker(int personeelsnummer) {
+		String url = "Update_medewerker.xhtml?id="
+				+ Integer.toString(personeelsnummer);
 		return url;
 	}
-	
-	public int beschikbareverlofdagen(int personbeelsnummer){
+
+	public int beschikbareverlofdagen(int personbeelsnummer) {
 		int currentYear = LocalDate.now().getYear();
-		Werknemer tmpw = Dao.getWerknemer(personbeelsnummer);
-		
+		Werknemer tmpw = dao.getWerknemer(personbeelsnummer);
+
 		int tmpaantal = tmpw.getAantalBeschikBareVerlofDagen(currentYear);
 		return tmpaantal;
-		
-		
+
 	}
-	 
-	
-	
 
 }
