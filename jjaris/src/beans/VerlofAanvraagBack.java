@@ -45,14 +45,19 @@ public class VerlofAanvraagBack implements Serializable{
 	 * @return
 	 */
 	public List<VerlofAanvraag> getAanvragen(){
-//		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
-//		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
-//		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
-//		if(zoekToestand<0 && zoekToestand>3){filter.voegFilterToe("toestand", zoekToestand);}
+		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
+		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
+		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
+		else{System.out.println("***********************************geen filter");}
+		if(zoekToestand<0 && zoekToestand>3){filter.voegFilterToe("toestand", zoekToestand);}
+		else{System.out.println("***********************************geen filter");}
 		return verlofaanvraagDAO.getVerlofAanvragen(filter);
 	}
 	
 	public String zoeken(){
+		setStartdatum();
+		setEinddatum();
+		getAanvragen();
 		return null;
 		
 	}
@@ -94,7 +99,7 @@ public class VerlofAanvraagBack implements Serializable{
 	 * Zet datum aan de hand van de apparte velden met datumbuilder
 	 * @param startdatum
 	 */
-	public void setStartdatum(Date startdatum) {
+	public void setStartdatum() {
 		DatumBuilder tmp = new DatumBuilder(startDag, startMaand, startJaar);
 		this.startdatum = tmp.buildDate();
 	}
@@ -105,7 +110,7 @@ public class VerlofAanvraagBack implements Serializable{
 	 * Zet datum aan de hand van de apparte veldenmet datumbuilder
 	 * @param einddatum
 	 */
-	public void setEinddatum(Date einddatum) {
+	public void setEinddatum() {
 		DatumBuilder tmp = new DatumBuilder(eindDag, eindMaand, eindJaar);
 		this.einddatum = tmp.buildDate();
 	}

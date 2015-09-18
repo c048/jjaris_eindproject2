@@ -1,11 +1,13 @@
 package daos;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -116,12 +118,12 @@ public class VerlofAanvraagDAO {
 				}
 				if(key.equals("startdatum")){
 					aantal++;
-					querystring +=  " c."+key+"<= :" + key;
+					querystring +=  " c."+key+">= :" + key;
 					
 				}
 				if(key.equals("einddatum")){
 					aantal++;
-					querystring += " c."+key+">= :" + key;
+					querystring += " c."+key+"<= :" + key;
 					
 				}
 				if(key.equals("werknemer.personeelsnummer") || key.equals("werknemer.team.code") || key.equals("toestand")){
@@ -138,8 +140,14 @@ public class VerlofAanvraagDAO {
 		}
 		TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
 		
+		
 		for(String key : filter){
+//			if (filter.getValue(key) instanceof Calendar){
+//				query.setParameter(key.replace(".", ""), (Calendar) filter.getValue(key), TemporalType.DATE);
+//			}
+//			else{
 			query.setParameter(key.replace(".", ""), filter.getValue(key));
+//			}
 		}
 		
 		return (List<VerlofAanvraag>) query.getResultList();
