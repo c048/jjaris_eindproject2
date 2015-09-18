@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import utils.DatumBuilder;
 import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Adres;
@@ -157,19 +158,12 @@ public class ManageMedewerkerBack implements Serializable {
 	}
 	
 	private void createGeboorteJaar() {
-		if(getGebDag() <= 0) {
-			System.out.println(getGebDag());
-			throw new IllegalArgumentException("Geboortedag mag niet leeg zijn!");
+		try {
+			DatumBuilder dBuilder = new DatumBuilder(gebDag, gebMaand, gebJaar);
+			werknemer.setGeboortedatum(dBuilder.buildCalendar());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
 		}
-		if(getGebMaand() <= 0 || getGebMaand() > 12) {
-			System.out.println(getGebMaand());
-			throw new IllegalArgumentException("Geboortemaand moet tussen 1 en 12 liggen!");
-		}
-		if(getGebJaar() <= 0) {
-			System.out.println(getGebJaar());
-			throw new IllegalArgumentException("U bent te oud!");
-		}
-		werknemer.setGeboortedatum(new GregorianCalendar(getGebJaar(), getGebMaand()-1, getGebDag()));
 	}
 	
 	public String addMedewerker() {
