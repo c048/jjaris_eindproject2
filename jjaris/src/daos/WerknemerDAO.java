@@ -10,8 +10,6 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-import com.sun.tools.ws.wsdl.document.jaxws.Exception;
-
 import utils.Filter;
 import entities.JaarlijksVerlof;
 import entities.Team;
@@ -196,8 +194,7 @@ public class WerknemerDAO {
 					aantal++;
 				}
 				if (key.equals("personeelsnummer") || key.equals("team.code")) {
-					key.replace(".", "");
-					querystring += " w." + key + " = :" + key;
+					querystring += " w." + key + " = :" + key.replace(".", "");
 					aantal++;
 				}
 			}
@@ -209,8 +206,7 @@ public class WerknemerDAO {
 			if (key.equals("naam") || key.equals("voornaam")) {
 				query.setParameter(key, "%" + filter.getValue(key) + "%");
 			} else {
-				key.replace(".", "");
-				query.setParameter(key, filter.getValue(key));
+				query.setParameter(key.replace(".", ""), filter.getValue(key));
 			}
 		}
 
