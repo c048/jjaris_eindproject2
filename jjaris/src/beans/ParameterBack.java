@@ -9,8 +9,11 @@ import javax.inject.Named;
 @SessionScoped
 public class ParameterBack implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int personeelsnummer, code, jaarlijksverlofId, verlofaanvraagId,
-			collectieveSluitingId;
+	private int personeelsnummer;
+	private int code;
+	private int jaarlijksverlofId;
+	private int verlofaanvraagId;
+	private int collectieveSluitingId;
 
 	public int getPersoneelsnummer() {
 		return personeelsnummer;
@@ -50,6 +53,14 @@ public class ParameterBack implements Serializable {
 
 	public void setCollectieveSluitingId(int collectieveSluitingId) {
 		this.collectieveSluitingId = collectieveSluitingId;
+	}
+	
+	public void reset() {
+		setCode(0);
+		setCollectieveSluitingId(0);
+		setJaarlijksverlofId(0);
+		setPersoneelsnummer(0);
+		setVerlofaanvraagId(0);
 	}
 
 }
