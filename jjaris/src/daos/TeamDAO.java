@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import utils.Filter;
 import entities.Team;
+import entities.Werknemer;
 
 @ApplicationScoped
 public class TeamDAO {
@@ -123,6 +125,41 @@ public class TeamDAO {
 		l = tqry.getResultList();
 
 		return l;
+	}
+
+	public List<Team> getTeams(Filter f) {
+		String queryString = "SELECT c FROM Team c";
+	
+		if (!f.isEmpty()) {
+			queryString += " WHERE";
+			int aantal = 0;
+			for (String key : f) {
+				if (aantal != 0) {
+					queryString += " AND";
+				}
+				if (key.equals("naam") || key.equals("teamverantwoordelijke.naam")) {
+					queryString += " c." + key + " LIKE :" + key;
+					aantal++;
+				}
+				if (key.equals("code") ) {
+					queryString += " c." + key + " = :" + key;
+					aantal++;
+				}
+			}
+		}
+
+		TypedQuery<Team> query = em.createQuery(queryString, Team.class);
+
+		for (String key : f) {
+			if (key.equals("naam") || key.equals("teamverantwoordelijke.naam")) {
+				query.setParameter(key, "%" + f.getValue(key) + "%");
+			} else {
+				query.setParameter(key, f.getValue(key));
+			}
+		}
+
+		return query.getResultList();
+		
 	}
 
 }

@@ -7,50 +7,52 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import utils.Filter;
 import daos.TeamDAO;
 import daos.WerknemerDAO;
 import entities.Team;
 import entities.Werknemer;
 
-@Named("HrManageTeam")
+@Named
 @RequestScoped
 public class HrTeamsBack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject	
-	private TeamDAO Dao;
+	private TeamDAO tDao;
+	@Inject
+	private ParameterBack parameters;
+	
 	private List<Team> teams;
-	private Team team;
-	private String Teamnaam,Teamcode,TeamVerantwoordelijke;
+	
+	private String teamNaam,naamTeamVerantwoordelijke;
+	private int teamCode;
+	
+	
 	public List<Team> getTeams() {
 		return teams;
 	}
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-	public Team getTeam() {
-		return team;
+	
+	public String getTeamNaam() {
+		return teamNaam;
 	}
-	public void setTeam(Team team) {
-		this.team = team;
+	public void setTeamNaam(String teamnaam) {
+		teamNaam = teamnaam;
 	}
-	public String getTeamnaam() {
-		return Teamnaam;
+	public int getTeamCode() {
+		return teamCode;
 	}
-	public void setTeamnaam(String teamnaam) {
-		Teamnaam = teamnaam;
-	}
-	public String getTeamcode() {
-		return Teamcode;
-	}
-	public void setTeamcode(String teamcode) {
-		Teamcode = teamcode;
+	public void setTeamCode(int teamcode) {
+		teamCode = teamcode;
 	}
 	public String getTeamVerantwoordelijke() {
-		return TeamVerantwoordelijke;
+		return naamTeamVerantwoordelijke;
 	}
 	public void setTeamVerantwoordelijke(String teamVerantwoordelijke) {
-		TeamVerantwoordelijke = teamVerantwoordelijke;
+		naamTeamVerantwoordelijke = teamVerantwoordelijke;
 	}
 	
 	public String TeamAanpassen(int code){
@@ -61,14 +63,31 @@ public class HrTeamsBack implements Serializable {
 	
 	
 	public String verwijderTeam(int code){
-		Team tmpw = Dao.getTeam(code);
-		Dao.verwijderTeam(tmpw);
-		return "hr.xhtml";
+		Team tmpw = tDao.getTeam(code);
+		tDao.verwijderTeam(tmpw);;
+		return "teamsHr";
 		
 	}
-	public String EditTeam(int code){
-		String url = "Update_team.xhtml?code="+Integer.toString(code);
-		return url;
+	
+	public String editTeam(int code){
+		parameters.setCode(code);
+		return "teamHrEdit";
+	}
+	
+	public String zoek(){
+		Filter f = new Filter();
+		if (!getTeamNaam().trim().equals("")){
+			f.voegFilterToe("naam", getTeamNaam());
+		}
+		if (!getTeamVerantwoordelijke().trim().equals("")){
+			f.voegFilterToe("teamverantwoordelijke.naam", getTeamVerantwoordelijke());
+		}
+		if (getTeamCode() != 0){
+			f.voegFilterToe("code", getTeamCode());
+		}
+		
+		teams = tDao.getTeams(f);
+		return "teamsHr";
 	}
 	
 }

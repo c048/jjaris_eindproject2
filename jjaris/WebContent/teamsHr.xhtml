@@ -10,15 +10,15 @@
 <h:body>
 	<h:form>
 		<h:outputLabel for="txtNaam" value="Naam: "></h:outputLabel>
-		<h:inputText id="txtNaam" value="#{H}"></h:inputText>
+		<h:inputText id="txtNaam" value="#{hrTeamsBack.teamNaam}"></h:inputText>
 		<h:outputLabel for="txtNaamVerantwoordelijke"
 			value="Naam verantwoordelijke: "></h:outputLabel>
-		<h:inputText id="txtNaamVerantwoordelijke" value="#{}"></h:inputText>
+		<h:inputText id="txtNaamVerantwoordelijke" value="#{hrTeamsBack.teamVerantwoordelijke}"></h:inputText>
 		<h:outputLabel for="IntTeamCode" value="Team Code: "></h:outputLabel>
-		<h:inputText id="IntTeamCode" value="#{}"></h:inputText>
-		<h:commandButton value="Zoek Team" action="#{}"></h:commandButton>
+		<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}"></h:inputText>
+		<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
 
-		<h:dataTable value="#{}" var="team">
+		<h:dataTable value="#{hrTeamsBack.teams}" var="team">
 			<h:column>
 				<f:facet name="header">Team Code</f:facet>    				
 		      	#{team.code}</h:column>
@@ -27,14 +27,15 @@
 		      	#{team.naam}</h:column>
 			<h:column>
 				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
-		      	#{team.teamverantwoordelijke.volledigenaam}</h:column>
+		      	#{team.teamverantwoordelijke.volledigeNaam}</h:column>
 			<h:column>
-				<f:facet name="header">Wijzigen Team</f:facet>
-				<h:commandButton value="#{}" label="Update Team" action="#{}"></h:commandButton>
+				<f:facet name="header">Wijzigen of Verwijderen Team</f:facet>
+				<h:commandButton value="Update Team"  action="#{hrTeamsBack.editTeam(team.code)}"></h:commandButton>
+				<h:commandButton value="Verwijder Team"  action="#{hrTeamsBack.verwijderTeam(team.code)}"></h:commandButton>
 			</h:column>
 		</h:dataTable>
 
-		<h:commandButton value="Ga terug" action=""></h:commandButton>
+		<h:commandButton value="Ga terug" ></h:commandButton>
 	</h:form>
 </h:body>
 </html>
