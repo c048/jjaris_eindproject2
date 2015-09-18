@@ -2,15 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Human resources</title>
 </h:head>
 <h:body>
 	<h:form>
-
-		<hr></hr>
+		<hr/>
 		<h:outputLabel id="lblMedewerkers" value="Medewerkers">Medewerkers</h:outputLabel> *css nog te maken<br />
 
 		<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">Naam:</h:outputLabel>
@@ -19,184 +19,57 @@
 		<h:inputText id="txtVoornaam" value="#{HrManageMedewerker.voornaam}"></h:inputText>
 		<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
 			for="txtPersoneelsnummer">Personeelsnummer:</h:outputLabel>
-		<h:inputText id="txtPersoneelsnummer"></h:inputText>
-		<h:commandButton id = "btnZoeken" action ="#{HrManageTeam.zoeken}"></h:commandButton>
-		<br />
-		<br />
-		<br />
-		<h:dataTable value="#{HrManageMedewerker.werknemers}" var="Medewerker">
+		<h:inputText id="txtPersoneelsnummer" value="#{HrManageMedewerker.ID}"></h:inputText>
+		<h:commandButton id="btnZoeken" action="#{HrManageTeam.zoeken}"></h:commandButton>
+		<br/>
+		<br/>
+		<br/>
+		<h:dataTable value="#{HrManageMedewerker.werknemers}" var="Medewerker"> -->
 			<h:column>
 				<f:facet name="header">ID</f:facet>    				
-      #{Medewerker.personeelsnummer}
-   </h:column>
+		      	#{Medewerker.personeelsnummer}
+		   	</h:column>
 			<h:column>
-				<f:facet name="header">Naam</f:facet>
-      #{Medewerker.naam}
-   </h:column>
+						<f:facet name="header">Naam</f:facet>
+		      #{Medewerker.naam}
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Voornaam</f:facet>
-      #{Medewerker.voornaam}
-   </h:column>
+		      	#{Medewerker.voornaam}
+			</h:column>
 			<h:column>
 				<f:facet name="header">Verlofdagen</f:facet>
-      #{Medewerker.beschikbareverlofdagen}
-   </h:column>
-
+		    	#{Medewerker.beschikbareverlofdagen}
+		 	</h:column>
 			<h:column>
 				<f:facet name="header">Adres</f:facet>
-      #{Medewerker.adres}
-   </h:column>
+		      	#{Medewerker.adres}
+		  	</h:column>
 			<h:column>
 				<f:facet name="header">Email</f:facet>
-      #{Medewerker.email}
-   </h:column>
+				#{Medewerker.email}
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Team</f:facet>
-      #{Medewerker.team}
-   </h:column>
-   			<h:column>
+				#{Medewerker.team}
+		   	</h:column>
+			<h:column>
 				<f:facet name="header">verwijderen</f:facet>
-      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
-   </h:column>
-      			<h:column>
+				<h:commandButton value="#{Medewerker.personeelsnummer}"
+							action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
+			</h:column>
+			<h:column>
 				<f:facet name="header">Aanpassen</f:facet>
-      <h:commandButton value="#{Medewerker.personeelsnummer}" action="#{HrManageMedewerker.Editmedewerker}"></h:commandButton>
-   </h:column>
-   
-		</h:dataTable>
-		<h:commandButton ID="btnZoek"
-			action="#{HrManageMedewerker.zoekWerkNemer}"></h:commandButton>
-		<br></br>
-		<br></br>
-		
-		<h:commandButton id="btnPasMedewerkerAAn" action="#{HrManageMedewerker.Editmedewerker}"
-			value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
-	</h:form>
-
-
-
-
-
-
-
-
-
-	<hr></hr>
-	<h:form>
-		<h:outputLabel ID="lblTeams" value="Teams">Teams</h:outputLabel>
-		<br></br>
-		<h:outputLabel value="Naam" id="lblNaamTeam" for="txtNaamTeam">Naam</h:outputLabel>
-		<h:inputText id="txtNaamTeam" value="?"></h:inputText>
-		<h:outputLabel ID="lblCodeTeams" value="Code" for="txtCodeTeams">Code</h:outputLabel>
-		<h:inputText id="txtCodeTeams" value="?"></h:inputText>
-		<h:outputLabel id="lblVerantwoordelijkeTeam" value="Verantwoordelijke"
-			for="txtVerantwoordelijkeTeam">Verantwoordelijke:</h:outputLabel>
-		<h:inputText id="txtVerantwoordelijkeTeam" value="?"></h:inputText>
-		<h:commandButton id="btnZoekTeam" value="Zoek" action="#{HrManageTeam.zoek}">Zoek</h:commandButton>
-		<br></br>
-		<h:dataTable value="#{HrManageTeam.teams}" var="Team">
-			<h:column>
-				<f:facet name="header">Code</f:facet>
-#{Team.code}
-</h:column>
-			<h:column>
-				<f:facet name="header">Naam</f:facet>
-#{Team.naam}
-</h:column>
-			<h:column>
-				<f:facet name="header">Verantwoordelijke</f:facet>
-#{Team.verantwoordelijke}
-</h:column>
-			<h:column>
-				<f:facet name="header">Aantal leden</f:facet>
-#{Team.aantal}
-</h:column>
-			<h:column>
-				<f:facet name="header">Human resources?</f:facet>
-#{Team.hR}
-</h:column>
-			<h:column>
-				<f:facet name="header">Verwijderen</f:facet>
-#{Team.verwijderen}
-</h:column>
-			<h:column>
-				<f:facet name="header">aanpassen</f:facet>
-#{Team.editTeam}
-</h:column>
-		</h:dataTable>
-		<h:commandButton ID="btnNieuwTeam" value="#{}">Nieuw Team</h:commandButton>
-		
-
-	</h:form>
-	<hr></hr>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<h:form>
-		<h:outputLabel id="lblJaarlijksverlof" value="Jaarlijks verlof">Jaarlijks verlof</h:outputLabel>
-		<br></br>
-		<h:outputLabel value="Jaartal" id="lblJaartal" for="txtJaartal">Jaartal</h:outputLabel>
-		<h:inputText value="?" id="txtJaartal"></h:inputText>
-		<h:outputLabel value="Code team" id="lblCodeTeam" for="txtCodeTeam">Code team:</h:outputLabel>
-		<h:inputText id="txtCodeTeam" value="?"></h:inputText>
-		<h:outputLabel value="PersoneelsId" id="lblPersoneelsId"
-			for="txtPersoneelsId">Personeels ID</h:outputLabel>
-		<h:inputText id="txtPersoneelsId" value="?"></h:inputText>
-		<h:commandButton Id="btnZoekJaarlijksVerlof" value="Zoek" action="#{}">Zoek</h:commandButton>
-		<br />
-		<h:dataTable value="#{}" var="JaarlijksVerlof">
-			<h:column>
-				<f:facet name="header">PersoneelsNummer</f:facet>
-#{JaarlijksVerlof.Id}
-</h:column>
-			<h:column>
-				<f:facet name="header">Naam</f:facet>
-#{JaarlijksVerlof.naam}
-</h:column>
-			<f:facet name="header">Voornaam</f:facet>
-#{JaarlijksVerlof.Voornaam}
-</h:column>
-			<f:facet name="header">Team</f:facet>
-#{JaarlijksVerlof.Team}
-</h:column>
-			<f:facet name="header">Jaar</f:facet>
-#{JaarlijksVerlof.jaar}
-</h:column>
+				<h:commandButton value="#{Medewerker.personeelsnummer}"
+						action="#{HrManageMedewerker.Editmedewerker}"></h:commandButton>
 			</h:column>
-			<f:facet name="header">Aantal dagen</f:facet>
-#{JaarlijksVerlof.aantal}
-</h:column>
-			</h:column>
-			<f:facet name="header">aanpassen</f:facet>
-#{JaarlijksVerlof.edit}
-</h:column>
-			</h:column>
-			<f:facet name="header">verwijderen</f:facet>
-#{JaarlijksVerlof.remove}
-</h:column>
-		</h:dataTable>
+	</h:dataTable>
+			<h:commandButton ID="btnZoek"
+		action="#{HrManageMedewerker.zoekWerkNemer}"></h:commandButton><br/><br/>
 
-		<br></br>
-		<h:commandButton value="Nieuw Jaarlijks verlof" id="btnNieuwVerlof">Nieuw Jaarlijks Verlof</h:commandButton>
-		<br></br>
-		<h:outputLabel id="lblIdVerlofEdit" value="Id" for="txtIdVerlofEdit">Id:</h:outputLabel>
-		<h:inputText value="?" id="txtIdVerlofEdit"></h:inputText>
-		<h:commandButton value="Pas Jaarlijks Verlof aan"
-			id="btnPasJaarlijksAan" action="#{JaarlijksVerlof.}">Pas Jaarlijks Verlof aan</h:commandButton>
-
-
-
-
-
-
-
-	</h:form>
+	<h:commandButton id="btnPasMedewerkerAAn"
+		action="#{HrManageMedewerker.Editmedewerker}"
+		value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
+</h:form>
 </h:body>
 </html>
