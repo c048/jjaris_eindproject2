@@ -8,6 +8,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import daos.TeamDAO;
 import entities.Team;
 import entities.Werknemer;
@@ -16,6 +18,7 @@ import entities.Werknemer;
 @RequestScoped
 public class EditTeamBack implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@NotEmpty
 	private String naam;
 	private int personeelsnrVerantwoordelijke;
 	@Inject

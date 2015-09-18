@@ -218,4 +218,8 @@ public class Werknemer implements Serializable {
 		return String.format("Werknemer %s %s met nr %s met adres %s, behoort tot Team %s%n", getVoornaam(), getNaam(), getPersoneelsnummer(),
 				getAdres(), getTeam().getNaam());
 	}
+	
+	public String getVolledigeNaam(){
+		return String.format("%s %s", getVoornaam(),getNaam());
+	}
 }

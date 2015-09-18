@@ -10,14 +10,14 @@
 <h:body>
 	<h:form>
 		<h:outputLabel for="teamNaam" value="Naam Team: "></h:outputLabel>
-		<h:inputText id="teamNaam" value="#{manageTeamBack.naam}"></h:inputText>
+		<h:inputText id="teamNaam" value="#{createTeamBack.naam}"></h:inputText>
 		<br></br>
 		<h:outputLabel for="isHR" value="HR? "></h:outputLabel>
-		<h:selectOneRadio id="isHR" value="#{manageTeamBack.HR}" required="true" >
+		<h:selectOneRadio id="isHR" value="#{createTeamBack.HR}" required="true" >
 			<f:selectItem itemLabel="YES " itemValue="true"></f:selectItem>
 			<f:selectItem itemLabel="NO " itemValue="false"></f:selectItem>
 		</h:selectOneRadio>
-		<h:commandButton value="voeg Team Toe" action="#{manageTeamBack.voegTeamToe}"></h:commandButton>
+		<h:commandButton value="voeg Team Toe" action="#{createTeamBack.voegTeamToe}"></h:commandButton>
 		<h:commandButton value="Ga terug naar HR zonder opslaan" action="HR"></h:commandButton>
 	</h:form>
 </h:body>
