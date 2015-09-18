@@ -2,8 +2,10 @@ package beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -62,21 +64,24 @@ public class HrTeamsBack implements Serializable {
 	}
 	
 	
-	public String verwijderTeam(int code){
+	public String verwijderTeam(){
+		String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeVerwijder");
 		System.out.println("in verwijder team van HrTeamsBack");
-		Team tmpw = tDao.getTeam(code);
+		Team tmpw = tDao.getTeam(Integer.parseInt(code));
 		tDao.verwijderTeam(tmpw);;
 		return "teamsHr";
 		
 	}
 	
-	public String editTeam(int code){
+	public String editTeam(){
+		String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
 		System.out.println("in edit team van HrTeamsBack");
-		parameters.setCode(code);
+		parameters.setCode(Integer.parseInt(code));
 		return "teamHrEdit";
 	}
 	
 	public String zoek(){
+		System.out.println("in zoek() van HrTeamsBack");
 		Filter f = new Filter();
 		if (!getTeamNaam().trim().equals("")){
 			f.voegFilterToe("naam", getTeamNaam());
