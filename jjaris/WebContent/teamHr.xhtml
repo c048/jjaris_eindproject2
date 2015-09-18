@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Zoek Team</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:outputLabel for="txtNaam" value="Naam: "></h:outputLabel>
+		<h:inputText id="txtNaam" value="#{}"></h:inputText>
+		<h:outputLabel for="txtNaamVerantwoordelijke"
+			value="Naam verantwoordelijke: "></h:outputLabel>
+		<h:inputText id="txtNaamVerantwoordelijke" value="#{}"></h:inputText>
+		<h:outputLabel for="IntTeamCode" value="Team Code: "></h:outputLabel>
+		<h:inputText id="IntTeamCode" value="#{}"></h:inputText>
+		<h:commandButton value="Zoek Team" action="#{}"></h:commandButton>
+
+		<h:dataTable value="#{}" var="team">
+			<h:column>
+				<f:facet name="header">Team Code</f:facet>    				
+		      	#{team.code}</h:column>
+			<h:column>
+				<f:facet name="header">Team Naam</f:facet>    				
+		      	#{team.naam}</h:column>
+			<h:column>
+				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
+		      	#{team.teamverantwoordelijke.volledigenaam}</h:column>
+			<h:column>
+				<f:facet name="header">Wijzigen Team</f:facet>
+				<h:commandButton value="#{}" label="Update Team" action="#{}"></h:commandButton>
+			</h:column>
+		</h:dataTable>
+
+		<h:commandButton value="Ga terug" action=""></h:commandButton>
+	</h:form>
+</h:body>
+</html>
