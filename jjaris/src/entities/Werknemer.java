@@ -196,6 +196,10 @@ public class Werknemer implements Serializable {
 		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum)))
 				.collect(Collectors.toList());
 	}
+	
+	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
+		jaarlijkseverloven.add(jaarlijksverlof);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

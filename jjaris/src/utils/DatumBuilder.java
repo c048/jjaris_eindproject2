@@ -1,6 +1,8 @@
 package utils;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.InputMismatchException;
 
 
 
@@ -12,11 +14,6 @@ import java.util.Date;
  *
  */
 public class DatumBuilder {
-	
-	
-	
-	
-	
 	/**
 	 * 
 	 * @param dag :integer max 2 cijfers min 1 cijfers
@@ -24,19 +21,45 @@ public class DatumBuilder {
 	 * @param jaar integer max 4 cijfers min 4 cijfers
 	 * @return Datum type Date
 	 */
-	public Date buildDatum (int dag,int maand,int jaar){
-		return null;
-		
+	private int dag;
+	private int maand;
+	private int jaar;
+	
+	public DatumBuilder(int dag, int maand, int jaar) {
+		try {
+		setDag(dag);
+		setMaand(maand);
+		setJaar(jaar);
+		} catch (InputMismatchException e) {
+			throw new InputMismatchException(e.getMessage());
+		}
 	}
 	
-	private int controleerJaar (int jaar){
+	private int getDag() {
+		return dag;
+	}
+
+	private void setDag(int dag) {
+		this.dag = dag;
+	}
+
+	private int getMaand() {
+		return maand;
+	}
+
+	private void setMaand(int maand) {
+		this.maand = maand;
+	}
+
+	private int getJaar() {
 		return jaar;
-		
 	}
-	private int controleerMaand (int maand){
-		return 0;
+
+	private void setJaar(int jaar) {
+		this.jaar = jaar;
 	}
-	private int controleerDag (int dag){
-		return 0;
+
+	public Date buildDatum (){
+		return new Date(getJaar(), getMaand(), getDag());
 	}
 }
