@@ -18,20 +18,20 @@
 		<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}"></h:inputText>
 		<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
 
-		<h:dataTable value="#{hrTeamsBack.teams}" var="team">
+		<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam">
 			<h:column>
 				<f:facet name="header">Team Code</f:facet>    				
-		      	#{team.code}</h:column>
+		      	#{tmpTeam.code}</h:column>
 			<h:column>
 				<f:facet name="header">Team Naam</f:facet>    				
-		      	#{team.naam}</h:column>
+		      	#{tmpTeam.naam}</h:column>
 			<h:column>
 				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
-		      	#{team.teamverantwoordelijke.volledigeNaam}</h:column>
+		      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
 			<h:column>
 				<f:facet name="header">Wijzigen of Verwijderen Team</f:facet>
-				<h:commandButton value="Update Team"  action="#{hrTeamsBack.editTeam(team.code)}"></h:commandButton>
-				<h:commandButton value="Verwijder Team"  action="#{hrTeamsBack.verwijderTeam(team.code)}"></h:commandButton>
+				<h:commandButton value="Update Team"  action="#{hrTeamsBack.editTeam(tmpTeam.code)}"></h:commandButton>
+				<h:commandButton value="Verwijder Team"  action="#{hrTeamsBack.verwijderTeam(tmpTeam.code)}"></h:commandButton>
 			</h:column>
 		</h:dataTable>
 

@@ -63,6 +63,7 @@ public class HrTeamsBack implements Serializable {
 	
 	
 	public String verwijderTeam(int code){
+		System.out.println("in verwijder team van HrTeamsBack");
 		Team tmpw = tDao.getTeam(code);
 		tDao.verwijderTeam(tmpw);;
 		return "teamsHr";
@@ -70,6 +71,7 @@ public class HrTeamsBack implements Serializable {
 	}
 	
 	public String editTeam(int code){
+		System.out.println("in edit team van HrTeamsBack");
 		parameters.setCode(code);
 		return "teamHrEdit";
 	}

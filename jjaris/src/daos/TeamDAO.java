@@ -106,8 +106,8 @@ public class TeamDAO {
 
 		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND " + "c.teamverantwoordelijke.naam LIKE :leider",
 				Team.class);
-		query.setParameter("naam", "%"+zoekNaam+"%");
-		query.setParameter("leider", "%"+zoekVerantwoordelijke+"%");
+		query.setParameter("naam", "%" + zoekNaam + "%");
+		query.setParameter("leider", "%" + zoekVerantwoordelijke + "%");
 		return (List<Team>) query.getResultList();
 
 	}
@@ -129,7 +129,7 @@ public class TeamDAO {
 
 	public List<Team> getTeams(Filter f) {
 		String queryString = "SELECT c FROM Team c";
-	
+
 		if (!f.isEmpty()) {
 			queryString += " WHERE";
 			int aantal = 0;
@@ -138,28 +138,28 @@ public class TeamDAO {
 					queryString += " AND";
 				}
 				if (key.equals("naam") || key.equals("teamverantwoordelijke.naam")) {
-					queryString += " c." + key + " LIKE :" + key;
+					queryString += " c." + key + " LIKE :" + key.replace(".", "");
 					aantal++;
 				}
-				if (key.equals("code") ) {
+				if (key.equals("code")) {
 					queryString += " c." + key + " = :" + key;
 					aantal++;
 				}
 			}
 		}
-
+		System.out.println(queryString);
 		TypedQuery<Team> query = em.createQuery(queryString, Team.class);
 
 		for (String key : f) {
-			if (key.equals("naam") || key.equals("teamverantwoordelijke.naam")) {
-				query.setParameter(key, "%" + f.getValue(key) + "%");
-			} else {
+			if (key.equals("naam")||key.equals("teamverantwoordelijke.naam")) {
+				query.setParameter(key.replace(".", ""), "%" + f.getValue(key) + "%");
+			}else {
 				query.setParameter(key, f.getValue(key));
 			}
 		}
 
 		return query.getResultList();
-		
+
 	}
 
 }
