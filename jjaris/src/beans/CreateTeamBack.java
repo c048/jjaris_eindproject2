@@ -6,6 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import daos.TeamDAO;
 import entities.Team;
 
@@ -13,6 +15,7 @@ import entities.Team;
 @RequestScoped
 public class CreateTeamBack implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@NotEmpty
 	private String naam;
 	private String HR = "false";
 	@Inject

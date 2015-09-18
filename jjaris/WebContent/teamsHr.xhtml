@@ -45,9 +45,10 @@
 		<br></br>
 		<h:outputLabel for="IntTeamCodePasAan" value="Team Code: "></h:outputLabel>
 		<h:inputText id="IntTeamCodePasAan"   value="#{hrTeamsBack.aanpasCode}"></h:inputText>
-		<h:commandButton value="Pas team aan" action="#{hrTeamsBack.editTeam}"></h:commandButton>
+		<h:commandButton value="Pas Team aan " action="#{hrTeamsBack.editTeam}"></h:commandButton>
+		<h:commandButton value="Verwijder Team " action="#{hrTeamsBack.verwijderTeam}"></h:commandButton>
 	</h:form>
 
-
+<h:messages style="color:red;"></h:messages>
 </h:body>
 </html>

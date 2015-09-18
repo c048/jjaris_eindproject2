@@ -73,16 +73,21 @@ public class HrTeamsBack implements Serializable {
 	
 	public String verwijderTeam(){
 		//String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeVerwijder");
-		System.out.println("in verwijder team van HrTeamsBack");
-		//Team tmpw = tDao.getTeam(Integer.parseInt(code));
-		//tDao.verwijderTeam(tmpw);;
+		//System.out.println("in verwijder team van HrTeamsBack");
+		Team team = tDao.getTeam(getAanpasCode());
+		try {
+			tDao.verwijderTeam(team);
+		} catch (NullPointerException npe) {
+			// TODO: handle exception
+		}
+		
 		return "teamsHr";
 		
 	}
 	
 	public String editTeam(){
 		//String code =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
-		System.out.println("in edit team van HrTeamsBack");
+		//System.out.println("in edit team van HrTeamsBack");
 		parameters.setCode(getAanpasCode());
 		return "teamHrEdit";
 	}

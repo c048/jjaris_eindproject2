@@ -28,14 +28,15 @@ public class TeamDAO {
 	/**
 	 * Verwijdert een team, dat niet null is uit de database, als het geen
 	 * werknemers bevat
-	 * 
 	 * @param team
+	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
 	 */
 	@Transactional
 	public void verwijderTeam(Team team) {
 
 		if (team != null && team.getTeamleden().isEmpty()) {
-			Team t = em.find(Team.class, team);
+			Team t = em.find(Team.class, team.getCode());
 			em.remove(t);
 		} else {
 			if (team == null) {
