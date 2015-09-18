@@ -34,12 +34,15 @@ public class WerknemerDAO {
 	 */
 	@Transactional
 	public void voegWerknemerToe(Werknemer werknemer) {
-		Team team = werknemer.getTeam();
-		if (team != null && team.getCode() == 0) {
-			em.persist(team);
+		if(getWerknemer(werknemer.getEmail()) == null) {
+			Team team = werknemer.getTeam();
+			if (team != null && team.getCode() == 0) {
+				em.persist(team);
+			}
+			em.persist(werknemer);
+		} else {
+			updateWerknemer(werknemer);
 		}
-		em.persist(werknemer);
-
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,6 +23,8 @@ public class ManageMedewerkerBack implements Serializable {
 	private WerknemerDAO werknemerDAO;
 	@Inject
 	private TeamDAO teamDAO;
+	@Inject
+	private ParameterBack params;
 
 	private static final long serialVersionUID = 1L;
 	private Werknemer werknemer;
@@ -35,6 +38,14 @@ public class ManageMedewerkerBack implements Serializable {
 		adres = new Adres();
 		werknemer = new Werknemer();
 		team = new Team();
+	}
+	
+	@PostConstruct
+	public void init() {
+		if(params.getPersoneelsnummer() != 0) {
+			werknemer = werknemerDAO.getWerknemer(params.getPersoneelsnummer());
+		}
+		params.reset();
 	}
 	
 	public Team getTeam() {
@@ -162,16 +173,15 @@ public class ManageMedewerkerBack implements Serializable {
 	}
 	
 	public String addMedewerker() {
-//		try {
+		try {
 			createGeboorteJaar();
 			werknemer.setAdres(adres);
 			werknemer.setTeam(team);
 			werknemerDAO.voegWerknemerToe(werknemer);
-//		} catch (Exception e){
-//			System.out.println(e.getMessage() + " errortype: " + e.getClass());
-//			return null;
-//		}
-//		return "HR";
-		return null;
+		} catch (Exception e){
+			System.out.println(e.getMessage() + " errortype: " + e.getClass());
+			return null;
+		}
+		return "medewerkerHr";
 	}
 }
