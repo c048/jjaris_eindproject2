@@ -42,7 +42,9 @@
 			<h:inputText id="mEmail" required="true" value="#{medewerkerHrManageBack.email}"></h:inputText>
 			<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
 			<h:inputText id="mPwd" required="true" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
-			<h:commandButton value="Voeg Medewerker Toe" action="#{medewerkerHrManageBack.addMedewerker()}"></h:commandButton>
+			<h:commandButton value="Creëer medewerker &amp; nog één" action="#{medewerkerHrManageBack.addMedewerkerContinue()}"></h:commandButton>
+			<h:commandButton value="Creëer medewerker" action="#{medewerkerHrManageBack.addMedewerker()}"></h:commandButton>
+			<h:commandButton value="Annuleren" action="#{medewerkerHrManageBack.cancel()}" immediate="true"></h:commandButton>
 		</h:form>
 	</h:body>
 </html>

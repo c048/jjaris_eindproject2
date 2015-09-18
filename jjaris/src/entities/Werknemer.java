@@ -150,7 +150,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public int getAantalBeschikBareVerlofDagen(int jaartal) {
-		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
+		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(new JaarlijksVerlof());
 		if (tmpJaar == null) {
 			throw new NullPointerException();
 		}

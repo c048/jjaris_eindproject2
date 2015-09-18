@@ -28,16 +28,12 @@ public class MedewerkerHrManageBack implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Werknemer werknemer;
-	private Adres adres;
-	private Team team;
 	private int gebDag;
 	private int gebJaar;
 	private int gebMaand;
 	
 	public MedewerkerHrManageBack () {
-		adres = new Adres();
-		werknemer = new Werknemer();
-		team = new Team();
+		reset();
 	}
 	
 	@PostConstruct
@@ -49,11 +45,11 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 	
 	public Team getTeam() {
-		return team;
+		return werknemer.getTeam();
 	}
 
 	public void setTeam(Team team) {
-		this.team = team;
+		this.werknemer.setTeam(team);
 	}
 
 	public void setGebDag(int gebDag) {
@@ -85,23 +81,23 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 	
 	public void setGemeente(String gemeente) {
-		adres.setGemeente(gemeente);
+		werknemer.getAdres().setGemeente(gemeente);
 	}
 	
 	public void setHuisnummer(String huisnummer) {
-		adres.setHuisnummer(huisnummer);
+		werknemer.getAdres().setHuisnummer(huisnummer);
 	}
 	
 	public void setPostcode(String postcode) {
-		adres.setPostcode(postcode);
+		werknemer.getAdres().setPostcode(postcode);
 	}
 	
 	public void setStraat(String straat) {
-		adres.setStraat(straat);
+		werknemer.getAdres().setStraat(straat);
 	}
 	
 	public void setBusnummer(String busnummer) {
-		adres.setBusnummer(busnummer);
+		werknemer.getAdres().setBusnummer(busnummer);
 	}
 	
 	public String getEmail() {
@@ -121,23 +117,23 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 	
 	public String getGemeente() {
-		return adres.getGemeente();
+		return werknemer.getAdres().getGemeente();
 	}
 	
 	public String getHuisnummer() {
-		return adres.getHuisnummer();
+		return werknemer.getAdres().getHuisnummer();
 	}
 	
 	public String getPostcode() {
-		return adres.getPostcode();
+		return werknemer.getAdres().getPostcode();
 	}
 	
 	public String getStraat() {
-		return adres.getStraat();
+		return werknemer.getAdres().getStraat();
 	}
 	
 	public String getBusnummer() {
-		return adres.getBusnummer();
+		return werknemer.getAdres().getBusnummer();
 	}
 	
 	public int getGebDag() {
@@ -156,25 +152,31 @@ public class MedewerkerHrManageBack implements Serializable {
 		return teamDAO.getTeams();
 	}
 	
-	private void createGeboorteJaar() {
-		try {
-			DatumBuilder dBuilder = new DatumBuilder(gebDag, gebMaand, gebJaar);
-			werknemer.setGeboortedatum(dBuilder.buildCalendar());
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+	public void reset() {
+		werknemer = new Werknemer();
+		werknemer.setAdres(new Adres());
+		werknemer.setTeam(new Team());
+	}
+	
+	public String addMedewerkerContinue() {
+		if(addMedewerker() != null) {
+			reset();
 		}
+		return null;
 	}
 	
 	public String addMedewerker() {
 		try {
-			createGeboorteJaar();
-			werknemer.setAdres(adres);
-			werknemer.setTeam(team);
+			werknemer.setGeboortedatum(new DatumBuilder(gebDag, gebMaand, gebJaar).buildCalendar());
 			werknemerDAO.voegWerknemerToe(werknemer);
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " errortype: " + e.getClass());
 			return null;
 		}
-		return "medewerkerHr";
+		return "medewerkersHr";
+	}
+	
+	public String cancel() {
+		return "medewerkersHr";
 	}
 }
