@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -40,14 +41,25 @@ public class MedewerkerHrManageBack implements Serializable {
 	public void init() {
 		if(params.getPersoneelsnummer() != 0) {
 			werknemer = werknemerDAO.getWerknemer(params.getPersoneelsnummer());
+			setGebDag(werknemer.getGeboortedatum().get(Calendar.DAY_OF_MONTH));
+			setGebJaar(werknemer.getGeboortedatum().get(Calendar.YEAR));
+			setGebMaand(werknemer.getGeboortedatum().get(Calendar.MONTH) + 1);
 		}
 		params.reset();
 	}
-	
+
 	public Team getTeam() {
 		return werknemer.getTeam();
 	}
-
+	
+	public void setPersoneelsnummer(int personeelsnummer) {
+		werknemer.setPersoneelsnummer(personeelsnummer);
+	}
+	
+	public int getPersoneelsnummer() {
+		return werknemer.getPersoneelsnummer();
+	}
+	
 	public void setTeam(Team team) {
 		this.werknemer.setTeam(team);
 	}
@@ -168,7 +180,12 @@ public class MedewerkerHrManageBack implements Serializable {
 	public String addMedewerker() {
 		try {
 			werknemer.setGeboortedatum(new DatumBuilder(gebDag, gebMaand, gebJaar).buildCalendar());
-			werknemerDAO.voegWerknemerToe(werknemer);
+			if(werknemerDAO.getWerknemer(werknemer.getEmail()) == null) {
+				werknemerDAO.voegWerknemerToe(werknemer);
+			} else {
+				System.out.println(werknemer.getPersoneelsnummer());
+				werknemerDAO.updateWerknemer(werknemer);
+			}
 		} catch (Exception e){
 			System.out.println(e.getMessage() + " errortype: " + e.getClass());
 			return null;
