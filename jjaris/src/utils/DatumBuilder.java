@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
@@ -27,9 +28,9 @@ public class DatumBuilder {
 	
 	public DatumBuilder(int dag, int maand, int jaar) {
 		try {
-		setDag(dag);
-		setMaand(maand);
-		setJaar(jaar);
+			setDag(dag);
+			setMaand(maand);
+			setJaar(jaar);
 		} catch (InputMismatchException e) {
 			throw new InputMismatchException(e.getMessage());
 		}
@@ -59,7 +60,11 @@ public class DatumBuilder {
 		this.jaar = jaar;
 	}
 
-	public Date buildDatum (){
-		return new Date(getJaar(), getMaand(), getDag());
+	public Calendar buildCalendar (){
+		return new GregorianCalendar(getJaar(), getMaand(), getDag());
+	}
+	
+	public Date buildDate() {
+		return buildCalendar().getTime();
 	}
 }
