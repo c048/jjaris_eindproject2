@@ -1,7 +1,6 @@
 package daos;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
@@ -12,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import utils.Filter;
+import entities.JaarlijksVerlof;
 import entities.Team;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
@@ -102,12 +102,21 @@ public class WerknemerDAO {
 
 		if (werknemer != null && !werknemer.isVerantwoordelijke()) {
 			Werknemer w = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-			List<VerlofAanvraag> verlofaanvragen = werknemer.getAlleVerlofAanvragen();
+
+			List<VerlofAanvraag> verlofaanvragen = w.getAlleVerlofAanvragen();
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				VerlofAanvraag va = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
 				em.remove(va);
 			}
+
+			List<JaarlijksVerlof> jaarlijkseverloven = w.getJaarlijkseverloven();
+			for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
+				JaarlijksVerlof jv = em.find(JaarlijksVerlof.class, jaarlijksVerlof.getId());
+				em.remove(jv);
+			}
+
 			em.remove(w);
+
 		} else {
 			if (werknemer == null) {
 				throw new NullPointerException("WerknemerDAO.verwijderWerknemer kan niet worden uitgevoerd op null");
@@ -188,9 +197,15 @@ public class WerknemerDAO {
 				}
 			}
 		}
+
 		TypedQuery<Werknemer> query = em.createQuery(querystring, Werknemer.class);
+
 		for (String key : filter) {
-			query.setParameter(key, filter.getValue(key));
+			if (key.equals("naam") || key.equals("voornaam")) {
+				query.setParameter(key, "%" + filter.getValue(key) + "%");
+			} else {
+				query.setParameter(key, filter.getValue(key));
+			}
 		}
 
 		return query.getResultList();

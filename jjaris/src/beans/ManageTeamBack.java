@@ -11,7 +11,7 @@ import entities.Team;
 
 @Named
 @RequestScoped
-public class manageTeamBack implements Serializable {
+public class ManageTeamBack implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String naam;
 	private String HR = "false";
