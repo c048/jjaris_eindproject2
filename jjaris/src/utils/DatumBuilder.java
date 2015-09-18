@@ -40,8 +40,8 @@ public class DatumBuilder {
 	}
 
 	private void setDag(int dag) throws IllegalArgumentException {
-		Calendar tmpTime = new GregorianCalendar(getJaar(), getMaand(), 1);
-		if(dag > tmpTime.getActualMaximum(Calendar.MONTH) && dag < 1) {
+		Calendar tmpTime = new GregorianCalendar(getJaar(), getMaand()-1, 1);
+		if(dag > tmpTime.getActualMaximum(Calendar.DAY_OF_MONTH) || dag < 1) {
 			throw new IllegalArgumentException(String.format("Dag moet tussen 1 en %s liggen!", tmpTime.getActualMaximum(Calendar.MONTH)));
 		}
 		this.dag = dag;
