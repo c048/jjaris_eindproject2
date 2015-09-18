@@ -53,6 +53,17 @@ public class Team implements Serializable {
 		this.HR = HR;
 	}
 
+	public Werknemer getTeamlid(int personeelsnummer) {
+		Werknemer w = null;
+		for (Werknemer werknemer : teamleden) {
+			if (werknemer.getPersoneelsnummer() == personeelsnummer) {
+				w = werknemer;
+				break;
+			}
+		}
+		return w;
+	}
+
 	public List<Werknemer> getTeamleden() {
 		return this.teamleden;
 	}
@@ -191,8 +202,6 @@ public class Team implements Serializable {
 			return false;
 		}
 	}
-
-	
 
 	@Override
 	public boolean equals(Object obj) {
