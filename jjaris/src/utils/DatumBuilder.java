@@ -3,7 +3,6 @@ package utils;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.InputMismatchException;
 
 
 
@@ -15,24 +14,24 @@ import java.util.InputMismatchException;
  *
  */
 public class DatumBuilder {
-	/**
-	 * 
-	 * @param dag :integer max 2 cijfers min 1 cijfers
-	 * @param maand :integer max 2 cijfers min 1 cijfers
-	 * @param jaar integer max 4 cijfers min 4 cijfers
-	 * @return Datum type Date
-	 */
 	private int dag;
 	private int maand;
 	private int jaar;
 	
-	public DatumBuilder(int dag, int maand, int jaar) {
+	/**
+	 * 
+	 * @param dag = dag van de maand
+	 * @param maand = maand van het jaar
+	 * @param jaar = jaartal
+	 * @throws IllegalArgumentException
+	 */
+	public DatumBuilder(int dag, int maand, int jaar) throws IllegalArgumentException {
 		try {
-			setDag(dag);
-			setMaand(maand);
 			setJaar(jaar);
-		} catch (InputMismatchException e) {
-			throw new InputMismatchException(e.getMessage());
+			setMaand(maand);
+			setDag(dag);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 	
@@ -40,7 +39,11 @@ public class DatumBuilder {
 		return dag;
 	}
 
-	private void setDag(int dag) {
+	private void setDag(int dag) throws IllegalArgumentException {
+		Calendar tmpTime = new GregorianCalendar(getJaar(), getMaand(), 1);
+		if(dag > tmpTime.getActualMaximum(Calendar.MONTH) || dag < 1) {
+			throw new IllegalArgumentException(String.format("Dag moet tussen 1 en %s liggen!", tmpTime.getActualMaximum(Calendar.MONTH)));
+		}
 		this.dag = dag;
 	}
 
@@ -48,7 +51,11 @@ public class DatumBuilder {
 		return maand;
 	}
 
-	private void setMaand(int maand) {
+	private void setMaand(int maand) throws IllegalArgumentException {
+		if(maand > 12 || maand < 1) {
+			throw new IllegalArgumentException("Maand moet tussen 1 en 12 liggen!");
+		}
+		
 		this.maand = maand;
 	}
 
@@ -61,10 +68,15 @@ public class DatumBuilder {
 	}
 
 	public Calendar buildCalendar (){
-		return new GregorianCalendar(getJaar(), getMaand(), getDag());
+		return new GregorianCalendar(getJaar(), getMaand()-1, getDag());
 	}
 	
 	public Date buildDate() {
 		return buildCalendar().getTime();
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%02d-%02d-%04d", getDag(), getMaand(), getJaar());
 	}
 }
