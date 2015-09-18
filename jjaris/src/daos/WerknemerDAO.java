@@ -10,6 +10,8 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import com.sun.tools.ws.wsdl.document.jaxws.Exception;
+
 import utils.Filter;
 import entities.JaarlijksVerlof;
 import entities.Team;
@@ -85,9 +87,11 @@ public class WerknemerDAO {
 	@Transactional
 	public void updateWerknemer(Werknemer werknemer) {
 		Werknemer tmp = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-		if (tmp != null) {
-			tmp.setGegevens(werknemer);
+		if (tmp != null ) {
+				tmp.setGegevens(werknemer);
 		}
+		else
+			throw new IllegalArgumentException("geen werknemer is gevonden met  personeel nr" +werknemer.getPersoneelsnummer() );
 
 	}
 

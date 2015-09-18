@@ -9,8 +9,9 @@
 <h:body>
 <h:form>
 	<!-- Overzicht van de fesstdagen moet bijkomen -->
+	<!-- Overzicht van de collectieve verloven moet bijkomen -->
 		<h:panelGrid id="feestdag" columns="4">	
-			<h1>FEESTDAGEN</h1>
+			<h4>FEESTDAGEN</h4>
 			<h:inputHidden value="legeFGrid1-2" id="legeFGrid1-2" />
 			<h:inputHidden value="legeFGrid1-3" id="legeFGrid1-3" />
 			<h:inputHidden value="legeFGrid1-4" id="legeFGrid1-4" />
@@ -31,13 +32,12 @@
 			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumFJaar}"></h:inputText>
 			
 			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
-			<input  id="txtFTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerendF}"/>
+			<h:selectBooleanCheckbox id="txtFTerugkerend" value="#{collectievesluiting.terugkerendF}" />
 			<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
 			<h:commandButton value="Voeg Feestdag Toe" action="#{collectievesluiting.voegFeestdagToe}"></h:commandButton>
-		</h:panelGrid>
-	
-		<h:panelGrid id="collectieveVerlof" columns="4">	
-			<h1>COLLECTIVEVERLOF</h1>
+	</h:panelGrid>
+	<h:panelGrid id="CollectieveVerlof" columns="4">	
+			<h4>COLLECTIVEVERLOF</h4>
 			<h:inputHidden value="legeGrid1-2" id="legeGrid1-2" />
 			<h:inputHidden value="legeGrid1-3" id="legeGrid1-3" />
 			<h:inputHidden value="legeGrid1-4" id="legeGrid1-4" />
@@ -55,7 +55,7 @@
 			<h:outputText for="txtCVBeginDatum" value="Begin Datum"></h:outputText>
 			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumCVDag}"></h:inputText>
 			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}"></h:inputText>
-			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}"></h:inputText>
+			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}"></h:inputText>			
 			
 			<h:inputHidden value="legeGrid5-1" id="legeGrid5-1" />
 			<h:outputLabel for="txtCVEDag" value="Dag"></h:outputLabel>
@@ -68,12 +68,14 @@
 			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumCVJaar}"></h:inputText>
 			
 			<h:outputText for="txtCVTerugkerend" value="terugkerend?"></h:outputText>
-			<input  id="txtCVTerugkerend" type="checkbox" name="terugkerend" value="#{collectievesluiting.terugkerendCV}"/>
+			<h:selectBooleanCheckbox id="txtCVTerugkerend" value="#{collectievesluiting.terugkerendCV}" />
 			<h:inputHidden value="legeCVGrid6-3" id="legeCVGrid6-3" />
 			<h:commandButton value="Voeg Collectieve Verlof Toe" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
 		</h:panelGrid>
-			
+	<br/>
+	<br/>		
 	<h:commandButton value="Terug" action="HR.xhtml"></h:commandButton>
 </h:form>
+<h:messages style="color:red;"></h:messages>
 </h:body>
 </html>
