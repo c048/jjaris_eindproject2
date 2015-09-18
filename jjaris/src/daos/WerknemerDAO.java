@@ -196,6 +196,7 @@ public class WerknemerDAO {
 					aantal++;
 				}
 				if (key.equals("personeelsnummer") || key.equals("team.code")) {
+					key.replace(".", "");
 					querystring += " w." + key + " = :" + key;
 					aantal++;
 				}
@@ -208,6 +209,7 @@ public class WerknemerDAO {
 			if (key.equals("naam") || key.equals("voornaam")) {
 				query.setParameter(key, "%" + filter.getValue(key) + "%");
 			} else {
+				key.replace(".", "");
 				query.setParameter(key, filter.getValue(key));
 			}
 		}
