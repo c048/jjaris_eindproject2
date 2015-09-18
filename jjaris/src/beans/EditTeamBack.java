@@ -30,7 +30,9 @@ public class EditTeamBack implements Serializable {
 	@PostConstruct
 	public void init() {
 		team = tDao.getTeam(parameterback.getCode());
-		personeelsnrVerantwoordelijke = team.getTeamverantwoordelijke().getPersoneelsnummer();
+		if (team.getTeamverantwoordelijke() != null) {
+			personeelsnrVerantwoordelijke = team.getTeamverantwoordelijke().getPersoneelsnummer();
+		}
 		naam = team.getNaam();
 	}
 
@@ -58,12 +60,12 @@ public class EditTeamBack implements Serializable {
 	public List<Werknemer> getTeamleden() {
 		return getTeam().getTeamleden();
 	}
-	
-	private void setTeamverantwoordelijke(){
+
+	private void setTeamverantwoordelijke() {
 		team.setTeamverantwoordelijke(getTeam().getTeamlid(getPersoneelsnrVerantwoordelijke()));
 	}
-	
-	public String updateTeam(){
+
+	public String updateTeam() {
 		setTeamverantwoordelijke();
 		getTeam().setNaam(getNaam());
 		tDao.updateTeam(getTeam());

@@ -30,18 +30,22 @@
 			<h:column>
 				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
 		      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
-			<h:column>
-				<f:facet name="header">Wijzigen of Verwijderen Team</f:facet>
-				<h:commandButton value="Update Team"
-					action="#{hrTeamsBack.editTeam}">
-					<f:param name="selCodeEdit" value="#{tmpTeam.code}" />
-				</h:commandButton>
-				<h:commandButton value="Verwijder Team"
-					action="#{hrTeamsBack.verwijderTeam}">
-					<f:param name="selCodeVerwijder" value="#{tmpTeam.code}" ></f:param>
-				</h:commandButton>
-			</h:column>
+<!-- 			<h:column> -->
+<!-- 				<f:facet name="header">Wijzigen of Verwijderen Team</f:facet> -->
+<!-- 				<h:commandButton value="Update Team" -->
+<!-- 					action="#{hrTeamsBack.editTeam}"> -->
+<!-- 					<f:param name="selCodeEdit" value="#{tmpTeam.code}" /> -->
+<!-- 				</h:commandButton> -->
+<!-- 				<h:commandButton value="Verwijder Team #{tmpTeam.code}" -->
+<!-- 					action="#{hrTeamsBack.verwijderTeam}"> -->
+<!-- 					<f:param name="selCodeVerwijder" value="#{tmpTeam.code}" ></f:param> -->
+<!-- 				</h:commandButton> -->
+<!-- 			</h:column> -->
 		</h:dataTable>
+		<br></br>
+		<h:outputLabel for="IntTeamCodePasAan" value="Team Code: "></h:outputLabel>
+		<h:inputText id="IntTeamCodePasAan"   value="#{hrTeamsBack.aanpasCode}"></h:inputText>
+		<h:commandButton value="Pas team aan" action="#{hrTeamsBack.editTeam}"></h:commandButton>
 	</h:form>
 
 
