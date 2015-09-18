@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,11 +28,13 @@ public class HrMedewerkersBack implements Serializable {
 	private String team;
 	private int ID;
 	private List<Werknemer> delijst;
+	@Inject
+	private ParameterBack backIsBack;
 	
 	public HrMedewerkersBack() {
 		delijst = new ArrayList<Werknemer>();
 	}
-
+	
 	public int getID() { 
 		return ID;
 	}
@@ -47,15 +50,15 @@ public class HrMedewerkersBack implements Serializable {
 
 	public List<Werknemer> getWerknemers() {
 		Filter f = new Filter();
-		if (!naam.equalsIgnoreCase("") &&naam != null) {
+		if (naam != null && !naam.trim().equalsIgnoreCase("") ) {
 			f.voegFilterToe("naam", getNaam());
 		}
 
-		if (!voornaam.equalsIgnoreCase("")&&voornaam != null) {
+		if (voornaam != null && !voornaam.trim().equalsIgnoreCase("")) {
 			f.voegFilterToe("voornaam", getVoornaam());
 		}
-		if (ID != 0&&naam != null) {
-			f.voegFilterToe("ID", getID());
+		if ( naam != null &&ID != 0) {
+			f.voegFilterToe("personeelsnummer", getID());
 		}
 		
 		return dao.getWerknemers(f);
@@ -106,9 +109,8 @@ public class HrMedewerkersBack implements Serializable {
 	}
 
 	public String Editmedewerker(int personeelsnummer) {
-		String url = "Update_medewerker.xhtml?id="
-				+ Integer.toString(personeelsnummer);
-		return url;
+		backIsBack.setPersoneelsnummer(personeelsnummer);
+		return "medewerkerHrManage";
 	}
 
 	public int beschikbareverlofdagen(int personbeelsnummer) {
