@@ -10,15 +10,41 @@
 <h:body>
 	<h2>Nieuwe verlofaanvraag indienen</h2>
 	<h:form>
+		<h:panelGrid>
+		<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
+			<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtFDatum1" value="Datum"></h:outputText>
+			<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startJaar}"></h:inputText>
+			<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}"></h:inputText>
+			<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startDag}"></h:inputText>
+
+			<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
+			<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtFDatum2" value="Datum"></h:outputText>
+			<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
+			<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}"></h:inputText>
+			<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindDag}"></h:inputText>
+			
+			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
+			<h:inputHidden value="legeFGrid5-2" id="legeFGrid5-2" />
+			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
+			<h:commandButton value="Aanvragen" action="#{verlofaanvraag.toevoegen()}"></h:commandButton>
+		</h:panelGrid>	
 		
-			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.startdatum}">
-				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
-				</h:inputText>
-			<h:outputLabel for="txtVerlofAanvraagEindDatum" value="EindDatum:"></h:outputLabel>
-			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.einddatum}">
-				<f:convertDateTime locale="nl" type="date" dateStyle="short" />
-				</h:inputText>
+<!-- 			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel> -->
+<!-- 			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.startdatum}"> -->
+<!-- 				<f:convertDateTime locale="nl" type="date" dateStyle="short" /> -->
+<!-- 				</h:inputText> -->
+<!-- 			<h:outputLabel for="txtVerlofAanvraagEindDatum" value="EindDatum:"></h:outputLabel> -->
+<!-- 			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.einddatum}"> -->
+<!-- 				<f:convertDateTime locale="nl" type="date" dateStyle="short" /> -->
+<!-- 				</h:inputText> -->
 			<h:commandButton value="Aanvragen" action="#{verlofaanvraag.toevoegen()}"></h:commandButton>
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
