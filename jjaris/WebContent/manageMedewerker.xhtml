@@ -16,7 +16,6 @@
 			<h:selectOneMenu value="#{managemedewerkerback.team.code}">
 				<f:selectItems value="#{managemedewerkerback.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
 			</h:selectOneMenu><br/>
-			
 			<h:panelGrid id="panel" columns="4">
 				<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
 				<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
@@ -28,7 +27,6 @@
 				<h:inputText id="txtFMaand1"  value="#{managemedewerkerback.gebMaand}"></h:inputText>
 				<h:inputText id="txtFJaar1"  value="#{managemedewerkerback.gebJaar}"></h:inputText>
 			</h:panelGrid>
-			
 			<h3>Adres</h3>
 			<h:outputLabel for="adresStraat" value="Straat"></h:outputLabel>
 			<h:inputText id="adresStraat" value="#{managemedewerkerback.straat}"></h:inputText><br/>
