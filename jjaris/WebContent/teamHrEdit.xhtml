@@ -13,10 +13,10 @@
 		<h:inputText id="teamNaam" value="#{editTeamBack.naam}"></h:inputText>
 		<h:outputLabel for="verant" value="Teamverantwoordelijke: "></h:outputLabel>
 		<h:selectOneMenu value="#{editTeamBack.personeelsnrVerantwoordelijke}"
-			id="verant">
+			id="verant" >
 			<f:selectItems value="#{editTeamBack.teamleden}" var="teamlid"
 				itemLabel="#{teamlid.volledigeNaam}"
-				itemValue="#{teamlid.personeelsnummer}"></f:selectItems>
+				itemValue="#{teamlid.personeelsnummer}" noSelectionValue="0"></f:selectItems>
 		</h:selectOneMenu>
 		<h:commandButton value="Update Team"
 			action="#{editTeamBack.updateTeam}"></h:commandButton>
