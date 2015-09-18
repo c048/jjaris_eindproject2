@@ -11,16 +11,16 @@
 <h:body>
 	<h:form>
 		<hr/>
-		<h:outputLabel id="lblMedewerkers" value="Medewerkers">Medewerkers</h:outputLabel> *css nog te maken<br />
+		<h:outputLabel id="lblMedewerkers" value="Medewerkers"></h:outputLabel><br />
 
-		<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">Naam:</h:outputLabel>
+		<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">:</h:outputLabel>
 		<h:inputText id="txtNaam" value="#{HrManageMedewerker.naam}"></h:inputText>
-		<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">Voornaam:</h:outputLabel>
+		<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">:</h:outputLabel>
 		<h:inputText id="txtVoornaam" value="#{HrManageMedewerker.voornaam}"></h:inputText>
 		<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
-			for="txtPersoneelsnummer">Personeelsnummer:</h:outputLabel>
+			for="txtPersoneelsnummer">:</h:outputLabel>
 		<h:inputText id="txtPersoneelsnummer" value="#{HrManageMedewerker.ID}"></h:inputText>
-		<h:commandButton id="btnZoeken" action="#{HrManageTeam.zoeken}"></h:commandButton>
+		<h:commandButton id="btnZoeken" action="#{HrManageTeam.zoeken}" value="Zoek"></h:commandButton>
 		<br/>
 		<br/>
 		<br/>
@@ -56,20 +56,17 @@
 			<h:column>
 				<f:facet name="header">verwijderen</f:facet>
 				<h:commandButton value="#{Medewerker.personeelsnummer}"
-							action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
+							action="#{HrManageMedewerker.verwijderWerknemer}">Verwijderen</h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Aanpassen</f:facet>
 				<h:commandButton value="#{Medewerker.personeelsnummer}"
-						action="#{HrManageMedewerker.Editmedewerker}"></h:commandButton>
+						action="#{HrManageMedewerker.Editmedewerker}">Aanpassen</h:commandButton>
 			</h:column>
 	</h:dataTable>
-			<h:commandButton ID="btnZoek"
-		action="#{HrManageMedewerker.zoekWerkNemer}"></h:commandButton><br/><br/>
+			
 
-	<h:commandButton id="btnPasMedewerkerAAn"
-		action="#{HrManageMedewerker.Editmedewerker}"
-		value="Pas Medewerker Aan">Pas medewerker aan</h:commandButton>
+
 </h:form>
 </h:body>
 </html>
