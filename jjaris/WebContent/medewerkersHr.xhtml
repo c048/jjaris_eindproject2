@@ -14,17 +14,17 @@
 		<h:outputLabel id="lblMedewerkers" value="Medewerkers"></h:outputLabel><br />
 
 		<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">:</h:outputLabel>
-		<h:inputText id="txtNaam" value="#{HrManageMedewerker.naam}"></h:inputText>
+		<h:inputText id="txtNaam" value="#{medewerkersHrBack.naam}"></h:inputText>
 		<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">:</h:outputLabel>
-		<h:inputText id="txtVoornaam" value="#{HrManageMedewerker.voornaam}"></h:inputText>
+		<h:inputText id="txtVoornaam" value="#{medewerkersHrBack.voornaam}"></h:inputText>
 		<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
 			for="txtPersoneelsnummer">:</h:outputLabel>
-		<h:inputText id="txtPersoneelsnummer" value="#{HrManageMedewerker.ID}"></h:inputText>
-		<h:commandButton id="btnZoeken" action="#{HrManageMedewerker.zoek()}" value="Zoek"></h:commandButton>
+		<h:inputText id="txtPersoneelsnummer" value="#{medewerkersHrBack.ID}"></h:inputText>
+		<h:commandButton id="btnZoeken" action="#{medewerkersHrBack.zoek()}" value="Zoek"></h:commandButton>
 		<br/>
 		<br/>
 		<br/>
-		<h:dataTable value="#{HrManageMedewerker.werknemers}" var="Medewerker"> -->
+		<h:dataTable value="#{medewerkersHrBack.werknemers}" var="Medewerker"> -->
 			<h:column>
 				<f:facet name="header">ID</f:facet>    				
 		      	#{Medewerker.personeelsnummer}
@@ -52,17 +52,15 @@
 			<h:column>
 				<f:facet name="header">verwijderen</f:facet>
 				<h:commandButton value="Verwijderen"
-							action="#{HrManageMedewerker.verwijderWerknemer}"></h:commandButton>
+							action="#{medewerkersHrBack.verwijderWerknemer(Medewerker.personeelsnummer)}"></h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Aanpassen</f:facet>
 				<h:commandButton value="Aanpassen"
-						action="#{HrManageMedewerker.editMedewerker(Medewerker.personeelsnummer)}"></h:commandButton>
+						action="#{medewerkersHrBack.editMedewerker(Medewerker.personeelsnummer)}"></h:commandButton>
 			</h:column>
 	</h:dataTable>
-			
-
-
+	<h:commandButton value="Voeg nieuwe medewerker toe" action="#{medewerkersHrBack.createMedewerker()}"></h:commandButton>
 </h:form>
 </h:body>
 </html>

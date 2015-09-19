@@ -14,9 +14,9 @@ import utils.Filter;
 import daos.WerknemerDAO;
 import entities.Werknemer;
 
-@Named("HrManageMedewerker")
+@Named("medewerkersHrBack")
 @RequestScoped
-public class HrMedewerkersBack implements Serializable {
+public class MedewerkersHrBack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -30,19 +30,19 @@ public class HrMedewerkersBack implements Serializable {
 	private List<Werknemer> delijst;
 	@Inject
 	private ParameterBack backIsBack;
-	
-	public HrMedewerkersBack() {
+
+	public MedewerkersHrBack() {
 		delijst = new ArrayList<Werknemer>();
 	}
-	
-	public int getID() { 
+
+	public int getID() {
 		return ID;
 	}
 
 	public void setID(int iD) {
 		ID = iD;
 	}
-	
+
 	public String zoek() {
 		delijst = getWerknemers();
 		return null;
@@ -50,17 +50,17 @@ public class HrMedewerkersBack implements Serializable {
 
 	public List<Werknemer> getWerknemers() {
 		Filter f = new Filter();
-		if (naam != null && !naam.trim().equalsIgnoreCase("") ) {
+		if (naam != null && !naam.trim().equalsIgnoreCase("")) {
 			f.voegFilterToe("naam", getNaam());
 		}
 
 		if (voornaam != null && !voornaam.trim().equalsIgnoreCase("")) {
 			f.voegFilterToe("voornaam", getVoornaam());
 		}
-		if ( naam != null &&ID != 0) {
+		if (naam != null && ID != 0) {
 			f.voegFilterToe("personeelsnummer", getID());
 		}
-		
+
 		return dao.getWerknemers(f);
 	}
 
@@ -104,12 +104,16 @@ public class HrMedewerkersBack implements Serializable {
 	public String verwijderWerknemer(int personeelsnummer) {
 		Werknemer tmpw = dao.getWerknemer(personeelsnummer);
 		dao.verwijderWerknemer(tmpw);
-		return "hr.xhtml";
+		return null;
 
 	}
 
-	public String Editmedewerker(int personeelsnummer) {
+	public String editMedewerker(int personeelsnummer) {
 		backIsBack.setPersoneelsnummer(personeelsnummer);
+		return "medewerkerHrManage";
+	}
+	
+	public String createMedewerker() {
 		return "medewerkerHrManage";
 	}
 
