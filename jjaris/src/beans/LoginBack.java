@@ -55,12 +55,12 @@ public class LoginBack implements Serializable {
 		Werknemer w = wDao.getWerknemer(email);
 		if (w.controleerPasswoord(getPaswoord())) {
 			if (w.isHR()) {
-				return "HR";
+				return "medewerkershr";
 			} else {
 				if (w.isVerantwoordelijke()) {
 					return "verantwoordelijke";
 				} else {
-					return "verlofAanvraag";
+					return "verlofMedewerker";
 				}
 
 			}
@@ -70,7 +70,7 @@ public class LoginBack implements Serializable {
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
-			return "login";
+			return null;
 		}
 	}
 
