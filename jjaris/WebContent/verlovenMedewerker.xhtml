@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<h:head>
+	  <title>Medewerker verloven</title>
+	</h:head>
+	
+	<h:body>
+		<h2>Mijn verlof aanvragen</h2>
+		
+		<h:form>
+			<h:outputLabel for="verlofMFilterStatus" value="Status"></h:outputLabel>
+			<h:selectOneMenu id="verlofMFilterStatus"></h:selectOneMenu>
+			<h:outputLabel for="verlofMFilterJaar" value="Jaar"></h:outputLabel>
+			<h:selectOneMenu id="verlofMFilterJaar"></h:selectOneMenu>
+			<h:commandButton value="Filteren"></h:commandButton>
+		</h:form>
+		
+		<h:dataTable></h:dataTable><br/>
+		<h:outputLabel for="verlofMResterend" value="Resterend aantal verlofdagen"></h:outputLabel>
+		<h:outputText id="verlofMResterend" value=""></h:outputText><br/>
+		
+		<h3>Nieuw verlof aanvraag aanmaken</h3>
+		<h:form>
+			<h:outputLabel for="verlofMAanvraagStart" value="Start Datum"></h:outputLabel>
+			<h:inputText id="verlofMAanvraagStart"></h:inputText>
+			<h:outputLabel for="verlofMAanvraagEinde" value="Eind Datum"></h:outputLabel>
+			<h:inputText id="verlofMAanvraagEinde"></h:inputText>
+			<h:commandButton value="Toevoegen"></h:commandButton>
+		</h:form>
+	</h:body>
+
+</html>
