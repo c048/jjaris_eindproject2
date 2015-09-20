@@ -105,7 +105,6 @@ public class MedewerkersHrBack implements Serializable {
 		Werknemer tmpw = dao.getWerknemer(personeelsnummer);
 		dao.verwijderWerknemer(tmpw);
 		return null;
-
 	}
 
 	public String editMedewerker(int personeelsnummer) {
