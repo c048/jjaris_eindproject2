@@ -38,38 +38,40 @@
 			</h:panelGrid>
 		</h:form>
 		
-		<h:dataTable value="#{verlofMedewerkerBack.searchAanvragen()}" var="singleAanvraag">
-			<h:column>
-				<f:facet name="header">ID</f:facet>    				
-		      	#{singleAanvraag.id}
-		   	</h:column>
-			<h:column>
-				<f:facet name="header">Start</f:facet>
-				<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.startdatum)}">
-					<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
-				</h:outputText> 
-		   	</h:column>
-			<h:column>
-				<f:facet name="header">Einde</f:facet>
-				<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.einddatum)}">
-					<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
-				</h:outputText>
-			</h:column>
-			<h:column>
-				<f:facet name="header">Aanvraag</f:facet>
-				<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.aanvraagdatum)}">
-					<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
-				</h:outputText>
-		  	</h:column>
-			<h:column>
-				<f:facet name="header">Toestand</f:facet>
-				#{singleAanvraag.toestand}
-		   	</h:column>
-			<h:column>
-				<f:facet name="header">verwijderen</f:facet>
-				<h:commandButton value="Annuleren" action="#{verlofMedewerkerBack.cancelAanvraag(singleAanvraag.id)}"></h:commandButton>
-			</h:column>
-		</h:dataTable><br/>
+		<h:form>
+			<h:dataTable value="#{verlofMedewerkerBack.searchAanvragen()}" var="singleAanvraag">
+				<h:column>
+					<f:facet name="header">ID</f:facet>    				
+			      	#{singleAanvraag.id}
+			   	</h:column>
+				<h:column>
+					<f:facet name="header">Start</f:facet>
+					<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.startdatum)}">
+						<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText> 
+			   	</h:column>
+				<h:column>
+					<f:facet name="header">Einde</f:facet>
+					<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.einddatum)}">
+						<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Aanvraag</f:facet>
+					<h:outputText value="#{verlofMedewerkerBack.convertDate(singleAanvraag.aanvraagdatum)}">
+						<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>
+			  	</h:column>
+				<h:column>
+					<f:facet name="header">Toestand</f:facet>
+					#{singleAanvraag.toestand}
+			   	</h:column>
+				<h:column>
+					<f:facet name="header">Annuleren</f:facet>
+					<h:commandButton value="Annuleren" action="#{verlofMedewerkerBack.cancelAanvraag(singleAanvraag.id)}"></h:commandButton>
+				</h:column>
+			</h:dataTable>
+		</h:form>
 		
 		<h3>Nieuw verlof aanvraag aanmaken</h3>
 		<h:form>

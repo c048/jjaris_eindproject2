@@ -148,8 +148,9 @@ public class VerlofMedewerkerBack {
 		}
 	}
 	
-	public String cancelAanvraag(String id) {
-		VerlofAanvraag tmpVerlof = verlofAanvragen.getVerlofAanvraag(Integer.parseInt(id));
+	public String cancelAanvraag(int id) {
+		System.out.println("hier");
+		VerlofAanvraag tmpVerlof = verlofAanvragen.getVerlofAanvraag(id);
 		tmpVerlof.annuleren();
 		verlofAanvragen.updateVerlofAanvraag(tmpVerlof);
 		return null;
