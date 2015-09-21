@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>VerlofTeam</title>
+</h:head>
+<h:body>
+
+<h:form>
+
+<h:outputLabel value="Zoekcriteria: "></h:outputLabel>
+
+<h:outputLabel value="Startdatum: "></h:outputLabel>
+<h:inputText value="#{verlofTeamBack.startdatum}"></h:inputText>
+
+<h:outputLabel value="Einddatum: "></h:outputLabel>
+<h:inputText value="#{verlofTeamBack.einddatum}"></h:inputText>
+
+<h:outputLabel value="Toestand:(Geef 1 voor ingediend, 2 voor afgekeurd, 3 voor goedgekeurd en 4 voor geannuleerd) "></h:outputLabel>
+<h:inputText value="#{verlofTeamBack.toestand}"></h:inputText>
+
+<h:outputLabel value="Werknemer: "></h:outputLabel>
+<h:selectOneMenu value="verlofTeamBack.werknemer.volledigeNaam">
+	<f:selectItem itemValue="" itemLabel="" />
+	<f:selectItems value="verlofTeamBack.werknemers"></f:selectItems>
+</h:selectOneMenu>
+
+<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoek}"></h:commandButton>
+
+<h:dataTable value="verlofTeamBack" var="tmpVerlofAanvraag">
+			<h:column>
+				<f:facet name="header">ID</f:facet>    				
+		      	#{tmpVerlofAanvraag.id}</h:column>
+			<h:column>
+				<f:facet name="header">Naam Werknemer</f:facet>    				
+		      	#{tmpVerlofAanvraag.werknemer.volledigeNaam}</h:column>
+			
+			<h:column>
+    				<f:facet name="header">Startdatum</f:facet>	
+    				<h:outputText value="#{tmpVerlofAanvraag.converteerNaarDate(va.startdatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>		
+    			</h:column>		
+    			<h:column>
+    				<f:facet name="header">EindDatum</f:facet>	
+    				<h:outputText value="#{tmpVerlofAanvraag.converteerNaarDate(va.einddatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>	
+    			</h:column>	
+		      	
+			
+			<h:column>
+				<f:facet name="header">Status</f:facet>    				
+		      	#{tmpVerlofAanvraag.toestand}</h:column>
+			
+			<c:if test="${tmpVerlofAanvraag.toestand = 0}">
+
+			<h:column>   				
+		      	<h:commandButton id="Goed" action="#{tmpVerlofAanvraag.goedkeuren}" value="#{tmpVerlofAanvraag.id}" /></h:column>
+		    </c:if>
+		      	
+</h:dataTable>
+
+<h:outputLabel value="Geef ID: "></h:outputLabel>
+<h:inputTextarea value="#{verlofTeamBack.id}"></h:inputText>
+<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
+<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputText>
+<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>
+
+</h:form>
+
+
+<h:messages style="color:red;"></h:messages>
+</h:body>
+</html>
