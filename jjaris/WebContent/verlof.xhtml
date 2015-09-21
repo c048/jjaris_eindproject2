@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:util="http://java.sun.com/jsf/composite/myutils"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Verlof Aanvraag</title>
+</h:head>
+<h:body>
+	<h2>Verlofaanvraagen Overzicht</h2>
+	<h:form>
+		<h:panelGrid id="panel" columns="4">
+		<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
+			<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
+			<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startDag}"></h:inputText>
+			<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}"></h:inputText>
+			<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startJaar}"></h:inputText>
+
+			<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
+			<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
+			<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
+			<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
+			
+			<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
+			<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindDag}"></h:inputText>
+			<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}"></h:inputText>
+			<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
+			
+			verlof.alleVerloven
+			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
+			<h:outputlabel value="Toestand" id="toestand" />
+			<h:selectOneMenu id="menu" value="#{}"  >
+				<f:selectItem itemLabel="Toestand" itemValue="#{}" />
+            	<f:selectItems value="#{toestandBack.toestandLijst}" />
+			</h:selectOneMenu>
+			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
+
+		</h:panelGrid>	
+
+	</h:form>
+	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
+<!-- 	<h:form>
+<h:dataTable value="#{verlofaanvraag.aanvragen}" var="va">
+    			<h:column>
+    				column header
+    				<f:facet name="header">ID</f:facet>
+    				row record
+    				#{va.id}
+    			</h:column>		
+    			<h:column>
+    				<f:facet name="header">Startdatum</f:facet>	
+    				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.startdatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>		
+    			</h:column>		
+    			<h:column>
+    				<f:facet name="header">EindDatum</f:facet>	
+    				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.einddatum)}">
+ 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+					</h:outputText>	
+    			</h:column>	
+    			<h:column>
+    				<f:facet name="header">Toestand</f:facet>
+    				#{va.toestand}
+    			</h:column>	
+    			<h:column>
+    				<f:facet name="header">Reden</f:facet>
+    				#{va.reden}
+    			</h:column>
+    			<h:column>
+    				<f:facet name="header">Annuleren</f:facet>
+    				<h:commandButton value="verwijderen" action="#{verlofaanvraag.annuleren(va.id)}"></h:commandButton>
+    			</h:column>
+    		</h:dataTable>		
+	</h:form> -->			
+</h:body>
+</html>
