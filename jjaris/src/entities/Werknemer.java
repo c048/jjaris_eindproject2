@@ -153,12 +153,9 @@ public class Werknemer implements Serializable {
 	}
 
 	public int getAantalBeschikBareVerlofDagen(int jaartal) {
-		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(new JaarlijksVerlof());
-		if (tmpJaar == null) {
-			throw new NullPointerException();
-		}
-		int verlofdagen = verlofaanvragen.stream().mapToInt(v -> v.getPeriode()).sum();
-		return (tmpJaar.getAantalDagen() - verlofdagen);
+		int tmpJaar = getJaarlijksVerlof(jaartal);
+		int verlofdagen = verlofaanvragen.stream().filter(v -> v.getToestand().equals(Toestand.INGEDIEND) || v.getToestand().equals(Toestand.GOEDGEKEURD)).mapToInt(v -> v.getPeriode()).sum();
+		return (tmpJaar - verlofdagen);
 	}
 
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
@@ -187,9 +184,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
-		return verlofaanvragen.stream()
-				.filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum)) && v.getToestand() == toestand)
-				.collect(Collectors.toList());
+		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum)) && v.getToestand().equals(toestand)).collect(Collectors.toList());
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
