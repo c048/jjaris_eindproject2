@@ -13,6 +13,7 @@ import javax.inject.Named;
 import utils.DatumBuilder;
 import utils.Filter;
 import daos.VerlofAanvraagDAO;
+import entities.Team;
 import entities.Toestand;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
@@ -26,19 +27,17 @@ public class VerlofMedewerkerBack implements Serializable{
 	private LoginBack user;
 	@Inject
 	private VerlofAanvraagDAO verlofaanvraagDAO;
-	private Date startdatum;
-	private Date einddatum;
 	private int startJaar;
 	private int startMaand;
 	private int startDag;
 	private int eindJaar;
 	private int eindMaand;
 	private int eindDag;
-	private Toestand toestand;
+	private Toestand toestand =  null;
+	private Team team;
 	
 	
 	private Filter filter= new Filter();
-	private int zoekToestand ;
 
 	/**
 	 * Lijst met verlofaanvragen per werknemer gefilterd standaard lege filters
@@ -46,18 +45,16 @@ public class VerlofMedewerkerBack implements Serializable{
 	 * @return
 	 */
 	public List<VerlofAanvraag> getAanvragen(){
+		Date startdatum = buildDatum(startDag, startMaand, startJaar);
+		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
 		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
 		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
 		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
-		//else{System.out.println("***********************************geen filter");}
-		if(zoekToestand<0 && zoekToestand>3){filter.voegFilterToe("toestand", zoekToestand);}
-		//else{System.out.println("***********************************geen filter");}
+		if(toestand !=null){filter.voegFilterToe("toestand", toestand);}
 		return verlofaanvraagDAO.getVerlofAanvragen(filter);
 	}
 	
 	public String zoeken(){
-		setStartdatum();
-		setEinddatum();
 		getAanvragen();
 		return null;
 		
@@ -76,9 +73,9 @@ public class VerlofMedewerkerBack implements Serializable{
 	 * Verlof aanvragen
 	 */
 	public void toevoegen(){
+		Date startdatum = buildDatum(startDag, startMaand, startJaar);
+		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
 		Werknemer werknemer = user.getIngelogdeWerknemer();
-		setStartdatum();
-		setEinddatum();
 		VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
 		verlofaanvraagDAO.voegVerlofAanvraagToe(verlof);	
 	}		
@@ -94,35 +91,32 @@ public class VerlofMedewerkerBack implements Serializable{
 	}
 
 	
-	public Date getStartdatum() {
-		return startdatum;
-	}
+
 	/**
 	 * Zet datum aan de hand van de apparte velden met datumbuilder
 	 * @param startdatum
 	 */
-	public void setStartdatum() {
-		DatumBuilder tmp = new DatumBuilder(startDag, startMaand, startJaar);
-		this.startdatum = tmp.buildDate();
+	
+	private Date buildDatum(int dag, int maand, int jaar){
+		if (dag != 0 && maand != 0 && jaar !=0){
+		DatumBuilder tmp = new DatumBuilder(dag, maand, jaar);
+		return tmp.buildDate();
+		}
+		else{
+			return null;
+		}
 	}
-	public Date getEinddatum() {
-		return einddatum;
-	}
+	
+
 	/**
 	 * Zet datum aan de hand van de apparte veldenmet datumbuilder
 	 * @param einddatum
 	 */
-	public void setEinddatum() {
-		DatumBuilder tmp = new DatumBuilder(eindDag, eindMaand, eindJaar);
-		this.einddatum = tmp.buildDate();
-	}
-	
+
 	public Date converteerNaarDate(Calendar calendar){
 		return calendar.getTime() ;
 	}
-//	public getEinddatumString(){
-//		converteerDatum(einddatum).
-//	}
+
 	public int getStartJaar() {
 		return startJaar;
 	}
@@ -159,20 +153,23 @@ public class VerlofMedewerkerBack implements Serializable{
 	public void setEindDag(int eindDag) {
 		this.eindDag = eindDag;
 	}
-	public int getZoekToestand() {
-		return zoekToestand;
-	}
-	public void setZoekToestand(int zoekToestand) {
-		this.zoekToestand = zoekToestand;
+
+	public String getToestand() {
+		return toestand == null ? "": toestand.toString();
 	}
 
-	public Toestand getToestand() {
-		return toestand;
+	public void setToestand(String toestand) {
+		if(toestand != null && !toestand.isEmpty ()) {
+			this.toestand = Toestand.valueOf(toestand);
+		}
 	}
 
-	public void setToestand(Toestand toestand) {
-		this.toestand = toestand;
+	public Team getTeam() {
+		return team;
 	}
-	
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 	
 }

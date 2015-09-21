@@ -35,19 +35,12 @@
 			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
 				<h:selectOneMenu id="menu" value="#{verlofaanvraag.toestand}" >
             		<f:selectItems value="#{toestandBack.toestandLijst}" />
+             		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
 				</h:selectOneMenu>
 			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
 			<h:commandButton value="Aanvragen" action="#{verlofaanvraag.toevoegen()}"></h:commandButton>
 		</h:panelGrid>	
 		
-<!-- 			<h:outputLabel for="txtVerlofAanvraagStartDatum" value="StartDatum:"></h:outputLabel> -->
-<!-- 			<h:inputText id="txtVerlofAanvraagStartDatum" value="#{verlofaanvraag.startdatum}"> -->
-<!-- 				<f:convertDateTime locale="nl" type="date" dateStyle="short" /> -->
-<!-- 				</h:inputText> -->
-<!-- 			<h:outputLabel for="txtVerlofAanvraagEindDatum" value="EindDatum:"></h:outputLabel> -->
-<!-- 			<h:inputText id="txtVerlofAanvraagEindDatum" value="#{verlofaanvraag.einddatum}"> -->
-<!-- 				<f:convertDateTime locale="nl" type="date" dateStyle="short" /> -->
-<!-- 				</h:inputText> -->
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 	<h:form>
