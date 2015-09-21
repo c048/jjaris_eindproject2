@@ -34,7 +34,11 @@ public class Team implements Serializable {
 	}
 
 	public void setNaam(String naam) {
+		if(naam != null && !naam.trim().equals("")){
 		this.naam = naam;
+		}else{
+			throw new IllegalArgumentException("De naam van het team mag niet null of een spatie zijn");
+		}
 	}
 
 	public int getCode() {

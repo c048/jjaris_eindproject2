@@ -3,6 +3,8 @@ package beans;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,7 +17,7 @@ import entities.Team;
 @RequestScoped
 public class CreateTeamBack implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@NotEmpty
+	@NotEmpty(message = "Team naam mag niet leeg zijn")
 	private String naam;
 	private String HR = "false";
 	@Inject
@@ -39,13 +41,21 @@ public class CreateTeamBack implements Serializable {
 
 	public String voegTeamToe() {
 		Team t = new Team();
-		t.setNaam(getNaam());
-		if (getHR().equals("true")) {
-			t.setHR(true);
-		} else {
-			t.setHR(false);
+		try {
+			t.setNaam(getNaam());
+			if (getHR().equals("true")) {
+				t.setHR(true);
+			} else {
+				t.setHR(false);
+			}
+			tDao.voegTeamToe(t);
+		} catch (IllegalArgumentException iae) {
+			FacesMessage msg = new FacesMessage(iae.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
 		}
-		tDao.voegTeamToe(t);
+
 		return null;
 
 	}
