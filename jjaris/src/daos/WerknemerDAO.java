@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
@@ -37,12 +38,13 @@ public class WerknemerDAO {
 	 */
 	@Transactional
 	public void voegWerknemerToe(Werknemer werknemer) {
-		Team team = werknemer.getTeam();
-		if (team != null && team.getCode() == 0) {
-			em.persist(team);
-		}
-		em.persist(werknemer);
-
+	
+			Team team = werknemer.getTeam();
+			if (team != null && team.getCode() == 0) {
+				em.persist(team);
+			}
+			em.persist(werknemer);
+	
 	}
 
 	/**
@@ -132,12 +134,12 @@ public class WerknemerDAO {
 	}
 
 	/**
-	 * Geeft een werknemer met een bepaald e-mail adres terug
+	 * Geeft een werknemer met een bepaald e-mail adres terug. geeft null terug
+	 * als de werknemer niet gevonden wordt
 	 * 
 	 * @param email
 	 * @return Werknemer
-	 * @throws NoResultException
-	 *             - if there is no result
+	 * 
 	 * @throws NonUniqueResultException
 	 *             - if more than one result
 	 * @throws IllegalStateException
@@ -158,7 +160,12 @@ public class WerknemerDAO {
 	public Werknemer getWerknemer(String email) {
 		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.email LIKE :email", Werknemer.class);
 		tqry.setParameter("email", email);
-		return tqry.getSingleResult();
+		try {
+			return tqry.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;// indien er geen gevonden wordt in de database
+		}
+
 	}
 
 	/**
