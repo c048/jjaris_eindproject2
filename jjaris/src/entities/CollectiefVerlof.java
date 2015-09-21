@@ -59,7 +59,20 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		return aantalDagen-aantalWeekendDagen;
 	}
 
+	public String getOmschrijving() {
+		return super.getOmschrijving();
+	}
 	
+	public String getBeginDatumStr(){
+		Calendar cal=super.getStartdatum();	
+		return cal.get(Calendar.DAY_OF_MONTH)+"-"+cal.get(Calendar.MONTH)+"-"+cal.get(Calendar.YEAR);
+		
+	}
+	
+	public String getEindDatumStr(){
+		return einddatum.get(Calendar.DAY_OF_MONTH)+"-"+einddatum.get(Calendar.MONTH)+"-"+einddatum.get(Calendar.YEAR);
+		
+	}
 
 	@Override
 	public String toString() {

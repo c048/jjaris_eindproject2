@@ -27,9 +27,9 @@ public class CollectieveSluitingDAO {
 	public  List<Feestdag> getFeestdagen (Calendar begindatum, Calendar einddatum){
 		
 	
-		TypedQuery<Feestdag> query = em.createQuery("SELECT f FROM FEESTDAGEN f WHERE f.startdatum"+
+		TypedQuery<Feestdag> query = em.createQuery("SELECT f FROM Feestdag f WHERE f.startdatum"+
 						" BETWEEN :begindatum AND :einddatum ",Feestdag.class);
-		
+
 		return (List<Feestdag>) query.setParameter("begindatum", begindatum)
 				.setParameter("einddatum", einddatum).getResultList();
 
@@ -50,12 +50,12 @@ public class CollectieveSluitingDAO {
 	@Transactional
 	public  List<CollectiefVerlof> getCollectieveVerloven(Calendar begindatum, Calendar einddatum) {
 				
-		TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM COLLECTIEVEVERLOVEN c WHERE "+
+		TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM CollectiefVerlof c WHERE "+
 				"((c.startdatum BETWEEN :begindatum  AND :einddatum ) "+
 				"OR (c.einddatum BETWEEN :begindatum  AND :einddatum )) "+
 				"OR (c.startdatum <= :begindatum AND c.einddatum >= :einddatum ) ",CollectiefVerlof.class);
 		
-		return (List<CollectiefVerlof>) query.setParameter("startdatum", begindatum)
+		return (List<CollectiefVerlof>) query.setParameter("begindatum", begindatum)
 				.setParameter("einddatum", einddatum).getResultList();
 		
 	}
