@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class JaarlijksVerlof implements Serializable{
@@ -17,6 +18,16 @@ public class JaarlijksVerlof implements Serializable{
 	private int jaar;
 	private int aantalDagen;
 	
+	@ManyToOne
+	private Werknemer werknemer;
+	
+
+	public Werknemer getWerknemer() {
+		return werknemer;
+	}
+	public void setWerknemer(Werknemer werknemer) {
+		this.werknemer = werknemer;
+	}
 	public int getId() {
 		return id;
 	}
