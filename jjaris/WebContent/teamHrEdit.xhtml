@@ -14,9 +14,11 @@
 		<h:outputLabel for="verant" value="Teamverantwoordelijke: "></h:outputLabel>
 		<h:selectOneMenu value="#{editTeamBack.personeelsnrVerantwoordelijke}"
 			id="verant" >
+			<f:selectItem itemLabel="geen verantwoordelijke" noSelectionOption="true"></f:selectItem>
 			<f:selectItems value="#{editTeamBack.teamleden}" var="teamlid"
 				itemLabel="#{teamlid.volledigeNaam}"
-				itemValue="#{teamlid.personeelsnummer}" noSelectionValue="0"></f:selectItems>
+				itemValue="#{teamlid.personeelsnummer}" ></f:selectItems>
+				
 		</h:selectOneMenu>
 		<h:commandButton value="Update Team"
 			action="#{editTeamBack.updateTeam}"></h:commandButton>

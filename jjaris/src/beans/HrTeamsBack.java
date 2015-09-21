@@ -2,19 +2,18 @@ package beans;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.RollbackException;
+import javax.transaction.TransactionalException;
 
 import utils.Filter;
 import daos.TeamDAO;
-import daos.WerknemerDAO;
 import entities.Team;
-import entities.Werknemer;
 
 @Named
 @RequestScoped
@@ -85,18 +84,26 @@ public class HrTeamsBack implements Serializable {
 		Team team = tDao.getTeam(getAanpasCode());
 		try {
 			tDao.verwijderTeam(team);
-		} catch (NullPointerException npe) {
+		}
+		catch (NullPointerException npe) {
 			FacesMessage msg = new FacesMessage(npe.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
-		}catch (IllegalArgumentException iae) {
+		} 
+		catch (IllegalArgumentException iae) {
 			FacesMessage msg = new FacesMessage(iae.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
 		}
-
+//		catch (TransactionalException te) {
+//					FacesMessage msg = new FacesMessage("Kan geen team verwijderen met nog teamleden in");
+//					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+//					FacesContext.getCurrentInstance().addMessage(null, msg);
+//					FacesContext.getCurrentInstance().renderResponse();
+//		}
+			
 		return "teamsHr";
 
 	}

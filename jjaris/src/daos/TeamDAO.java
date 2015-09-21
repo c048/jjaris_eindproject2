@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import utils.Filter;
 import entities.Team;
-import entities.Werknemer;
+
 
 @ApplicationScoped
 public class TeamDAO {
@@ -32,16 +33,23 @@ public class TeamDAO {
 	 * @throws NullPointerException
 	 * @throws IllegalArgumentException
 	 */
-	@Transactional
+	//@Transactional //Indien in een transactional methode een exceptie wordt gegooid, krijg je tijdens de uitvoering een TransactionalException
 	public void verwijderTeam(Team team) {
 
 		if (team != null && team.getTeamleden().isEmpty()) {
+			EntityTransaction tx =  em.getTransaction();
+			tx.begin();
+			System.out.printf("team %s aan het verwijderen",team.getNaam());
 			Team t = em.find(Team.class, team.getCode());
+			System.out.println("team gevonden voor verwijdering");
 			em.remove(t);
+			tx.commit();
+			
 		} else {
 			if (team == null) {
 				throw new NullPointerException("TeamDAO.verwijderTeam kan niet worden uitgevoerd op null");
 			} else {
+				System.out.println("team heeft nog teamleden in else methode");
 				throw new IllegalArgumentException(
 						"TeamDAO.verwijderTeam kan niet worden uitgevoerd want er zijn nog werknemers gekoppeld aan dit team");
 			}
