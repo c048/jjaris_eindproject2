@@ -33,10 +33,10 @@
 			
 			
 			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
-			<h:outputlabel value="Toestand" id="toestand" />
-			<h:selectOneMenu id="menu" value="#{toestand}" var="toestand" >
-            	<f:selectItems itemLabel="Toestand" value="#{toestandBack.toestandLijst}" />
-			</h:selectOneMenu>
+			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
+				<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
+            		<f:selectItems value="#{toestandBack.toestandLijst}" />
+				</h:selectOneMenu>
 			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
 
 
@@ -72,10 +72,7 @@
     				<f:facet name="header">Reden</f:facet>
     				#{va.reden}
     			</h:column>
-    			<h:column>
-    				<f:facet name="header">Annuleren</f:facet>
-    				<h:commandButton value="verwijderen" action="#{verlofaanvraag.annuleren(va.id)}"></h:commandButton>
-    			</h:column>
+
     		</h:dataTable>		
 	</h:form>			 
 </h:body>

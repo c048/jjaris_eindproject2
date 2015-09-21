@@ -32,8 +32,10 @@
 			<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
 			
 			
-			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
-			<h:inputHidden value="legeFGrid5-2" id="legeFGrid5-2" />
+			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
+				<h:selectOneMenu id="menu" value="#{verlofaanvraag.toestand}" >
+            		<f:selectItems value="#{toestandBack.toestandLijst}" />
+				</h:selectOneMenu>
 			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
 			<h:commandButton value="Aanvragen" action="#{verlofaanvraag.toevoegen()}"></h:commandButton>
 		</h:panelGrid>	

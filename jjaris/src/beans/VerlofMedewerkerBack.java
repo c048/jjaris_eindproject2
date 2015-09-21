@@ -34,7 +34,7 @@ public class VerlofMedewerkerBack implements Serializable{
 	private int eindJaar;
 	private int eindMaand;
 	private int eindDag;
-	
+	private Toestand toestand;
 	
 	
 	private Filter filter= new Filter();
@@ -164,6 +164,14 @@ public class VerlofMedewerkerBack implements Serializable{
 	}
 	public void setZoekToestand(int zoekToestand) {
 		this.zoekToestand = zoekToestand;
+	}
+
+	public Toestand getToestand() {
+		return toestand;
+	}
+
+	public void setToestand(Toestand toestand) {
+		this.toestand = toestand;
 	}
 	
 	
