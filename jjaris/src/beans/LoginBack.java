@@ -7,6 +7,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
+
+import javax.persistence.NonUniqueResultException;
 
 //import daos.TeamDAO;
 import daos.WerknemerDAO;
@@ -21,8 +24,9 @@ public class LoginBack implements Serializable {
 	private String paswoord;
 	@Inject
 	private WerknemerDAO wDao;
-//	@Inject
-//	private TeamDAO tDao;
+
+	// @Inject
+	// private TeamDAO tDao;
 
 	public String getEmail() {
 		return email;
@@ -52,26 +56,41 @@ public class LoginBack implements Serializable {
 	}
 
 	public String login() {
-		Werknemer w = wDao.getWerknemer(email);
-		if (w.controleerPasswoord(getPaswoord())) {
-			if (w.isHR()) {
-				return "medewerkershr";
-			} else {
-				if (w.isVerantwoordelijke()) {
-					return "verantwoordelijke";
+		try {
+			Werknemer w = wDao.getWerknemer(email);
+			if (w.controleerPasswoord(getPaswoord())) {
+				if (w.isHR()) {
+					return "medewerkersHr";
 				} else {
-					return "verlofMedewerker";
+					if (w.isVerantwoordelijke()) {
+						return "verlofTeam";
+					} else {
+						return "verlofMedewerker";
+					}
+
 				}
 
+			} else {
+				FacesMessage msg = new FacesMessage("Ongeldige login gegevens");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				FacesContext.getCurrentInstance().renderResponse();
+				return null;
 			}
-
-		} else {
-			FacesMessage msg = new FacesMessage("Ongeldige login gegevens");
+		} catch (NoResultException nre) {
+			FacesMessage msg = new FacesMessage("Er is geen werknemer gevonden met dit e-mail adres");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
+			return null;
+		} catch (NonUniqueResultException nure) {
+			FacesMessage msg = new FacesMessage("Er zijn meerdere werknemers gevonden met hetzelfde e-mail adres");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
 			return null;
 		}
+
 	}
 
 }

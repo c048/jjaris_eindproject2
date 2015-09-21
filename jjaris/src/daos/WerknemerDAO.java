@@ -31,16 +31,18 @@ public class WerknemerDAO {
 	 *             als er al een werknemer met dezelfde id bestaat
 	 * @throws TransactionRequiredException
 	 *             als er een probleem is met het opzetten van de tranacties
+	 * @throws SQLIntegrityConstraintViolationException
+	 *             als je een werknemer probeert toe te voegen met een e-mail
+	 *             adres dat al bestaat
 	 */
 	@Transactional
 	public void voegWerknemerToe(Werknemer werknemer) {
-		if(getWerknemer(werknemer.getEmail()) == null) {
-			Team team = werknemer.getTeam();
-			if (team != null && team.getCode() == 0) {
-				em.persist(team);
-			}
-			em.persist(werknemer);
+		Team team = werknemer.getTeam();
+		if (team != null && team.getCode() == 0) {
+			em.persist(team);
 		}
+		em.persist(werknemer);
+
 	}
 
 	/**
@@ -86,11 +88,10 @@ public class WerknemerDAO {
 	@Transactional
 	public void updateWerknemer(Werknemer werknemer) {
 		Werknemer tmp = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-		if (tmp != null ) {
-				tmp.setGegevens(werknemer);
-		}
-		else
-			throw new IllegalArgumentException("geen werknemer is gevonden met  personeel nr" +werknemer.getPersoneelsnummer() );
+		if (tmp != null) {
+			tmp.setGegevens(werknemer);
+		} else
+			throw new IllegalArgumentException("geen werknemer is gevonden met  personeel nr" + werknemer.getPersoneelsnummer());
 
 	}
 
@@ -135,10 +136,28 @@ public class WerknemerDAO {
 	 * 
 	 * @param email
 	 * @return Werknemer
+	 * @throws NoResultException
+	 *             - if there is no result
+	 * @throws NonUniqueResultException
+	 *             - if more than one result
+	 * @throws IllegalStateException
+	 *             - if called for a Java Persistence query language UPDATE or
+	 *             DELETE statement
+	 * @throws QueryTimeoutException
+	 *             - if the query execution exceeds the query timeout value set
+	 *             and only the statement is rolled back
+	 * @throws TransactionRequiredException
+	 *             - if a lock mode has been set and there is no transaction
+	 * @throws PessimisticLockException
+	 *             - if pessimistic locking fails and the transaction is rolled
+	 *             back LockTimeoutException - if pessimistic locking fails and
+	 *             only the statement is rolled back PersistenceException - if
+	 *             the query execution exceeds the query timeout value set and
+	 *             the transaction is rolled back
 	 */
 	public Werknemer getWerknemer(String email) {
 		TypedQuery<Werknemer> tqry = em.createQuery("SELECT w FROM Werknemer w WHERE w.email LIKE :email", Werknemer.class);
-		tqry.setParameter("email", "%" + email + "%");
+		tqry.setParameter("email", email);
 		return tqry.getSingleResult();
 	}
 

@@ -16,8 +16,11 @@ public class Werknemer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int personeelsnummer;
+	@Column(nullable=false)
 	private String naam;
+	@Column(nullable=false)
 	private String voornaam;
+	@Column(unique=true,nullable=false)
 	private String email;
 	@Temporal(TemporalType.DATE)
 	private Calendar geboortedatum;
