@@ -157,7 +157,8 @@ public class Werknemer implements Serializable {
 		if (tmpJaar == null) {
 			throw new NullPointerException();
 		}
-		return tmpJaar.getAantalDagen();
+		int verlofdagen = verlofaanvragen.stream().mapToInt(v -> v.getPeriode()).sum();
+		return (tmpJaar.getAantalDagen() - verlofdagen);
 	}
 
 	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
