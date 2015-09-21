@@ -6,9 +6,10 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 @Entity
-@Table(name="FEESDAGEN")
+@Table(name="FEESTDAGEN")
 public class Feestdag extends CollectieveSluiting implements Serializable{
 	
 	
@@ -23,6 +24,8 @@ public class Feestdag extends CollectieveSluiting implements Serializable{
 		super(startdatum, omschrijving, terugkerend);
 		
 	}
+	
+	
 
 	/**
 	 * geeft true als feestdag  valt in  een werkdag.

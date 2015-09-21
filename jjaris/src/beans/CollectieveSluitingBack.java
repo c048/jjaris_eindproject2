@@ -3,13 +3,20 @@ package beans;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.sun.istack.internal.NotNull;
+
+import utils.DatumBuilder;
 import daos.CollectieveSluitingDAO;
 import daos.WerknemerDAO;
+import entities.Feestdag;
 
 @Named("collectievesluiting")
 @RequestScoped
@@ -32,8 +39,9 @@ public class CollectieveSluitingBack implements Serializable {
 	private int einddatumCVMaand;
 	private int einddatumCVDag;
 	
-	
+	@NotNull
 	private String omschrijvingF;
+	@NotNull
 	private String omschrijvingCV;
 	
 	private boolean terugkerendF;
@@ -41,22 +49,39 @@ public class CollectieveSluitingBack implements Serializable {
 	
 
 
-
 	public String voegFeestdagToe() {
-	
+		
+		try {
+			
+			DatumBuilder feestdag=new DatumBuilder(startdatumFDag, startdatumFMaand, startdatumFJaar);
+			
+			dao.voegFeestdagToe(feestdag.buildCalendar(), omschrijvingF, terugkerendF);
+
+		}
+		catch(IllegalArgumentException eIllArgExc) {
+			 setFacesMessage("Datum en omschrijving van de feestdag zijn verplicht in te vullen." ) ;
+		}
+
+		return "collectieveSluiting";
+		
+		
+		/*
+		 
 		Calendar feestdag = new GregorianCalendar();
 
 		feestdag.set(Calendar.YEAR, startdatumFJaar);
 		feestdag.set(Calendar.MONTH, startdatumFMaand-1);
 		feestdag.set(Calendar.DAY_OF_MONTH, startdatumFDag);
 		
-		dao.voegFeestdagToe(feestdag, omschrijvingF, terugkerendF);
+		// dao.voegFeestdagToe(feestdag, omschrijvingF, terugkerendF);
 		
-		System.out.println("*********Debug:feestdag" +feestdag.get(Calendar.DAY_OF_MONTH)+
+		*/
+		
+	/*	System.out.println("*********Debug:feestdag" +feestdag.get(Calendar.DAY_OF_MONTH)+
 				"-"+feestdag.get(Calendar.MONTH) + 
-				"-" +feestdag.get(Calendar.YEAR));
+				"-" +feestdag.get(Calendar.YEAR));*/
 		
-		return "collectieveSluiting";
+		
 	}
 	
 	public String voegCollectieveVerlofToe() {
@@ -67,25 +92,31 @@ public class CollectieveSluitingBack implements Serializable {
 		csBegindatum.set(Calendar.MONTH, startdatumCVMaand-1);
 		csBegindatum.set(Calendar.DAY_OF_MONTH, startdatumCVDag);
 		
-		System.out.println("*********Debug:begindatumCV" +csBegindatum.get(Calendar.DAY_OF_MONTH)+
-							"-"+csBegindatum.get(Calendar.MONTH) + 
-							"-" +csBegindatum.get(Calendar.YEAR));
-		
-		Calendar csEinddatum = new GregorianCalendar();
-		
+		Calendar csEinddatum = new GregorianCalendar();	
 
 		csEinddatum.set(Calendar.YEAR, einddatumCVJaar);
 		csEinddatum.set(Calendar.MONTH, einddatumCVMaand-1);
 		csEinddatum.set(Calendar.DAY_OF_MONTH, einddatumCVDag);
 		
-		System.out.println("*********Debug:einddatumCV" +csEinddatum.get(Calendar.DAY_OF_MONTH)+
-				"-"+csEinddatum.get(Calendar.MONTH) + 
-				"-" +csEinddatum.get(Calendar.YEAR));
-		
 		dao.voegCollectieveVerlofToe(csBegindatum, csEinddatum,omschrijvingCV, terugkerendCV);
 		
 		return "collectieveSluiting";
 	}
+	
+	
+	public void setFacesMessage(String msg ) {
+		FacesMessage fMsg = new FacesMessage(msg);
+		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		FacesContext.getCurrentInstance().renderResponse();
+	}
+	
+	public List<Feestdag> getFeestdagen(){
+		Calendar cal=Calendar.getInstance();
+		return dao.getAlleFeestdagen(cal.get(Calendar.YEAR));	
+
+	}
+	
 
 	public int getStartdatumFJaar() {
 		return startdatumFJaar;
@@ -172,7 +203,7 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingCV(String omschrijvingCV) {
-		System.out.println("*********Debug:omschrijvingCV" +omschrijvingCV );
+		//System.out.println("*********Debug:omschrijvingCV" +omschrijvingCV );
 		this.omschrijvingCV = omschrijvingCV;
 	}
 

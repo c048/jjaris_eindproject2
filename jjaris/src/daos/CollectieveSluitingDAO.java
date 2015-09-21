@@ -27,9 +27,9 @@ public class CollectieveSluitingDAO {
 	public  List<Feestdag> getFeestdagen (Calendar begindatum, Calendar einddatum){
 		
 	
-		TypedQuery<Feestdag> query = em.createQuery("SELECT f FROM FEESDAGEN f WHERE f.startdatum"+
+		TypedQuery<Feestdag> query = em.createQuery("SELECT f FROM FEESTDAGEN f WHERE f.startdatum"+
 						" BETWEEN :begindatum AND :einddatum ",Feestdag.class);
-
+		
 		return (List<Feestdag>) query.setParameter("begindatum", begindatum)
 				.setParameter("einddatum", einddatum).getResultList();
 
