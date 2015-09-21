@@ -13,6 +13,7 @@ import javax.inject.Named;
 import utils.DatumBuilder;
 import utils.Filter;
 import daos.VerlofAanvraagDAO;
+import entities.Toestand;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
@@ -33,6 +34,7 @@ public class Verlof implements Serializable{
 	private int eindJaar;
 	private int eindMaand;
 	private int eindDag;
+	private Toestand toestand;
 	private List<VerlofAanvraag> alleVerloven;
 	
 	

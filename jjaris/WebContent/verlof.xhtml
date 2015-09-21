@@ -31,21 +31,21 @@
 			<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}"></h:inputText>
 			<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
 			
-			verlof.alleVerloven
+			
 			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
 			<h:outputlabel value="Toestand" id="toestand" />
-			<h:selectOneMenu id="menu" value="#{}"  >
-				<f:selectItem itemLabel="Toestand" itemValue="#{}" />
-            	<f:selectItems value="#{toestandBack.toestandLijst}" />
+			<h:selectOneMenu id="menu" value="#{toestand}" var="toestand" >
+            	<f:selectItems itemLabel="Toestand" value="#{toestandBack.toestandLijst}" />
 			</h:selectOneMenu>
 			<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
+
 
 		</h:panelGrid>	
 
 	</h:form>
 	<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
-<!-- 	<h:form>
-<h:dataTable value="#{verlofaanvraag.aanvragen}" var="va">
+ 	<h:form>
+<h:dataTable value="#{verlof.alleVerloven}" var="va">
     			<h:column>
     				column header
     				<f:facet name="header">ID</f:facet>
@@ -77,6 +77,6 @@
     				<h:commandButton value="verwijderen" action="#{verlofaanvraag.annuleren(va.id)}"></h:commandButton>
     			</h:column>
     		</h:dataTable>		
-	</h:form> -->			
+	</h:form>			 
 </h:body>
 </html>
