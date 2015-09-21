@@ -33,17 +33,17 @@ public class TeamDAO {
 	 * @throws NullPointerException
 	 * @throws IllegalArgumentException
 	 */
-	//@Transactional //Indien in een transactional methode een exceptie wordt gegooid, krijg je tijdens de uitvoering een TransactionalException
+	@Transactional //Indien in een transactional methode een exceptie wordt gegooid, krijg je tijdens de uitvoering een TransactionalException
 	public void verwijderTeam(Team team) {
 
 		if (team != null && team.getTeamleden().isEmpty()) {
-			EntityTransaction tx =  em.getTransaction();
-			tx.begin();
+//			EntityTransaction tx =  em.getTransaction();
+//			tx.begin();
 			System.out.printf("team %s aan het verwijderen",team.getNaam());
 			Team t = em.find(Team.class, team.getCode());
 			System.out.println("team gevonden voor verwijdering");
 			em.remove(t);
-			tx.commit();
+//			tx.commit();
 			
 		} else {
 			if (team == null) {
