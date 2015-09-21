@@ -82,7 +82,11 @@ public class Team implements Serializable {
 		if (teamverantwoordelijke != null) {
 			this.teamverantwoordelijke = teamverantwoordelijke;
 			this.teamverantwoordelijke.setTeam(this);
+		} else {
+			this.teamverantwoordelijke = null;
+
 		}
+
 	}
 
 	// vanaf hier Stef, nog geen foutafhandeling!!

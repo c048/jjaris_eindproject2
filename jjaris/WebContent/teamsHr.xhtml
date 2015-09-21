@@ -18,8 +18,7 @@
 		<h:outputLabel for="IntTeamCode" value="Team Code: "></h:outputLabel>
 		<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}"></h:inputText>
 		<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
-	</h:form>
-	<h:form>
+	
 		<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam">
 			<h:column>
 				<f:facet name="header">Team Code</f:facet>    				
@@ -30,23 +29,22 @@
 			<h:column>
 				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
 		      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
-<!-- 			<h:column> -->
-<!-- 				<f:facet name="header">Wijzigen of Verwijderen Team</f:facet> -->
-<!-- 				<h:commandButton value="Update Team" -->
-<!-- 					action="#{hrTeamsBack.editTeam}"> -->
+			<h:column>
+				<f:facet name="header">Wijzigen Team</f:facet>
+				<h:commandButton value="Update Team"
+					action="#{hrTeamsBack.editeerTeam(tmpTeam.code)}">
 <!-- 					<f:param name="selCodeEdit" value="#{tmpTeam.code}" /> -->
-<!-- 				</h:commandButton> -->
-<!-- 				<h:commandButton value="Verwijder Team #{tmpTeam.code}" -->
-<!-- 					action="#{hrTeamsBack.verwijderTeam}"> -->
+				</h:commandButton>
+				</h:column>
+				<h:column>
+				<f:facet name="header">Verwijderen Team</f:facet>
+				<h:commandButton value="Verwijder Team"
+					action="#{hrTeamsBack.verwijderenTeam(tmpTeam.code)}">
 <!-- 					<f:param name="selCodeVerwijder" value="#{tmpTeam.code}" ></f:param> -->
-<!-- 				</h:commandButton> -->
-<!-- 			</h:column> -->
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
-		<br></br>
-		<h:outputLabel for="IntTeamCodePasAan" value="Team Code: "></h:outputLabel>
-		<h:inputText id="IntTeamCodePasAan"   value="#{hrTeamsBack.aanpasCode}"></h:inputText>
-		<h:commandButton value="Pas Team aan " action="#{hrTeamsBack.editTeam}"></h:commandButton>
-		<h:commandButton value="Verwijder Team " action="#{hrTeamsBack.verwijderTeam}"></h:commandButton>
+
 	</h:form>
 
 <h:messages style="color:red;"></h:messages>

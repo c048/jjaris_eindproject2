@@ -64,6 +64,8 @@ public class EditTeamBack implements Serializable {
 	private void setTeamverantwoordelijke() {
 		if(getPersoneelsnrVerantwoordelijke() != 0){
 		team.setTeamverantwoordelijke(getTeam().getTeamlid(getPersoneelsnrVerantwoordelijke()));
+		}else{
+			team.setTeamverantwoordelijke(null);//geen teamverantwoordelijke geselecteerd
 		}
 	}
 

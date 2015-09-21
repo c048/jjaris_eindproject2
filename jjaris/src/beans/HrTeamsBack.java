@@ -29,15 +29,15 @@ public class HrTeamsBack implements Serializable {
 
 	private String teamNaam, naamTeamVerantwoordelijke;
 	private int teamCode;
-	private int aanpasCode;
+//	private int aanpasCode;
 
-	public int getAanpasCode() {
-		return aanpasCode;
-	}
-
-	public void setAanpasCode(int aanpasCode) {
-		this.aanpasCode = aanpasCode;
-	}
+//	public int getAanpasCode() {
+//		return aanpasCode;
+//	}
+//
+//	public void setAanpasCode(int aanpasCode) {
+//		this.aanpasCode = aanpasCode;
+//	}
 
 	public List<Team> getTeams() {
 		return teams;
@@ -77,11 +77,11 @@ public class HrTeamsBack implements Serializable {
 
 	}
 
-	public String verwijderTeam() {
+	public String verwijderenTeam(int teamCode) {
 		// String code =
 		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeVerwijder");
-		// System.out.println("in verwijder team van HrTeamsBack");
-		Team team = tDao.getTeam(getAanpasCode());
+		System.out.println("in verwijder team van HrTeamsBack");
+		Team team = tDao.getTeam(teamCode);
 		try {
 			tDao.verwijderTeam(team);
 		}
@@ -108,11 +108,11 @@ public class HrTeamsBack implements Serializable {
 
 	}
 
-	public String editTeam() {
+	public String editeerTeam(int teamCode) {
 		// String code =
 		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
-		// System.out.println("in edit team van HrTeamsBack");
-		parameters.setCode(getAanpasCode());
+		System.out.println("in edit team van HrTeamsBack");
+		parameters.setCode(teamCode);
 		return "teamHrEdit";
 	}
 
