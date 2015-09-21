@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.InputMismatchException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import utils.ControleerVerlofAanvraag;
 
 @Entity
@@ -112,6 +115,21 @@ public class VerlofAanvraag implements Serializable{
 		}	
 		return false;		
 	}	
+	
+	public boolean verlofOverlapt(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+		if(startDatum.before(eindDatum)){
+			if (eindDatum.before(this.getStartdatum()) || startDatum.after(this.getEinddatum())){
+				return false;
+			}else{
+				return true;
+			}
+		}else {
+			throw new InputMismatchException("startDatum moet voor eindDatum liggen");
+		}
+	}
+	
+	
+	
 	/**
 	 * Verlofaanvraag wordt goedgekeurd door teamleader
 	 */
