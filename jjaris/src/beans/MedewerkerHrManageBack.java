@@ -187,20 +187,16 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public String verwerkMedewerker() {
-		System.out.println("********** In verwerk");
 		try {
 			valideerMedewerker();
-			System.out.println("********** Valideren gedaan");
 			if (werknemerDAO.getWerknemer(werknemer.getEmail()) == null) {
 				werknemerDAO.voegWerknemerToe(werknemer);
 			} else {
-				System.out.println("********** Email bestaat");
 				if (params.getPersoneelsnummer() != 0) {
 					werknemer.setPersoneelsnummer(params.getPersoneelsnummer());
 					werknemerDAO.updateWerknemer(werknemer);
 					params.reset();
 				} else {
-					System.out.println("********** Id niet set");
 					throw new IllegalArgumentException("Er bestaat al een persoon met dit e-mail adres");
 				}
 			}
