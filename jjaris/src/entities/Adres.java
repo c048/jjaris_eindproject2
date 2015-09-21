@@ -56,7 +56,7 @@ public class Adres implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("straat: %s %s %s , woonplaats: %s %s", getStraat(), getHuisnummer(), getBusnummer(), getPostcode(), getGemeente());
+		return String.format("%s %s%s - %s, %s", getStraat(), getHuisnummer(), getBusnummer(), getPostcode(), getGemeente());
 	}
 
 }

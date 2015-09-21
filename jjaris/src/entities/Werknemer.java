@@ -130,7 +130,7 @@ public class Werknemer implements Serializable {
 		this.verlofaanvragen = verlofaanvragen;
 	}
 
-	public void setGegevens(Werknemer werknemer) {
+	public void setGegevens(Werknemer werknemer) { 
 		setNaam(werknemer.getNaam());
 		setVoornaam(werknemer.getVoornaam());
 		setAdres(werknemer.getAdres());
@@ -149,7 +149,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public boolean isHR() {
-		return team.getNaam().equalsIgnoreCase("hr");
+		return team.getHR();
 	}
 
 	public int getAantalBeschikBareVerlofDagen(int jaartal) {

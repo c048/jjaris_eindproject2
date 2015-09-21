@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:body>
+		<ui:composition>
+			<div id="links">
+				<h:link value="Mijn verlof aanvragen" outcome="verlofMedewerker"></h:link>
+				<c:if test="${loginBack.getIngelogdeWerknemer().isVerantwoordelijke() eq true}">
+					<h:link value="Mijn team" outcome="verlofTeam"></h:link>
+				</c:if>
+				<c:if test="${loginBack.getIngelogdeWerknemer().isHR() eq true}">
+					<h:link value="Overzicht Medewerkers" outcome="medewerkersHr"></h:link>
+					<h:link value="Overzicht Verlof" outcome="verlofAanvraagHr"></h:link>
+					<h:link value="Overzicht Teams" outcome="teamsHr"></h:link>
+				</c:if>
+			</div>
+		</ui:composition>
+	</h:body>
+</html>

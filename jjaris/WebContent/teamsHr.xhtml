@@ -2,51 +2,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Zoek Team</title>
 </h:head>
 <h:body>
-	<h:form>
-		<h:outputLabel for="txtNaam" value="Naam: "></h:outputLabel>
-		<h:inputText id="txtNaam" value="#{hrTeamsBack.teamNaam}"></h:inputText>
-		<h:outputLabel for="txtNaamVerantwoordelijke"
-			value="Naam verantwoordelijke: "></h:outputLabel>
-		<h:inputText id="txtNaamVerantwoordelijke"
-			value="#{hrTeamsBack.teamVerantwoordelijke}"></h:inputText>
-		<h:outputLabel for="IntTeamCode" value="Team Code: "></h:outputLabel>
-		<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}"></h:inputText>
-		<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
-	
-		<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam">
-			<h:column>
-				<f:facet name="header">Team Code</f:facet>    				
-		      	#{tmpTeam.code}</h:column>
-			<h:column>
-				<f:facet name="header">Team Naam</f:facet>    				
-		      	#{tmpTeam.naam}</h:column>
-			<h:column>
-				<f:facet name="header">Team Verantwoordelijke</f:facet>    				
-		      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
-			<h:column>
-				<f:facet name="header">Wijzigen Team</f:facet>
-				<h:commandButton value="Update Team"
-					action="#{hrTeamsBack.editeerTeam(tmpTeam.code)}">
-<!-- 					<f:param name="selCodeEdit" value="#{tmpTeam.code}" /> -->
-				</h:commandButton>
-				</h:column>
-				<h:column>
-				<f:facet name="header">Verwijderen Team</f:facet>
-				<h:commandButton value="Verwijder Team"
-					action="#{hrTeamsBack.verwijderenTeam(tmpTeam.code)}">
-<!-- 					<f:param name="selCodeVerwijder" value="#{tmpTeam.code}" ></f:param> -->
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
-
-	</h:form>
-
-<h:messages style="color:red;"></h:messages>
-</h:body>
+	<ui:composition template="/WEB-INF/templates/defaultTemplate.xhtml">
+		<ui:define name="title">Manage Medewerker</ui:define>
+			<ui:define name="content">
+				<div id="content-wrapper">
+					<h:form>
+						<h:outputLabel for="txtNaam" value="Naam: "></h:outputLabel>
+						<h:inputText id="txtNaam" value="#{hrTeamsBack.teamNaam}"></h:inputText>
+						<h:outputLabel for="txtNaamVerantwoordelijke"
+							value="Naam verantwoordelijke: "></h:outputLabel>
+						<h:inputText id="txtNaamVerantwoordelijke"
+							value="#{hrTeamsBack.teamVerantwoordelijke}"></h:inputText>
+						<h:outputLabel for="IntTeamCode" value="Team Code: "></h:outputLabel>
+						<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}"></h:inputText>
+						<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
+					
+						<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam">
+							<h:column>
+								<f:facet name="header">Team Code</f:facet>    				
+						      	#{tmpTeam.code}</h:column>
+							<h:column>
+								<f:facet name="header">Team Naam</f:facet>    				
+						      	#{tmpTeam.naam}</h:column>
+							<h:column>
+								<f:facet name="header">Team Verantwoordelijke</f:facet>    				
+						      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
+							<h:column>
+								<f:facet name="header">Wijzigen Team</f:facet>
+								<h:commandButton value="Update Team"
+									action="#{hrTeamsBack.editeerTeam(tmpTeam.code)}">
+				<!-- 					<f:param name="selCodeEdit" value="#{tmpTeam.code}" /> -->
+								</h:commandButton>
+								</h:column>
+								<h:column>
+								<f:facet name="header">Verwijderen Team</f:facet>
+								<h:commandButton value="Verwijder Team"
+									action="#{hrTeamsBack.verwijderenTeam(tmpTeam.code)}">
+				<!-- 					<f:param name="selCodeVerwijder" value="#{tmpTeam.code}" ></f:param> -->
+								</h:commandButton>
+							</h:column>
+						</h:dataTable>
+				
+					</h:form>
+					<h:messages style="color:red;"></h:messages>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
 </html>
