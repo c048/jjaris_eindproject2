@@ -2,10 +2,13 @@ package beans;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -45,19 +48,14 @@ public class MedewerkerHrManageBack implements Serializable {
 			setGebJaar(werknemer.getGeboortedatum().get(Calendar.YEAR));
 			setGebMaand(werknemer.getGeboortedatum().get(Calendar.MONTH) + 1);
 		}
-		params.reset();
 	}
 
 	public Team getTeam() {
 		return werknemer.getTeam();
 	}
 
-	public void setPersoneelsnummer(int personeelsnummer) {
-		werknemer.setPersoneelsnummer(personeelsnummer);
-	}
-
-	public int getPersoneelsnummer() {
-		return werknemer.getPersoneelsnummer();
+	public int findPersoneelsnummer() {
+		return params.getPersoneelsnummer();
 	}
 
 	public void setTeam(Team team) {
@@ -89,7 +87,9 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public void setPasswoord(String passwoord) {
-		werknemer.setPasswoord(passwoord);
+		if(!passwoord.isEmpty()) {
+			werknemer.setPasswoord(passwoord);
+		}
 	}
 
 	public void setGemeente(String gemeente) {
@@ -169,6 +169,15 @@ public class MedewerkerHrManageBack implements Serializable {
 		werknemer.setAdres(new Adres());
 		werknemer.setTeam(new Team());
 	}
+	
+	public void valideerMedewerker() throws IllegalArgumentException {
+		DatumBuilder tmpBuilder = new DatumBuilder(gebDag, gebMaand,gebJaar);
+		if(tmpBuilder.isVoorVandaag()) {
+			werknemer.setGeboortedatum(tmpBuilder.buildCalendar());
+		} else {
+			throw new IllegalArgumentException("Geboortejaar kan niet in de toekomst liggen");
+		}
+	}
 
 	public String addMedewerkerContinue() {
 		if (verwerkMedewerker() != null) {
@@ -178,26 +187,42 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public String verwerkMedewerker() {
+		System.out.println("********** In verwerk");
 		try {
-			werknemer.setGeboortedatum(new DatumBuilder(gebDag, gebMaand,
-					gebJaar).buildCalendar());
+			valideerMedewerker();
+			System.out.println("********** Valideren gedaan");
 			if (werknemerDAO.getWerknemer(werknemer.getEmail()) == null) {
 				werknemerDAO.voegWerknemerToe(werknemer);
-
 			} else {
-				if (werknemer.getPersoneelsnummer() != 0) {
+				System.out.println("********** Email bestaat");
+				if (params.getPersoneelsnummer() != 0) {
+					werknemer.setPersoneelsnummer(params.getPersoneelsnummer());
 					werknemerDAO.updateWerknemer(werknemer);
+					params.reset();
+				} else {
+					System.out.println("********** Id niet set");
+					throw new IllegalArgumentException("Er bestaat al een persoon met dit e-mail adres");
 				}
-				werknemerDAO.updateWerknemer(werknemer);
 			}
+		} catch (IllegalArgumentException e){
+			setFacesMessage(e.getMessage());
+			return null;
 		} catch (Exception e) {
-			System.out.println(e.getMessage() + " errortype: " + e.getClass());
+			setFacesMessage("Onbekende error, contacteer IT-support!");
 			return null;
 		}
 		return "medewerkersHr";
 	}
+	
+	public void setFacesMessage(String msg ) {
+		FacesMessage fMsg = new FacesMessage(msg);
+		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		FacesContext.getCurrentInstance().renderResponse();
+	}
 
 	public String cancel() {
+		params.reset();
 		return "medewerkersHr";
 	}
 }

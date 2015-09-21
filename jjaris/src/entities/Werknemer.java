@@ -25,7 +25,7 @@ public class Werknemer implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Calendar geboortedatum;
 	private String passwoord;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "werknemer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<JaarlijksVerlof> jaarlijkseverloven;
 	@OneToMany(mappedBy = "werknemer", fetch = FetchType.EAGER)
 	private List<VerlofAanvraag> verlofaanvragen;

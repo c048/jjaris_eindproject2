@@ -2,18 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 	<html 	xmlns="http://www.w3.org/1999/xhtml" 
 			xmlns:h="http://xmlns.jcp.org/jsf/html"
-			xmlns:f="http://xmlns.jcp.org/jsf/core">
+			xmlns:f="http://xmlns.jcp.org/jsf/core"
+			xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>Voeg medewerker toe</title>
 	</h:head>
 	<h:body>
 		<h:form>
-			<h:inputHidden value="#{medewerkerHrManageBack.personeelsnummer}"></h:inputHidden>
+			<c:if test="${medewerkerHrManageBack.findPersoneelsnummer() ne 0}"><h:outputText value="ID : #{medewerkerHrManageBack.findPersoneelsnummer()}"></h:outputText><br/></c:if>
 			<h:outputLabel for="mNaam" value="Naam"></h:outputLabel>
-			<h:inputText id="mNaam" required="true" value="#{medewerkerHrManageBack.voornaam}"></h:inputText>
+			<h:inputText id="mNaam" required="true" requiredMessage="U moet een voornaam invullen" value="#{medewerkerHrManageBack.voornaam}">
+			</h:inputText>
 			<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
-			<h:inputText id="mAchterNaam" required="true" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
+			<h:inputText id="mAchterNaam" required="true" requiredMessage="U moet een achternaan invoeren" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
 			<h:selectOneMenu value="#{medewerkerHrManageBack.team.code}">
 				<f:selectItems value="#{medewerkerHrManageBack.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
 			</h:selectOneMenu><br/>
@@ -25,9 +27,9 @@
 				<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 				
 				<h:outputText for="txtFDatum1" value="Geboortedatum"></h:outputText>
-				<h:inputText id="txtFDag1"  value="#{medewerkerHrManageBack.gebDag}"></h:inputText>
-				<h:inputText id="txtFMaand1"  value="#{medewerkerHrManageBack.gebMaand}"></h:inputText>
-				<h:inputText id="txtFJaar1"  value="#{medewerkerHrManageBack.gebJaar}"></h:inputText>
+				<h:inputText id="txtFDag1" converterMessage="Dag moet een getal zijn" value="#{medewerkerHrManageBack.gebDag}"></h:inputText>
+				<h:inputText id="txtFMaand1" converterMessage="Maand moet een getal zijn" value="#{medewerkerHrManageBack.gebMaand}"></h:inputText>
+				<h:inputText id="txtFJaar1" converterMessage="Jaar moet een getal zijn" value="#{medewerkerHrManageBack.gebJaar}"></h:inputText>
 			</h:panelGrid>
 			
 			<h3>Adres</h3>
@@ -42,12 +44,31 @@
 			<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
 			<h:inputText id="adresGemeente" value="#{medewerkerHrManageBack.gemeente}"></h:inputText><br/>
 			<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
-			<h:inputText id="mEmail" required="true" value="#{medewerkerHrManageBack.email}"></h:inputText>
-			<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
-			<h:inputText id="mPwd" required="true" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
+			<h:inputText id="mEmail" required="true"  requiredMessage="U moet een e-mail adres invoeren" value="#{medewerkerHrManageBack.email}"></h:inputText>
 			
-			<h:commandButton value="Creëer medewerker &amp; nog één" action="#{medewerkerHrManageBack.addMedewerkerContinue()}"></h:commandButton>
-			<h:commandButton value="Creëer medewerker" action="#{medewerkerHrManageBack.verwerkMedewerker()}"></h:commandButton>
+			<c:choose>
+				<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
+					<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
+					<h:inputText id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
+				</c:when>
+				<c:otherwise>
+					<h:outputLabel for="mPwd" value="Nieuw Paswoord"></h:outputLabel>
+					<h:inputText id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
+				</c:otherwise>
+			</c:choose>
+			
+			
+			<h:messages style="color:red;"></h:messages><br/>
+			
+			<c:choose>
+				<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
+					<h:commandButton value="Creëer medewerker &amp; nog één" action="#{medewerkerHrManageBack.addMedewerkerContinue()}"></h:commandButton>
+					<h:commandButton value="Creëer medewerker" action="#{medewerkerHrManageBack.verwerkMedewerker()}"></h:commandButton>
+				</c:when>
+				<c:otherwise>
+					<h:commandButton value="Update medewerker" action="#{medewerkerHrManageBack.verwerkMedewerker()}"></h:commandButton>
+				</c:otherwise>
+			</c:choose>
 			<h:commandButton value="Annuleren" action="#{medewerkerHrManageBack.cancel()}" immediate="true"></h:commandButton>
 		</h:form>
 	</h:body>
