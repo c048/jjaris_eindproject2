@@ -7,8 +7,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.TransactionalException;
 
 import utils.Filter;
 import daos.WerknemerDAO;
@@ -103,7 +106,21 @@ public class MedewerkersHrBack implements Serializable {
 
 	public String verwijderWerknemer(int personeelsnummer) {
 		Werknemer tmpw = dao.getWerknemer(personeelsnummer);
+		try{
 		dao.verwijderWerknemer(tmpw);
+		}
+		catch (TransactionalException te){
+			FacesMessage msg = new FacesMessage("Kan werknemer niet verwijderen (hij is mogelijk nog verantwoordelijke van een team)");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();	
+		}
+//		catch (IllegalArgumentException iae) {
+//			FacesMessage msg = new FacesMessage(iae.getMessage());
+//			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+//			FacesContext.getCurrentInstance().addMessage(null, msg);
+//			FacesContext.getCurrentInstance().renderResponse();	
+//		}
 		return null;
 	}
 

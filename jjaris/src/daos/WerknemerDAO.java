@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TransactionRequiredException;
@@ -102,26 +103,15 @@ public class WerknemerDAO {
 	 * verlofaanvragen
 	 * 
 	 * @param werknemer
+	 * @throws NullPointerException als de werknemer null is
+	 * @throws IllegalArgumentException als de werknemer teamverantwoordelijke is
 	 */
 	@Transactional
 	public void verwijderWerknemer(Werknemer werknemer) {
 
 		if (werknemer != null && !werknemer.isVerantwoordelijke()) {
-			Werknemer w = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
-
-			List<VerlofAanvraag> verlofaanvragen = w.getAlleVerlofAanvragen();
-			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-				VerlofAanvraag va = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
-				em.remove(va);
-			}
-
-			List<JaarlijksVerlof> jaarlijkseverloven = w.getJaarlijkseverloven();
-			for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
-				JaarlijksVerlof jv = em.find(JaarlijksVerlof.class, jaarlijksVerlof.getId());
-				em.remove(jv);
-			}
-
-			em.remove(w);
+			
+			verwijderWerknemerUitDatabank(werknemer);
 
 		} else {
 			if (werknemer == null) {
@@ -131,6 +121,28 @@ public class WerknemerDAO {
 						"WerknemerDAO.verwijderWerknemer kan niet worden uitgevoerd, omdat de werknemer teamverantwoordelijke is");
 			}
 		}
+	}
+
+	//hulpmethode
+	@Transactional
+	private void verwijderWerknemerUitDatabank(Werknemer werknemer) {
+		
+		Werknemer w = em.find(Werknemer.class, werknemer.getPersoneelsnummer());
+
+		List<VerlofAanvraag> verlofaanvragen = w.getAlleVerlofAanvragen();
+		for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
+			VerlofAanvraag va = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
+			em.remove(va);
+		}
+
+		List<JaarlijksVerlof> jaarlijkseverloven = w.getJaarlijkseverloven();
+		for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
+			JaarlijksVerlof jv = em.find(JaarlijksVerlof.class, jaarlijksVerlof.getId());
+			em.remove(jv);
+		}
+		
+		em.remove(w);
+		
 	}
 
 	/**
