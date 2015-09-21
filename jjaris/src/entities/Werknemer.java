@@ -158,9 +158,16 @@ public class Werknemer implements Serializable {
 		return (tmpJaar - verlofdagen);
 	}
 
-	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
-		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum,this);
-		getVerlofaanvragen().add(tmpAanvraag);
+//	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
+//		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum,this);
+//		getVerlofaanvragen().add(tmpAanvraag);
+//	}
+	
+	public void voegVerlofAanvraagToe(VerlofAanvraag va){
+		getVerlofaanvragen().add(va);
+		if (!va.getWerknemer().equals(this)){
+			va.setWerknemer(this);
+		}
 	}
 
 	public void annuleerVerlofAanvraag(int verlofaanvraagId) throws NullPointerException {
@@ -184,7 +191,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
-		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) || v.getEinddatum().after(begindatum)) && v.getToestand() == (toestand)).collect(Collectors.toList());
+		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum)) && v.getToestand() == (toestand)).collect(Collectors.toList());
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
@@ -192,6 +199,9 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
+		if (verlofaanvragen.isEmpty()){
+			return verlofaanvragen;
+		}
 		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum))).collect(Collectors.toList());
 	}
 	

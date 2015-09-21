@@ -1,10 +1,12 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
 
 import org.junit.Test;
 
@@ -30,7 +32,6 @@ public class Tests {
 	@Test
 	public void testGetPeriode1(){
 		Werknemer werknemer = new Werknemer();
-		werknemer.setNaam("Frans");
 		System.out.println("nr van zaterdag: "+Calendar.SATURDAY);
 		System.out.println("nr van zondag: "+Calendar.SUNDAY);
 		VerlofAanvraag verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,0,1), new GregorianCalendar(2015, 0, 15),werknemer);
@@ -55,11 +56,20 @@ public class Tests {
 	 * 
 	 */
 	@Test
-	public void testGeldigVerlof(){
+	public void testGeldigVerlof1(){
+		Werknemer w = new Werknemer();
+		VerlofAanvraag va = new VerlofAanvraag(new GregorianCalendar(2015, 9, 1), new GregorianCalendar(2015, 9, 22),w);
+		assertTrue(va.geldigVerlof(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12)));
 		
 	}
 	
-	
+	@Test
+	public void testGeldigVerlof2(){
+		Werknemer w = new Werknemer();
+		VerlofAanvraag va = new VerlofAanvraag(new GregorianCalendar(2015, 9, 1), new GregorianCalendar(2015, 9, 22),w);
+		assertFalse(va.geldigVerlof(new GregorianCalendar(2015, 9, 10), new GregorianCalendar(2015, 10, 12)));
+		
+	}
 	
 	
 	
