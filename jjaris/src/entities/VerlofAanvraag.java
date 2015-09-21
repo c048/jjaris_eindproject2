@@ -116,7 +116,13 @@ public class VerlofAanvraag implements Serializable{
 		return false;		
 	}	
 	
-	public boolean verlofOverlapt(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+	/**
+	 * hulpfunctie voor isOverlappend(GregorianCalendar startDatum, GregorianCalendar eindDatum)
+	 * @param startDatum
+	 * @param eindDatum
+	 * @return
+	 */
+	private boolean verlofOverlapt(GregorianCalendar startDatum, GregorianCalendar eindDatum){
 		if(startDatum.before(eindDatum)){
 			if (eindDatum.before(this.getStartdatum()) || startDatum.after(this.getEinddatum())){
 				return false;
@@ -126,6 +132,12 @@ public class VerlofAanvraag implements Serializable{
 		}else {
 			throw new InputMismatchException("startDatum moet voor eindDatum liggen");
 		}
+	}
+	
+	
+	private boolean isOverlappend(GregorianCalendar startDatum, GregorianCalendar eindDatum){
+		werknemer.getAlleVerlofAanvragen(startDatum, eindDatum);
+		return false;
 	}
 	
 	
