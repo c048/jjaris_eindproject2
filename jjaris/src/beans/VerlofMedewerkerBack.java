@@ -13,6 +13,7 @@ import javax.inject.Named;
 import utils.DatumBuilder;
 import utils.Filter;
 import daos.VerlofAanvraagDAO;
+import entities.Toestand;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
