@@ -58,7 +58,7 @@ public class LoginBack implements Serializable {
 	public String login() {
 		try {
 			Werknemer w = wDao.getWerknemer(email);
-			if (w.controleerPasswoord(getPaswoord())) {
+			if (w!=null && w.controleerPasswoord(getPaswoord())) {
 				if (w.isHR()) {
 					return "medewerkersHr";
 				} else {
@@ -71,18 +71,13 @@ public class LoginBack implements Serializable {
 				}
 
 			} else {
-				FacesMessage msg = new FacesMessage("Ongeldige login gegevens");
+				FacesMessage msg = new FacesMessage("Ongeldige login gegevens - paswoord of email adres niet correct");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 				FacesContext.getCurrentInstance().renderResponse();
 				return null;
 			}
-		} catch (NoResultException nre) {
-			FacesMessage msg = new FacesMessage("Er is geen werknemer gevonden met dit e-mail adres");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().renderResponse();
-			return null;
+		
 		} catch (NonUniqueResultException nure) {
 			FacesMessage msg = new FacesMessage("Er zijn meerdere werknemers gevonden met hetzelfde e-mail adres");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
