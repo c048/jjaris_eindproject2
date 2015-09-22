@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -44,7 +46,9 @@ public class VerlofAanvraagHr implements Serializable{
 	
 	private String achterNaam;
 	
-	private Filter filter= new Filter();
+	private List<VerlofAanvraag> verlofaanvragen;
+	
+//	private Filter filter= new Filter();
 
 	/**
 	 * Lijst met verlofaanvragen per werknemer gefilterd standaard lege filters
@@ -52,49 +56,81 @@ public class VerlofAanvraagHr implements Serializable{
 	 * @return
 	 */
 	public List<VerlofAanvraag> getAanvragen(){
-		Date startdatum = buildDatum(startDag, startMaand, startJaar);
-		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-//		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
-		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
-		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
-		if(toestand !=null){filter.voegFilterToe("toestand", toestand);}
-//		if(voorNaam !=null){filter.voegFilterToe("toest", voorNaam);}
-//		if(achterNaam !=null){filter.voegFilterToe("toe", achterNaam);}
-		System.out.println(personeelsNr+"********************************************");
-		if(personeelsNr !=0){filter.voegFilterToe("werknemer.personeelsnummer", personeelsNr);}
-		filter.voegFilterToe("werknemer.team.code", teamID);
+		if (verlofaanvragen == null){
+			verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragenWerknemer(user.getIngelogdeWerknemer().getPersoneelsnummer());
+		}
+		return verlofaanvragen;	
 		
-		
-		
-		
-		
-		return verlofaanvraagDAO.getVerlofAanvragen(filter);
+//		Date startdatum = buildDatum(startDag, startMaand, startJaar);
+//		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+////		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
+//		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
+//		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
+//		if(toestand !=null){filter.voegFilterToe("toestand", toestand);}
+//		if(personeelsNr !=0){filter.voegFilterToe("werknemer.personeelsnummer", personeelsNr);}
+//		filter.voegFilterToe("werknemer.team.code", teamID);
+//		
+//		return verlofaanvraagDAO.getVerlofAanvragen(filter);
 	}
-	
+	public void resetParameters() {
+		startDag = 0;
+		startMaand = 0;
+		startJaar = 0;
+		eindDag = 0;
+		eindJaar = 0;
+		eindMaand = 0;
+		toestand = null;
+		personeelsNr = 0;
+	}
 	public String zoeken(){
-		getAanvragen();
-		return null;
-		
-	}
-	
-	/**
-	 * Annuleer een verlofaanvraag	
-	 */
-	public String annuleren(int id){
-		Werknemer werknemer = user.getIngelogdeWerknemer();
-		werknemer.annuleerVerlofAanvraag(id);
-		verlofaanvraagDAO.updateVerlofAanvraag(verlofaanvraagDAO.getVerlofAanvraag(id));
-		return null;				
-	}
+			try {
+				Date startdatum = buildDatum(startDag, startMaand, startJaar);
+				Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+				Filter filter = new Filter();
+				filter.voegFilterToe("werknemer.personeelsnummer", user.getIngelogdeWerknemer().getPersoneelsnummer());
+				if (startdatum != null) {filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
+				if (einddatum != null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
+				if (toestand != null) {filter.voegFilterToe("toestand", toestand);}
+				if(personeelsNr !=0){filter.voegFilterToe("werknemer.personeelsnummer", personeelsNr);}
+				filter.voegFilterToe("werknemer.team.code", teamID);
+				verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragen(filter);
+			} catch (IllegalArgumentException iae) {
+				FacesMessage msg = new FacesMessage(iae.getMessage());
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				FacesContext.getCurrentInstance().renderResponse();
+			}
+
+			resetParameters();
+			return null;
+
+		}
+
 	/**
 	 * Verlof aanvragen
 	 */
-	public void toevoegen(){
-		Date startdatum = buildDatum(startDag, startMaand, startJaar);
-		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-		Werknemer werknemer = user.getIngelogdeWerknemer();
-		VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
-		verlofaanvraagDAO.voegVerlofAanvraagToe(verlof);	
+	public void toevoegen() {
+
+		try {
+			Date startdatum = buildDatum(startDag, startMaand, startJaar);
+			Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+			if (startdatum != null && einddatum != null) {
+				Werknemer werknemer = user.getIngelogdeWerknemer();
+				VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
+				verlofaanvraagDAO.voegVerlofAanvraagToe(verlof);
+			} else {
+				FacesMessage msg = new FacesMessage("Gelieve de datumvelden in te vullen");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				FacesContext.getCurrentInstance().renderResponse();
+			}
+		} catch (IllegalArgumentException iae) {
+			FacesMessage msg = new FacesMessage(iae.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
+		}
+
 	}		
 	/**
 	 * hulpmethode datum date-->gregorian
@@ -224,5 +260,6 @@ public class VerlofAanvraagHr implements Serializable{
 	public void setPersoneelsNr(int personeelsNr) {
 		this.personeelsNr = personeelsNr;
 	}
+
 }
 

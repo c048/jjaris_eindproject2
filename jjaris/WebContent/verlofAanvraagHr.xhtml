@@ -68,7 +68,7 @@
 			 	<h:form>
 					<h:dataTable value="#{verlof.aanvragen}" var="va">
 			  			<h:column>
-			  				<f:facet name="header">ID</f:facet>
+			  				<f:facet name="header">Verlof ID</f:facet>
 			  				#{va.id}
 			  			</h:column>		
 			  			<h:column>
@@ -91,6 +91,12 @@
 			  				<f:facet name="header">Reden</f:facet>
 			  				#{va.reden}
 			  			</h:column>
+			  			
+			  			<h:column>
+			  				<f:facet name="header">PersoneelsNr</f:facet>
+			  				#{va.werknemer.personeelsnummer}
+			  			</h:column>
+			  			
 			   		</h:dataTable>		
 				</h:form>
 			</div>
