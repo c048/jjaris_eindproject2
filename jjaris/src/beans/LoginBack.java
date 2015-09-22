@@ -60,10 +60,10 @@ public class LoginBack implements Serializable {
 			Werknemer w = wDao.getWerknemer(email);
 			if (w!=null && w.controleerPasswoord(getPaswoord())) {
 				if (w.isHR()) {
-					return "medewerkersHr";
+					return "verlofMedewerker";
 				} else {
 					if (w.isVerantwoordelijke()) {
-						return "medewerkersHr";
+						return "verlofMedewerker";
 					} else {
 						return "verlofMedewerker";
 					}
