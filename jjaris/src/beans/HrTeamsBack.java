@@ -132,6 +132,8 @@ public class HrTeamsBack implements Serializable {
 			f.voegFilterToe("code", getTeamCode());
 		}
 
+		
+	// comment line te verwijderen
 		teams = tDao.getTeams(f);
 		return "teamsHr";
 	}
