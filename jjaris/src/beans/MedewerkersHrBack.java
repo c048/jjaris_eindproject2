@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -53,17 +52,21 @@ public class MedewerkersHrBack implements Serializable {
 
 	public List<Werknemer> getWerknemers() {
 		Filter f = new Filter();
-		if (naam != null && !naam.trim().equalsIgnoreCase("")) {
-			f.voegFilterToe("naam", getNaam());
+		try {
+			if (naam != null && !naam.trim().equalsIgnoreCase("")) {
+				f.voegFilterToe("naam", getNaam());
+			}
+			if (voornaam != null && !voornaam.trim().equalsIgnoreCase("")) {
+				f.voegFilterToe("voornaam", getVoornaam());
+			}
+			if (naam != null && ID != 0) {
+				f.voegFilterToe("personeelsnummer", getID());
+			}
+		} catch (IllegalArgumentException iae) {
+			setFacesMessage("Geen gegevens gevonden met deze parameters");
+		} catch (NullPointerException npe) {
+			setFacesMessage("Geen gegevens gevonden met deze parameters");
 		}
-
-		if (voornaam != null && !voornaam.trim().equalsIgnoreCase("")) {
-			f.voegFilterToe("voornaam", getVoornaam());
-		}
-		if (naam != null && ID != 0) {
-			f.voegFilterToe("personeelsnummer", getID());
-		}
-
 		return dao.getWerknemers(f);
 	}
 
@@ -132,7 +135,12 @@ public class MedewerkersHrBack implements Serializable {
 	public String createMedewerker() {
 		return "medewerkerHrManage";
 	}
-
+	public void setFacesMessage(String msg) {
+		FacesMessage fMsg = new FacesMessage(msg);
+		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		FacesContext.getCurrentInstance().renderResponse();
+	}
 	public int beschikbareverlofdagen(int personbeelsnummer) {
 		int currentYear = LocalDate.now().getYear();
 		Werknemer tmpw = dao.getWerknemer(personbeelsnummer);

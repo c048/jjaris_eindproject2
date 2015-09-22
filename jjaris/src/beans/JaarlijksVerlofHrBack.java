@@ -2,7 +2,6 @@ package beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -39,19 +38,18 @@ public class JaarlijksVerlofHrBack implements Serializable {
 	private List<JaarlijksVerlof> delijst2;
 
 	public JaarlijksVerlofHrBack() {
-try {delijst2 = new ArrayList<JaarlijksVerlof>();
-	
-} catch (Exception e) {
-	setFacesMessage("Geen resultaten gevonden met deze parameters");
-}
-		
+		try {
+			delijst2 = new ArrayList<JaarlijksVerlof>();
+		} catch (Exception e) {
+			setFacesMessage("Geen resultaten gevonden met deze parameters");
+		}		
 	}
 
 	public List<JaarlijksVerlof> getjJaarlijksVerlof() {
-
 		Filter f = new Filter();
 		List<Werknemer> tempverlf = new ArrayList<Werknemer>();
 		List<JaarlijksVerlof> tempverlfB = new ArrayList<JaarlijksVerlof>();
+		
 		try {
 			if (ID != 0) {
 				f.voegFilterToe("werknemer.personeelsnummer", getID());
@@ -66,7 +64,6 @@ try {delijst2 = new ArrayList<JaarlijksVerlof>();
 			for (Werknemer werknemer : tempverlf) {
 				tempverlfB.addAll(werknemer.getJaarlijkseverloven());
 			}
-			
 			for (JaarlijksVerlof jaarlijksVerlof : tempverlfB) {
 				delijst2.add(jaarlijksVerlof);
 			}
@@ -75,8 +72,8 @@ try {delijst2 = new ArrayList<JaarlijksVerlof>();
 		} catch (NullPointerException npe) {
 			setFacesMessage("Geen gegevens gevonden met deze parameters");
 		}
+		
 		return delijst2;
-	
 	}
 
 	public int getCode() {
@@ -87,26 +84,12 @@ try {delijst2 = new ArrayList<JaarlijksVerlof>();
 		this.code = code;
 	}
 
-	public JaarlijksVerlof getVerlof() {
-		return verlof;
-	}
-
 	public int getJaar() {
 		return Jaar;
 	}
 
 	public void setJaar(int jaar) {
 		Jaar = jaar;
-	}
-
-	public String zoek() {
-		delijst2 = getjJaarlijksVerlof();
-
-		return null;
-	}
-
-	public void setVerlof(JaarlijksVerlof verlof) {
-		this.verlof = verlof;
 	}
 
 	public Werknemer getWerknemer() {
@@ -133,6 +116,19 @@ try {delijst2 = new ArrayList<JaarlijksVerlof>();
 		ID = iD;
 	}
 
+	public JaarlijksVerlof getVerlof() {
+		return verlof;
+	}
+
+	public String zoek() {
+		delijst2 = getjJaarlijksVerlof();
+		return null;
+	}
+
+	public void setVerlof(JaarlijksVerlof verlof) {
+		this.verlof = verlof;
+	}
+
 	public List<JaarlijksVerlof> getDelijst2() {
 		return delijst2;
 	}
@@ -147,5 +143,4 @@ try {delijst2 = new ArrayList<JaarlijksVerlof>();
 		FacesContext.getCurrentInstance().addMessage(null, fMsg);
 		FacesContext.getCurrentInstance().renderResponse();
 	}
-
 }
