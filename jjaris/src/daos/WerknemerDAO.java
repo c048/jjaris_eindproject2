@@ -237,7 +237,10 @@ public class WerknemerDAO {
 					aantal++;
 				}
 			}
+			querystring += " ORDER BY w.naam, w.voornaam, w.personeelsnummer";
 		}
+		
+		
 
 		TypedQuery<Werknemer> query = em.createQuery(querystring, Werknemer.class);
 
