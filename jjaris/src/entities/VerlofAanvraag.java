@@ -50,19 +50,19 @@ public class VerlofAanvraag implements Serializable {
 	 * @param eindDatum
 	 * @param Werknemer
 	 */
-	public VerlofAanvraag(GregorianCalendar startDatum,
-			GregorianCalendar eindDatum, Werknemer werknemer) {
+	public VerlofAanvraag(GregorianCalendar startDatum, GregorianCalendar eindDatum, Werknemer werknemer) {
 		GregorianCalendar now = new GregorianCalendar();
 		setWerknemer(werknemer);
 		setPeriode(startDatum, eindDatum);
 		setToestand(Toestand.INGEDIEND);
 		setAanvraagdatum(now);
-		//opgelet de verlofaanvraag zal niet toegevoegd worden aan de werknemer als er een verlofaanvraag in de werknemer zit met dezelde id
-		//als de verlofaanvraag nog niet in de database zit, heeft deze id 0
-		//id wordt gegenereert door de database
+		// opgelet de verlofaanvraag zal niet toegevoegd worden aan de werknemer
+		// als er een verlofaanvraag in de werknemer zit met dezelde id
+		// als de verlofaanvraag nog niet in de database zit, heeft deze id 0
+		// id wordt gegenereert door de database
 		if (!werknemer.getVerlofaanvragen().contains(this)) {
 			werknemer.voegVerlofAanvraagToe(this);
-			System.out.println("werknemer.voegVerlofAanvraagToe(this):"+this);
+			System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
 		}
 
 	}
@@ -82,7 +82,7 @@ public class VerlofAanvraag implements Serializable {
 			Calendar datum = new GregorianCalendar();
 			datum.setTime(startdatum.getTime());
 
-			while (einddatum.compareTo(datum)>=0) {
+			while (einddatum.compareTo(datum) >= 0) {
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
 				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
 					System.out.println(weekdag);
@@ -91,10 +91,10 @@ public class VerlofAanvraag implements Serializable {
 				datum.add(Calendar.DAY_OF_YEAR, 1);
 			}
 
-//			if (einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
-//					&& einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
-//				weekdagTeller++;
-//			}
+			// if (einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+			// && einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+			// weekdagTeller++;
+			// }
 			// ControleerVerlofAanvraag aanvraag = new
 			// ControleerVerlofAanvraag();
 			// int aantal = aanvraag.getAantalFeestdagenOpWeekdag(startdatum,
@@ -112,11 +112,14 @@ public class VerlofAanvraag implements Serializable {
 	 * @param startDatum
 	 * @param eindDatum
 	 */
-	public void setPeriode(GregorianCalendar startDatum,
-			GregorianCalendar eindDatum) {
+	public void setPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
 		if (geldigVerlof(startDatum, eindDatum)) {
 			this.startdatum = startDatum;
 			this.einddatum = eindDatum;
+		} else{
+			throw new IllegalArgumentException(
+					"Ongeldige Verlofperiode: startdatum moet voor einddatum liggen, startdatum moet minstens 14 dagen in de toekomst liggen"
+							+ " en het verlof mag niet overlappen met een bestaand verlof");
 		}
 	}
 
@@ -127,11 +130,9 @@ public class VerlofAanvraag implements Serializable {
 	 * @return true als een verlof kan aangevraagd worden
 	 * 
 	 */
-	public boolean geldigVerlof(GregorianCalendar startDatum,
-			GregorianCalendar eindDatum) {
+	public boolean geldigVerlof(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
 
-		if (startDatum.before(eindDatum) && isStartdatumGeldig(startDatum)
-				&& !isOverlappend(startDatum, eindDatum)) {
+		if (startDatum.before(eindDatum) && isStartdatumGeldig(startDatum) && !isOverlappend(startDatum, eindDatum)) {
 			return true;
 		}
 		return false;
@@ -154,30 +155,25 @@ public class VerlofAanvraag implements Serializable {
 	 * @param eindDatum
 	 * @return
 	 */
-	public boolean verlofOverlapt(GregorianCalendar startDatum,
-			GregorianCalendar eindDatum) {
+	public boolean verlofOverlapt(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
 		if (startDatum.before(eindDatum)) {
 			// System.out.println("startdatum ligt voor einddatum van te controleren periode");
 			if (getStartdatum() == null && getEinddatum() == null) {
 				return false;
 			}
-			if (eindDatum.before(getStartdatum())
-					|| getEinddatum().before(startDatum)) {
+			if (eindDatum.before(getStartdatum()) || getEinddatum().before(startDatum)) {
 				return false;
 			} else {
 				return true;
 			}
 		} else {
-			throw new InputMismatchException(
-					"startDatum moet voor eindDatum liggen");
+			throw new InputMismatchException("startDatum moet voor eindDatum liggen");
 		}
 	}
 
-	public boolean isOverlappend(GregorianCalendar startDatum,
-			GregorianCalendar eindDatum) {
-		
-		List<VerlofAanvraag> verlofaanvragen = getVerlofAanvragenWerknemer(
-				startDatum, eindDatum);
+	public boolean isOverlappend(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
+
+		List<VerlofAanvraag> verlofaanvragen = getVerlofAanvragenWerknemer(startDatum, eindDatum);
 
 		if (verlofaanvragen != null && !verlofaanvragen.isEmpty()) {
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
@@ -278,24 +274,17 @@ public class VerlofAanvraag implements Serializable {
 
 	@Override
 	public String toString() {
-		return String
-				.format("Verlofaanvraag van %s tot %s van %s",
-						getStartdatumAsString(), getEinddatumAsString(),
-						getWerknemer() == null ? "" : getWerknemer()
-								.getVolledigeNaam());
+		return String.format("Verlofaanvraag van %s tot %s van %s", getStartdatumAsString(), getEinddatumAsString(), getWerknemer() == null ? ""
+				: getWerknemer().getVolledigeNaam());
 	}
 
 	public String getStartdatumAsString() {
-		return String.format("%s/%s/%s",
-				getStartdatum().get(Calendar.DAY_OF_MONTH), getStartdatum()
-						.get(Calendar.MONTH) + 1,
+		return String.format("%s/%s/%s", getStartdatum().get(Calendar.DAY_OF_MONTH), getStartdatum().get(Calendar.MONTH) + 1,
 				getStartdatum().get(Calendar.YEAR));
 	}
 
 	public String getEinddatumAsString() {
-		return String.format("%s/%s/%s",
-				getEinddatum().get(Calendar.DAY_OF_MONTH),
-				getEinddatum().get(Calendar.MONTH) + 1,
+		return String.format("%s/%s/%s", getEinddatum().get(Calendar.DAY_OF_MONTH), getEinddatum().get(Calendar.MONTH) + 1,
 				getEinddatum().get(Calendar.YEAR));
 	}
 
@@ -307,18 +296,13 @@ public class VerlofAanvraag implements Serializable {
 	 * @param eindDatum
 	 * @return
 	 */
-	public List<VerlofAanvraag> getVerlofAanvragenWerknemer(
-			GregorianCalendar startDatum, GregorianCalendar eindDatum) {
+	public List<VerlofAanvraag> getVerlofAanvragenWerknemer(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
 		if (getWerknemer() != null) {
-			List<VerlofAanvraag> verlofaanvragen = werknemer
-					.getAlleVerlofAanvragen(startDatum, eindDatum,
-							Toestand.INGEDIEND);
+			List<VerlofAanvraag> verlofaanvragen = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.INGEDIEND);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				System.out.println(verlofAanvraag);
 			}
-			List<VerlofAanvraag> verlofaanvragenGoedgekeurd = werknemer
-					.getAlleVerlofAanvragen(startDatum, eindDatum,
-							Toestand.GOEDGEKEURD);
+			List<VerlofAanvraag> verlofaanvragenGoedgekeurd = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.GOEDGEKEURD);
 			verlofaanvragen.addAll(verlofaanvragenGoedgekeurd);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				System.out.println(verlofAanvraag);
@@ -351,6 +335,4 @@ public class VerlofAanvraag implements Serializable {
 		return true;
 	}
 
-	
-	
 }

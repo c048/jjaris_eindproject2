@@ -26,13 +26,13 @@ public class DatumBuilder {
 	 * @throws IllegalArgumentException
 	 */
 	public DatumBuilder(int dag, int maand, int jaar) throws IllegalArgumentException {
-		try {
+		//try {
 			setJaar(jaar);
 			setMaand(maand);
 			setDag(dag);
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException(e.getMessage());
-		}
+//		} catch (IllegalArgumentException e) {
+//			throw new IllegalArgumentException(e.getMessage());
+//		}
 	}
 	
 	private int getDag() {
