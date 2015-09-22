@@ -11,6 +11,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.TransactionalException;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import utils.DatumBuilder;
 import daos.TeamDAO;
@@ -34,7 +39,21 @@ public class MedewerkerHrManageBack implements Serializable {
 	private Werknemer werknemer;
 	private int gebDag;
 	private int gebJaar;
+	@Min(value = 1, message = "Maand kan niet onder 1 liggen")
+	@Max(value = 12, message = "Maand kan niet boven 12 liggen")
 	private int gebMaand;
+	@NotEmpty (message = "U moet een achternaam invullen")
+	private String naam;
+	@NotEmpty (message = "U moet een voornaam invullen")
+	private String voornaam;
+	@NotEmpty(message = "U moet een e-mail invoeren")
+	private String email;
+	@NotEmpty(message = "U moet een straat invoeren")
+	private String straat;
+	@NotEmpty(message = "U moet een gemeente invoeren")
+	private String gemeente;
+	@NotEmpty(message = "U moet een postcode invoeren")
+	private String postcode;
 
 	public MedewerkerHrManageBack() {
 		reset();
@@ -47,15 +66,13 @@ public class MedewerkerHrManageBack implements Serializable {
 			setGebDag(werknemer.getGeboortedatum().get(Calendar.DAY_OF_MONTH));
 			setGebJaar(werknemer.getGeboortedatum().get(Calendar.YEAR));
 			setGebMaand(werknemer.getGeboortedatum().get(Calendar.MONTH) + 1);
+			setEmail(werknemer.getEmail());
+			setNaam(werknemer.getNaam());
+			setVoornaam(werknemer.getVoornaam());
+			setGemeente(werknemer.getAdres().getGemeente());
+			setPostcode(werknemer.getAdres().getPostcode());
+			setStraat(werknemer.getAdres().getStraat());
 		}
-	}
-
-	public Team getTeam() {
-		return werknemer.getTeam();
-	}
-
-	public int findPersoneelsnummer() {
-		return params.getPersoneelsnummer();
 	}
 
 	public void setTeam(Team team) {
@@ -75,25 +92,29 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public void setEmail(String email) {
-		werknemer.setEmail(email);
+		this.email = email;
 	}
 
 	public void setNaam(String naam) {
-		werknemer.setNaam(naam);
+		this.naam = naam;
 	}
 
 	public void setVoornaam(String voornaam) {
-		werknemer.setVoornaam(voornaam);
+		this.voornaam = voornaam;
 	}
 
 	public void setPasswoord(String passwoord) {
-		if(!passwoord.isEmpty()) {
-			werknemer.setPasswoord(passwoord);
+		try {
+			if(!(passwoord.isEmpty())) { 
+				this.werknemer.setPasswoord(passwoord);
+			}
+		} catch (IllegalArgumentException ie) {
+			setFacesMessage(ie.getMessage());
 		}
 	}
 
 	public void setGemeente(String gemeente) {
-		werknemer.getAdres().setGemeente(gemeente);
+		this.gemeente = gemeente;
 	}
 
 	public void setHuisnummer(String huisnummer) {
@@ -101,19 +122,23 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public void setPostcode(String postcode) {
-		werknemer.getAdres().setPostcode(postcode);
+		this.postcode = postcode;
 	}
 
 	public void setStraat(String straat) {
-		werknemer.getAdres().setStraat(straat);
+		this.straat = straat;
 	}
 
 	public void setBusnummer(String busnummer) {
 		werknemer.getAdres().setBusnummer(busnummer);
 	}
 
+	public Team getTeam() {
+		return werknemer.getTeam();
+	}
+
 	public String getEmail() {
-		return werknemer.getEmail();
+		return email;
 	}
 
 	public String getPasswoord() {
@@ -121,15 +146,15 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public String getNaam() {
-		return werknemer.getNaam();
+		return naam;
 	}
 
 	public String getVoornaam() {
-		return werknemer.getVoornaam();
+		return voornaam;
 	}
 
 	public String getGemeente() {
-		return werknemer.getAdres().getGemeente();
+		return gemeente;
 	}
 
 	public String getHuisnummer() {
@@ -137,11 +162,11 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public String getPostcode() {
-		return werknemer.getAdres().getPostcode();
+		return postcode;
 	}
 
 	public String getStraat() {
-		return werknemer.getAdres().getStraat();
+		return straat;
 	}
 
 	public String getBusnummer() {
@@ -160,6 +185,10 @@ public class MedewerkerHrManageBack implements Serializable {
 		return gebMaand;
 	}
 
+	public int findPersoneelsnummer() {
+		return params.getPersoneelsnummer();
+	}
+
 	public List<Team> findAllTeams() {
 		return teamDAO.getTeams();
 	}
@@ -170,11 +199,17 @@ public class MedewerkerHrManageBack implements Serializable {
 		werknemer.setTeam(new Team());
 		setGebDag(0);
 		setGebMaand(0);
-		setGebJaar(gebJaar);
+		setGebJaar(0);
+		email = null;
+		naam = null;
+		voornaam = null;
+		gemeente = null;
+		straat = null;
+		postcode = null;
 	}
 	
 	public void valideerMedewerker() throws IllegalArgumentException {
-		DatumBuilder tmpBuilder = new DatumBuilder(gebDag, gebMaand,gebJaar);
+		DatumBuilder tmpBuilder = new DatumBuilder(gebDag, gebMaand, gebJaar);
 		if(tmpBuilder.isVoorVandaag()) {
 			werknemer.setGeboortedatum(tmpBuilder.buildCalendar());
 		} else {
@@ -191,7 +226,14 @@ public class MedewerkerHrManageBack implements Serializable {
 
 	public String verwerkMedewerker() {
 		try {
+			werknemer.setNaam(getNaam());
+			werknemer.setVoornaam(getVoornaam());
+			werknemer.setEmail(getEmail());
+			werknemer.getAdres().setStraat(getStraat());
+			werknemer.getAdres().setPostcode(getPostcode());
+			werknemer.getAdres().setGemeente(getGemeente());
 			valideerMedewerker();
+			
 			if (werknemerDAO.getWerknemer(werknemer.getEmail()) == null) {
 				werknemerDAO.voegWerknemerToe(werknemer);
 			} else {
@@ -203,8 +245,8 @@ public class MedewerkerHrManageBack implements Serializable {
 					throw new IllegalArgumentException("Er bestaat al een persoon met dit e-mail adres");
 				}
 			}
-		} catch (IllegalArgumentException e){
-			setFacesMessage(e.getMessage());
+		} catch (IllegalArgumentException iae){
+			setFacesMessage(iae.getMessage());
 			return null;
 		} catch (Exception e) {
 			setFacesMessage("Onbekende error, contacteer IT-support!");

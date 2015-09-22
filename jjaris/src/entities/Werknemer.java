@@ -51,24 +51,36 @@ public class Werknemer implements Serializable {
 		return this.naam;
 	}
 
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setNaam(String naam) throws IllegalArgumentException {
+		if(!(naam.trim().equals(""))) {
+			this.naam = naam;
+		} else {
+			throw new IllegalArgumentException("Achternaam mag niet leeg zijn!");
+		}
 	}
 
 	public String getVoornaam() {
 		return this.voornaam;
 	}
 
-	public void setVoornaam(String Voornaam) {
-		this.voornaam = Voornaam;
+	public void setVoornaam(String voornaam) throws IllegalArgumentException {
+		if(!(voornaam.trim().equals(""))) {
+			this.voornaam = voornaam;
+		} else {
+			throw new IllegalArgumentException("Voornaam mag niet leeg zijn");
+		}
 	}
 
 	public String getEmail() {
 		return this.email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String email) throws IllegalArgumentException {
+		if(!(email.trim().equals(""))) {
+			this.email = email;
+		} else {
+			throw new IllegalArgumentException("Email mag niet leeg zijn");
+		}
 	}
 
 	public Calendar getGeboortedatum() {
@@ -83,8 +95,12 @@ public class Werknemer implements Serializable {
 		return this.passwoord;
 	}
 
-	public void setPasswoord(String passwoord) {
-		this.passwoord = passwoord;
+	public void setPasswoord(String passwoord) throws IllegalArgumentException {
+		if(!(passwoord.trim().equals(""))) {
+			this.passwoord = passwoord;
+		} else {
+			throw new IllegalArgumentException("Passwoord mag niet leeg zijn");
+		}
 	}
 	
 	public boolean controleerPasswoord(String teControlerenPaswoord){
@@ -102,15 +118,16 @@ public class Werknemer implements Serializable {
 			if (!getTeam().zitWerknemerInTeam(this)) {
 				getTeam().voegTeamlidToe(this);
 			}
-		}else throw new NullPointerException("Werknemer.setTeam niet gelukt: kan geen null invullen");
-		
+		} else {
+			throw new NullPointerException("Werknemer.setTeam niet gelukt: kan geen null invullen");
+		}
 	}
 
 	public Adres getAdres() {
 		return this.adres;
 	}
 
-	public void setAdres(Adres adres) {
+	public void setAdres(Adres adres) throws IllegalArgumentException {
 		this.adres = adres;
 	}
 

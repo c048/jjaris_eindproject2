@@ -18,8 +18,12 @@ public class Adres implements Serializable {
 		return straat;
 	}
 
-	public void setStraat(String straat) {
-		this.straat = straat;
+	public void setStraat(String straat) throws IllegalArgumentException {
+		if(!(straat.trim().equals(""))) {
+			this.straat = straat;
+		} else {
+			throw new IllegalArgumentException("Straat mag niet leeg zijn");
+		}
 	}
 
 	public String getHuisnummer() {
@@ -42,16 +46,24 @@ public class Adres implements Serializable {
 		return postcode;
 	}
 
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public void setPostcode(String postcode) throws IllegalArgumentException {
+		if(!(postcode.trim().equals(""))) {
+			this.postcode = postcode;
+		} else {
+			throw new IllegalArgumentException("Postcode mag niet leeg zijn");
+		}
 	}
 
 	public String getGemeente() {
 		return gemeente;
 	}
 
-	public void setGemeente(String gemeente) {
-		this.gemeente = gemeente;
+	public void setGemeente(String gemeente) throws IllegalArgumentException {
+		if(!(gemeente.trim().equals(""))) {
+			this.gemeente = gemeente;
+		} else {
+			throw new IllegalArgumentException("Gemeente mag niet leeg zijn");
+		}
 	}
 
 	@Override

@@ -17,11 +17,11 @@
 							<h3>Medewerker ID : #{medewerkerHrManageBack.findPersoneelsnummer()}</h3>
 						</c:if>
 						<h:outputLabel for="mNaam" value="Voornaam"></h:outputLabel>
-						<h:inputText id="mNaam" required="true" requiredMessage="U moet een voornaam invullen" value="#{medewerkerHrManageBack.voornaam}"></h:inputText><br/>
+						<h:inputText id="mNaam" value="#{medewerkerHrManageBack.voornaam}"></h:inputText><br/>
 						<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
-						<h:inputText id="mAchterNaam" required="true" requiredMessage="U moet een achternaan invoeren" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
+						<h:inputText id="mAchterNaam" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
 						<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
-						<h:inputText id="mEmail" required="true"  requiredMessage="U moet een e-mail adres invoeren" value="#{medewerkerHrManageBack.email}"></h:inputText><br/>
+						<h:inputText id="mEmail" value="#{medewerkerHrManageBack.email}"></h:inputText><br/>
 						<h:outputLabel for="mTeam" value="Team"></h:outputLabel>
 						<h:selectOneMenu id="mTeam" value="#{medewerkerHrManageBack.team.code}">
 							<f:selectItems value="#{medewerkerHrManageBack.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
@@ -41,11 +41,11 @@
 						
 						<c:choose>
 							<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
-								<h:outputLabel for="mPwd" value="Paswoord"></h:outputLabel>
+								<h:outputLabel for="mPwd" value="Passwoord"></h:outputLabel>
 								<h:inputText id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
 							</c:when>
 							<c:otherwise>
-								<h:outputLabel for="mPwd" value="Nieuw Paswoord"></h:outputLabel>
+								<h:outputLabel for="mPwd" value="Nieuw Passwoord"></h:outputLabel>
 								<h:inputText id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
 							</c:otherwise>
 						</c:choose>

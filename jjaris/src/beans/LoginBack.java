@@ -24,6 +24,7 @@ public class LoginBack implements Serializable {
 	private String paswoord;
 	@Inject
 	private WerknemerDAO wDao;
+	private String component;
 
 	// @Inject
 	// private TeamDAO tDao;
@@ -53,6 +54,14 @@ public class LoginBack implements Serializable {
 		Werknemer w = getIngelogdeWerknemer();
 		return w.getTeam();
 
+	}
+	
+	public String getComponent() {
+		return component;
+	}
+
+	public void setComponent(String component) {
+		this.component = component;
 	}
 
 	public String login() {
