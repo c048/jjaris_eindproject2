@@ -106,21 +106,21 @@ public class MedewerkersHrBack implements Serializable {
 
 	public String verwijderWerknemer(int personeelsnummer) {
 		Werknemer tmpw = dao.getWerknemer(personeelsnummer);
-		try{
-		dao.verwijderWerknemer(tmpw);
-		}
-		catch (TransactionalException te){
-			FacesMessage msg = new FacesMessage("Kan werknemer niet verwijderen (hij is mogelijk nog verantwoordelijke van een team)");
+		try {
+			dao.verwijderWerknemer(tmpw);
+		} catch (TransactionalException te) {
+			FacesMessage msg = new FacesMessage(
+					"Kan werknemer niet verwijderen (hij is mogelijk nog verantwoordelijke van een team)");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().renderResponse();	
+			FacesContext.getCurrentInstance().renderResponse();
 		}
-//		catch (IllegalArgumentException iae) {
-//			FacesMessage msg = new FacesMessage(iae.getMessage());
-//			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//			FacesContext.getCurrentInstance().addMessage(null, msg);
-//			FacesContext.getCurrentInstance().renderResponse();	
-//		}
+		// catch (IllegalArgumentException iae) {
+		// FacesMessage msg = new FacesMessage(iae.getMessage());
+		// msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		// FacesContext.getCurrentInstance().addMessage(null, msg);
+		// FacesContext.getCurrentInstance().renderResponse();
+		// }
 		return null;
 	}
 
@@ -128,7 +128,7 @@ public class MedewerkersHrBack implements Serializable {
 		backIsBack.setPersoneelsnummer(personeelsnummer);
 		return "medewerkerHrManage";
 	}
-	
+
 	public String createMedewerker() {
 		return "medewerkerHrManage";
 	}
