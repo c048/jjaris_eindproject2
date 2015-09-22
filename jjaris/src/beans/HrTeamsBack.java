@@ -23,6 +23,8 @@ public class HrTeamsBack implements Serializable {
 	private TeamDAO tDao;
 	@Inject
 	private ParameterBack parameters;
+	@Inject
+	private LoginBack loginBean;
 
 	private List<Team> teams;
 
@@ -98,9 +100,8 @@ public class HrTeamsBack implements Serializable {
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 					FacesContext.getCurrentInstance().renderResponse();
 		}
-			
-		return "teamsHr";
-
+		
+		return null;
 	}
 
 	public String editeerTeam(int teamCode) {
@@ -108,7 +109,8 @@ public class HrTeamsBack implements Serializable {
 		// FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("selCodeEdit");
 		System.out.println("in edit team van HrTeamsBack");
 		parameters.setCode(teamCode);
-		return "teamHrEdit";
+		loginBean.changePage("teamHrEdit");
+		return null;
 	}
 
 	public String zoek() {
@@ -126,7 +128,7 @@ public class HrTeamsBack implements Serializable {
 
 		teams = tDao.getTeams(f);
 		resetParameters();
-		return "teamsHr";
+		return null;
 	}
 	
 	public void resetParameters(){
@@ -136,7 +138,8 @@ public class HrTeamsBack implements Serializable {
 	}
 	
 	public String toevoegenTeam(){
-		return "teamHrCreate";
+		loginBean.changePage("teamHrCreate");
+		return null;
 	}
 
 }

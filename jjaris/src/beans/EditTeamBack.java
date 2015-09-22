@@ -25,6 +25,8 @@ public class EditTeamBack implements Serializable {
 	private ParameterBack parameterback;
 	@Inject
 	private TeamDAO tDao;
+	@Inject
+	private LoginBack loginBean;
 	private Team team;
 
 	@PostConstruct
@@ -73,11 +75,13 @@ public class EditTeamBack implements Serializable {
 		setTeamverantwoordelijke();
 		getTeam().setNaam(getNaam());
 		tDao.updateTeam(getTeam());
-		return "teamsHr";
+		loginBean.changePage("teamsHr");
+		return null;
 	}
 	
 	public String annuleren(){
-		return "teamsHr";
+		loginBean.changePage("teamsHr");
+		return null;
 	}
 
 }

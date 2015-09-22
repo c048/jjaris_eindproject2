@@ -7,16 +7,21 @@
 	<h:body>
 		<ui:composition>
 			<div id="links">
-				<h:link value="Mijn verlof aanvragen" outcome="verlofMedewerker"></h:link>
-				<c:if test="${loginBack.getIngelogdeWerknemer().isVerantwoordelijke() eq true}">
-					<h:link value="Mijn team" outcome="verlofTeam"></h:link>
-				</c:if>
-				<c:if test="${loginBack.getIngelogdeWerknemer().isHR() eq true}">
-					<h:link value="Overzicht Medewerkers" outcome="medewerkersHr"></h:link>
-					<h:link value="Overzicht Verlof" outcome="verlofAanvraagHr"></h:link>
-					<h:link value="Jaarlijkse Verloven" outcome="jaarlijksVerlofHr"></h:link>
-					<h:link value="Overzicht Teams" outcome="teamsHr"></h:link>
-				</c:if>
+				<h:form>
+					<h:commandLink value="log out" action="#{loginBack.changePage('login')}"></h:commandLink>
+				</h:form>
+				<h:form>
+					<h:commandLink value="Mijn verlof" action="#{loginBack.changePage('verlofMedewerker')}"></h:commandLink>
+					<c:if test="${loginBack.getIngelogdeWerknemer().isVerantwoordelijke() eq true}">
+						<h:commandLink value="Mijn Team" action="#{loginBack.changePage('verlofTeam')}"></h:commandLink>
+					</c:if>
+					<c:if test="${loginBack.getIngelogdeWerknemer().isHR() eq true}">
+						<h:commandLink value="Overzicht Medewerkers" action="#{loginBack.changePage('medewerkersHr')}"></h:commandLink>
+						<h:commandLink value="Overzicht Verlof" action="#{loginBack.changePage('verlofHr')}"></h:commandLink>
+						<h:commandLink value="Jaarlijkse Verloven" action="#{loginBack.changePage('jaarlijksVerlofHr')}"></h:commandLink>
+						<h:commandLink value="Overzicht Teams" action="#{loginBack.changePage('teamsHr')}"></h:commandLink>
+					</c:if>
+				</h:form>
 			</div>
 		</ui:composition>
 	</h:body>

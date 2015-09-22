@@ -33,6 +33,8 @@ public class MedewerkerHrManageBack implements Serializable {
 	@Inject
 	private TeamDAO teamDAO;
 	@Inject
+	private LoginBack loginBack;
+	@Inject
 	private ParameterBack params;
 
 	private static final long serialVersionUID = 1L;
@@ -252,7 +254,8 @@ public class MedewerkerHrManageBack implements Serializable {
 			setFacesMessage("Onbekende error, contacteer IT-support!");
 			return null;
 		}
-		return "medewerkersHr";
+		loginBack.changePage("medewerkersHr");
+		return null;
 	}
 	
 	public void setFacesMessage(String msg) {
@@ -264,6 +267,7 @@ public class MedewerkerHrManageBack implements Serializable {
 
 	public String cancel() {
 		params.reset();
-		return "medewerkersHr";
+		loginBack.changePage("medewerkersHr");
+		return null;
 	}
 }

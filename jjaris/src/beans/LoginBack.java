@@ -63,22 +63,18 @@ public class LoginBack implements Serializable {
 	public void setComponent(String component) {
 		this.component = component;
 	}
+	
+	public String changePage(String page) {
+		setComponent(page);
+		return null;
+	}
 
 	public String login() {
 		try {
 			Werknemer w = wDao.getWerknemer(email);
 			if (w!=null && w.controleerPasswoord(getPaswoord())) {
-				if (w.isHR()) {
-					return "verlofMedewerker";
-				} else {
-					if (w.isVerantwoordelijke()) {
-						return "verlofMedewerker";
-					} else {
-						return "verlofMedewerker";
-					}
-
-				}
-
+				setComponent("verlofMedewerker");
+				return null;
 			} else {
 				FacesMessage msg = new FacesMessage("Ongeldige login gegevens - paswoord of email adres niet correct");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);

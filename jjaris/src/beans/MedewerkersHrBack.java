@@ -31,6 +31,8 @@ public class MedewerkersHrBack implements Serializable {
 	private int ID;
 	private List<Werknemer> delijst;
 	@Inject
+	private LoginBack loginBack; //niet verwijderen
+	@Inject
 	private ParameterBack backIsBack;
 
 	public MedewerkersHrBack() {
@@ -71,7 +73,6 @@ public class MedewerkersHrBack implements Serializable {
 	}
 
 	public Werknemer getWerknemer() {
-
 		return werknemer;
 	}
 
@@ -129,11 +130,13 @@ public class MedewerkersHrBack implements Serializable {
 
 	public String editMedewerker(int personeelsnummer) {
 		backIsBack.setPersoneelsnummer(personeelsnummer);
-		return "medewerkerHrManage";
+		loginBack.changePage("medewerkerHrManage");
+		return null;
 	}
 
 	public String createMedewerker() {
-		return "medewerkerHrManage";
+		loginBack.changePage("medewerkerHrManage");
+		return null;
 	}
 	public void setFacesMessage(String msg) {
 		FacesMessage fMsg = new FacesMessage(msg);

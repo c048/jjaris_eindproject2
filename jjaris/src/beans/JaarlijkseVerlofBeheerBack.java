@@ -28,6 +28,8 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 	
 	@Inject
 	private WerknemerDAO dao;
+	@Inject
+	private LoginBack loginBack;
 	
 	@NotNull(message="U moet een jaar opgeven")
 	private int jaar;
@@ -47,6 +49,8 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 				jVerlof.setWerknemer(werknemer);
 				werknemer.voegJaarlijksVerlofToe(jVerlof);
 				dao.updateWerknemer(werknemer);
+				
+				loginBack.changePage("jaarlijksVerlofHr");
 			}
 			else {
 				setFacesMessage("Verlofdagen van personeel nr "+personeelsNr+ " is al ingevoerd ");
@@ -55,8 +59,8 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 		else {
 			setFacesMessage("Geen werknemer gevonden met personeel nr: "+personeelsNr);
 		}
-
-		return "voegJaarlijkseVerloven";
+		
+		return null;
 	}
 		
 	
@@ -99,8 +103,4 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, fMsg);
 		FacesContext.getCurrentInstance().renderResponse();
 	}
-	
-
-	
-	
 }

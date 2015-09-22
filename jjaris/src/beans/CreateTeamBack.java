@@ -22,6 +22,8 @@ public class CreateTeamBack implements Serializable {
 	private String HR = "false";
 	@Inject
 	private TeamDAO tDao;
+	@Inject
+	private LoginBack loginBean;
 
 	public String getNaam() {
 		return naam;
@@ -55,13 +57,13 @@ public class CreateTeamBack implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
 		}
-
-		return "teamsHr";
-
+		loginBean.changePage("teamsHr");
+		return null;
 	}
 	
 	public String annuleren(){
-	return "teamsHr";
+		loginBean.changePage("teamsHr");
+		return null;
 	}
 
 }

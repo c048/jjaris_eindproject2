@@ -25,6 +25,8 @@ public class JaarlijksVerlofHrBack implements Serializable {
 
 	@Inject
 	private WerknemerDAO dao;
+	@Inject
+	private LoginBack loginBack;
 
 	@PersistenceContext
 	private EntityManager manager;
@@ -134,7 +136,8 @@ public class JaarlijksVerlofHrBack implements Serializable {
 	}
 
 	public String createJaarlijksVerlof() {
-		return "jaarlijkseVerlovenCreate";
+		loginBack.changePage("jaarlijksVerlofHrCreate");
+		return null;
 	}
 	
 	public void setFacesMessage(String msg) {
