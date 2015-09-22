@@ -23,9 +23,9 @@
 						<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 						
 						<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-						<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startDag}"></h:inputText>
-						<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}"></h:inputText>
-						<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startJaar}"></h:inputText>
+						<h:inputText id="txtFDag1"  value="#{verlof.startDag}"></h:inputText>
+						<h:inputText id="txtFMaand1"  value="#{verlof.startMaand}"></h:inputText>
+						<h:inputText id="txtFJaar1"  value="#{verlof.startJaar}"></h:inputText>
 			
 						<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
 						<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
@@ -33,9 +33,9 @@
 						<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
 						
 						<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-						<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindDag}"></h:inputText>
-						<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}"></h:inputText>
-						<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
+						<h:inputText id="txtFDag2"  value="#{verlof.eindDag}"></h:inputText>
+						<h:inputText id="txtFMaand2"  value="#{verlof.eindMaand}"></h:inputText>
+						<h:inputText id="txtFJaar2"  value="#{verlof.eindJaar}"></h:inputText>
 						
 						
 						<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
@@ -59,9 +59,11 @@
 						<h:outputLabel value="PersoneelsNr" for="personeelsNr"></h:outputLabel>	
 						<h:inputText id="personeelsNr"  value="#{verlof.personeelsNr}"></h:inputText>
 						<h:inputHidden value="legeFGrid7-3" id="legeFGrid7-3" />			            			        		
-						<h:commandButton value="Zoeken" action="#{verlof.zoeken()}"></h:commandButton>
+						<h:commandButton value="Zoeken" action="#{verlof.zoeken}"></h:commandButton>
 								</h:panelGrid>	
 							</h:form>
+							
+							<h:messages style="color:red;"></h:messages>
 				
 				<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 				
@@ -73,13 +75,13 @@
 			  			</h:column>		
 			  			<h:column>
 			  				<f:facet name="header">Startdatum</f:facet>	
-			  				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.startdatum)}">
+			  				<h:outputText value="#{verlof.converteerNaarDate(va.startdatum)}">
 							 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
 						</h:outputText>		
 			  			</h:column>		
 			  			<h:column>
 			  				<f:facet name="header">EindDatum</f:facet>	
-			  				<h:outputText value="#{verlofaanvraag.converteerNaarDate(va.einddatum)}">
+			  				<h:outputText value="#{verlof.converteerNaarDate(va.einddatum)}">
 							<f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
 						</h:outputText>	
 			  			</h:column>	
