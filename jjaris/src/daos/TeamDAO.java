@@ -91,7 +91,7 @@ public class TeamDAO {
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke, int code) {
 		if (code != 0) {
 			TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND "
-					+ "c.teamverantwoordelijke.naam LIKE :leider AND c.code = :code", Team.class);
+					+ "c.teamverantwoordelijke.naam LIKE :leider AND c.code = :code ORDER BY c.naam", Team.class);
 			query.setParameter("naam", "%" + zoekNaam + "%");
 			query.setParameter("leider", "%" + zoekVerantwoordelijke + "%");
 			query.setParameter("code", code);
@@ -112,7 +112,7 @@ public class TeamDAO {
 	 */
 	public List<Team> getTeams(String zoekNaam, String zoekVerantwoordelijke) {
 
-		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND " + "c.teamverantwoordelijke.naam LIKE :leider",
+		TypedQuery<Team> query = em.createQuery("SELECT c FROM Team c WHERE c.naam LIKE :naam AND " + "c.teamverantwoordelijke.naam LIKE :leider"+" ORDER BY c.naam",
 				Team.class);
 		query.setParameter("naam", "%" + zoekNaam + "%");
 		query.setParameter("leider", "%" + zoekVerantwoordelijke + "%");
@@ -154,7 +154,7 @@ public class TeamDAO {
 					aantal++;
 				}
 			}
-			queryString+= " ORDER BY t.naam";
+			queryString+= " ORDER BY c.naam";
 		}
 		System.out.println(queryString);
 		TypedQuery<Team> query = em.createQuery(queryString, Team.class);
