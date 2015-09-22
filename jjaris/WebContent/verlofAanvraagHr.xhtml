@@ -23,19 +23,19 @@
 						<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 						
 						<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-						<h:inputText id="txtFDag1"  value="#{verlof.startDag}"></h:inputText>
-						<h:inputText id="txtFMaand1"  value="#{verlof.startMaand}"></h:inputText>
-						<h:inputText id="txtFJaar1"  value="#{verlof.startJaar}"></h:inputText>
+						<h:inputText id="txtFDag1"  value="#{verlof.startDag}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
+						<h:inputText id="txtFMaand1"  value="#{verlof.startMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
+						<h:inputText id="txtFJaar1"  value="#{verlof.startJaar}" converterMessage="!!!!YOU FUCKED UP TYPING A YEAR!!!></h:inputText>
 			
 						<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
 						<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
 						<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
 						<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
 						
-						<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-						<h:inputText id="txtFDag2"  value="#{verlof.eindDag}"></h:inputText>
-						<h:inputText id="txtFMaand2"  value="#{verlof.eindMaand}"></h:inputText>
-						<h:inputText id="txtFJaar2"  value="#{verlof.eindJaar}"></h:inputText>
+						<h:outputText for="txtFDatum2" value="Eind Datum" ></h:outputText>
+						<h:inputText id="txtFDag2"  value="#{verlof.eindDag}" converterMessage="Geef een nummer in voor de einddag tussen 1 en 31"></h:inputText>
+						<h:inputText id="txtFMaand2"  value="#{verlof.eindMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
+						<h:inputText id="txtFJaar2"  value="#{verlof.eindJaar}" converterMessage="!!!!YOU FUCKED UP TYPING A YEAR!!!"></h:inputText>
 						
 						
 						<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
@@ -57,7 +57,7 @@
 			           
 			            	
 						<h:outputLabel value="PersoneelsNr" for="personeelsNr"></h:outputLabel>	
-						<h:inputText id="personeelsNr"  value="#{verlof.personeelsNr}"></h:inputText>
+						<h:inputText id="personeelsNr"  value="#{verlof.personeelsNr}" converterMessage="Geef een bestaand personeelsnummer in">
 						<h:inputHidden value="legeFGrid7-3" id="legeFGrid7-3" />			            			        		
 						<h:commandButton value="Zoeken" action="#{verlof.zoeken}"></h:commandButton>
 								</h:panelGrid>	

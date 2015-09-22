@@ -33,8 +33,23 @@
 							<f:facet name="header">Team Naam</f:facet>    				
 						      	#{tmpTeam.naam}</h:column>
 						<h:column>
-							<f:facet name="header">Team Verantwoordelijke</f:facet>    				
-						      	#{tmpTeam.teamverantwoordelijke.volledigeNaam}</h:column>
+							<f:facet name="header">Teamleden</f:facet>
+
+							<h:dataTable value="#{tmpTeam.getTeamleden()}" var="tmpTeamlid">
+								<h:column>
+									<f:facet name="header">Nr en volledige naam</f:facet>    	
+						      	#{tmpTeamlid.personeelsnummer}&nbsp;#{tmpTeamlid.volledigeNaam}
+						    </h:column>
+								<h:column>
+									<f:facet name="header">Teamverantwoordelijke</f:facet>    	
+						      	#{tmpTeamlid.isVerantwoordelijke()}
+						    </h:column>
+
+
+							</h:dataTable>
+
+						</h:column>
+
 						<h:column>
 							<f:facet name="header">HR</f:facet>
 							#{tmpTeam.HR}

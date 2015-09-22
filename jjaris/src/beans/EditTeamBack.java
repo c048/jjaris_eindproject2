@@ -75,5 +75,9 @@ public class EditTeamBack implements Serializable {
 		tDao.updateTeam(getTeam());
 		return "teamsHr";
 	}
+	
+	public String annuleren(){
+		return "teamsHr";
+	}
 
 }

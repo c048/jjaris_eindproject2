@@ -22,9 +22,9 @@
 							<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 							
 							<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-							<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startDag}"></h:inputText>
-							<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}"></h:inputText>
-							<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startJaar}"></h:inputText>
+							<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startDag}" converterMessage="Geef een nummer in voor de startdag tussen 1 en 31"></h:inputText>
+							<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}" converterMessage="Geef een nummer in voor de start maand tussen 1 en 12"></h:inputText>
+							<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startJaar}" converterMessage="Geef een nummer in van 4cijfers voor het startjaar"></h:inputText>
 				
 							<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
 							<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
@@ -32,9 +32,9 @@
 							<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
 							
 							<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-							<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindDag}"></h:inputText>
-							<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}"></h:inputText>
-							<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
+							<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindDag}" converterMessage="Geef een nummer in voor de einddag tussen 1 en 31"></h:inputText>
+							<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
+							<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}" converterMessage="Geef een nummer in van vier cijfers voor het eindjaar"></h:inputText>
 							
 							
 							<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
