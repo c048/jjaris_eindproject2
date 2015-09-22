@@ -40,6 +40,9 @@ public class HrTeamsBack implements Serializable {
 //	}
 
 	public List<Team> getTeams() {
+		
+		teams = tDao.getTeams();
+		
 		return teams;
 	}
 
