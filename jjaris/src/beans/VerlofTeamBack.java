@@ -101,7 +101,7 @@ public class VerlofTeamBack implements Serializable {
 		}
 	}
 
-	public String goedkeuren() {
+	public String goedkeuren(int id) {
 		VerlofAanvraag v = verlofaanvraagDAO.getVerlofAanvraag(id);
 		v.setToestand(Toestand.GOEDGEKEURD);
 		verlofaanvraagDAO.updateVerlofAanvraag(v);

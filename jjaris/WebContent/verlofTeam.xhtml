@@ -47,7 +47,6 @@
 								</h:selectOneMenu>
 								<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken()}"></h:commandButton>
 							</h:panelGrid>	
-							<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken}"></h:commandButton>
 							</h:form>
 							<h2>Overzicht verlofaanvragen</h2>
 							<h:form>
@@ -76,16 +75,21 @@
 										<f:facet name="header">Status</f:facet>    				
 								      	#{va.toestand}
 							      	</h:column>
-								</h:dataTable>
-								
-								<h2>Afkeuren van verlofaanvraagen</h2>
-								
-								<h:outputLabel value="Geef ID: "></h:outputLabel>
-								<h:inputText value="#{verlofTeamBack.id}"></h:inputText>
-								<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
-								<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputTextarea>
-								
-								<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>
+									<h:column>
+										<f:facet name="header">Goedkeuren</f:facet>	
+										<h:commandButton action="#{verlofTeamBack.goedkeuren(va.id)}" value="Goedkeuren" rendered="${va.toestand == 'INGEDIEND'}">
+										</h:commandButton>
+										
+									</h:column> 									
+							</h:dataTable>
+						</h:form>
+						<h2>Afkeuren van verlofaanvraagen</h2>
+						<h:form>
+							<h:outputLabel value="Geef ID: "></h:outputLabel>
+							<h:inputText value="#{verlofTeamBack.id}"></h:inputText>
+							<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
+							<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputTextarea>
+							<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>
 						</h:form>
 					<h:messages style="color:red;"></h:messages>
 				</div>
