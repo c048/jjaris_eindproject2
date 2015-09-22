@@ -19,7 +19,7 @@
 					<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
 						for="txtPersoneelsnummer">:</h:outputLabel>
 					<h:inputText id="txtPersoneelsnummer"
-						value="#{medewerkersHrBack.ID}"></h:inputText>
+						value="#{medewerkersHrBack.ID}" converterMessage="Gelieve een geldig ID in te geven"></h:inputText>
 					<h:commandButton id="btnZoeken"
 						action="#{medewerkersHrBack.zoek()}" value="Zoek"></h:commandButton>
 					<br />
@@ -64,7 +64,7 @@
 					</h:dataTable>
 					<h:commandButton value="Voeg nieuwe medewerker toe"
 						action="#{medewerkersHrBack.createMedewerker()}"></h:commandButton>
-					<h:messages></h:messages>
+					<h:messages style="color:red;"></h:messages>
 				</h:form>
 			</div>
 		</ui:define>
