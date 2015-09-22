@@ -18,7 +18,7 @@
 			<f:selectItem itemLabel="NO " itemValue="false"></f:selectItem>
 		</h:selectOneRadio>
 		<h:commandButton value="voeg Team Toe" action="#{createTeamBack.voegTeamToe}"></h:commandButton>
-		<h:commandButton value="Ga terug naar HR zonder opslaan" action="HR"></h:commandButton>
+		<h:commandButton value="Annuleren" action="#{createTeamBack.annuleren}" immediate="true"></h:commandButton>
 	</h:form>
 	<h:messages style="color:red;"></h:messages>
 </h:body>

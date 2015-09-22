@@ -28,16 +28,6 @@ public class HrTeamsBack implements Serializable {
 
 	private String teamNaam, naamTeamVerantwoordelijke;
 	private int teamCode;
-//	private int aanpasCode;
-
-//	public int getAanpasCode() {
-//		return aanpasCode;
-//	}
-//
-//	public void setAanpasCode(int aanpasCode) {
-//		this.aanpasCode = aanpasCode;
-//	}
-	
 	
 
 	public List<Team> getTeams() {
@@ -75,11 +65,11 @@ public class HrTeamsBack implements Serializable {
 		naamTeamVerantwoordelijke = teamVerantwoordelijke;
 	}
 
-	public String TeamAanpassen(int code) {
-		String url = "Update_team.xhtml?" + Integer.toString(code);
-		return url;
-
-	}
+//	public String TeamAanpassen(int code) {
+//		String url = "Update_team.xhtml?" + Integer.toString(code);
+//		return url;
+//
+//	}
 
 	public String verwijderenTeam(int teamCode) {
 		// String code =
@@ -134,7 +124,18 @@ public class HrTeamsBack implements Serializable {
 		}
 
 		teams = tDao.getTeams(f);
+		resetParameters();
 		return "teamsHr";
+	}
+	
+	public void resetParameters(){
+		setTeamNaam(null);
+		setTeamVerantwoordelijke(null);
+		setTeamCode(0);
+	}
+	
+	public String toevoegenTeam(){
+		return "teamHrCreate";
 	}
 
 }

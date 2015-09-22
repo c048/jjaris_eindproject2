@@ -59,5 +59,9 @@ public class CreateTeamBack implements Serializable {
 		return null;
 
 	}
+	
+	public String annuleren(){
+	return "teamsHr";
+	}
 
 }

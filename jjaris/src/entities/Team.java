@@ -99,7 +99,7 @@ public class Team implements Serializable {
 	 *
 	 */
 	public boolean isHr() {
-		return this.getHR();
+		return this.HR;
 	}
 
 	/**
