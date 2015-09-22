@@ -38,12 +38,15 @@
 						<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
 						
 						
-						<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
-						<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
-						<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
-			           		<f:selectItems value="#{toestandBack.toestandLijst}" />
-						</h:selectOneMenu>
-						<h:commandButton value="Zoeken" action="#{verlofaanvraag.zoeken()}"></h:commandButton>
+			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
+				<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
+            		<f:selectItems value="#{toestandBack.toestandLijst}" />
+             		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
+				</h:selectOneMenu>
+			<h:selectOneMenu id="teams" value="#{verlof.teamID}" >
+            		<f:selectItems value="#{verlof.teamlijst()}" var= "team" itemLabel="#{team.naam}" itemValue="#{team.code}"/>
+            		</h:selectOneMenu>	
+			<h:commandButton value="Zoeken" action="#{verlof.zoeken()}"></h:commandButton>
 					</h:panelGrid>	
 				</h:form>
 				
