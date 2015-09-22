@@ -210,7 +210,7 @@ public class MedewerkerHrManageBack implements Serializable {
 		return "medewerkersHr";
 	}
 	
-	public void setFacesMessage(String msg ) {
+	public void setFacesMessage(String msg) {
 		FacesMessage fMsg = new FacesMessage(msg);
 		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		FacesContext.getCurrentInstance().addMessage(null, fMsg);

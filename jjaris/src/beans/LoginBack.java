@@ -63,7 +63,7 @@ public class LoginBack implements Serializable {
 					return "medewerkersHr";
 				} else {
 					if (w.isVerantwoordelijke()) {
-						return "verlofTeam";
+						return "medewerkersHr";
 					} else {
 						return "verlofMedewerker";
 					}
