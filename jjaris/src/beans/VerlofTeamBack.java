@@ -40,8 +40,8 @@ public class VerlofTeamBack implements Serializable {
 	private String reden;
 
 	private Filter filter = new Filter();
+	
 
-	// private int zoekToestand ;
 
 	/**
 	 * Lijst met verlofaanvragen per team gefilterd standaard lege filters
@@ -52,8 +52,7 @@ public class VerlofTeamBack implements Serializable {
 	public List<VerlofAanvraag> getAanvragen() {
 		Date startdatum = buildDatum(startDag, startMaand, startJaar);
 		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-		System.out.println("data aangemaakt*******************");
-		filter.voegFilterToe("team.code", user
+		filter.voegFilterToe("werknemer.team.code", user
 				.getIngelogdeWerknemer().getTeam().getCode());
 		
 		if (startdatum != null) {
@@ -65,7 +64,7 @@ public class VerlofTeamBack implements Serializable {
 		if (toestand != null) {
 			filter.voegFilterToe("toestand", toestand);
 		}
-		System.out.println("Alles uit database gehaalt*********************");
+		
 		return verlofaanvraagDAO.getVerlofAanvragen(filter);
 	}
 
@@ -159,9 +158,7 @@ public class VerlofTeamBack implements Serializable {
 		return calendar.getTime();
 	}
 
-	// public getEinddatumString(){
-	// converteerDatum(einddatum).
-	// }
+	
 	public int getStartJaar() {
 		return startJaar;
 	}
@@ -210,13 +207,6 @@ public class VerlofTeamBack implements Serializable {
 		this.eindDag = eindDag;
 	}
 
-	// public int getZoekToestand() {
-	// return zoekToestand;
-	// }
-	// public void setZoekToestand(int zoekToestand) {
-	// this.zoekToestand = zoekToestand;
-	// }
-
 	public int getId() {
 		return id;
 	}
@@ -242,5 +232,7 @@ public class VerlofTeamBack implements Serializable {
 			this.toestand = Toestand.valueOf(toestand);
 		}
 	}
+	
+	
 
 }
