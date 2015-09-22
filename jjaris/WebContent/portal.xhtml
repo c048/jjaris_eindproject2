@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h:body>
+		<c:choose>
+			<c:when test="#{loginBack.component eq 'verlofMedewerker'}">
+				<ui:include src="WEB-INF/includes/verlofMedewerker.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'verlofTeam'}">
+				<ui:include src="WEB-INF/includes/verlofTeam.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'verlofHr'}">
+				<ui:include src="WEB-INF/includes/verlofHr.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'jaarlijksVerlofHr'}">
+				<ui:include src="WEB-INF/includes/jaarlijksVerlofHr.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'jaarlijksVerlofHrCreate'}">
+				<ui:include src="WEB-INF/includes/jaarlijksVerlofHrCreate.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'teamsHr'}">
+				<ui:include src="WEB-INF/includes/teamsHr.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'teamHrCreate'}">
+				<ui:include src="WEB-INF/includes/teamHrCreate.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'teamHrEdit'}">
+				<ui:include src="WEB-INF/includes/teamHrEdit.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'medewerkersHr'}">
+				<ui:include src="WEB-INF/includes/medewerkersHr.xhtml"></ui:include>
+			</c:when>
+			<c:when test="#{loginBack.component eq 'medewerkerHrManage'}">
+				<ui:include src="WEB-INF/includes/medewerkerHrManage.xhtml"></ui:include>
+			</c:when>
+			<c:otherwise>
+				<ui:include src="WEB-INF/includes/login.xhtml"></ui:include>
+			</c:otherwise>
+		</c:choose>
+	</h:body>
+</html>

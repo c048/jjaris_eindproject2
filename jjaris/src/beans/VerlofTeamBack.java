@@ -11,6 +11,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import utils.DatumBuilder;
 import utils.Filter;
@@ -49,29 +51,58 @@ public class VerlofTeamBack implements Serializable {
 	 * 
 	 * @return
 	 */
-	public List<VerlofAanvraag> getAanvragen() {
-		Date startdatum = buildDatum(startDag, startMaand, startJaar);
-		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-		filter.voegFilterToe("werknemer.team.code", user
-				.getIngelogdeWerknemer().getTeam().getCode());
-		
-		if (startdatum != null) {
-			filter.voegFilterToe("startdatum", converteerDatum(startdatum));
-		}
-		if (einddatum != null) {
-			filter.voegFilterToe("einddatum", converteerDatum(einddatum));
-		}
+	public List<VerlofAanvraag> filterAanvragen() {
+		filter.voegFilterToe("werknemer.team.code", user.getIngelogdeWerknemer().getTeam().getCode());
 		if (toestand != null) {
 			filter.voegFilterToe("toestand", toestand);
 		}
-		
 		return verlofaanvraagDAO.getVerlofAanvragen(filter);
+	}
+	
+	public void filterDates() {
+		try {
+			Date startdatum = null;
+			Date einddatum = null;
+			if(startDag != 0 || startMaand != 0 || startJaar != 0) {
+				if(startDag != 0 && startMaand != 0 && startJaar != 0) {
+					startdatum = buildDatum(startDag, startMaand, startJaar);
+				} else {
+					setFacesMessage("Gelieve de hele startdatum in te voeren");
+				}
+			}
+			
+			if(eindDag != 0 || eindMaand != 0 || eindJaar != 0) {
+				if(eindDag != 0 && eindMaand != 0 && eindJaar != 0) {
+					einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+				} else {
+					setFacesMessage("Gelieve de hele einddatum in te voeren");
+				}
+			}
+			
+			if(startdatum != null && einddatum == null) {
+				setFacesMessage("Gelieve een eind datum in te vullen");
+			}
+			
+			if(einddatum != null && startdatum == null) {
+				setFacesMessage("Gelieve een start datum in te vullen");
+			}
+			
+			if(startdatum != null && einddatum != null) {
+				if(!startdatum.before(einddatum)) {
+					setFacesMessage("Startdatum moet voor einddatum liggen");
+				} else {
+					filter.voegFilterToe("startdatum", converteerDatum(startdatum));
+					filter.voegFilterToe("einddatum", converteerDatum(einddatum));
+				}
+			}
+		} catch (IllegalArgumentException iae) {
+			setFacesMessage(iae.getMessage());
+		}
 	}
 
 	public String zoeken() {
-		getAanvragen();
+		filterDates();
 		return null;
-
 	}
 
 	/**
@@ -81,30 +112,36 @@ public class VerlofTeamBack implements Serializable {
 	 */
 	public String afkeuren() {
 		if (reden.equals("")) {
-
-			FacesMessage msg = new FacesMessage(
-					"Geef een reden om af te keuren");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().renderResponse();
-			return null;
+			setFacesMessage("Geef een reden om af te keuren");
 		}
 		// if(verlofaanvraagDAO.getVerlofAanvraag(id)){
 		//
 		// }
 		else {
-			VerlofAanvraag v = verlofaanvraagDAO.getVerlofAanvraag(id);
-			v.setToestand(Toestand.AFGEKEURD);
-			v.setReden(reden);
-			verlofaanvraagDAO.updateVerlofAanvraag(v);
-			return null;
+			try {
+				VerlofAanvraag v = verlofaanvraagDAO.getVerlofAanvraag(id);
+				v.setToestand(Toestand.AFGEKEURD);
+				v.setReden(reden);
+				verlofaanvraagDAO.updateVerlofAanvraag(v);
+			} catch (IllegalArgumentException iae) {
+				setFacesMessage(iae.getMessage());
+			} catch (Exception e) {
+				setFacesMessage("Unexpected Error, contact IT support!");
+			}
 		}
+		return null;
 	}
 
 	public String goedkeuren(int id) {
-		VerlofAanvraag v = verlofaanvraagDAO.getVerlofAanvraag(id);
-		v.setToestand(Toestand.GOEDGEKEURD);
-		verlofaanvraagDAO.updateVerlofAanvraag(v);
+		try {
+			VerlofAanvraag v = verlofaanvraagDAO.getVerlofAanvraag(id);
+			v.setToestand(Toestand.GOEDGEKEURD);
+			verlofaanvraagDAO.updateVerlofAanvraag(v);
+		} catch (IllegalArgumentException iae) {
+			setFacesMessage(iae.getMessage());
+		} catch (Exception e) {
+			setFacesMessage("Unexpected Error, contact IT support!");
+		}
 		return null;
 	}
 
@@ -223,8 +260,8 @@ public class VerlofTeamBack implements Serializable {
 		this.reden = reden;
 	}
 
-	public Toestand getToestand() {
-		return toestand;
+	public String getToestand() {
+		return toestand == null ? "": toestand.toString();
 	}
 
 	public void setToestand(String toestand) {
@@ -233,6 +270,11 @@ public class VerlofTeamBack implements Serializable {
 		}
 	}
 	
+	public void setFacesMessage(String msg) {
+		FacesMessage fMsg = new FacesMessage(msg);
+		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		FacesContext.getCurrentInstance().renderResponse();
+	}
 	
-
 }

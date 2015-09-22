@@ -112,7 +112,7 @@ public class VerlofAanvraag implements Serializable {
 	 * @param startDatum
 	 * @param eindDatum
 	 */
-	public void setPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
+	public void setPeriode(GregorianCalendar startDatum, GregorianCalendar eindDatum) throws IllegalArgumentException {
 		if (geldigVerlof(startDatum, eindDatum)) {
 			this.startdatum = startDatum;
 			this.einddatum = eindDatum;
@@ -143,8 +143,9 @@ public class VerlofAanvraag implements Serializable {
 		minStartdatum.add(Calendar.DAY_OF_MONTH, 14);
 		if (minStartdatum.before(startDatum)) {
 			return true;
-		} else
+		} else {
 			return false;
+		}
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class VerlofAanvraag implements Serializable {
 		if (verlofaanvragen != null && !verlofaanvragen.isEmpty()) {
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				System.out.println(verlofAanvraag);
-				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum)) {
+				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum) && verlofAanvraag.getId() != getId()) {
 					return true;
 				}
 			}
@@ -300,12 +301,12 @@ public class VerlofAanvraag implements Serializable {
 		if (getWerknemer() != null) {
 			List<VerlofAanvraag> verlofaanvragen = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.INGEDIEND);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-				System.out.println(verlofAanvraag);
+				System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
 			}
 			List<VerlofAanvraag> verlofaanvragenGoedgekeurd = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.GOEDGEKEURD);
 			verlofaanvragen.addAll(verlofaanvragenGoedgekeurd);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-				System.out.println(verlofAanvraag);
+				System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
 			}
 			return verlofaanvragen;
 		} else {

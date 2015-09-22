@@ -24,9 +24,9 @@
 								<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 								
 								<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-								<h:inputText id="txtFDag1"  value="#{verlofTeamBack.startDag}"></h:inputText>
-								<h:inputText id="txtFMaand1"  value="#{verlofTeamBack.startMaand}"></h:inputText>
-								<h:inputText id="txtFJaar1"  value="#{verlofTeamBack.startJaar}"></h:inputText>
+								<h:inputText id="txtFDag1" converterMessage="U moet een geldige start dag invoeren" value="#{verlofTeamBack.startDag}"></h:inputText>
+								<h:inputText id="txtFMaand1" converterMessage="U moet een geldige start maand invoeren" value="#{verlofTeamBack.startMaand}"></h:inputText>
+								<h:inputText id="txtFJaar1" converterMessage="U moet een geldig start jaar invoeren" value="#{verlofTeamBack.startJaar}"></h:inputText>
 					
 								<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
 								<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
@@ -34,9 +34,9 @@
 								<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
 								
 								<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-								<h:inputText id="txtFDag2"  value="#{verlofTeamBack.eindDag}"></h:inputText>
-								<h:inputText id="txtFMaand2"  value="#{verlofTeamBack.eindMaand}"></h:inputText>
-								<h:inputText id="txtFJaar2"  value="#{verlofTeamBack.eindJaar}"></h:inputText>
+								<h:inputText id="txtFDag2" converterMessage="U moet een geldige eind dag invoeren" value="#{verlofTeamBack.eindDag}"></h:inputText>
+								<h:inputText id="txtFMaand2" converterMessage="U moet een geldige eind maand invoeren" value="#{verlofTeamBack.eindMaand}"></h:inputText>
+								<h:inputText id="txtFJaar2" converterMessage="U moet een geldig eind jaar invoeren" value="#{verlofTeamBack.eindJaar}"></h:inputText>
 								
 								
 								<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
@@ -50,7 +50,7 @@
 							</h:form>
 							<h2>Overzicht verlofaanvragen</h2>
 							<h:form>
-								<h:dataTable value="#{verlofTeamBack.aanvragen}" var="va">
+								<h:dataTable value="#{verlofTeamBack.filterAanvragen()}" var="va">
 									<h:column>
 										<f:facet name="header">ID</f:facet>    				
 								      	<h:outputText value="#{va.id}"></h:outputText>
@@ -79,14 +79,13 @@
 										<f:facet name="header">Goedkeuren</f:facet>	
 										<h:commandButton action="#{verlofTeamBack.goedkeuren(va.id)}" value="Goedkeuren" rendered="${va.toestand == 'INGEDIEND'}">
 										</h:commandButton>
-										
 									</h:column> 									
 							</h:dataTable>
 						</h:form>
 						<h2>Afkeuren van verlofaanvraagen</h2>
 						<h:form>
 							<h:outputLabel value="Geef ID: "></h:outputLabel>
-							<h:inputText value="#{verlofTeamBack.id}"></h:inputText>
+							<h:inputText value="#{verlofTeamBack.id}" converterMessage="U moet een geldige ID invoeren"></h:inputText>
 							<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
 							<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputTextarea>
 							<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>

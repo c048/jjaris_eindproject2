@@ -42,17 +42,20 @@ public class VerlofAanvraagDAO {
 	 */
 	
 	@Transactional
-	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag){	
-		VerlofAanvraag tmp = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
-		tmp.setWerknemer(verlofAanvraag.getWerknemer());
-		tmp.setAanvraagdatum((GregorianCalendar) verlofAanvraag.getAanvraagdatum());
-		tmp.setPeriode((GregorianCalendar) verlofAanvraag.getStartdatum(), (GregorianCalendar) verlofAanvraag.getEinddatum());
-		tmp.setReactiedatum((GregorianCalendar) verlofAanvraag.getReactiedatum());
-		tmp.setReden(verlofAanvraag.getReden());
-		tmp.setToestand(verlofAanvraag.getToestand());
-		
-		
-	
+	public void updateVerlofAanvraag(VerlofAanvraag verlofAanvraag) throws IllegalArgumentException{	
+		try {
+			VerlofAanvraag tmp = em.find(VerlofAanvraag.class, verlofAanvraag.getId());
+			tmp.setWerknemer(verlofAanvraag.getWerknemer());
+			tmp.setAanvraagdatum((GregorianCalendar) verlofAanvraag.getAanvraagdatum());
+			tmp.setPeriode((GregorianCalendar) verlofAanvraag.getStartdatum(), (GregorianCalendar) verlofAanvraag.getEinddatum());
+			tmp.setReactiedatum((GregorianCalendar) verlofAanvraag.getReactiedatum());
+			tmp.setReden(verlofAanvraag.getReden());
+			tmp.setToestand(verlofAanvraag.getToestand());
+		} catch (IllegalArgumentException iae) {
+			System.out.println(iae.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	/**
 	 * Verlofaanvraag opvragen aan de hand van de ID
