@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.RollbackException;
 import javax.transaction.TransactionalException;
 
 import utils.Filter;
@@ -38,11 +37,13 @@ public class HrTeamsBack implements Serializable {
 //	public void setAanpasCode(int aanpasCode) {
 //		this.aanpasCode = aanpasCode;
 //	}
+	
+	
 
 	public List<Team> getTeams() {
-		
+		if (teams == null){
 		teams = tDao.getTeams();
-		
+		}
 		return teams;
 	}
 
@@ -88,24 +89,24 @@ public class HrTeamsBack implements Serializable {
 		try {
 			tDao.verwijderTeam(team);
 		}
-		catch (NullPointerException npe) {
-			FacesMessage msg = new FacesMessage(npe.getMessage());
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().renderResponse();
-		} 
-		catch (IllegalArgumentException iae) {
-			FacesMessage msg = new FacesMessage(iae.getMessage());
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().renderResponse();
-		}
-//		catch (TransactionalException te) {
-//					FacesMessage msg = new FacesMessage("Kan geen team verwijderen met nog teamleden in");
-//					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//					FacesContext.getCurrentInstance().addMessage(null, msg);
-//					FacesContext.getCurrentInstance().renderResponse();
+//		catch (NullPointerException npe) {
+//			FacesMessage msg = new FacesMessage(npe.getMessage());
+//			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+//			FacesContext.getCurrentInstance().addMessage(null, msg);
+//			FacesContext.getCurrentInstance().renderResponse();
+//		} 
+//		catch (IllegalArgumentException iae) {
+//			FacesMessage msg = new FacesMessage(iae.getMessage());
+//			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+//			FacesContext.getCurrentInstance().addMessage(null, msg);
+//			FacesContext.getCurrentInstance().renderResponse();
 //		}
+		catch (TransactionalException te) {
+					FacesMessage msg = new FacesMessage("Kan geen team verwijderen met nog teamleden in");
+					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+					FacesContext.getCurrentInstance().renderResponse();
+		}
 			
 		return "teamsHr";
 
@@ -132,9 +133,6 @@ public class HrTeamsBack implements Serializable {
 			f.voegFilterToe("code", getTeamCode());
 		}
 
-		
-	// comment line te verwijderen
-		// comment
 		teams = tDao.getTeams(f);
 		return "teamsHr";
 	}
