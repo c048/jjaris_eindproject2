@@ -11,8 +11,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 import utils.DatumBuilder;
 import utils.Filter;
@@ -39,7 +37,7 @@ public class VerlofMedewerkerBack implements Serializable {
 	private Toestand toestand = null;
 	private Team team;
 
-	private Filter filter = new Filter();
+	private List<VerlofAanvraag> verlofaanvragen;
 
 	/**
 	 * Lijst met verlofaanvragen per werknemer gefilterd standaard lege filters
@@ -48,30 +46,37 @@ public class VerlofMedewerkerBack implements Serializable {
 	 * @return
 	 */
 	public List<VerlofAanvraag> getAanvragen() {
+		if (verlofaanvragen == null){
+			verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragenWerknemer(user.getIngelogdeWerknemer().getPersoneelsnummer());
+		}
+		return verlofaanvragen;
+	}
+
+	public String zoeken() {
 		try {
 			Date startdatum = buildDatum(startDag, startMaand, startJaar);
 			Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+			Filter filter = new Filter();
 			filter.voegFilterToe("werknemer.personeelsnummer", user.getIngelogdeWerknemer().getPersoneelsnummer());
 			if (startdatum != null) {
+				System.out.println("filter startdatum toevoegen");
 				filter.voegFilterToe("startdatum", converteerDatum(startdatum));
 			}
 			if (einddatum != null) {
+				System.out.println("filter einddatum toevoegen");
 				filter.voegFilterToe("einddatum", converteerDatum(einddatum));
 			}
 			if (toestand != null) {
 				filter.voegFilterToe("toestand", toestand);
 			}
+			verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragen(filter);
 		} catch (IllegalArgumentException iae) {
 			FacesMessage msg = new FacesMessage(iae.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
 		}
-		return verlofaanvraagDAO.getVerlofAanvragen(filter);
-	}
 
-	public String zoeken() {
-		getAanvragen();
 		resetParameters();
 		return null;
 
@@ -85,7 +90,7 @@ public class VerlofMedewerkerBack implements Serializable {
 		// werknemer.annuleerVerlofAanvraag(id); //werkt niet!!
 		VerlofAanvraag va = verlofaanvraagDAO.getVerlofAanvraag(id);
 		va.annuleren();
-
+		System.out.println("toestand va:" + va.getToestand());
 		verlofaanvraagDAO.updateVerlofAanvraag(va);
 		return null;
 	}
