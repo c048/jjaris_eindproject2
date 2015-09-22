@@ -168,6 +168,9 @@ public class MedewerkerHrManageBack implements Serializable {
 		werknemer = new Werknemer();
 		werknemer.setAdres(new Adres());
 		werknemer.setTeam(new Team());
+		setGebDag(0);
+		setGebMaand(0);
+		setGebJaar(gebJaar);
 	}
 	
 	public void valideerMedewerker() throws IllegalArgumentException {

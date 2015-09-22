@@ -16,10 +16,12 @@
 						<c:if test="${medewerkerHrManageBack.findPersoneelsnummer() ne 0}">
 							<h3>Medewerker ID : #{medewerkerHrManageBack.findPersoneelsnummer()}</h3>
 						</c:if>
-						<h:outputLabel for="mNaam" value="Naam"></h:outputLabel>
+						<h:outputLabel for="mNaam" value="Voornaam"></h:outputLabel>
 						<h:inputText id="mNaam" required="true" requiredMessage="U moet een voornaam invullen" value="#{medewerkerHrManageBack.voornaam}"></h:inputText><br/>
 						<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
 						<h:inputText id="mAchterNaam" required="true" requiredMessage="U moet een achternaan invoeren" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
+						<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
+						<h:inputText id="mEmail" required="true"  requiredMessage="U moet een e-mail adres invoeren" value="#{medewerkerHrManageBack.email}"></h:inputText><br/>
 						<h:outputLabel for="mTeam" value="Team"></h:outputLabel>
 						<h:selectOneMenu id="mTeam" value="#{medewerkerHrManageBack.team.code}">
 							<f:selectItems value="#{medewerkerHrManageBack.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
@@ -59,8 +61,6 @@
 						<h:inputText id="adresPost" maxlength="4" value="#{medewerkerHrManageBack.postcode}"></h:inputText><br/>
 						<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
 						<h:inputText id="adresGemeente" value="#{medewerkerHrManageBack.gemeente}"></h:inputText><br/>
-						<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
-						<h:inputText id="mEmail" required="true"  requiredMessage="U moet een e-mail adres invoeren" value="#{medewerkerHrManageBack.email}"></h:inputText>
 						
 						<h:messages style="color:red;"></h:messages><br/>
 						
