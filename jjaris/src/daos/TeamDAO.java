@@ -129,7 +129,7 @@ public class TeamDAO {
 	public List<Team> getTeams() {
 		List<Team> l = null;
 
-		TypedQuery<Team> tqry = em.createQuery("SELECT t FROM Team t", Team.class);
+		TypedQuery<Team> tqry = em.createQuery("SELECT t FROM Team t ORDER BY t.naam", Team.class);
 		l = tqry.getResultList();
 
 		return l;
@@ -154,6 +154,7 @@ public class TeamDAO {
 					aantal++;
 				}
 			}
+			queryString+= " ORDER BY t.naam";
 		}
 		System.out.println(queryString);
 		TypedQuery<Team> query = em.createQuery(queryString, Team.class);
