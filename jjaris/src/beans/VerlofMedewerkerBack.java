@@ -64,9 +64,12 @@ public class VerlofMedewerkerBack implements Serializable{
 	 * Annuleer een verlofaanvraag	
 	 */
 	public String annuleren(int id){
-		Werknemer werknemer = user.getIngelogdeWerknemer();
-		werknemer.annuleerVerlofAanvraag(id);
-		verlofaanvraagDAO.updateVerlofAanvraag(verlofaanvraagDAO.getVerlofAanvraag(id));
+//		Werknemer werknemer = user.getIngelogdeWerknemer();
+//		werknemer.annuleerVerlofAanvraag(id);
+		VerlofAanvraag va= verlofaanvraagDAO.getVerlofAanvraag(id);
+		va.annuleren();
+		
+		verlofaanvraagDAO.updateVerlofAanvraag(va);
 		return null;				
 	}
 	/**
