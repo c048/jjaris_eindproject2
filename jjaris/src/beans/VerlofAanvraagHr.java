@@ -40,6 +40,7 @@ public class VerlofAanvraagHr implements Serializable{
 	private Team team;
 	private int teamID;
 	private String voorNaam;
+	private int personeelsNr;
 	
 	private String achterNaam;
 	
@@ -53,12 +54,20 @@ public class VerlofAanvraagHr implements Serializable{
 	public List<VerlofAanvraag> getAanvragen(){
 		Date startdatum = buildDatum(startDag, startMaand, startJaar);
 		Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
+//		filter.voegFilterToe("werknemer.personeelsnummer",user.getIngelogdeWerknemer().getPersoneelsnummer() );
 		if(startdatum!=null){filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
 		if(einddatum!=null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
 		if(toestand !=null){filter.voegFilterToe("toestand", toestand);}
-		if(voorNaam !=null){filter.voegFilterToe("toest", voorNaam);}
-		if(achterNaam !=null){filter.voegFilterToe("toe", achterNaam);}
+//		if(voorNaam !=null){filter.voegFilterToe("toest", voorNaam);}
+//		if(achterNaam !=null){filter.voegFilterToe("toe", achterNaam);}
+		System.out.println(personeelsNr+"********************************************");
+		if(personeelsNr !=0){filter.voegFilterToe("werknemer.personeelsnummer", personeelsNr);}
+		filter.voegFilterToe("werknemer.team.code", teamID);
+		
+		
+		
+		
+		
 		return verlofaanvraagDAO.getVerlofAanvragen(filter);
 	}
 	
@@ -206,6 +215,14 @@ public class VerlofAanvraagHr implements Serializable{
 	}
 	public List<Team> teamlijst(){
 		return teamDAO.getTeams();
+	}
+
+	public int getPersoneelsNr() {
+		return personeelsNr;
+	}
+
+	public void setPersoneelsNr(int personeelsNr) {
+		this.personeelsNr = personeelsNr;
 	}
 }
 

@@ -13,7 +13,7 @@
 		<ui:define name="title">Manage Medewerker</ui:define>
 		<ui:define name="content">
 			<div id="content-wrapper">
-				<h2>Verlofaanvraagen Overzicht</h2>
+				<h2>Verlofaanvragen Overzicht</h2>
 				
 				<h:form>
 					<h:panelGrid id="panel" columns="4">
@@ -38,26 +38,37 @@
 						<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}"></h:inputText>
 						
 						
-			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
-				<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
-            		<f:selectItems value="#{toestandBack.toestandLijst}" />
-             		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
-				</h:selectOneMenu>
-			<h:selectOneMenu id="teams" value="#{verlof.teamID}" >
-            		<f:selectItems value="#{verlof.teamlijst()}" var= "team" itemLabel="#{team.naam}" itemValue="#{team.code}"/>
-            		</h:selectOneMenu>	
-			<h:commandButton value="Zoeken" action="#{verlof.zoeken()}"></h:commandButton>
-					</h:panelGrid>	
-				</h:form>
+						<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
+							<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
+			            		<f:selectItems value="#{toestandBack.toestandLijst}" />
+			             		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
+							</h:selectOneMenu>
+						<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
+						<h:inputHidden value="legeFGrid5-4" id="legeFGrid5-4" />
+										
+						<h:outputLabel value="Team" id="team"></h:outputLabel>	
+						<h:selectOneMenu id="teams" value="#{verlof.teamID}" >
+			            		<f:selectItems value="#{verlof.teamlijst()}" var= "team" itemLabel="#{team.naam}" itemValue="#{team.code}"/>
+			            		</h:selectOneMenu>
+						<h:inputHidden value="legeFGrid6-3" id="legeFGrid6-3" />		
+			            <h:inputHidden value="legeFGrid6-4" id="legeFGrid6-4" />	
+			           
+			           
+			           
+			            	
+						<h:outputLabel value="PersoneelsNr" for="personeelsNr"></h:outputLabel>	
+						<h:inputText id="personeelsNr"  value="#{verlof.personeelsNr}"></h:inputText>
+						<h:inputHidden value="legeFGrid7-3" id="legeFGrid7-3" />			            			        		
+						<h:commandButton value="Zoeken" action="#{verlof.zoeken()}"></h:commandButton>
+								</h:panelGrid>	
+							</h:form>
 				
 				<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 				
 			 	<h:form>
-					<h:dataTable value="#{verlof.aanvraag}" var="va">
+					<h:dataTable value="#{verlof.aanvragen}" var="va">
 			  			<h:column>
-			  				column header
 			  				<f:facet name="header">ID</f:facet>
-			  				row record
 			  				#{va.id}
 			  			</h:column>		
 			  			<h:column>
