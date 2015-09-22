@@ -1,99 +1,92 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
- xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+ xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>VerlofTeam</title>
 </h:head>
-<h:body>
-
-<h:form>
-
-<h:outputLabel value="Zoekcriteria: "></h:outputLabel>
-
-<h:panelGrid id="panel" columns="4">
-		<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
-			<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
-			<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
-			<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
-			
-			<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-			<h:inputText id="txtFDag1"  value="#{verlofTeamBack.startDag}"></h:inputText>
-			<h:inputText id="txtFMaand1"  value="#{verlofTeamBack.startMaand}"></h:inputText>
-			<h:inputText id="txtFJaar1"  value="#{verlofTeamBack.startJaar}"></h:inputText>
-
-			<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
-			<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
-			<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
-			<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
-			
-			<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-			<h:inputText id="txtFDag2"  value="#{verlofTeamBack.eindDag}"></h:inputText>
-			<h:inputText id="txtFMaand2"  value="#{verlofTeamBack.eindMaand}"></h:inputText>
-			<h:inputText id="txtFJaar2"  value="#{verlofTeamBack.eindJaar}"></h:inputText>
-			
-			
-			<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
-			<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
-				<h:selectOneMenu id="menu" value="#{verlofTeamBack.toestand}" >
-					<f:selectItems value="#{toestandBack.toestandLijst}" />
-            		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
-            		
-				</h:selectOneMenu>
-			<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken()}"></h:commandButton>
-		</h:panelGrid>	
-
-
-<h:outputLabel value="Werknemer: "></h:outputLabel>
-<h:selectOneMenu value="verlofTeamBack.werknemer.volledigeNaam">
-	<f:selectItem itemValue="" itemLabel="" />
-	<f:selectItems value="verlofTeamBack.werknemers"></f:selectItems>
-</h:selectOneMenu>
-
-<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken}"></h:commandButton>
-
-<h:dataTable value="verlofTeamBack" var="tmpVerlofAanvraag">
-			<h:column>
-				<f:facet name="header">ID</f:facet>    				
-		      	#{tmpVerlofAanvraag.id}</h:column>
-			<h:column>
-				<f:facet name="header">Naam Werknemer</f:facet>    				
-		      	#{tmpVerlofAanvraag.werknemer.volledigeNaam}</h:column>
-			
-			<h:column>
-    				<f:facet name="header">Startdatum</f:facet>	
-    				<h:outputText value="#{verlofTeamBack.converteerNaarDate(tmpVerlofAanvraag.startdatum)}">
- 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
-					</h:outputText>		
-    			</h:column>		
-    			<h:column>
-    				<f:facet name="header">EindDatum</f:facet>	
-    				<h:outputText value="#{verlofTeamBack.converteerNaarDate(tmpVerlofAanvraag.einddatum)}">
- 						 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
-					</h:outputText>	
-    			</h:column>	
-		      	
-			
-			<h:column>
-				<f:facet name="header">Status</f:facet>    				
-		      	#{tmpVerlofAanvraag.toestand}</h:column>
-			
-
-		      	
-</h:dataTable>
-
-<h:outputLabel value="Geef ID: "></h:outputLabel>
-<h:inputText value="#{verlofTeamBack.id}"></h:inputText>
-<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
-<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputTextarea>
-
-<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>
-
-</h:form>
-
-
-<h:messages style="color:red;"></h:messages>
-</h:body>
+	<h:body>
+		<ui:composition template="/WEB-INF/templates/defaultTemplate.xhtml">
+			<ui:define name="title">Manage Medewerker</ui:define>
+				<ui:define name="content">
+					<div id="content-wrapper">
+				
+						<h:form>
+							<h:outputLabel value="Zoekcriteria: "></h:outputLabel>
+				
+							<h:panelGrid id="panel" columns="4">
+								<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
+								<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
+								<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
+								<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
+								
+								<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
+								<h:inputText id="txtFDag1"  value="#{verlofTeamBack.startDag}"></h:inputText>
+								<h:inputText id="txtFMaand1"  value="#{verlofTeamBack.startMaand}"></h:inputText>
+								<h:inputText id="txtFJaar1"  value="#{verlofTeamBack.startJaar}"></h:inputText>
+					
+								<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
+								<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
+								<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
+								<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
+								
+								<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
+								<h:inputText id="txtFDag2"  value="#{verlofTeamBack.eindDag}"></h:inputText>
+								<h:inputText id="txtFMaand2"  value="#{verlofTeamBack.eindMaand}"></h:inputText>
+								<h:inputText id="txtFJaar2"  value="#{verlofTeamBack.eindJaar}"></h:inputText>
+								
+								
+								<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
+								<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
+								<h:selectOneMenu id="menu" value="#{verlofTeamBack.toestand}" >
+									<f:selectItems value="#{toestandBack.toestandLijst}" />
+					           		<f:selectItem itemLabel="ALLES WEERGEVEN" itemValue=""></f:selectItem>
+								</h:selectOneMenu>
+								<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken()}"></h:commandButton>
+							</h:panelGrid>	
+						
+							<h:commandButton value="Zoeken" action="#{verlofTeamBack.zoeken}"></h:commandButton>
+							<hr/>
+							<h:dataTable value="verlofTeamBack.verloven" var="tmpverlofaanvraag">
+								<h:column>
+									<f:facet name="header">ID</f:facet>    				
+							      	#{tmpverlofaanvraag.id}
+						      	</h:column>
+								<h:column>
+									<f:facet name="header">Naam Werknemer</f:facet>    				
+							      	#{tmpverlofaanvraag.werknemer.volledigeNaam}
+						      	</h:column>
+								<h:column>
+					   				<f:facet name="header">Startdatum</f:facet>	
+					   				<h:outputText value="#{verlofTeamBack.converteerNaarDate(tmpverlofaanvraag.startdatum)}">
+										 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+									</h:outputText>		
+					   			</h:column>		
+					   			<h:column>
+					   				<f:facet name="header">EindDatum</f:facet>	
+					   				<h:outputText value="#{verlofTeamBack.converteerNaarDate(tmpverlofaanvraag.einddatum)}">
+										 <f:convertDateTime locale="nl" type="date" pattern="dd-MM-yyyy" />
+									</h:outputText>	
+					   			</h:column>
+								<h:column>
+									<f:facet name="header">Status</f:facet>    				
+							      	#{tmpverlofaanvraag.toestand}
+						      	</h:column>
+							</h:dataTable>
+							
+							<h:outputLabel value="Geef ID: "></h:outputLabel>
+							<h:inputText value="#{verlofTeamBack.id}"></h:inputText>
+							<h:outputLabel value="Geef reden tot afkeuring: "></h:outputLabel>
+							<h:inputTextarea value="#{verlofTeamBack.reden}"></h:inputTextarea>
+							
+							<h:commandButton value="Afkeuren" action="#{verlofTeamBack.afkeuren}"></h:commandButton>
+						</h:form>
+					<h:messages style="color:red;"></h:messages>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
 </html>
