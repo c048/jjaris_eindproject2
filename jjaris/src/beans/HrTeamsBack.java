@@ -78,6 +78,7 @@ public class HrTeamsBack implements Serializable {
 		Team team = tDao.getTeam(teamCode);
 		try {
 			tDao.verwijderTeam(team);
+			teams = tDao.getTeams();
 		}
 //		catch (NullPointerException npe) {
 //			FacesMessage msg = new FacesMessage(npe.getMessage());

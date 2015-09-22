@@ -56,7 +56,7 @@ public class CreateTeamBack implements Serializable {
 			FacesContext.getCurrentInstance().renderResponse();
 		}
 
-		return null;
+		return "teamsHr";
 
 	}
 	
