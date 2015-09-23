@@ -11,7 +11,7 @@
 		<ui:define name="content">
 			<div id="content-wrapper">
 				<h:form>
-					<h2>Medewerker overzicht</h2>
+					<h2>Medewerker overzicht(Hr)</h2>
 					<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">:</h:outputLabel>
 					<h:inputText id="txtNaam" value="#{medewerkersHrBack.naam}"></h:inputText>
 					<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">:</h:outputLabel>
@@ -32,7 +32,7 @@
 						      	#{Medewerker.personeelsnummer}
 						   	</h:column>
 						<h:column>
-							<f:facet name="header">Naam</f:facet>
+							<f:facet name="header">achternaam</f:facet>
 						      	#{Medewerker.naam}
 						   	</h:column>
 						<h:column>
