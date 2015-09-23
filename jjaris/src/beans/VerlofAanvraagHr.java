@@ -82,29 +82,31 @@ public class VerlofAanvraagHr implements Serializable{
 		toestand = null;
 		personeelsNr = 0;
 	}
+	
 	public String zoeken(){
-			try {
-				Date startdatum = buildDatum(startDag, startMaand, startJaar);
-				Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
-				Filter filter = new Filter();
+		try {
+			Date startdatum = buildDatum(startDag, startMaand, startJaar);
+			Date einddatum = buildDatum(eindDag, eindMaand, eindJaar);
+			Filter filter = new Filter();
+			if(!user.getIngelogdeWerknemer().isHR()) {
 				filter.voegFilterToe("werknemer.personeelsnummer", user.getIngelogdeWerknemer().getPersoneelsnummer());
-				if (startdatum != null) {filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
-				if (einddatum != null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
-				if (toestand != null) {filter.voegFilterToe("toestand", toestand);}
 				if(personeelsNr !=0){filter.voegFilterToe("werknemer.personeelsnummer", personeelsNr);}
-				filter.voegFilterToe("werknemer.team.code", teamID);
-				verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragen(filter);
-			} catch (IllegalArgumentException iae) {
-				FacesMessage msg = new FacesMessage(iae.getMessage());
-				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				FacesContext.getCurrentInstance().renderResponse();
 			}
-
-			resetParameters();
-			return null;
-
+			if (startdatum != null) {filter.voegFilterToe("startdatum", converteerDatum(startdatum));}
+			if (einddatum != null) {filter.voegFilterToe("einddatum", converteerDatum(einddatum));}
+			if (toestand != null) {filter.voegFilterToe("toestand", toestand);}
+			filter.voegFilterToe("werknemer.team.code", teamID);
+			verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragen(filter);
+		} catch (IllegalArgumentException iae) {
+			FacesMessage msg = new FacesMessage(iae.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().renderResponse();
 		}
+
+		resetParameters();
+		return null;
+	}
 
 	/**
 	 * Verlof aanvragen
