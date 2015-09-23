@@ -240,7 +240,7 @@ public class Werknemer implements Serializable {
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
 		if (verlofaanvragen.isEmpty()) {
-			System.out.println("verlofaanvragen van: " + getVolledigeNaam() + "zijn leeg");
+			//System.out.println("verlofaanvragen van: " + getVolledigeNaam() + "zijn leeg");
 			return verlofaanvragen;
 		}
 		return verlofaanvragen.stream()

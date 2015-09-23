@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.Test;
 
 import entities.JaarlijksVerlof;
+import entities.Toestand;
 import entities.VerlofAanvraag;
 import entities.Werknemer;
 
@@ -107,7 +108,10 @@ public class Tests {
 		jv2016.setWerknemer(w);
 		w.voegJaarlijksVerlofToe(jv2016);
 		
-		//VerlofAanvraag va4 = new VerlofAanvraag(startDatum, eindDatum, w)
+		VerlofAanvraag va4 = new VerlofAanvraag(new GregorianCalendar(2015, 11, 12), new GregorianCalendar(2016, 1, 12),w);
+		System.out.println("verlofaanvraag va4 periode 2015:"+va4.getPeriodeInJaarStartdatum());
+		System.out.println("verlofaanvraag va4 periode 2016:"+va4.getPeriodeInJaarEinddatum());
+		System.out.println("verlofaanvraag va4 : toestand " + (va4.getToestand()==Toestand.AFGEKEURD?"Afgekeurd":"FOUT"));
 		
 	}
 	

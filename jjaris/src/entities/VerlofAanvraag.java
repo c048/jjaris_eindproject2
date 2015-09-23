@@ -60,7 +60,7 @@ public class VerlofAanvraag implements Serializable {
 		
 		if (!this.werknemer.getVerlofaanvragen().contains(this)) {
 			getWerknemer().voegVerlofAanvraagToe(this);
-			System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
+			//System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
 		}
 		// opgelet de verlofaanvraag zal niet toegevoegd worden aan de werknemer
 		// als er een verlofaanvraag in de werknemer zit met dezelde id
@@ -381,12 +381,12 @@ public class VerlofAanvraag implements Serializable {
 		if (getWerknemer() != null) {
 			List<VerlofAanvraag> verlofaanvragen = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.INGEDIEND);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-				System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
+				//System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
 			}
 			List<VerlofAanvraag> verlofaanvragenGoedgekeurd = werknemer.getAlleVerlofAanvragen(startDatum, eindDatum, Toestand.GOEDGEKEURD);
 			verlofaanvragen.addAll(verlofaanvragenGoedgekeurd);
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-				System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
+				//System.out.println("******* GetVerlofAanvragenWerknemer: " + verlofAanvraag);
 			}
 			return verlofaanvragen;
 		} else {
