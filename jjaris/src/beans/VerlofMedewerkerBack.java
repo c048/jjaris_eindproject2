@@ -123,6 +123,12 @@ public class VerlofMedewerkerBack implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 				FacesContext.getCurrentInstance().renderResponse();
 			}
+				StringBuilder verlof = new StringBuilder();
+				verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
+				verlof.append("\n met id: "+user.getIngelogdeWerknemer().getPersoneelsnummer());
+				verlof.append("\n is geannuleerd");
+				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
+					"Verlofaanvraag gewijzigd", verlof.toString());
 		} catch (IllegalArgumentException iae) {
 			FacesMessage msg = new FacesMessage(iae.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
