@@ -176,8 +176,21 @@ public class Werknemer implements Serializable {
 
 	public int getAantalBeschikBareVerlofDagen(int jaartal) {
 		int tmpJaar = getJaarlijksVerlof(jaartal);
-		int verlofdagen = verlofaanvragen.stream().filter(v -> v.getToestand() == Toestand.INGEDIEND || v.getToestand() == Toestand.GOEDGEKEURD)
-				.mapToInt(v -> v.getPeriode()).sum();
+		List<VerlofAanvraag> va = getAlleVerlofAanvragen(new GregorianCalendar(jaartal, 0, 1), new GregorianCalendar(jaartal, 11, 31)).stream()
+				.filter(v -> v.getToestand().equals(Toestand.INGEDIEND) || v.getToestand().equals(Toestand.GOEDGEKEURD)).collect(Collectors.toList());
+		int verlofdagen = 0;
+		for (VerlofAanvraag verlofAanvraag : va) {
+			if (verlofAanvraag.isStartEnEinddatumInZelfdeJaar()) {
+				verlofdagen += verlofAanvraag.getPeriode();
+			} else {
+				if (verlofAanvraag.geefJaarStartdatum() == jaartal) {
+					verlofdagen += verlofAanvraag.getPeriodeInJaarStartdatum();
+				}
+				if (verlofAanvraag.geefJaarEinddatum() == jaartal) {
+					verlofdagen += verlofAanvraag.getPeriodeInJaarEinddatum();
+				}
+			}
+		}
 		return (tmpJaar - verlofdagen);
 	}
 
@@ -233,18 +246,20 @@ public class Werknemer implements Serializable {
 		}
 		return tmpJaar.getAantalDagen();
 	}
-	
-	public JaarlijksVerlof getJaarlijksVerlofVanJaar(int jaartal){
+
+	public JaarlijksVerlof getJaarlijksVerlofVanJaar(int jaartal) {
 		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
-//		if (tmpJaar == null){
-//			throw new NullPointerException("Werknemer.getJaarlijksVerlofVanJaar(int jaartal) : er bestaat geen jaarlijks verlof met dit jaartal");
-//		}
+		// if (tmpJaar == null){
+		// throw new
+		// NullPointerException("Werknemer.getJaarlijksVerlofVanJaar(int jaartal) : er bestaat geen jaarlijks verlof met dit jaartal");
+		// }
 		return tmpJaar;
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
 		if (verlofaanvragen.isEmpty()) {
-			//System.out.println("verlofaanvragen van: " + getVolledigeNaam() + "zijn leeg");
+			// System.out.println("verlofaanvragen van: " + getVolledigeNaam() +
+			// "zijn leeg");
 			return verlofaanvragen;
 		}
 		return verlofaanvragen.stream()
@@ -266,7 +281,7 @@ public class Werknemer implements Serializable {
 
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
 		if (jaarlijksverlof != null) {
-			if (jaarlijksverlof.getWerknemer().equals(this) ) {
+			if (jaarlijksverlof.getWerknemer().equals(this)) {
 				jaarlijkseverloven.add(jaarlijksverlof);
 
 			} else
