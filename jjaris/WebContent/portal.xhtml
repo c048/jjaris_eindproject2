@@ -37,6 +37,9 @@
 			<c:when test="#{loginBack.component eq 'medewerkerHrManage'}">
 				<ui:include src="WEB-INF/includes/medewerkerHrManage.xhtml"></ui:include>
 			</c:when>
+			<c:when test="#{loginBack.component eq 'collectieveSluitingHr'}">
+				<ui:include src="WEB-INF/includes/collectieveSluitingHr.xhtml"></ui:include>
+			</c:when>
 			<c:otherwise>
 				<ui:include src="WEB-INF/includes/login.xhtml"></ui:include>
 			</c:otherwise>
