@@ -46,27 +46,18 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 	
 	
 	public String voegJaarlijkseVerlofToe() {
-		System.out.println("***************Debug:JaarlijkseVerlofBeheerBack:voegJaarlijkseVerlofToe:PersoneelNr:  " +params.getPersoneelsnummer());
 		Werknemer werknemer=dao.getWerknemer(params.getPersoneelsnummer());
 		if(werknemer!=null) {
-			System.out.println("***************Debug:JaarlijkseVerlofBeheerBack:voegJaarlijkseVerlofToe: werknemer gevonden  " );
-
 			if( (werknemer.getJaarlijkseverloven().stream().filter(j -> j.getJaar() == jaar).findFirst().orElse(null)) ==null){
-				System.out.println("***************Debug:JaarlijkseVerlofBeheerBack:voegJaarlijkseVerlofToe: werknemer heeft geen jaarlijkse verlof van dit jaar  " );
-
 				JaarlijksVerlof jVerlof=new JaarlijksVerlof();
 				jVerlof.setJaar(jaar);
 				jVerlof.setAantalDagen(aantalDagen);
 				jVerlof.setWerknemer(werknemer);
 				werknemer.voegJaarlijksVerlofToe(jVerlof);
-				System.out.println("***************Debug:JaarlijkseVerlofBeheerBack:voegJaarlijkseVerlofToe: nieuwe jaarlijkse verlof toegevoegd  " );
-
 				dao.updateWerknemer(werknemer);
 				
-				System.out.println("***************Debug:JaarlijkseVerlofBeheerBack:voegJaarlijkseVerlofToe: werknemer is geupdated " );
-
-				
 				loginBack.changePage("medewerkersHr");
+				params.reset();
 			}
 			else {
 				setFacesMessage("Verlofdagen van personeel nr "+params.getPersoneelsnummer()+ " is al ingevoerd ");
@@ -77,7 +68,7 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 			setFacesMessage("Geen werknemer gevonden met personeel nr: "+params.getPersoneelsnummer());
 		}
 		
-		params.reset();
+
 		return null;
 	}
 		
