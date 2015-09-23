@@ -8,24 +8,41 @@
 
 	<h:body>
 		<ui:composition template="../templates/defaultTemplate.xhtml">
-			<ui:define name="title">Manage Medewerker</ui:define>
+			<ui:define name="title">HR | Manage Medewerker</ui:define>
 			<ui:define name="content">
 				<div id="content-wrapper">
-					<h:form>
-						<h2>Manage Medewerker</h2>
-						<c:if test="${medewerkerHrManageBack.findPersoneelsnummer() ne 0}">
-							<h3>Medewerker ID : #{medewerkerHrManageBack.findPersoneelsnummer()}</h3>
-						</c:if>
-						<h:outputLabel for="mNaam" value="Voornaam"></h:outputLabel>
-						<h:inputText id="mNaam" value="#{medewerkerHrManageBack.voornaam}"></h:inputText><br/>
-						<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
-						<h:inputText id="mAchterNaam" value="#{medewerkerHrManageBack.naam}"></h:inputText><br/>
-						<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
-						<h:inputText id="mEmail" value="#{medewerkerHrManageBack.email}"></h:inputText><br/>
-						<h:outputLabel for="mTeam" value="Team"></h:outputLabel>
-						<h:selectOneMenu id="mTeam" value="#{medewerkerHrManageBack.team.code}">
-							<f:selectItems value="#{medewerkerHrManageBack.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
-						</h:selectOneMenu><br/>
+					<h2>Manage Medewerker</h2>
+					<h:form class="contentForm_1">
+						<c:choose>
+							<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() ne 0}">
+								<h3>Medewerker ID : #{medewerkerHrManageBack.findPersoneelsnummer()}</h3>
+							</c:when>
+							<c:otherwise>
+								<h3>Nieuwe Medewerker</h3>
+							</c:otherwise>
+						</c:choose>
+						<h:panelGrid columns="2" class="inputPanel_1">
+							<h:outputLabel for="mNaam" value="Voornaam"></h:outputLabel>
+							<h:inputText id="mNaam" value="#{medewerkerHrManageBack.voornaam}"></h:inputText>
+							<h:outputLabel for="mAchterNaam" value="Achternaam"></h:outputLabel>
+							<h:inputText id="mAchterNaam" value="#{medewerkerHrManageBack.naam}"></h:inputText>
+							<h:outputLabel for="mEmail" value="Email"></h:outputLabel>
+							<h:inputText id="mEmail" value="#{medewerkerHrManageBack.email}"></h:inputText>
+							<c:choose>
+								<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
+									<h:outputLabel for="mPwd" value="Passwoord"></h:outputLabel>
+									<h:inputText id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
+								</c:when>
+								<c:otherwise>
+									<h:outputLabel for="mPwd" value="Nieuw Passwoord"></h:outputLabel>
+									<h:inputText id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputText>
+								</c:otherwise>
+							</c:choose>
+							<h:outputLabel for="mTeam" value="Team"></h:outputLabel>
+							<h:selectOneMenu id="mTeam" value="#{medewerkerHrManageBack.team.code}">
+								<f:selectItems value="#{medewerkerHrManageBack.findAllTeams()}" var="team" itemLabel="#{team.naam}" itemValue="#{team.code}"></f:selectItems>
+							</h:selectOneMenu><br/>
+						</h:panelGrid>
 						
 						<h:panelGrid id="panel" columns="4">
 							<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
@@ -33,36 +50,34 @@
 							<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
 							<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 							
-							<h:outputText for="txtFDatum1" value="Geboortedatum"></h:outputText>
-							<h:inputText id="txtFDag1" converterMessage="Dag moet een getal zijn" value="#{medewerkerHrManageBack.gebDag}"></h:inputText>
-							<h:inputText id="txtFMaand1" converterMessage="Maand moet een getal zijn" value="#{medewerkerHrManageBack.gebMaand}"></h:inputText>
-							<h:inputText id="txtFJaar1" converterMessage="Jaar moet een getal zijn" value="#{medewerkerHrManageBack.gebJaar}"></h:inputText>
+							<h:outputLabel for="txtFDatum1" value="Geboortedatum"></h:outputLabel>
+							<h:inputText class="columnTiny_2" id="txtFDag1" converterMessage="Dag moet een getal zijn" value="#{medewerkerHrManageBack.gebDag}"></h:inputText>
+							<h:inputText class="columnTiny_2" id="txtFMaand1" converterMessage="Maand moet een getal zijn" value="#{medewerkerHrManageBack.gebMaand}"></h:inputText>
+							<h:inputText class="columnMedium_1" id="txtFJaar1" converterMessage="Jaar moet een getal zijn" value="#{medewerkerHrManageBack.gebJaar}"></h:inputText>
 						</h:panelGrid>
 						
-						<c:choose>
-							<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
-								<h:outputLabel for="mPwd" value="Passwoord"></h:outputLabel>
-								<h:inputText id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
-							</c:when>
-							<c:otherwise>
-								<h:outputLabel for="mPwd" value="Nieuw Passwoord"></h:outputLabel>
-								<h:inputText id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputText><br/>
-							</c:otherwise>
-						</c:choose>
-						
 						<h3>Adres</h3>
-						<h:outputLabel for="adresStraat" value="Straat"></h:outputLabel>
-						<h:inputText id="adresStraat" value="#{medewerkerHrManageBack.straat}"></h:inputText><br/>
-						<h:outputLabel for="adresNr" value="Huisnummer"></h:outputLabel>
-						<h:inputText id="adresNr" maxlength="5" value="#{medewerkerHrManageBack.huisnummer}"></h:inputText>
-						<h:outputLabel for="adresBus" value="Busnummer"></h:outputLabel>
-						<h:inputText id="adresBus" maxlength="5" value="#{medewerkerHrManageBack.busnummer}"></h:inputText><br/>
-						<h:outputLabel for="adresPost" value="Postcode"></h:outputLabel>
-						<h:inputText id="adresPost" maxlength="4" value="#{medewerkerHrManageBack.postcode}"></h:inputText><br/>
-						<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
-						<h:inputText id="adresGemeente" value="#{medewerkerHrManageBack.gemeente}"></h:inputText><br/>
+						<h:panelGrid columns="4" class="inputPanel_1">
+							<h:outputLabel for="adresStraat" value="Straat"></h:outputLabel>
+							<h:inputText id="adresStraat" value="#{medewerkerHrManageBack.straat}"></h:inputText>
+							<h:inputHidden value="spacer"/><h:inputHidden value="spacer"/>
+							
+							<h:outputLabel for="adresNr" value="Huisnummer"></h:outputLabel>
+							<h:inputText id="adresNr" maxlength="5" value="#{medewerkerHrManageBack.huisnummer}"></h:inputText>
+							
+							<h:outputLabel for="adresBus" value="Busnummer"></h:outputLabel>
+							<h:inputText class="columnTiny_1" id="adresBus" maxlength="5" value="#{medewerkerHrManageBack.busnummer}"></h:inputText>
+							
+							<h:outputLabel for="adresPost" value="Postcode"></h:outputLabel>
+							<h:inputText id="adresPost" maxlength="4" value="#{medewerkerHrManageBack.postcode}"></h:inputText>
+							<h:inputHidden value="spacer"/><h:inputHidden value="spacer"/>
+							
+							<h:outputLabel for="adresGemeente" value="Gemeente"></h:outputLabel>
+							<h:inputText id="adresGemeente" value="#{medewerkerHrManageBack.gemeente}"></h:inputText>
+							<h:inputHidden value="spacer"/><h:inputHidden value="spacer"/>
+						</h:panelGrid>
 						
-						<h:messages style="color:red;"></h:messages><br/>
+						<h:messages class="errorBox_1"></h:messages>
 						
 						<c:choose>
 							<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">

@@ -10,7 +10,7 @@
 				<h:form>
 					<h:commandLink value="log out" action="#{loginBack.changePage('login')}"></h:commandLink>
 				</h:form>
-				<h:form>
+				<h:form class="bottomLinks">
 					<h:commandLink value="Mijn verlof" action="#{loginBack.changePage('verlofMedewerker')}"></h:commandLink>
 					<c:if test="${loginBack.getIngelogdeWerknemer().isVerantwoordelijke() eq true}">
 						<h:commandLink value="Mijn Team" action="#{loginBack.changePage('verlofTeam')}"></h:commandLink>
@@ -20,7 +20,6 @@
 						<h:commandLink value="Overzicht Verlof" action="#{loginBack.changePage('verlofHr')}"></h:commandLink>
 						<h:commandLink value="Jaarlijkse Verloven" action="#{loginBack.changePage('jaarlijksVerlofHr')}"></h:commandLink>
 						<h:commandLink value="Overzicht Teams" action="#{loginBack.changePage('teamsHr')}"></h:commandLink>
-						<h:commandLink value="Collectieve Sluitings" action="#{loginBack.changePage('collectieveSluitingHr')}"></h:commandLink>
 					</c:if>
 				</h:form>
 			</div>

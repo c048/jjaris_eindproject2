@@ -15,7 +15,7 @@
 			<div id="content-wrapper">
 				<h2>Verlofaanvragen Overzicht</h2>
 				
-				<h:form>
+				<h:form class="contentForm_1">
 					<h:panelGrid id="panel" columns="4">
 					<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
 						<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
@@ -37,7 +37,6 @@
 						<h:inputText id="txtFMaand2"  value="#{verlof.eindMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
 						<h:inputText id="txtFJaar2"  value="#{verlof.eindJaar}" converterMessage="!!!!YOU FUCKED UP TYPING A YEAR!!!"></h:inputText>
 						
-						
 						<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
 							<h:selectOneMenu id="menu" value="#{verlof.toestand}" >
 			            		<f:selectItems value="#{toestandBack.toestandLijst}" />
@@ -52,22 +51,19 @@
 			            		</h:selectOneMenu>
 						<h:inputHidden value="legeFGrid6-3" id="legeFGrid6-3" />		
 			            <h:inputHidden value="legeFGrid6-4" id="legeFGrid6-4" />	
-			           
-			           
-			           
 			            	
 						<h:outputLabel value="PersoneelsNr" for="personeelsNr"></h:outputLabel>	
 						<h:inputText id="personeelsNr"  value="#{verlof.personeelsNr}" converterMessage="Geef een bestaand personeelsnummer in"></h:inputText>
 						<h:inputHidden value="legeFGrid7-3" id="legeFGrid7-3" />			            			        		
 						<h:commandButton value="Zoeken" action="#{verlof.zoeken}"></h:commandButton>
-								</h:panelGrid>	
-							</h:form>
-							
-							<h:messages style="color:red;"></h:messages>
+					</h:panelGrid>	
+				</h:form>
+				
+				<h:messages style="color:red;"></h:messages>
 				
 				<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
 				
-			 	<h:form>
+			 	<h:form class="contentForm_1">
 					<h:dataTable value="#{verlof.aanvragen}" var="va">
 			  			<h:column>
 			  				<f:facet name="header">Verlof ID</f:facet>

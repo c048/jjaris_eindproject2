@@ -7,17 +7,17 @@
 
 <h:body>
 	<ui:composition template="../templates/defaultTemplate.xhtml">
-		<ui:define name="title">Overzicht Medewerkers</ui:define>
+		<ui:define name="title">HR - Medewerker Overzicht</ui:define>
 		<ui:define name="content">
 			<div id="content-wrapper">
-				<h:form>
-					<h2>Medewerker overzicht(Hr)</h2>
-					<h:outputLabel id="lblnaam" value="Naam" for="txtNaam">:</h:outputLabel>
+				<h2>HR - Medewerker overzicht</h2>
+				<h:form class="contentForm_1">
+					<h:outputLabel id="lblnaam" value="Naam" for="txtNaam"></h:outputLabel>
 					<h:inputText id="txtNaam" value="#{medewerkersHrBack.naam}"></h:inputText>
-					<h:outputLabel id="lblvoornaam" value="voornaam" for="txtVoornaam">:</h:outputLabel>
+					<h:outputLabel id="lblvoornaam" value="Voornaam" for="txtVoornaam"></h:outputLabel>
 					<h:inputText id="txtVoornaam" value="#{medewerkersHrBack.voornaam}"></h:inputText>
 					<h:outputLabel id="lblPersoneelsnummer" value="Personeelsnummer"
-						for="txtPersoneelsnummer">:</h:outputLabel>
+						for="txtPersoneelsnummer"></h:outputLabel>
 					<h:inputText id="txtPersoneelsnummer"
 						value="#{medewerkersHrBack.ID}" converterMessage="Gelieve een geldig ID in te geven"></h:inputText>
 					<h:commandButton id="btnZoeken"
@@ -25,14 +25,13 @@
 					<br />
 					<br />
 					<br />
-					<h:dataTable value="#{medewerkersHrBack.werknemers}"
-						var="Medewerker"> -->
-							<h:column>
+					<h:dataTable value="#{medewerkersHrBack.werknemers}" var="Medewerker" class="dataTable_1" columnClasses="column_1,column_1,column_1,column_1,column_1,column_1,columnEnd_1,columnEnd_1,columnEnd_1">
+						<h:column>
 							<f:facet name="header">ID</f:facet>    				
 						      	#{Medewerker.personeelsnummer}
-						   	</h:column>
+					   	</h:column>
 						<h:column>
-							<f:facet name="header">achternaam</f:facet>
+							<f:facet name="header">Achternaam</f:facet>
 						      	#{Medewerker.naam}
 						   	</h:column>
 						<h:column>
@@ -52,24 +51,23 @@
 								#{Medewerker.team.naam}
 						   	</h:column>
 						<h:column>
-							<f:facet name="header">verwijderen</f:facet>
 							<h:commandButton value="Verwijderen"
 								action="#{medewerkersHrBack.verwijderWerknemer(Medewerker.personeelsnummer)}"></h:commandButton>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Aanpassen</f:facet>
 							<h:commandButton value="Aanpassen"
 								action="#{medewerkersHrBack.editMedewerker(Medewerker.personeelsnummer)}"></h:commandButton>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Create jaarlijksverlof</f:facet>
 							<h:commandButton value="Create jaarlijksverlof"
 								action="#{medewerkersHrBack.toonJaarlijksVerlof(Medewerker.personeelsnummer)}"></h:commandButton>
 						</h:column>
 					</h:dataTable>
-					<h:commandButton value="Voeg nieuwe medewerker toe"
-						action="#{medewerkersHrBack.createMedewerker()}"></h:commandButton>
-					<h:messages style="color:red;"></h:messages>
+					<div class="rightAligner">
+						<h:commandButton value="Voeg nieuwe medewerker toe"
+							action="#{medewerkersHrBack.createMedewerker()}"></h:commandButton>
+						<h:messages style="color:red;"></h:messages>
+					</div>
 				</h:form>
 			</div>
 		</ui:define>

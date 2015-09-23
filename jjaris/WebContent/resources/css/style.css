@@ -1,26 +1,237 @@
 @CHARSET "ISO-8859-1";
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 body {
 	background-color: #ffffff;
 	color: #444444;
-	font-family: sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	margin: 0px;
 }
 
 a {
-	color: #444444;
+	color: #00B4CC;
 	margin: 0 0 0 20px;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #888888;
+	color: #7f8c8d;
 }
 
 h1 {
 	font-size: 3em;
 }
+
+/* Navigation */
+
+.bottomLinks {
+	padding-top: 20px;
+}
+
+#navigation {
+	background-color: #FFFFFFF;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -moz-box-sizing: border-box;
+	height: 100px;
+}
+
+#links {
+	font-size: 0.75em;
+	margin: 0 auto;
+	padding-top: 35px;
+	text-align: right;
+	text-transform: uppercase;
+}
+
+/* Navigation */
+
+/* Main Content */
+
+h2 {
+	background-color: #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -moz-box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.5em;
+	margin-bottom: 20px;
+	padding: 10px 15px;
+	text-transform: capitalize;
+}
+
+h3 {
+	color: #3f9ab5;
+    padding: 5px 0 10px 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.columnTiny_1 {
+	width: 25px;
+}
+
+.columnTiny_2 {
+	width: 35px;
+}
+
+.columnMedium_1 {
+	width: 60px;
+}
+
+#content-wrapper {
+	padding: 20px 0 1px 0;
+}
+
+#content {
+	background-color: #EEEEEE;
+}
+
+.contentForm_1 {
+	background-color: #FFFFFF;
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -moz-box-sizing: border-box;
+	margin-bottom: 20px;
+	padding: 10px 15px;
+}
+
+.dataTable_1 {
+	font-size: 0.8em;
+	text-align: left;
+	width: 100%;
+}
+
+.dataTable_1 input[type='submit'] {
+	border: 0px;
+}
+
+.dataTable_1 input[type='submit']:hover {
+	border: 0px;
+}
+
+.dataTable_1 th {
+	border-right: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	background-color: #00B4CC;
+	padding: 5px 6px;
+}
+
+.dataTable_1 th:last-child {
+	border-left: 0px;
+}
+
+.column_1 {
+	border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+	padding: 5px 6px;
+}
+
+.columnEnd_1 {
+	border-right: 1px solid #EEE;
+    border-bottom: 1px solid #EEE;
+	padding: 5px 0px;
+	text-align: center;
+}
+
+.columnEnd_1:last-child {
+	border-right: 0px;
+}
+
+label {
+	font-size: 0.8em;
+	padding-right: 10px;
+}
+
+input[type='text'] {
+	border: 1px solid #CCCCCC;
+	font-size: 0.8em;
+	padding: 3px 3px 3px 5px;
+	margin-right: 10px;
+}
+
+input[type='submit'] {
+	background-color: #FFF;
+    border: 1px solid #EEE;
+    color: #3f9ab5;
+    cursor: pointer;
+    display: block;
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 1px 1px;
+    padding: 8px 20px;
+    text-decoration: none;
+}
+
+input[type='submit']:hover {
+	border: 1px solid #DDD;
+    color: #e67e22;
+}
+
+.rightAligner {
+	margin-top: 10px;
+	text-align: right;
+}
+
+.errorBox_1 {
+    color: #e05e60;
+    font-size: 0.8em;
+    font-weight: normal;
+    line-height: 14px;
+    margin: 10px 0;
+    padding: 12px 0px 12px 0px;
+}
+
+.errorBox_1 li {
+	margin: 5px 0;
+}
+
+.inputPanel_1 td {
+	padding: 2px 0 4px 0;
+}
+
+/* Main Content */
 
 .login-panel {
 	background-color: #efefef;
@@ -32,22 +243,7 @@ h1 {
 
 #content-wrapper, #footer-annotation, #links, #login-wrapper{
 	margin: 0 auto;
-	width: 65%;
-}
-
-#links {
-	font-size: 0.75em;
-	font-weight: bold;
-	margin: 0 auto;
-	padding-top: 55px;
-	text-align: right;
-	text-transform: uppercase;
-	width: 65%;
-}
-
-#navigation {
-	background-color: #efefef;
-	height: 100px;
+	width: 85%;
 }
 
 #navigation, #footer, #loginPanel {
@@ -55,5 +251,8 @@ h1 {
 }
 
 #footer-annotation {
+	color: #777777;
+	font-size: 0.8em;
+    padding: 35px 0;
 	text-align: center;
 }
