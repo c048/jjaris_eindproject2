@@ -74,6 +74,12 @@ public class VerlofAanvraagDAO {
 	 */
 	
 	@Transactional
+	public List<VerlofAanvraag> getVerlofAanvragen() {
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c", VerlofAanvraag.class);
+		return (List<VerlofAanvraag>) query.getResultList();
+	}
+	
+	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
