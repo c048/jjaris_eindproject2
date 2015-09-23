@@ -116,7 +116,7 @@ public class VerlofTeamBack implements Serializable {
 			setFacesMessage("Geef een reden om af te keuren");
 		}
 		// if(verlofaanvraagDAO.getVerlofAanvraag(id)){
-		//
+		// comment
 		// }
 		else {
 			try {
@@ -124,6 +124,8 @@ public class VerlofTeamBack implements Serializable {
 				v.setToestand(Toestand.AFGEKEURD);
 				v.setReden(reden);
 				verlofaanvraagDAO.updateVerlofAanvraag(v);
+				reden ="";
+				id=0;
 			} catch (IllegalArgumentException iae) {
 				setFacesMessage(iae.getMessage());
 			} catch (Exception e) {
