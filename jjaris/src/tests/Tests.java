@@ -77,16 +77,16 @@ public class Tests {
 		w.setNaam("Janssen");
 		w.setVoornaam("jefke");
 		
-		VerlofAanvraag va = new VerlofAanvraag();
-		va.setWerknemer(w);
-		assertFalse(va.verlofOverlapt(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
-		assertFalse(va.isOverlappend(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
-		assertTrue(va.isStartdatumGeldig(new GregorianCalendar(2015, 10, 1)));
-		assertTrue(new GregorianCalendar(2015, 10, 1).before(new GregorianCalendar(2015, 10, 22)));
-		assertTrue(new GregorianCalendar(2015, 10, 22).after(new GregorianCalendar(2015, 10, 1)));
-		assertTrue(va.geldigVerlof(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
+		VerlofAanvraag va = new VerlofAanvraag(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22),w);
 		
-		va.setPeriode(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22));
+		assertTrue(va.isStartdatumGeldig(new GregorianCalendar(2015, 10, 1)));
+		assertTrue(va.verlofOverlapt(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
+		assertTrue(va.isOverlappend(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
+		
+		
+		assertFalse(va.geldigVerlof(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22)));
+		
+		
 		va.setId(1);
 		System.out.println(va);
 		assertFalse(va.verlofOverlapt(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12)));
@@ -96,6 +96,8 @@ public class Tests {
 		System.out.println("va2:"+va2);
 		va2.setId(2);
 		List<VerlofAanvraag> verlofaanvragen = va2.getVerlofAanvragenWerknemer(new GregorianCalendar(2015, 10, 2), new GregorianCalendar(2015, 10, 28));
+		verlofaanvragen = w.getAlleVerlofAanvragen();
+		assertEquals(2, verlofaanvragen.size());
 		assertFalse(verlofaanvragen.isEmpty());
 		for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 			System.out.println(verlofAanvraag);

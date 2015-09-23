@@ -40,6 +40,7 @@ public class VerlofAanvraag implements Serializable {
 	 * Lege Constructor
 	 */
 	public VerlofAanvraag() {
+		
 	}
 
 	/**
@@ -56,15 +57,16 @@ public class VerlofAanvraag implements Serializable {
 		setPeriode(startDatum, eindDatum);
 		setToestand(Toestand.INGEDIEND);
 		setAanvraagdatum(now);
+		
+		if (!this.werknemer.getVerlofaanvragen().contains(this)) {
+			getWerknemer().voegVerlofAanvraagToe(this);
+			System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
+		}
 		// opgelet de verlofaanvraag zal niet toegevoegd worden aan de werknemer
 		// als er een verlofaanvraag in de werknemer zit met dezelde id
 		// als de verlofaanvraag nog niet in de database zit, heeft deze id 0
 		// id wordt gegenereert door de database
-		if (!getWerknemer().getVerlofaanvragen().contains(this)) {
-			getWerknemer().voegVerlofAanvraagToe(this);
-			System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
-		}
-
+		
 	}
 
 	/**
@@ -203,8 +205,10 @@ public class VerlofAanvraag implements Serializable {
 	 * 
 	 */
 	public boolean geldigVerlof(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
-
-		if (startDatum.before(eindDatum) && isStartdatumGeldig(startDatum) && !isOverlappend(startDatum, eindDatum)) {
+		if (startDatum == null || eindDatum == null) {
+			return false;
+		}
+		if (startDatum.compareTo(eindDatum) <= 0 && isStartdatumGeldig(startDatum) && !isOverlappend(startDatum, eindDatum)) {
 			return true;
 		}
 		return false;
@@ -343,7 +347,8 @@ public class VerlofAanvraag implements Serializable {
 	public void setWerknemer(Werknemer werknemer) {
 		if (werknemer != null) {
 			this.werknemer = werknemer;
-		}else{
+			
+		} else {
 			throw new NullPointerException("VerlofAanvraag.setWerknemer : parameter werknemer is null");
 		}
 	}
@@ -410,7 +415,5 @@ public class VerlofAanvraag implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

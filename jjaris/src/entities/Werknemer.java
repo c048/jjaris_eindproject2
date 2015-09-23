@@ -136,7 +136,12 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setJaarlijkseverloven(List<JaarlijksVerlof> jaarlijkseverloven) {
-		this.jaarlijkseverloven = jaarlijkseverloven;
+		for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
+			if (!this.jaarlijkseverloven.contains(jaarlijksVerlof)) {
+				voegJaarlijksVerlofToe(jaarlijksVerlof);
+			}
+		}
+
 	}
 
 	public List<VerlofAanvraag> getVerlofaanvragen() {
