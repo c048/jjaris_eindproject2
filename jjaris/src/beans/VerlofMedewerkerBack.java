@@ -87,8 +87,6 @@ public class VerlofMedewerkerBack implements Serializable {
 	 * Annuleer een verlofaanvraag
 	 */
 	public String annuleren(int id) {
-		// Werknemer werknemer = user.getIngelogdeWerknemer();
-		// werknemer.annuleerVerlofAanvraag(id); //werkt niet!!
 		try {
 			VerlofAanvraag va = verlofaanvraagDAO.getVerlofAanvraag(id);
 			va.annuleren();
@@ -101,6 +99,10 @@ public class VerlofMedewerkerBack implements Serializable {
 				verlof.append("\n is geannuleerd");
 				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
 					"Verlofaanvraag gewijzigd", verlof.toString());
+				
+				Filter filter = new Filter();
+				filter.voegFilterToe("werknemer.personeelsnummer", user.getIngelogdeWerknemer().getPersoneelsnummer());
+				verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragen(filter);
 		} 
 			catch (IllegalArgumentException iae) {
 				FacesMessage msg = new FacesMessage(iae.getMessage());
