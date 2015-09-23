@@ -113,7 +113,8 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 	
 	public String terugAction(){
-		return "medewerkersHr";
+		loginBack.changePage("medewerkersHr");
+		return null;
 	}
 
 	public int getStartdatumFJaar() {
