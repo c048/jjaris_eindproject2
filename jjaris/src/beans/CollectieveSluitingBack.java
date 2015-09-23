@@ -94,7 +94,7 @@ public class CollectieveSluitingBack implements Serializable {
 			
 		}
 		
-		loginBack.changePage("collectieveSluitingHr");
+		loginBack.changePage("medewerkersHr");
 		return null;
 	}
 	
