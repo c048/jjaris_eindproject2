@@ -32,13 +32,19 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 
 	}
 
-	public Calendar getEinddatum() {
-		return einddatum;
+	public String getEinddatum() {			
+		return einddatum.get(Calendar.DAY_OF_MONTH)+"-"+einddatum.get(Calendar.MONTH)+"-"+einddatum.get(Calendar.YEAR);
 	}
+	
+	public String getBegindatum() {			
+		return super.getStartdatum().get(Calendar.DAY_OF_MONTH)+"-"+super.getStartdatum().get(Calendar.MONTH)+"-"+super.getStartdatum().get(Calendar.YEAR);
+	}
+	
 
 	public void setEinddatum(Calendar einddatum) {
 		this.einddatum = einddatum;
 	}
+	
 	
 	
 	/**
@@ -59,6 +65,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		return aantalDagen-aantalWeekendDagen;
 	}
 
+	@Override
 	public String getOmschrijving() {
 		return super.getOmschrijving();
 	}
@@ -74,6 +81,7 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		
 	}
 
+	
 	@Override
 	public String toString() {
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd");

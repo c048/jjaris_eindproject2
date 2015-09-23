@@ -38,6 +38,7 @@ public class Feestdag extends CollectieveSluiting implements Serializable{
 	}
 	
 	
+	@Override
 	public String getOmschrijving() {
 		return super.getOmschrijving();
 	}
