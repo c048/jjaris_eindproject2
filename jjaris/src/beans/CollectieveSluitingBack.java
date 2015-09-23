@@ -10,13 +10,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.swing.JOptionPane;
 
-import com.sun.istack.internal.NotNull;
+
+import javax.validation.constraints.NotNull;
 
 import utils.DatumBuilder;
 import daos.CollectieveSluitingDAO;
-import daos.WerknemerDAO;
 import entities.CollectiefVerlof;
 import entities.Feestdag;
 
@@ -44,7 +43,9 @@ public class CollectieveSluitingBack implements Serializable {
 	private int einddatumCVMaand;
 	private int einddatumCVDag;
 	
+	@NotNull
 	private String omschrijvingF;
+	@NotNull
 	private String omschrijvingCV;
 	
 	private boolean terugkerendF;
@@ -56,22 +57,16 @@ public class CollectieveSluitingBack implements Serializable {
 	public String voegFeestdagToe() {
 	
 		try {
-			DatumBuilder  feestDag=new DatumBuilder(startdatumFDag, startdatumFMaand, startdatumFJaar);
-			if(omschrijvingF!=null)
+			DatumBuilder  feestDag=new DatumBuilder(startdatumFDag, startdatumFMaand+1, startdatumFJaar);
+			if(omschrijvingF!=null || !omschrijvingF.equals(""))
 				dao.voegFeestdagToe(feestDag.buildCalendar(), omschrijvingF, terugkerendF);
-			else
-				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 
 		}
 		catch(IllegalArgumentException eIllArg){
 			setFacesMessage("Incorrecte gegevens bij Datum  ");
 			
 		}
-		
-/*		System.out.println("*********Debug:feestdag" +feestdag.get(Calendar.DAY_OF_MONTH)+
-				"-"+feestdag.get(Calendar.MONTH) + 
-				"-" +feestdag.get(Calendar.YEAR));
-*/		
+			
 		
 		loginBack.changePage("collectieveSluitingHr");
 		return null;
@@ -82,12 +77,11 @@ public class CollectieveSluitingBack implements Serializable {
 		
 		
 		try {
-			DatumBuilder  csBegindatum=new DatumBuilder(startdatumCVDag, startdatumCVMaand, startdatumCVJaar);
-			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand, einddatumCVJaar);
+			DatumBuilder  csBegindatum=new DatumBuilder(startdatumCVDag, startdatumCVMaand+1, startdatumCVJaar);
+			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand+1, einddatumCVJaar);
 			if(omschrijvingCV!=null)
 				dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
-			else
-				setFacesMessage("Omschrijving moet ingevuld zijn  ");
+
 		}
 		catch(IllegalArgumentException eIllArg){
 			setFacesMessage("Incorrecte gegevens bij Datum  ");
@@ -194,7 +188,11 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingF(String omschrijvingF) {
+		
+		if(omschrijvingF==null || omschrijvingF.equals(""))
+			setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		this.omschrijvingF = omschrijvingF;
+		
 	}
 
 	public String getOmschrijvingCV() {
@@ -202,7 +200,10 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingCV(String omschrijvingCV) {
+		if(omschrijvingCV==null || omschrijvingCV.equals(""))
+			setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		this.omschrijvingCV = omschrijvingCV;
+
 	}
 
 	public boolean isTerugkerendF() {
