@@ -27,9 +27,11 @@
 							<h:inputText id="txtAantalDagen"
 								value="#{jaarlijkseverlofbeheer.aantalDagen}"></h:inputText>
 				
-							<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
+							<h:commandButton value="Annuleren "
+								action="#{jaarlijkseverlofbeheer.annuleren}"></h:commandButton>
 							<h:commandButton value="Toevoegen "
 								action="#{jaarlijkseverlofbeheer.voegJaarlijkseVerlofToe}"></h:commandButton>
+
 						</h:panelGrid>
 					</h:form>
 					<h:messages style="color:red;"></h:messages>
