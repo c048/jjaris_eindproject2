@@ -75,7 +75,7 @@ public class VerlofAanvraagDAO {
 	
 	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragen() {
-		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c", VerlofAanvraag.class);
+		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c ORDER BY c.startdatum", VerlofAanvraag.class);
 		return (List<VerlofAanvraag>) query.getResultList();
 	}
 	
@@ -83,7 +83,7 @@ public class VerlofAanvraagDAO {
 	public List<VerlofAanvraag> getVerlofAanvragenTeam(int teamCode){
 		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
-				+ "WHERE c.werknemer.team.code = :teamcode ",VerlofAanvraag.class);
+				+ "WHERE c.werknemer.team.code = :teamcode ORDER BY c.startdatum",VerlofAanvraag.class);
 		
 		return (List<VerlofAanvraag>) query.setParameter("code", teamCode).getResultList();
 		
@@ -98,10 +98,8 @@ public class VerlofAanvraagDAO {
 	@Transactional
 	public List<VerlofAanvraag> getVerlofAanvragenWerknemer(int personeelnr){
 		
-//		Werknemer werknemer = em.find(Werknemer.class, personeelnr);
-		
 		TypedQuery<VerlofAanvraag> query = em.createQuery("SELECT c FROM VerlofAanvraag c "
-				+ "WHERE c.werknemer.personeelsnummer = :personeelnr ",VerlofAanvraag.class);
+				+ "WHERE c.werknemer.personeelsnummer = :personeelnr ORDER BY c.startdatum",VerlofAanvraag.class);
 		
 		
 		
@@ -139,24 +137,16 @@ public class VerlofAanvraagDAO {
 					aantal++;
 					querystring += " c."+key+"= :" + key.replace(".", "");
 				}
-				
-//				else{
-//	Geen strings	aantal++;
-//					querystring += " c."+entry.getKey()+"LIKE :" + entry.getKey();
-//				}
-				
 			}
+		querystring += " ORDER BY c.startdatum";	
 		}
+		
+		
 		TypedQuery<VerlofAanvraag> query = em.createQuery(querystring,VerlofAanvraag.class);
 		
 		
 		for(String key : filter){
-//			if (filter.getValue(key) instanceof Calendar){
-//				query.setParameter(key.replace(".", ""), (Calendar) filter.getValue(key), TemporalType.DATE);
-//			}
-//			else{
 			query.setParameter(key.replace(".", ""), filter.getValue(key));
-//			}
 		}
 		
 		return (List<VerlofAanvraag>) query.getResultList();
