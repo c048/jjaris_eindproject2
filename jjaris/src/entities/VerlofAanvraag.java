@@ -233,7 +233,7 @@ public class VerlofAanvraag implements Serializable {
 	 * @return
 	 */
 	public boolean verlofOverlapt(GregorianCalendar startDatum, GregorianCalendar eindDatum) {
-		if (startDatum.before(eindDatum)) {
+		if (startDatum.compareTo(eindDatum) <= 0) {
 			// System.out.println("startdatum ligt voor einddatum van te controleren periode");
 			if (getStartdatum() == null && getEinddatum() == null) {
 				return false;
