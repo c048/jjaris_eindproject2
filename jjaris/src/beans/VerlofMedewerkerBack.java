@@ -87,21 +87,19 @@ public class VerlofMedewerkerBack implements Serializable {
 	 * Annuleer een verlofaanvraag
 	 */
 	public String annuleren(int id) {
-		StringBuilder verlof = new StringBuilder();
 		// Werknemer werknemer = user.getIngelogdeWerknemer();
 		// werknemer.annuleerVerlofAanvraag(id); //werkt niet!!
 		VerlofAanvraag va = verlofaanvraagDAO.getVerlofAanvraag(id);
 		va.annuleren();
 		System.out.println("toestand va:" + va.getToestand());
 		verlofaanvraagDAO.updateVerlofAanvraag(va);
-		verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
-		verlof.append("\n met id: "+va.getId());
-		verlof.append("\n is geannuleerd");
 		
 		if(va.getToestand()!=Toestand.GEANNULEERD){
-		SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),
-		//SendMail.SendEmail("Joske@joske.joske",
-		
+			StringBuilder verlof = new StringBuilder();
+			verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
+			verlof.append("\n met id: "+va.getId());
+			verlof.append("\n is geannuleerd");
+			SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
 				"Verlofaanvraag gewijzigd", verlof.toString());
 		}
 		return null;
