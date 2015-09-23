@@ -80,6 +80,20 @@
 			    			</h:column>
 			    		</h:dataTable>		
 					</h:form>	
+					
+					
+					<h:dataTable value="#{verlofaanvraag.jaarlijkseVerloven}" var="jaarlijksVerlof">
+					<h:column>
+					<f:facet name="header">Jaarlijks verlof Jaar</f:facet>
+					#{jaarlijksVerlof.jaar}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Beschikbare dagen</f:facet>
+					#{jaarlijksVerlof.aantalDagen}
+					</h:column>
+					</h:dataTable>
+					
+					
 					<h:messages style="color:red;"></h:messages>
 				</div>
 			</ui:define>

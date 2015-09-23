@@ -16,6 +16,7 @@ import utils.DatumBuilder;
 import utils.Filter;
 import utils.SendMail;
 import daos.VerlofAanvraagDAO;
+import entities.JaarlijksVerlof;
 import entities.Team;
 import entities.Toestand;
 import entities.VerlofAanvraag;
@@ -51,6 +52,11 @@ public class VerlofMedewerkerBack implements Serializable {
 			verlofaanvragen = verlofaanvraagDAO.getVerlofAanvragenWerknemer(user.getIngelogdeWerknemer().getPersoneelsnummer());
 		}
 		return verlofaanvragen;
+	}
+	
+	
+	public List<JaarlijksVerlof> getJaarlijkseVerloven(){
+		return user.getIngelogdeWerknemer().getJaarlijkseverloven();
 	}
 
 	public String zoeken() {
