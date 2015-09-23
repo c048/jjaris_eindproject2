@@ -152,5 +152,10 @@ public class MedewerkersHrBack implements Serializable {
 		return tmpaantal;
 
 	}
+	public String toonJaarlijksVerlof(int personeelsnummer) {
+		backIsBack.setPersoneelsnummer(personeelsnummer);
+		loginBack.changePage("jaarlijksVerlofHrCreate");
+		return null;
+	}
 
 }
