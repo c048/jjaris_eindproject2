@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import utils.ControleerVerlofAanvraag;
-
 @Entity
 public class VerlofAanvraag implements Serializable {
 	private static final long serialVersionUID = 1L;
