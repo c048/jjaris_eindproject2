@@ -61,6 +61,11 @@
 							<h:commandButton value="Aanpassen"
 								action="#{medewerkersHrBack.editMedewerker(Medewerker.personeelsnummer)}"></h:commandButton>
 						</h:column>
+						<h:column>
+							<f:facet name="header">Overzicht jaarlijksverlof</f:facet>
+							<h:commandButton value="toon overzicht"
+								action="#{medewerkersHrBack.toonJaarlijksVerlof(Medewerker.personeelsnummer)}"></h:commandButton>
+						</h:column>
 					</h:dataTable>
 					<h:commandButton value="Voeg nieuwe medewerker toe"
 						action="#{medewerkersHrBack.createMedewerker()}"></h:commandButton>
