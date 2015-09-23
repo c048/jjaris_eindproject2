@@ -48,10 +48,12 @@ public class Tests {
 		System.out.println(verlofaanvraag.getPeriode());
 		assertEquals(14, verlofaanvraag.getPeriode());
 		System.out.println("************************");
-		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2016,1,1), new GregorianCalendar(2016, 1, 29),werknemer);
+		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2015,11,22), new GregorianCalendar(2016, 0, 29),werknemer);
 		System.out.println(verlofaanvraag);
 		System.out.println(verlofaanvraag.getPeriode());
-		assertEquals(21, verlofaanvraag.getPeriode());
+		assertEquals(29, verlofaanvraag.getPeriode());
+		assertEquals(8, verlofaanvraag.getPeriodeInJaarStartdatum());
+		assertEquals(21, verlofaanvraag.getPeriodeInJaarEinddatum());
 		System.out.println("************************");
 		verlofaanvraag = new VerlofAanvraag(new GregorianCalendar(2016,2,1), new GregorianCalendar(2016, 3, 30),werknemer);
 		System.out.println(verlofaanvraag);
@@ -85,30 +87,23 @@ public class Tests {
 		w.voegJaarlijksVerlofToe(jv);
 		VerlofAanvraag va = new VerlofAanvraag(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22),w);
 		va.setId(1);
+		assertEquals(15, va.getPeriode());
+		assertEquals(15,w.getAantalBeschikBareVerlofDagen(2015));
 		
-		List<VerlofAanvraag> verlofaanvragen ;
-		
-		verlofaanvragen = va.getVerlofAanvragenWerknemer(new GregorianCalendar(2015, 10, 1), new GregorianCalendar(2015, 10, 22));
-		for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-			System.out.println(verlofAanvraag);
-		}
-		
-		
-		System.out.println(va);
-		assertFalse(va.verlofOverlapt(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12)));
-		assertFalse(va.isOverlappend(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12)));
-		assertTrue(va.geldigVerlof(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12)));
 		VerlofAanvraag va2 = new VerlofAanvraag(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12), w);
-		System.out.println("va2:"+va2);
 		va2.setId(2);
-		verlofaanvragen = va2.getVerlofAanvragenWerknemer(new GregorianCalendar(2015, 10, 2), new GregorianCalendar(2015, 10, 28));
-		verlofaanvragen = w.getAlleVerlofAanvragen();
+		List<VerlofAanvraag> verlofaanvragen = w.getAlleVerlofAanvragen();
 		assertEquals(2, verlofaanvragen.size());
-		assertFalse(verlofaanvragen.isEmpty());
+		assertEquals(9, va2.getPeriode());
+		assertEquals(6,w.getAantalBeschikBareVerlofDagen(2015));
+		
 		for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 			System.out.println(verlofAanvraag);
 		}
-		assertTrue(va2.isOverlappend(new GregorianCalendar(2015, 10, 2), new GregorianCalendar(2015, 10, 28)));
+		
+		//VerlofAanvraag va3 = new VerlofAanvraag(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12), w);
+		//je krijgt exceptie omdat het een ongeldig verlof is
+		//System.out.println(va3+" toestand: "+va3.getToestand());
 		
 	}
 	

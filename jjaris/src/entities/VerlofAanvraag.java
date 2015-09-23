@@ -118,7 +118,7 @@ public class VerlofAanvraag implements Serializable {
 			while (einddatumPeriode.compareTo(datum) >= 0) {
 				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
 				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
-					System.out.println(weekdag);
+					//System.out.println(weekdag);
 					weekdagTeller++;
 				}
 				datum.add(Calendar.DAY_OF_YEAR, 1);

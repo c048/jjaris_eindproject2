@@ -231,7 +231,7 @@ public class Werknemer implements Serializable {
 		if (tmpJaar == null) {
 			return 0;
 		}
-		return tmpJaar.getJaar();
+		return tmpJaar.getAantalDagen();
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
