@@ -184,7 +184,7 @@ public class Werknemer implements Serializable {
 	// }
 
 	public void voegVerlofAanvraagToe(VerlofAanvraag va) {
-	
+
 		if (va != null) {
 
 			if (!va.getWerknemer().equals(this)) {
@@ -202,7 +202,7 @@ public class Werknemer implements Serializable {
 					va.afkeuren("Afkeuring door systeem - Onvoldoende verlofdagen beschikbaar");
 				}
 			}
-			
+
 			verlofaanvragen.add(va);
 
 		} else
@@ -224,7 +224,7 @@ public class Werknemer implements Serializable {
 	public int getJaarlijksVerlof(int jaartal) throws NullPointerException {
 		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
 		if (tmpJaar == null) {
-			throw new NullPointerException();
+			return 0;
 		}
 		return tmpJaar.getJaar();
 	}

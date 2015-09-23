@@ -125,10 +125,10 @@ public class VerlofAanvraag implements Serializable {
 		return weekdagTeller;
 	}
 
-	public boolean isStartdatumVandaag() {
+	public boolean isVerlofBegonnen() {
 		if (getStartdatum() != null) {
 			Calendar now = new GregorianCalendar();
-			return now.compareTo(getStartdatum()) == 0;
+			return now.compareTo(getStartdatum()) >= 0;
 		} else {
 			throw new NullPointerException("VerlofAanvraag.isStartdatumVandaag : startdatum is null");
 		}
@@ -410,5 +410,7 @@ public class VerlofAanvraag implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 
 }
