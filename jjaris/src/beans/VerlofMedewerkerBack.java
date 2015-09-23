@@ -58,6 +58,11 @@ public class VerlofMedewerkerBack implements Serializable {
 	public List<JaarlijksVerlof> getJaarlijkseVerloven(){
 		return user.getIngelogdeWerknemer().getJaarlijkseverloven();
 	}
+	
+	public int getResterendeVerlofdagen (int jaartal){
+		return user.getIngelogdeWerknemer().getAantalBeschikBareVerlofDagen(jaartal);
+	}
+	
 
 	public String zoeken() {
 		try {
