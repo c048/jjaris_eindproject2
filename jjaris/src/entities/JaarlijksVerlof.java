@@ -21,6 +21,7 @@ public class JaarlijksVerlof implements Serializable{
 	@ManyToOne
 	private Werknemer werknemer;
 	
+	
 	public Werknemer getWerknemer() {
 		return werknemer;
 	}

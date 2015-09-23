@@ -14,18 +14,20 @@
 					<h:form>
 						<h:panelGrid id="feestdag" columns="2">
 				
-							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: " ></h:outputLabel>
-							<h:inputText id="txtPersoneelsNr"
-								value="#{jaarlijkseverlofbeheer.personeelsNr}"></h:inputText>
-				
+							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: ">#{jaarlijkseverlofbeheer.personeelsNr}</h:outputLabel>
+							<h:outputLabel for="txtPersoneelsNaam" value="Personeels Voornaam: ">#{jaarlijkseverlofbeheer.voornaam}</h:outputLabel>
+							
+							<h:outputLabel for="txtPersoneelsVoornaam" value="Personeels Naam: ">#{jaarlijkseverlofbeheer.naam}</h:outputLabel>
+							<h:inputHidden value="legeFGrid2-2" id="legeFGrid2-2" />
+							
 							<h:outputLabel for="txtJaar" value="Jaar: "></h:outputLabel>
-							<h:inputText id="txtJaar" value="#{jaarlijkseverlofbeheer.jaar}" converterMessage="Geef een Jaartal in bestaande uit vier cijfers"></h:inputText>
+							<h:inputText id="txtJaar" value="#{jaarlijkseverlofbeheer.jaar}"></h:inputText>
 				
-							<h:outputLabel for="txtAantalDagen" value="Aantal dagen: " converterMessage="Geef een geldig positief getal in"></h:outputLabel>
+							<h:outputLabel for="txtAantalDagen" value="Aantal dagen: "></h:outputLabel>
 							<h:inputText id="txtAantalDagen"
 								value="#{jaarlijkseverlofbeheer.aantalDagen}"></h:inputText>
 				
-							<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
+							<h:inputHidden value="legeFGrid5-1" id="legeFGrid5-1" />
 							<h:commandButton value="Toevoegen "
 								action="#{jaarlijkseverlofbeheer.voegJaarlijkseVerlofToe}"></h:commandButton>
 						</h:panelGrid>
