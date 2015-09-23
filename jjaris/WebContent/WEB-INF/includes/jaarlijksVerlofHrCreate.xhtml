@@ -14,14 +14,14 @@
 					<h:form>
 						<h:panelGrid id="feestdag" columns="2">
 				
-							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: "></h:outputLabel>
+							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: " ></h:outputLabel>
 							<h:inputText id="txtPersoneelsNr"
 								value="#{jaarlijkseverlofbeheer.personeelsNr}"></h:inputText>
 				
 							<h:outputLabel for="txtJaar" value="Jaar: "></h:outputLabel>
-							<h:inputText id="txtJaar" value="#{jaarlijkseverlofbeheer.jaar}"></h:inputText>
+							<h:inputText id="txtJaar" value="#{jaarlijkseverlofbeheer.jaar}" converterMessage="Geef een Jaartal in bestaande uit vier cijfers"></h:inputText>
 				
-							<h:outputLabel for="txtAantalDagen" value="Aantal dagen: "></h:outputLabel>
+							<h:outputLabel for="txtAantalDagen" value="Aantal dagen: " converterMessage="Geef een geldig positief getal in"></h:outputLabel>
 							<h:inputText id="txtAantalDagen"
 								value="#{jaarlijkseverlofbeheer.aantalDagen}"></h:inputText>
 				
