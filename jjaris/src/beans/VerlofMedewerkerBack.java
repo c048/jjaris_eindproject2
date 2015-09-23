@@ -126,7 +126,7 @@ public class VerlofMedewerkerBack implements Serializable {
 				StringBuilder verlof = new StringBuilder();
 				verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
 				verlof.append("\n met id: "+user.getIngelogdeWerknemer().getPersoneelsnummer());
-				verlof.append("\n is geannuleerd");
+				verlof.append("\n is aangevraagd");
 				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
 					"Verlofaanvraag gewijzigd", verlof.toString());
 		} catch (IllegalArgumentException iae) {
