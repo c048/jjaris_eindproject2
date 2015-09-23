@@ -92,18 +92,22 @@ public class Tests {
 		
 		VerlofAanvraag va2 = new VerlofAanvraag(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12), w);
 		va2.setId(2);
-		List<VerlofAanvraag> verlofaanvragen = w.getAlleVerlofAanvragen();
-		assertEquals(2, verlofaanvragen.size());
+		
+		
 		assertEquals(9, va2.getPeriode());
 		assertEquals(6,w.getAantalBeschikBareVerlofDagen(2015));
-		
-		for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
-			System.out.println(verlofAanvraag);
-		}
 		
 		//VerlofAanvraag va3 = new VerlofAanvraag(new GregorianCalendar(2015, 11, 1), new GregorianCalendar(2015, 11, 12), w);
 		//je krijgt exceptie omdat het een ongeldig verlof is
 		//System.out.println(va3+" toestand: "+va3.getToestand());
+		JaarlijksVerlof jv2016 = new JaarlijksVerlof();
+		jv2016.setAantalDagen(30);
+		jv2016.setJaar(2016);
+		jv2016.setId(2);
+		jv2016.setWerknemer(w);
+		w.voegJaarlijksVerlofToe(jv2016);
+		
+		//VerlofAanvraag va4 = new VerlofAanvraag(startDatum, eindDatum, w)
 		
 	}
 	

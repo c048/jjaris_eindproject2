@@ -158,7 +158,11 @@ public class Werknemer implements Serializable {
 		setAdres(werknemer.getAdres());
 		setEmail(werknemer.getEmail());
 		setGeboortedatum(werknemer.getGeboortedatum());
-		setJaarlijkseverloven(werknemer.getJaarlijkseverloven());
+		for (JaarlijksVerlof jaarlijksVerlof : werknemer.getJaarlijkseverloven()) {
+			if (!this.jaarlijkseverloven.contains(jaarlijksVerlof)) {
+				voegJaarlijksVerlofToe(jaarlijksVerlof);
+			}
+		}
 		setPasswoord(werknemer.getPasswoord());
 		setTeam(werknemer.getTeam());
 	}
