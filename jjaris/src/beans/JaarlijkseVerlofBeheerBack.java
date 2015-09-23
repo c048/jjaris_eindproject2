@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import daos.CollectieveSluitingDAO;
 import daos.WerknemerDAO;
 import entities.JaarlijksVerlof;
+import entities.VerlofAanvraag;
 import entities.Werknemer;
 
 @Named("jaarlijkseverlofbeheer")
