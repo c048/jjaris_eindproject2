@@ -181,11 +181,14 @@ public class Werknemer implements Serializable {
 //	}
 	
 	public void voegVerlofAanvraagToe(VerlofAanvraag va){
+		int jaartal = va.getStartdatum().get(Calendar.YEAR);
+		if(va.getPeriode()<getAantalBeschikBareVerlofDagen(jaartal))
+		
+		
+		verlofaanvragen.add(va);
 		if (!va.getWerknemer().equals(this)){
 			va.setWerknemer(this);
 		}
-		verlofaanvragen.add(va);
-		
 	}
 
 	public void annuleerVerlofAanvraag(int verlofaanvraagId) throws NullPointerException {

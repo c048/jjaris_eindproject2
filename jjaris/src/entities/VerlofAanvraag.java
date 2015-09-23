@@ -91,10 +91,6 @@ public class VerlofAanvraag implements Serializable {
 				datum.add(Calendar.DAY_OF_YEAR, 1);
 			}
 
-			// if (einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
-			// && einddatum.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
-			// weekdagTeller++;
-			// }
 			// ControleerVerlofAanvraag aanvraag = new
 			// ControleerVerlofAanvraag();
 			// int aantal = aanvraag.getAantalFeestdagenOpWeekdag(startdatum,
@@ -103,6 +99,120 @@ public class VerlofAanvraag implements Serializable {
 		}
 
 		return weekdagTeller;
+	}
+
+	/**
+	 * Berekent het aantal op te nemen verlofdagen (weekdagen) in het jaar van
+	 * de startdatum
+	 * 
+	 * @return int
+	 */
+	public int getPeriodeInJaarStartdatum() {
+		int weekdagTeller = 0;
+		if (getStartdatum() != null && getEinddatum() != null) {
+			Calendar EinddatumPeriode;
+			if (isStartEnEinddatumInZelfdeJaar()) {
+				EinddatumPeriode = getEinddatum();
+			} else {
+				EinddatumPeriode = new GregorianCalendar(geefJaarStartdatum(), 11, 31);
+				// 31 december van het jaar waarin de startdatum ligt
+			}
+
+			Calendar datum = new GregorianCalendar();
+			datum.setTime(getStartdatum().getTime());
+
+			while (EinddatumPeriode.compareTo(datum) >= 0) {
+				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
+				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
+					System.out.println(weekdag);
+					weekdagTeller++;
+				}
+				datum.add(Calendar.DAY_OF_YEAR, 1);
+			}
+
+		}
+
+		return weekdagTeller;
+	}
+
+	private int telWeekdagen(Calendar begindatumPeriode, Calendar einddatumPeriode) {
+		int weekdagTeller = 0;
+		if (begindatumPeriode != null && einddatumPeriode != null) {
+			Calendar datum = new GregorianCalendar();
+			datum.setTime(begindatumPeriode.getTime());
+			while (einddatumPeriode.compareTo(datum) >= 0) {
+				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
+				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
+					System.out.println(weekdag);
+					weekdagTeller++;
+				}
+				datum.add(Calendar.DAY_OF_YEAR, 1);
+			}
+
+		}
+		return weekdagTeller;
+	}
+
+	public boolean isStartdatumVandaag() {
+		if (getStartdatum() != null) {
+			Calendar now = new GregorianCalendar();
+			return now.compareTo(getStartdatum()) == 0;
+		} else {
+			throw new NullPointerException("VerlofAanvraag.isStartdatumVandaag : startdatum is null");
+		}
+	}
+
+	/**
+	 * Berekent het aantal op te nemen verlofdagen (weekdagen) in het jaar van
+	 * de einddatum
+	 * 
+	 * @return int
+	 */
+	public int getPeriodeInJaarEinddatum() {
+		int weekdagTeller = 0;
+		if (getStartdatum() != null && getEinddatum() != null) {
+			Calendar BegindatumPeriode;
+			if (isStartEnEinddatumInZelfdeJaar()) {
+				BegindatumPeriode = getStartdatum();
+			} else {
+				BegindatumPeriode = new GregorianCalendar(geefJaarEinddatum(), 0, 1);
+				// 1 januari van het jaar waarin de einddatum valt
+			}
+
+			Calendar datum = new GregorianCalendar();
+			datum.setTime(BegindatumPeriode.getTime());
+
+			while (getEinddatum().compareTo(datum) >= 0) {
+				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
+				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
+					System.out.println(weekdag);
+					weekdagTeller++;
+				}
+				datum.add(Calendar.DAY_OF_YEAR, 1);
+			}
+
+		}
+
+		return weekdagTeller;
+	}
+
+	public int geefJaarStartdatum() {
+		if (getStartdatum() != null) {
+			return getStartdatum().get(Calendar.YEAR);
+		} else {
+			throw new NullPointerException("VerlofAanvraag.geefJaarStartdatum :Verlofaanvraag startdatum is null");
+		}
+	}
+
+	public int geefJaarEinddatum() {
+		if (getEinddatum() != null) {
+			return getEinddatum().get(Calendar.YEAR);
+		} else
+			throw new NullPointerException("VerlofAanvraag.geefJaarEinddatum :Verlofaanvraag einddatum is null");
+	}
+
+	public boolean isStartEnEinddatumInZelfdeJaar() {
+		return geefJaarEinddatum() == geefJaarStartdatum();
 	}
 
 	/**
@@ -116,7 +226,7 @@ public class VerlofAanvraag implements Serializable {
 		if (geldigVerlof(startDatum, eindDatum)) {
 			this.startdatum = startDatum;
 			this.einddatum = eindDatum;
-		} else{
+		} else {
 			throw new IllegalArgumentException(
 					"Ongeldige Verlofperiode: startdatum moet voor einddatum liggen, startdatum moet minstens 14 dagen in de toekomst liggen"
 							+ " en het verlof mag niet overlappen met een bestaand verlof");
@@ -179,7 +289,7 @@ public class VerlofAanvraag implements Serializable {
 		if (verlofaanvragen != null && !verlofaanvragen.isEmpty()) {
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				System.out.println(verlofAanvraag);
-				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum) && verlofAanvraag.getId() != getId() && verlofAanvraag.getToestand() != Toestand.GEANNULEERD) {
+				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum) && verlofAanvraag.getId() != getId()) {
 					return true;
 				}
 			}
