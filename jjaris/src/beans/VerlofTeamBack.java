@@ -16,6 +16,7 @@ import javax.validation.constraints.Min;
 
 import utils.DatumBuilder;
 import utils.Filter;
+import utils.SendMail;
 import daos.VerlofAanvraagDAO;
 import entities.Toestand;
 import entities.VerlofAanvraag;
@@ -128,6 +129,12 @@ public class VerlofTeamBack implements Serializable {
 			} catch (Exception e) {
 				setFacesMessage("Unexpected Error, contact IT support!");
 			}
+				StringBuilder verlof = new StringBuilder();
+				verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
+				verlof.append("\n met id: "+id);
+				verlof.append("\n is afgekeurd door uw teamleader \n met als reden: "+reden);
+				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
+					"Verlofaanvraag gewijzigd", verlof.toString());
 		}
 		return null;
 	}
@@ -142,6 +149,12 @@ public class VerlofTeamBack implements Serializable {
 		} catch (Exception e) {
 			setFacesMessage("Unexpected Error, contact IT support!");
 		}
+		StringBuilder verlof = new StringBuilder();
+		verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
+		verlof.append("\n met id: "+id);
+		verlof.append("\n is goedgekeurd door uw teamleader");
+		SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
+			"Verlofaanvraag gewijzigd", verlof.toString());
 		return null;
 	}
 
