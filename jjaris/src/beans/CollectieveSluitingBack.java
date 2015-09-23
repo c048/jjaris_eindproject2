@@ -29,6 +29,9 @@ public class CollectieveSluitingBack implements Serializable {
 	@Inject
 	private CollectieveSluitingDAO dao;
 	
+	@Inject
+	private LoginBack loginBack;
+	
 	private int startdatumFJaar;
 	private int startdatumFMaand;
 	private int startdatumFDag;
@@ -69,7 +72,10 @@ public class CollectieveSluitingBack implements Serializable {
 				"-"+feestdag.get(Calendar.MONTH) + 
 				"-" +feestdag.get(Calendar.YEAR));
 */		
-		return "collectieveSluiting";
+		
+		loginBack.changePage("collectieveSluitingHr");
+		return null;
+
 	}
 	
 	public String voegCollectieveVerlofToe() {
@@ -88,6 +94,7 @@ public class CollectieveSluitingBack implements Serializable {
 			
 		}
 		
+		loginBack.changePage("collectieveSluitingHr");
 		return null;
 	}
 	
@@ -103,6 +110,10 @@ public class CollectieveSluitingBack implements Serializable {
 		Calendar cal=Calendar.getInstance();
 		return dao.getAlleCollectieveVerloven(cal.get(Calendar.YEAR));	
 
+	}
+	
+	public String terugAction(){
+		return "medewerkersHr";
 	}
 
 	public int getStartdatumFJaar() {

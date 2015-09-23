@@ -76,7 +76,7 @@ public class CollectieveSluitingDAO {
 	
 	@Transactional
 	public void voegFeestdagToe(Calendar feestdatum , String omschrijving, boolean terugkerend ) {
-		//TODO exception. als alle gegevens zijn niet ingevuld??
+		
 		Feestdag feestdag;
 		
 		if(feestdatum!=null & omschrijving!=null ) {
