@@ -114,20 +114,27 @@ public class HrTeamsBack implements Serializable {
 	}
 
 	public String zoek() {
-		System.out.println("in zoek() van HrTeamsBack");
-		Filter f = new Filter();
-		if (!getTeamNaam().trim().equals("")) {
-			f.voegFilterToe("naam", getTeamNaam());
-		}
-		if (!getTeamVerantwoordelijke().trim().equals("")) {
-			f.voegFilterToe("teamverantwoordelijke.naam", getTeamVerantwoordelijke());
-		}
-		if (getTeamCode() != 0) {
-			f.voegFilterToe("code", getTeamCode());
-		}
+		try {
+			System.out.println("in zoek() van HrTeamsBack");
+			Filter f = new Filter();
+			if (!getTeamNaam().trim().equals("")) {
+				f.voegFilterToe("naam", getTeamNaam());
+			}
+			if (!getTeamVerantwoordelijke().trim().equals("")) {
+				f.voegFilterToe("teamverantwoordelijke.naam", getTeamVerantwoordelijke());
+			}
+			if (getTeamCode() != 0) {
+				f.voegFilterToe("code", getTeamCode());
+			}
 
-		teams = tDao.getTeams(f);
-		resetParameters();
+			teams = tDao.getTeams(f);
+			resetParameters();
+		} catch (IllegalArgumentException iae) {
+			setFacesMessage("Geen gegevens gevonden met deze parameters");
+		} catch (NullPointerException npe) {
+			setFacesMessage("Geen gegevens gevonden met deze parameters");
+		
+		}
 		return null;
 	}
 	
@@ -141,5 +148,10 @@ public class HrTeamsBack implements Serializable {
 		loginBean.changePage("teamHrCreate");
 		return null;
 	}
-
+	public void setFacesMessage(String msg) {
+		FacesMessage fMsg = new FacesMessage(msg);
+		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		FacesContext.getCurrentInstance().addMessage(null, fMsg);
+		FacesContext.getCurrentInstance().renderResponse();
+	}
 }
