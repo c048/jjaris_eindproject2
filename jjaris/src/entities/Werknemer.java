@@ -16,11 +16,11 @@ public class Werknemer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int personeelsnummer;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String naam;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String voornaam;
-	@Column(unique=true,nullable=false)
+	@Column(unique = true, nullable = false)
 	private String email;
 	@Temporal(TemporalType.DATE)
 	private Calendar geboortedatum;
@@ -52,7 +52,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setNaam(String naam) throws IllegalArgumentException {
-		if(!(naam.trim().equals(""))) {
+		if (!(naam.trim().equals(""))) {
 			this.naam = naam;
 		} else {
 			throw new IllegalArgumentException("Achternaam mag niet leeg zijn!");
@@ -64,7 +64,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setVoornaam(String voornaam) throws IllegalArgumentException {
-		if(!(voornaam.trim().equals(""))) {
+		if (!(voornaam.trim().equals(""))) {
 			this.voornaam = voornaam;
 		} else {
 			throw new IllegalArgumentException("Voornaam mag niet leeg zijn");
@@ -76,7 +76,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setEmail(String email) throws IllegalArgumentException {
-		if(!(email.trim().equals(""))) {
+		if (!(email.trim().equals(""))) {
 			this.email = email;
 		} else {
 			throw new IllegalArgumentException("Email mag niet leeg zijn");
@@ -96,14 +96,14 @@ public class Werknemer implements Serializable {
 	}
 
 	public void setPasswoord(String passwoord) throws IllegalArgumentException {
-		if(!(passwoord.trim().equals(""))) {
+		if (!(passwoord.trim().equals(""))) {
 			this.passwoord = passwoord;
 		} else {
 			throw new IllegalArgumentException("Passwoord mag niet leeg zijn");
 		}
 	}
-	
-	public boolean controleerPasswoord(String teControlerenPaswoord){
+
+	public boolean controleerPasswoord(String teControlerenPaswoord) {
 		return teControlerenPaswoord.equals(getPasswoord());
 	}
 
@@ -113,7 +113,7 @@ public class Werknemer implements Serializable {
 
 	public void setTeam(Team team) {
 		// System.out.println(team);
-		if (team != null){
+		if (team != null) {
 			this.team = team;
 			if (!getTeam().zitWerknemerInTeam(this)) {
 				getTeam().voegTeamlidToe(this);
@@ -147,7 +147,7 @@ public class Werknemer implements Serializable {
 		this.verlofaanvragen = verlofaanvragen;
 	}
 
-	public void setGegevens(Werknemer werknemer) { 
+	public void setGegevens(Werknemer werknemer) {
 		setNaam(werknemer.getNaam());
 		setVoornaam(werknemer.getVoornaam());
 		setAdres(werknemer.getAdres());
@@ -159,7 +159,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public boolean isVerantwoordelijke() {
-		if(team.getTeamverantwoordelijke()!=null){
+		if (team.getTeamverantwoordelijke() != null) {
 			return team.getTeamverantwoordelijke().personeelsnummer == this.personeelsnummer;
 		}
 		return false;
@@ -171,24 +171,42 @@ public class Werknemer implements Serializable {
 
 	public int getAantalBeschikBareVerlofDagen(int jaartal) {
 		int tmpJaar = getJaarlijksVerlof(jaartal);
-		int verlofdagen = verlofaanvragen.stream().filter(v -> v.getToestand() == Toestand.INGEDIEND || v.getToestand() == Toestand.GOEDGEKEURD).mapToInt(v -> v.getPeriode()).sum();
+		int verlofdagen = verlofaanvragen.stream().filter(v -> v.getToestand() == Toestand.INGEDIEND || v.getToestand() == Toestand.GOEDGEKEURD)
+				.mapToInt(v -> v.getPeriode()).sum();
 		return (tmpJaar - verlofdagen);
 	}
 
-//	public void voegVerlofAanvroegToe(GregorianCalendar startdatum, GregorianCalendar einddatum) {
-//		VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum, einddatum,this);
-//		getVerlofaanvragen().add(tmpAanvraag);
-//	}
+	// public void voegVerlofAanvroegToe(GregorianCalendar startdatum,
+	// GregorianCalendar einddatum) {
+	// VerlofAanvraag tmpAanvraag = new VerlofAanvraag(startdatum,
+	// einddatum,this);
+	// getVerlofaanvragen().add(tmpAanvraag);
+	// }
+
+	public void voegVerlofAanvraagToe(VerlofAanvraag va) {
 	
-	public void voegVerlofAanvraagToe(VerlofAanvraag va){
-		int jaartal = va.getStartdatum().get(Calendar.YEAR);
-		if(va.getPeriode()<getAantalBeschikBareVerlofDagen(jaartal))
-		
-		
-		verlofaanvragen.add(va);
-		if (!va.getWerknemer().equals(this)){
-			va.setWerknemer(this);
-		}
+		if (va != null) {
+
+			if (!va.getWerknemer().equals(this)) {
+				throw new IllegalArgumentException(
+						"Werknemer.voegVerlofAanvraagToe : kan verlof niet toevoegen: verlofaanvraag behoort niet toe aan deze werknemer");
+			}
+
+			if (va.isStartEnEinddatumInZelfdeJaar()) {
+				if (va.getPeriode() > getAantalBeschikBareVerlofDagen(va.geefJaarStartdatum())) {
+					va.afkeuren("Afkeuring door systeem - Onvoldoende verlofdagen beschikbaar");
+				}
+			} else {
+				if (va.getPeriodeInJaarStartdatum() > getAantalBeschikBareVerlofDagen(va.geefJaarStartdatum())
+						|| va.getPeriodeInJaarEinddatum() > getAantalBeschikBareVerlofDagen(va.geefJaarEinddatum())) {
+					va.afkeuren("Afkeuring door systeem - Onvoldoende verlofdagen beschikbaar");
+				}
+			}
+			
+			verlofaanvragen.add(va);
+
+		} else
+			throw new NullPointerException("Werknemer.voegVerlofAanvraagToe : kan verlof niet toevoegen: parameter verlofaanvraag is null");
 	}
 
 	public void annuleerVerlofAanvraag(int verlofaanvraagId) throws NullPointerException {
@@ -212,11 +230,13 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
-		if (verlofaanvragen.isEmpty()){
-			System.out.println("verlofaanvragen van: "+getVolledigeNaam()+"zijn leeg");
+		if (verlofaanvragen.isEmpty()) {
+			System.out.println("verlofaanvragen van: " + getVolledigeNaam() + "zijn leeg");
 			return verlofaanvragen;
 		}
-		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum)) && v.getToestand() == (toestand)).collect(Collectors.toList());
+		return verlofaanvragen.stream()
+				.filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum)) && v.getToestand() == (toestand))
+				.collect(Collectors.toList());
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
@@ -224,12 +244,13 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
-		if (verlofaanvragen.isEmpty()){
+		if (verlofaanvragen.isEmpty()) {
 			return verlofaanvragen;
 		}
-		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum))).collect(Collectors.toList());
+		return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum)))
+				.collect(Collectors.toList());
 	}
-	
+
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
 		jaarlijkseverloven.add(jaarlijksverlof);
 	}
@@ -255,8 +276,8 @@ public class Werknemer implements Serializable {
 		return String.format("Werknemer %s %s met nr %s met adres %s, behoort tot Team %s%n", getVoornaam(), getNaam(), getPersoneelsnummer(),
 				getAdres(), getTeam().getNaam());
 	}
-	
-	public String getVolledigeNaam(){
-		return String.format("%s %s", getVoornaam(),getNaam());
+
+	public String getVolledigeNaam() {
+		return String.format("%s %s", getVoornaam(), getNaam());
 	}
 }

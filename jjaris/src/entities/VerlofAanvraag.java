@@ -60,8 +60,8 @@ public class VerlofAanvraag implements Serializable {
 		// als er een verlofaanvraag in de werknemer zit met dezelde id
 		// als de verlofaanvraag nog niet in de database zit, heeft deze id 0
 		// id wordt gegenereert door de database
-		if (!werknemer.getVerlofaanvragen().contains(this)) {
-			werknemer.voegVerlofAanvraagToe(this);
+		if (!getWerknemer().getVerlofaanvragen().contains(this)) {
+			getWerknemer().voegVerlofAanvraagToe(this);
 			System.out.println("werknemer.voegVerlofAanvraagToe(this):" + this);
 		}
 
@@ -76,28 +76,14 @@ public class VerlofAanvraag implements Serializable {
 	 */
 	public int getPeriode() {
 		int weekdagTeller = 0;
-
 		if (getStartdatum() != null && getEinddatum() != null) {
-
-			Calendar datum = new GregorianCalendar();
-			datum.setTime(startdatum.getTime());
-
-			while (einddatum.compareTo(datum) >= 0) {
-				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
-				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
-					System.out.println(weekdag);
-					weekdagTeller++;
-				}
-				datum.add(Calendar.DAY_OF_YEAR, 1);
-			}
-
+			weekdagTeller = telWeekdagen(getStartdatum(), getEinddatum());
 			// ControleerVerlofAanvraag aanvraag = new
 			// ControleerVerlofAanvraag();
 			// int aantal = aanvraag.getAantalFeestdagenOpWeekdag(startdatum,
 			// einddatum);
 			// weekdagTeller -= aantal;
 		}
-
 		return weekdagTeller;
 	}
 
@@ -110,28 +96,15 @@ public class VerlofAanvraag implements Serializable {
 	public int getPeriodeInJaarStartdatum() {
 		int weekdagTeller = 0;
 		if (getStartdatum() != null && getEinddatum() != null) {
-			Calendar EinddatumPeriode;
+			Calendar einddatumPeriode;
 			if (isStartEnEinddatumInZelfdeJaar()) {
-				EinddatumPeriode = getEinddatum();
+				einddatumPeriode = getEinddatum();
 			} else {
-				EinddatumPeriode = new GregorianCalendar(geefJaarStartdatum(), 11, 31);
+				einddatumPeriode = new GregorianCalendar(geefJaarStartdatum(), 11, 31);
 				// 31 december van het jaar waarin de startdatum ligt
 			}
-
-			Calendar datum = new GregorianCalendar();
-			datum.setTime(getStartdatum().getTime());
-
-			while (EinddatumPeriode.compareTo(datum) >= 0) {
-				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
-				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
-					System.out.println(weekdag);
-					weekdagTeller++;
-				}
-				datum.add(Calendar.DAY_OF_YEAR, 1);
-			}
-
+			weekdagTeller = telWeekdagen(getStartdatum(), einddatumPeriode);
 		}
-
 		return weekdagTeller;
 	}
 
@@ -148,7 +121,6 @@ public class VerlofAanvraag implements Serializable {
 				}
 				datum.add(Calendar.DAY_OF_YEAR, 1);
 			}
-
 		}
 		return weekdagTeller;
 	}
@@ -171,25 +143,15 @@ public class VerlofAanvraag implements Serializable {
 	public int getPeriodeInJaarEinddatum() {
 		int weekdagTeller = 0;
 		if (getStartdatum() != null && getEinddatum() != null) {
-			Calendar BegindatumPeriode;
+			Calendar begindatumPeriode;
 			if (isStartEnEinddatumInZelfdeJaar()) {
-				BegindatumPeriode = getStartdatum();
+				begindatumPeriode = getStartdatum();
 			} else {
-				BegindatumPeriode = new GregorianCalendar(geefJaarEinddatum(), 0, 1);
+				begindatumPeriode = new GregorianCalendar(geefJaarEinddatum(), 0, 1);
 				// 1 januari van het jaar waarin de einddatum valt
 			}
 
-			Calendar datum = new GregorianCalendar();
-			datum.setTime(BegindatumPeriode.getTime());
-
-			while (getEinddatum().compareTo(datum) >= 0) {
-				int weekdag = datum.get(Calendar.DAY_OF_WEEK);
-				if (weekdag != Calendar.SATURDAY && weekdag != Calendar.SUNDAY) {
-					System.out.println(weekdag);
-					weekdagTeller++;
-				}
-				datum.add(Calendar.DAY_OF_YEAR, 1);
-			}
+			weekdagTeller = telWeekdagen(begindatumPeriode, getEinddatum());
 
 		}
 
@@ -379,8 +341,11 @@ public class VerlofAanvraag implements Serializable {
 	}
 
 	public void setWerknemer(Werknemer werknemer) {
-		this.werknemer = werknemer;
-
+		if (werknemer != null) {
+			this.werknemer = werknemer;
+		}else{
+			throw new NullPointerException("VerlofAanvraag.setWerknemer : parameter werknemer is null");
+		}
 	}
 
 	@Override
