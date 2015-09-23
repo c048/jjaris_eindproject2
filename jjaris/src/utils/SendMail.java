@@ -28,9 +28,9 @@ public final class SendMail {
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			// Set Subject: header field
-			message.setSubject("This is the Subject Line!");
+			message.setSubject(subject);
 			// Now set the actual message
-			message.setText("This is the actual message");
+			message.setText(boddy);
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
