@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -33,49 +34,60 @@ public class JaarlijksVerlofHrBack implements Serializable {
 
 	private JaarlijksVerlof verlof;
 	private Werknemer werknemer;
-	private Team team;
+
 	private int ID, code;
 	private int Jaar;
 
 	private List<JaarlijksVerlof> delijst2;
 
 	public JaarlijksVerlofHrBack() {
-		try {
+	}
+
+	@PostConstruct
+	public void init() {
+		
+
 			delijst2 = new ArrayList<JaarlijksVerlof>();
-		} catch (Exception e) {
-			setFacesMessage("Geen resultaten gevonden met deze parameters");
-		}		
+			List<Werknemer> alleWerknemers = dao.getAlleWerknemers();
+			for (Werknemer werknemer : alleWerknemers) {
+				delijst2.addAll(werknemer.getJaarlijkseverloven());
+			}
+
+		if (getDelijst2().isEmpty()){
+			setFacesMessage("Geen jaarlijkse verloven gevonden!");
+		}
 	}
 
 	public List<JaarlijksVerlof> getjJaarlijksVerlof() {
 		Filter f = new Filter();
 		List<Werknemer> tempverlf = new ArrayList<Werknemer>();
 		List<JaarlijksVerlof> tempverlfB = new ArrayList<JaarlijksVerlof>();
-		
-		try {
-			if (ID != 0) {
-				f.voegFilterToe("werknemer.personeelsnummer", getID());
-			}
+
+		if (getID() != 0) {
+			f.voegFilterToe("personeelsnummer", getID());
+		}
+
+		if (getCode() != 0) {
+			f.voegFilterToe("team.code", getCode());
+		}
+
+		tempverlf = dao.getWerknemers(f);
+
+		for (Werknemer werknemer : tempverlf) {
 			if (Jaar != 0) {
-				f.voegFilterToe("jaar", getJaar());
-			}
-			if (code != 0) {
-				f.voegFilterToe("werknemer.team.code", team.getCode());
-			}
-			tempverlf = dao.getWerknemers(f);
-			for (Werknemer werknemer : tempverlf) {
+				if (werknemer.getJaarlijksVerlofVanJaar(Jaar) != null) {
+					tempverlfB.add(werknemer.getJaarlijksVerlofVanJaar(Jaar));
+				}
+			} else {
 				tempverlfB.addAll(werknemer.getJaarlijkseverloven());
 			}
-			for (JaarlijksVerlof jaarlijksVerlof : tempverlfB) {
-				delijst2.add(jaarlijksVerlof);
-			}
-		} catch (IllegalArgumentException iae) {
-			setFacesMessage("Geen gegevens gevonden met deze parameters");
-		} catch (NullPointerException npe) {
-			setFacesMessage("Geen gegevens gevonden met deze parameters");
 		}
-		
-		return delijst2;
+
+		if (tempverlfB.isEmpty()) {
+			setFacesMessage("Geen gegevens gevonden met deze parameters!");
+		}
+
+		return tempverlfB;
 	}
 
 	public int getCode() {
@@ -102,14 +114,6 @@ public class JaarlijksVerlofHrBack implements Serializable {
 		this.werknemer = werknemer;
 	}
 
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
 	public int getID() {
 		return ID;
 	}
@@ -124,6 +128,7 @@ public class JaarlijksVerlofHrBack implements Serializable {
 
 	public String zoek() {
 		delijst2 = getjJaarlijksVerlof();
+		resetParameters();
 		return null;
 	}
 
@@ -139,11 +144,18 @@ public class JaarlijksVerlofHrBack implements Serializable {
 		loginBack.changePage("jaarlijksVerlofHrCreate");
 		return null;
 	}
-	
+
 	public void setFacesMessage(String msg) {
 		FacesMessage fMsg = new FacesMessage(msg);
 		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		FacesContext.getCurrentInstance().addMessage(null, fMsg);
 		FacesContext.getCurrentInstance().renderResponse();
 	}
+
+	public void resetParameters() {
+		setID(0);
+		setCode(0);
+		setJaar(0);
+	}
+
 }

@@ -233,6 +233,14 @@ public class Werknemer implements Serializable {
 		}
 		return tmpJaar.getAantalDagen();
 	}
+	
+	public JaarlijksVerlof getJaarlijksVerlofVanJaar(int jaartal){
+		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream().filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
+//		if (tmpJaar == null){
+//			throw new NullPointerException("Werknemer.getJaarlijksVerlofVanJaar(int jaartal) : er bestaat geen jaarlijks verlof met dit jaartal");
+//		}
+		return tmpJaar;
+	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum, Toestand toestand) {
 		if (verlofaanvragen.isEmpty()) {

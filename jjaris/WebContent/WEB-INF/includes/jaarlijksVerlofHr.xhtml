@@ -20,7 +20,7 @@
 					<h:outputLabel value="Code team" id="lblCodeTeam" for="txtCodeTeam"> :</h:outputLabel>
 					<h:inputText id="txtCodeTeam" value="#{jaarlijks.code}"
 						converterMessage="Gelieve een geldige teamcode in te geven"></h:inputText>
-					<h:outputLabel value="PersoneelsId" id="lblPersoneelsId"
+					<h:outputLabel value="Personeelsnummer" id="lblPersoneelsId"
 						for="txtPersoneelsId">
 					</h:outputLabel>
 					<h:inputText id="txtPersoneelsId" value="#{jaarlijks.ID}"
@@ -30,8 +30,8 @@
 					<br />
 					<h:dataTable value="#{jaarlijks.delijst2}" var="tmp">
 						<h:column>
-							<f:facet name="header">PersoneelsNummer</f:facet>
-							#{tmp.id}
+							<f:facet name="header">personeelsNummer</f:facet>
+							#{tmp.werknemer.personeelsnummer}
 						</h:column>
 						<h:column>
 							<f:facet name="header">jaar</f:facet>
@@ -42,15 +42,23 @@
 							#{tmp.aantalDagen}
 						</h:column>
 						<h:column>
-							<f:facet name="header">naam</f:facet>
+							<f:facet name="header">voornaam</f:facet>
+						#{tmp.werknemer.voornaam}
+						</h:column>
+						<h:column>
+							<f:facet name="header">achternaam</f:facet>
 						#{tmp.werknemer.naam}
 						</h:column>
 						<h:column>
-							<f:facet name="header"> team naam</f:facet>
+							<f:facet name="header">team code</f:facet>
+						#{tmp.werknemer.team.code}
+						</h:column>
+						<h:column>
+							<f:facet name="header">team naam</f:facet>
 						#{tmp.werknemer.team.naam}
 						</h:column>
 					</h:dataTable><br/>
-					<h:commandButton value="Nieuw Jaarlijks verlof" id="btnNieuwVerlof" action="#{jaarlijks.createJaarlijksVerlof()}"></h:commandButton>
+					
 				</h:form>
 				<h:messages style="color:red;"></h:messages>
 			</div>
