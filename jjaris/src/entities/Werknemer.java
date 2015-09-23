@@ -257,7 +257,16 @@ public class Werknemer implements Serializable {
 	}
 
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
-		jaarlijkseverloven.add(jaarlijksverlof);
+		if (jaarlijksverlof != null) {
+			if (jaarlijksverlof.getWerknemer() == this) {
+				jaarlijkseverloven.add(jaarlijksverlof);
+
+			} else
+				throw new IllegalArgumentException(
+						"Werknemer.voegJaarlijksVerlofToe :kan JaarlijksVerlof niet toevoegen: behoort niet toe aan deze werknemer ");
+		} else
+			throw new NullPointerException("Werknemer.voegJaarlijksVerlofToe :kan JaarlijksVerlof niet toevoegen: parameter is null ");
+
 	}
 
 	@Override
