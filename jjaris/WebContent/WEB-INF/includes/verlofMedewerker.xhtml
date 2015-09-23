@@ -88,8 +88,12 @@
 					#{jaarlijksVerlof.jaar}
 					</h:column>
 					<h:column>
-					<f:facet name="header">Beschikbare dagen</f:facet>
+					<f:facet name="header">Totaal verlofdagen</f:facet>
 					#{jaarlijksVerlof.aantalDagen}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Resterende verlofdagen</f:facet>
+					#{verlofaanvraag.getResterendeVerlofdagen(jaarlijksVerlof.jaar)}
 					</h:column>
 					</h:dataTable>
 					

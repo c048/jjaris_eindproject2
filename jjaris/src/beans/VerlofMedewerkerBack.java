@@ -16,6 +16,7 @@ import utils.DatumBuilder;
 import utils.Filter;
 import utils.SendMail;
 import daos.VerlofAanvraagDAO;
+import daos.WerknemerDAO;
 import entities.JaarlijksVerlof;
 import entities.Team;
 import entities.Toestand;
@@ -30,6 +31,8 @@ public class VerlofMedewerkerBack implements Serializable {
 	private LoginBack user;
 	@Inject
 	private VerlofAanvraagDAO verlofaanvraagDAO;
+	@Inject
+	private WerknemerDAO werknemerDAO;
 	private int startJaar;
 	private int startMaand;
 	private int startDag;
@@ -58,6 +61,11 @@ public class VerlofMedewerkerBack implements Serializable {
 	public List<JaarlijksVerlof> getJaarlijkseVerloven(){
 		return user.getIngelogdeWerknemer().getJaarlijkseverloven();
 	}
+	
+	public int getResterendeVerlofdagen (int jaartal){
+		return user.getIngelogdeWerknemer().getAantalBeschikBareVerlofDagen(jaartal);
+	}
+	
 
 	public String zoeken() {
 		try {
@@ -134,6 +142,8 @@ public class VerlofMedewerkerBack implements Serializable {
 				Werknemer werknemer = user.getIngelogdeWerknemer();
 				VerlofAanvraag verlof = new VerlofAanvraag(converteerDatum(startdatum), converteerDatum(einddatum), werknemer);
 				verlofaanvraagDAO.voegVerlofAanvraagToe(verlof);
+//				werknemer = user.getIngelogdeWerknemer();
+//				werknemerDAO.updateWerknemer(werknemer);
 			} else {
 				FacesMessage msg = new FacesMessage("Gelieve de datumvelden in te vullen");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);

@@ -1,5 +1,7 @@
 package daos;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -96,6 +98,17 @@ public class WerknemerDAO {
 		} else
 			throw new IllegalArgumentException("geen werknemer is gevonden met  personeel nr" + werknemer.getPersoneelsnummer());
 
+	}
+	
+	@Transactional
+	public void voegJaarlijksVerlofToe(JaarlijksVerlof jv){
+		Calendar now = new GregorianCalendar();
+		int huidigJaar = now.get(Calendar.YEAR);
+		if (jv.getWerknemer() != null && jv.getJaar() >= huidigJaar && jv.getAantalDagen()>=0){
+			em.persist(jv);
+		}else {
+			System.out.println("Kon jaarlijks verlof niet toevoegen aan database");
+		}
 	}
 
 	/**
