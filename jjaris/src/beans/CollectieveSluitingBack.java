@@ -60,6 +60,8 @@ public class CollectieveSluitingBack implements Serializable {
 			DatumBuilder  feestDag=new DatumBuilder(startdatumFDag, startdatumFMaand+1, startdatumFJaar);
 			if(omschrijvingF!=null || !omschrijvingF.equals(""))
 				dao.voegFeestdagToe(feestDag.buildCalendar(), omschrijvingF, terugkerendF);
+			else
+				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 
 		}
 		catch(IllegalArgumentException eIllArg){
@@ -81,7 +83,8 @@ public class CollectieveSluitingBack implements Serializable {
 			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand+1, einddatumCVJaar);
 			if(omschrijvingCV!=null)
 				dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
-
+			else
+				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		}
 		catch(IllegalArgumentException eIllArg){
 			setFacesMessage("Incorrecte gegevens bij Datum  ");
@@ -188,9 +191,6 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingF(String omschrijvingF) {
-		
-		if(omschrijvingF==null || omschrijvingF.equals(""))
-			setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		this.omschrijvingF = omschrijvingF;
 		
 	}
@@ -200,8 +200,6 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 
 	public void setOmschrijvingCV(String omschrijvingCV) {
-		if(omschrijvingCV==null || omschrijvingCV.equals(""))
-			setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		this.omschrijvingCV = omschrijvingCV;
 
 	}
