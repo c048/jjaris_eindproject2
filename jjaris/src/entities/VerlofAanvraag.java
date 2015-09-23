@@ -179,7 +179,7 @@ public class VerlofAanvraag implements Serializable {
 		if (verlofaanvragen != null && !verlofaanvragen.isEmpty()) {
 			for (VerlofAanvraag verlofAanvraag : verlofaanvragen) {
 				System.out.println(verlofAanvraag);
-				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum) && verlofAanvraag.getId() != getId()) {
+				if (verlofAanvraag.verlofOverlapt(startDatum, eindDatum) && verlofAanvraag.getId() != getId() && verlofAanvraag.getToestand() != Toestand.GEANNULEERD) {
 					return true;
 				}
 			}
