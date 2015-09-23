@@ -89,26 +89,35 @@ public class VerlofMedewerkerBack implements Serializable {
 	public String annuleren(int id) {
 		// Werknemer werknemer = user.getIngelogdeWerknemer();
 		// werknemer.annuleerVerlofAanvraag(id); //werkt niet!!
-		VerlofAanvraag va = verlofaanvraagDAO.getVerlofAanvraag(id);
-		va.annuleren();
-		System.out.println("toestand va:" + va.getToestand());
-		verlofaanvraagDAO.updateVerlofAanvraag(va);
+		try {
+			VerlofAanvraag va = verlofaanvraagDAO.getVerlofAanvraag(id);
+			va.annuleren();
+			verlofaanvraagDAO.updateVerlofAanvraag(va);
+			System.out.println("IETS**************************************************************************");
+			
+				StringBuilder verlof = new StringBuilder();
+				verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
+				verlof.append("\n met id: "+va.getId());
+				verlof.append("\n is geannuleerd");
+				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
+					"Verlofaanvraag gewijzigd", verlof.toString());
+		} 
+			catch (IllegalArgumentException iae) {
+				FacesMessage msg = new FacesMessage(iae.getMessage());
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				FacesContext.getCurrentInstance().renderResponse();
+			}
+
 		
-		if(va.getToestand()!=Toestand.GEANNULEERD){
-			StringBuilder verlof = new StringBuilder();
-			verlof.append("De verlofaanvraag van "+user.getIngelogdeWerknemer().getNaam());
-			verlof.append("\n met id: "+va.getId());
-			verlof.append("\n is geannuleerd");
-			SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
-				"Verlofaanvraag gewijzigd", verlof.toString());
-		}
+	
 		return null;
 	}
 
 	/**
 	 * Verlof aanvragen
 	 */
-	public void toevoegen() {
+	public String toevoegen() {
 
 		try {
 			Date startdatum = buildDatum(startDag, startMaand, startJaar);
@@ -135,6 +144,7 @@ public class VerlofMedewerkerBack implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			FacesContext.getCurrentInstance().renderResponse();
 		}
+		return null;
 
 	}
 
