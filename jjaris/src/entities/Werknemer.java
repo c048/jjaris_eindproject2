@@ -190,7 +190,7 @@ public class Werknemer implements Serializable {
 					verlofdagen += verlofAanvraag.getPeriodeInJaarEinddatum();
 				}
 			}
-		}
+		} 
 		return (tmpJaar - verlofdagen);
 	}
 
