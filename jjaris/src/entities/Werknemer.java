@@ -158,11 +158,7 @@ public class Werknemer implements Serializable {
 		setAdres(werknemer.getAdres());
 		setEmail(werknemer.getEmail());
 		setGeboortedatum(werknemer.getGeboortedatum());
-		for (JaarlijksVerlof jaarlijksVerlof : werknemer.getJaarlijkseverloven()) {
-			if (!this.jaarlijkseverloven.contains(jaarlijksVerlof)) {
-				voegJaarlijksVerlofToe(jaarlijksVerlof);
-			}
-		}
+		setJaarlijkseverloven(werknemer.getJaarlijkseverloven());
 		setPasswoord(werknemer.getPasswoord());
 		setTeam(werknemer.getTeam());
 	}
@@ -262,7 +258,7 @@ public class Werknemer implements Serializable {
 
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
 		if (jaarlijksverlof != null) {
-			if (jaarlijksverlof.getWerknemer() == this) {
+			if (jaarlijksverlof.getWerknemer().equals(this) ) {
 				jaarlijkseverloven.add(jaarlijksverlof);
 
 			} else
