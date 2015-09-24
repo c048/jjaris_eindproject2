@@ -35,6 +35,15 @@ public class CollectieveSluitingDAO {
 
 	}
 	
+	@Transactional
+	public  List<Feestdag> getFeestdagen (){
+		
+		TypedQuery<Feestdag> query = em.createQuery("SELECT f FROM Feestdag f",Feestdag.class);
+
+		return (List<Feestdag>) query.getResultList();
+
+	}
+	
 
 	public  List<Feestdag> getAlleFeestdagen(int jaartal) {
 		
@@ -45,6 +54,15 @@ public class CollectieveSluitingDAO {
 		einddatum.set(jaartal, Calendar.DECEMBER, 31);  //December  31ste  jaartaal
 		
 		return getFeestdagen(begindatum,einddatum );
+	}
+	
+	@Transactional
+	public  List<CollectiefVerlof> getCollectieveVerloven( ) {
+				
+		TypedQuery<CollectiefVerlof> query = em.createQuery("SELECT c FROM CollectiefVerlof c ",CollectiefVerlof.class);
+		
+		return (List<CollectiefVerlof>) query.getResultList();
+		
 	}
 	
 	@Transactional

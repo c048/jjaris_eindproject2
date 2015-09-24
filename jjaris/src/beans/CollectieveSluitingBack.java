@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import utils.DatumBuilder;
@@ -31,6 +33,7 @@ public class CollectieveSluitingBack implements Serializable {
 	@Inject
 	private LoginBack loginBack;
 	
+	@Digits(integer=4,fraction=0, message="Vul één geldig nummer a.u.b.")
 	private int startdatumFJaar;
 	private int startdatumFMaand;
 	private int startdatumFDag;
@@ -55,21 +58,20 @@ public class CollectieveSluitingBack implements Serializable {
 
 
 	public String voegFeestdagToe() {
-	
+
 		try {
-			DatumBuilder  feestDag=new DatumBuilder(startdatumFDag, startdatumFMaand+1, startdatumFJaar);
-			if(omschrijvingF!=null || !omschrijvingF.equals(""))
+			DatumBuilder  feestDag=new DatumBuilder(startdatumFDag, startdatumFMaand, startdatumFJaar);
+			if(omschrijvingF!=null && !omschrijvingF.equals(""))
 				dao.voegFeestdagToe(feestDag.buildCalendar(), omschrijvingF, terugkerendF);
 			else
 				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 
 		}
 		catch(IllegalArgumentException eIllArg){
-			setFacesMessage("Incorrecte gegevens bij Datum  ");
+			setFacesMessage("Incorrect datum  gegevens");
 			
 		}
 			
-		
 		loginBack.changePage("collectieveSluitingHr");
 		return null;
 
@@ -79,33 +81,36 @@ public class CollectieveSluitingBack implements Serializable {
 		
 		
 		try {
-			DatumBuilder  csBegindatum=new DatumBuilder(startdatumCVDag, startdatumCVMaand+1, startdatumCVJaar);
-			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand+1, einddatumCVJaar);
-			if(omschrijvingCV!=null)
+			DatumBuilder  csBegindatum=new DatumBuilder(startdatumCVDag, startdatumCVMaand, startdatumCVJaar);
+			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand, einddatumCVJaar);
+			if(omschrijvingCV!=null && !omschrijvingCV.equals(""))
 				dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
 			else
 				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		}
 		catch(IllegalArgumentException eIllArg){
-			setFacesMessage("Incorrecte gegevens bij Datum  ");
+			setFacesMessage("Incorrect datum  gegevens");
 			
 		}
 		
-		loginBack.changePage("medewerkersHr");
+		loginBack.changePage("collectieveSluitingHr");
 		return null;
 	}
 	
 	public List<Feestdag> getFeestdagen() {
 		
 		Calendar cal=Calendar.getInstance();
-		return dao.getAlleFeestdagen(cal.get(Calendar.YEAR));	
+		//alleen de feestdagen die later dan dit jaar zijn getoond worden
+		return dao.getFeestdagen().stream().filter(j -> j.getJaar() >= cal.get(Calendar.YEAR)).collect(Collectors.toList()); 
 
 	}
 	
 	public List<CollectiefVerlof> getCollectieveVerloven() {
 		
 		Calendar cal=Calendar.getInstance();
-		return dao.getAlleCollectieveVerloven(cal.get(Calendar.YEAR));	
+		return dao.getCollectieveVerloven().stream().filter(j -> j.getBeginJaar() >= cal.get(Calendar.YEAR)).collect(Collectors.toList()); 
+		
+		//return dao.getAlleCollectieveVerloven(cal.get(Calendar.YEAR));	
 
 	}
 	

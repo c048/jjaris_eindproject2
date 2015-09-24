@@ -33,11 +33,11 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 	}
 
 	public String getEinddatum() {			
-		return einddatum.get(Calendar.DAY_OF_MONTH)+"-"+einddatum.get(Calendar.MONTH)+"-"+einddatum.get(Calendar.YEAR);
+		return einddatum.get(Calendar.DAY_OF_MONTH)+"-"+(einddatum.get(Calendar.MONTH)+1)+"-"+einddatum.get(Calendar.YEAR);
 	}
 	
 	public String getBegindatum() {			
-		return super.getStartdatum().get(Calendar.DAY_OF_MONTH)+"-"+super.getStartdatum().get(Calendar.MONTH)+"-"+super.getStartdatum().get(Calendar.YEAR);
+		return super.getStartdatum().get(Calendar.DAY_OF_MONTH)+"-"+(super.getStartdatum().get(Calendar.MONTH)+1)+"-"+super.getStartdatum().get(Calendar.YEAR);
 	}
 	
 
@@ -81,6 +81,9 @@ public class CollectiefVerlof extends CollectieveSluiting implements Serializabl
 		
 	}
 
+	 public int getBeginJaar(){
+		 return super.getStartdatum().get(Calendar.YEAR);
+	 }
 	
 	@Override
 	public String toString() {

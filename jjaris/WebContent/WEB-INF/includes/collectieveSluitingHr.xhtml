@@ -41,6 +41,12 @@
 			<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
 			<h:commandButton value="Toevoegen" action="#{collectievesluiting.voegFeestdagToe}"></h:commandButton>
 	</h:panelGrid>
+	<br/><br/>
+	<h:dataTable value="#{collectievesluiting.feestdagen}" var="tmp">
+	<f:facet name="caption"> <b>Overzicht van ingegeven Feestdagen van dit Jaar</b></f:facet>
+		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
+		<h:column><f:facet name="header">Feestdatum</f:facet>#{tmp.datumStr}</h:column>
+	</h:dataTable>
 		
 	<h:panelGrid id="CollectieveVerlof" columns="4">	
 			<h4>COLLECTIVEVERLOF</h4>
@@ -78,7 +84,15 @@
 			<h:inputHidden value="legeCVGrid6-3" id="legeCVGrid6-3" />
 			<h:commandButton value="Toevoegen" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
 		</h:panelGrid>
-
+	<br/><br/>
+	<h:dataTable value="#{collectievesluiting.collectieveVerloven}" var="tmp">
+	<f:facet name="caption"> <b>Overzicht van ingegeven Collective Verloven van dit Jaar</b></f:facet>
+		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
+		<h:column><f:facet name="header">Begin Datum</f:facet>#{tmp.begindatum}</h:column> 
+		<h:column><f:facet name="header">Eind Datum</f:facet>#{tmp.einddatum}</h:column>
+	</h:dataTable>
+	<br/>
+	<br/>
 			
 	<h:commandButton value="Terug" action="#{collectievesluiting.terugAction}"></h:commandButton>
 	</h:form>
