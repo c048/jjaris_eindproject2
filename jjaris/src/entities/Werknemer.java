@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import javax.persistence.*;
 
+import utils.Hasher;
+
 @Entity
 public class Werknemer implements Serializable {
 
@@ -77,7 +79,11 @@ public class Werknemer implements Serializable {
 
 	public void setEmail(String email) throws IllegalArgumentException {
 		if (!(email.trim().equals(""))) {
-			this.email = email;
+			if(email.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
+				this.email = email;
+			} else {
+				throw new IllegalArgumentException("U moet een geldige email invoeren");
+			}
 		} else {
 			throw new IllegalArgumentException("Email mag niet leeg zijn");
 		}
@@ -97,14 +103,14 @@ public class Werknemer implements Serializable {
 
 	public void setPasswoord(String passwoord) throws IllegalArgumentException {
 		if (!(passwoord.trim().equals(""))) {
-			this.passwoord = passwoord;
+			this.passwoord = Hasher.hash(passwoord);
 		} else {
 			throw new IllegalArgumentException("Passwoord mag niet leeg zijn");
 		}
 	}
 
 	public boolean controleerPasswoord(String teControlerenPaswoord) {
-		return teControlerenPaswoord.equals(getPasswoord());
+		return Hasher.hash(teControlerenPaswoord).equals(getPasswoord());
 	}
 
 	public Team getTeam() {
