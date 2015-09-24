@@ -220,9 +220,11 @@ public class MedewerkerHrManageBack implements Serializable {
 	}
 
 	public String addMedewerkerContinue() {
-		if (verwerkMedewerker() != null) {
+		verwerkMedewerker();
+		if (loginBack.getComponent().equals("medewerkersHr")) {
 			reset();
 		}
+		loginBack.changePage("medewerkerHrManage");
 		return null;
 	}
 
