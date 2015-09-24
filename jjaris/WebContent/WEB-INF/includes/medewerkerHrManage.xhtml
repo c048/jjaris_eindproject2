@@ -31,11 +31,11 @@
 							<c:choose>
 								<c:when test="${medewerkerHrManageBack.findPersoneelsnummer() eq 0}">
 									<h:outputLabel for="mPwd" value="Passwoord"></h:outputLabel>
-									<h:inputText id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputText>
+									<h:inputSecret id="mPwd" required="true" requiredMessage="U moet een wachtwoord invoeren" value="#{medewerkerHrManageBack.passwoord}"></h:inputSecret>
 								</c:when>
 								<c:otherwise>
 									<h:outputLabel for="mPwd" value="Nieuw Passwoord"></h:outputLabel>
-									<h:inputText id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputText>
+									<h:inputSecret id="mPwd" value="#{medewerkerHrManageBack.passwoord}"></h:inputSecret>
 								</c:otherwise>
 							</c:choose>
 							<h:outputLabel for="mTeam" value="Team"></h:outputLabel>
