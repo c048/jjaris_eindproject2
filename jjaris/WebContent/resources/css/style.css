@@ -256,6 +256,52 @@ textarea {
 
 /* Main Content */
 
+/* Start Login Panel */
+
+.loginContainer {
+	background-color: #efefef;
+	height: 160px;
+	padding: 20px;
+	margin: 300px auto 0 auto;
+	width: 40%;
+}
+
+.loginLeft,
+.loginRight {
+	display: inline-block;
+}
+
+.loginLeft {
+	width: 30%;
+}
+
+.loginLeft img {
+	width: 100%;
+}
+
+.loginRight {
+	vertical-align: top;
+	width: 69%;
+}
+
+.login-panel {
+	padding: 25px 0 0 25px;
+}
+
+.login-panel input[type="text"] {
+	width: 96%;
+}
+
+.login-panel input[type="password"] {
+	width: 100%;
+}
+
+.login-panel td {
+	padding-bottom: 10px;
+}
+
+/* End Login Panel */
+
 /* start Utils */
 
 .topAligner {
@@ -263,14 +309,6 @@ textarea {
 }
 
 /* end Utils */
-
-.login-panel {
-	background-color: #efefef;
-	height: 160px;
-	padding: 20px;
-	margin: 300px auto 0 auto;
-	width: 40%;
-}
 
 #content-wrapper, #footer-annotation, #links, #login-wrapper{
 	margin: 0 auto;

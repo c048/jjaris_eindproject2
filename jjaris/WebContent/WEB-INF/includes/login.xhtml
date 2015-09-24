@@ -9,16 +9,23 @@
 			<ui:define name="title">Jarris Login</ui:define>
 			<ui:define name="loginPanel">
 				<div id="login-wrapper">
-					<h:form class="login-panel">
-						<h:panelGrid columns="2">
-							<h:outputLabel value="E-mail adres: "></h:outputLabel>
-							<h:inputText value="#{loginBack.email}"></h:inputText>
-							<h:outputLabel value="Paswoord: "></h:outputLabel>
-							<h:inputSecret value="#{loginBack.paswoord}"></h:inputSecret>
-							<h:commandButton value="login" action="#{loginBack.login}"></h:commandButton>
-						</h:panelGrid>
-					</h:form>
-					<h:messages style="color:red;"></h:messages>
+					<div class="loginContainer">
+						<div class="loginLeft">
+							<img src="http://localhost:8080/jjaris/resources/images/logo.jpg"></img>
+						</div>
+						<div class="loginRight">
+							<h:form class="login-panel">
+								<h:panelGrid columns="2">
+									<h:outputLabel value="E-mail adres: "></h:outputLabel>
+									<h:inputText value="#{loginBack.email}"></h:inputText>
+									<h:outputLabel value="Paswoord: "></h:outputLabel>
+									<h:inputSecret value="#{loginBack.paswoord}"></h:inputSecret>
+									<h:commandButton value="login" action="#{loginBack.login}"></h:commandButton>
+								</h:panelGrid>
+							</h:form>
+						</div>
+						<h:messages style="color:red;"></h:messages>
+					</div>
 				</div>
 			</ui:define>
 		</ui:composition>
