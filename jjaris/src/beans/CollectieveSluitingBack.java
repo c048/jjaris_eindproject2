@@ -91,7 +91,7 @@ public class CollectieveSluitingBack implements Serializable {
 				if(csEinddatum.buildCalendar().after((Calendar)csBegindatum.buildCalendar() ))
 						dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
 				else
-					setFacesMessage("Begin datum moet voor eind datum liggen   ");
+					setFacesMessage("Begindatum moet voor einddatum liggen   ");
 			}
 			else
 				setFacesMessage("Omschrijving moet ingevuld zijn  ");
