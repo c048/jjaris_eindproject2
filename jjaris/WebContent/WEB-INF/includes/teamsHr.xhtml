@@ -25,7 +25,7 @@
 					<h:inputText id="IntTeamCode" value="#{hrTeamsBack.teamCode}" converterMessage="Geef een geldige code in"></h:inputText>
 					<h:commandButton value="Zoek Team" action="#{hrTeamsBack.zoek}"></h:commandButton>
 
-					<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam"  class="dataTable_1" columnClasses="column_1,column_1,column_1,column_1,column_1,column_1,column_1">
+					<h:dataTable value="#{hrTeamsBack.teams}" var="tmpTeam"  class="dataTable_1" columnClasses="column_1,column_1,column_1,column_1,columnEnd_1,columnEnd_1">
 						<h:column>
 							<f:facet name="header">Team Code</f:facet>    				
 						      	#{tmpTeam.code}</h:column>
