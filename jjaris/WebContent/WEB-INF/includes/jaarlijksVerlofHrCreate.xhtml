@@ -14,10 +14,10 @@
 					<h:form class="contentForm_1">
 						<h:panelGrid class="inputPanel_1" id="feestdag" columns="2">
 				
-							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: ">#{jaarlijkseverlofbeheer.personeelsNr}</h:outputLabel>
-							<h:outputLabel for="txtPersoneelsNaam" value="Personeels Voornaam: ">#{jaarlijkseverlofbeheer.voornaam}</h:outputLabel>
+							<h:outputLabel for="txtPersoneelsNr" value="Personeelsnummer: ">#{jaarlijkseverlofbeheer.personeelsNr}</h:outputLabel>
+							<h:outputLabel for="txtPersoneelsNaam" value="Voornaam: ">#{jaarlijkseverlofbeheer.voornaam}</h:outputLabel>
 							
-							<h:outputLabel for="txtPersoneelsVoornaam" value="Personeels Naam: ">#{jaarlijkseverlofbeheer.naam}</h:outputLabel>
+							<h:outputLabel for="txtPersoneelsVoornaam" value="Achternaam: ">#{jaarlijkseverlofbeheer.naam}</h:outputLabel>
 							<h:inputHidden value="legeFGrid2-2" id="legeFGrid2-2" />
 							
 							<h:outputLabel for="txtJaar" value="Jaar: "></h:outputLabel>
@@ -34,6 +34,24 @@
 
 						</h:panelGrid>
 					</h:form>
+					
+					<h:dataTable value="#{jaarlijkseverlofbeheer.jaarlijkseVerloven}" var="jaarlijksVerl" class="dataTable_1" columnClasses="column_1,column_1,columnEnd_1">
+							<h:column>
+								<f:facet name="header">Jaarlijks verlof Jaar</f:facet>
+								#{jaarlijksVerl.jaar}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Totaal verlofdagen</f:facet>
+								#{jaarlijksVerl.aantalDagen}
+							</h:column>
+						</h:dataTable>	
+					
+					
+					
+					
+					
+					
+					
 					<h:messages class="errorBox_1"></h:messages>
 				</div>
 			</ui:define>

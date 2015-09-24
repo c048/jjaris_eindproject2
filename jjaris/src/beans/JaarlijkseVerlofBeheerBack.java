@@ -130,6 +130,11 @@ public class JaarlijkseVerlofBeheerBack implements Serializable {
 		this.personeelsNr = personeelsNr;
 	}*/
 	
+	public List<JaarlijksVerlof> getJaarlijkseVerloven(){
+		Werknemer werknemer=dao.getWerknemer(params.getPersoneelsnummer());
+		return werknemer.getJaarlijkseverloven();
+	}
+	
 	
 	
 	public void setFacesMessage(String msg ) {
