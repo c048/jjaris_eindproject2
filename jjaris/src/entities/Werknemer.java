@@ -110,7 +110,8 @@ public class Werknemer implements Serializable {
 	}
 
 	public boolean controleerPasswoord(String teControlerenPaswoord) {
-		return Hasher.hash(teControlerenPaswoord).equals(getPasswoord());
+		String tmp = Hasher.hash(teControlerenPaswoord);
+		return tmp.equals(getPasswoord());
 	}
 
 	public Team getTeam() {
@@ -178,7 +179,7 @@ public class Werknemer implements Serializable {
 		setEmail(werknemer.getEmail());
 		setGeboortedatum(werknemer.getGeboortedatum());
 		//setJaarlijkseverloven(werknemer.getJaarlijkseverloven());
-		setPasswoord(werknemer.getPasswoord());
+		this.passwoord = (werknemer.getPasswoord());
 		setTeam(werknemer.getTeam());
 	}
 
