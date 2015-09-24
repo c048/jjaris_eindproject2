@@ -133,7 +133,9 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<JaarlijksVerlof> getJaarlijkseverloven() {
+		if (jaarlijkseverloven != null){
 		jaarlijkseverloven = jaarlijkseverloven.stream().distinct().collect(Collectors.toList());
+		}
 		return jaarlijkseverloven;
 	}
 
@@ -153,7 +155,9 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getVerlofaanvragen() {
+		if (verlofaanvragen != null){
 		verlofaanvragen = verlofaanvragen.stream().distinct().collect(Collectors.toList());
+		}
 		return verlofaanvragen;
 	}
 
@@ -214,7 +218,7 @@ public class Werknemer implements Serializable {
 	public void voegVerlofAanvraagToe(VerlofAanvraag va) {
 
 		if (va != null) {
-			if (!verlofaanvragen.contains(va)) {
+			if (!getVerlofaanvragen().contains(va)) {
 
 				if (!va.getWerknemer().equals(this)) {
 					throw new IllegalArgumentException(
@@ -232,7 +236,7 @@ public class Werknemer implements Serializable {
 					}
 				}
 
-				verlofaanvragen.add(va);
+				getVerlofaanvragen().add(va);
 			}
 
 		} else
@@ -242,7 +246,7 @@ public class Werknemer implements Serializable {
 
 	public void annuleerVerlofAanvraag(int verlofaanvraagId)
 			throws NullPointerException {
-		VerlofAanvraag tmpAanvraag = verlofaanvragen.stream()
+		VerlofAanvraag tmpAanvraag = getVerlofaanvragen().stream()
 				.filter(v -> v.getId() == verlofaanvraagId).findFirst()
 				.orElse(null);
 		if (tmpAanvraag == null) {
@@ -252,13 +256,13 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getLopendeVerlofAanvragen() {
-		return verlofaanvragen.stream()
+		return getVerlofaanvragen().stream()
 				.filter(v -> v.getToestand().equals(Toestand.INGEDIEND))
 				.collect(Collectors.toList());
 	}
 
 	public int getJaarlijksVerlof(int jaartal) {
-		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream()
+		JaarlijksVerlof tmpJaar = getJaarlijkseverloven().stream()
 				.filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
 		if (tmpJaar == null) {
 			return 0;
@@ -267,7 +271,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public JaarlijksVerlof getJaarlijksVerlofVanJaar(int jaartal) {
-		JaarlijksVerlof tmpJaar = jaarlijkseverloven.stream()
+		JaarlijksVerlof tmpJaar = getJaarlijkseverloven().stream()
 				.filter(j -> j.getJaar() == jaartal).findFirst().orElse(null);
 		// if (tmpJaar == null){
 		// throw new
@@ -284,34 +288,30 @@ public class Werknemer implements Serializable {
 			// "zijn leeg");
 			return verlofaanvragen;
 		}
-		return verlofaanvragen
-				.stream()
-				.filter(v -> (v.getStartdatum().before(einddatum) && v
-						.getEinddatum().after(begindatum))
-						&& v.getToestand() == (toestand))
+		return getVerlofaanvragen().stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum)) && v.getToestand() == (toestand))
 				.collect(Collectors.toList());
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen() {
-		return verlofaanvragen;
+		return getVerlofaanvragen();
 	}
 
 	public List<VerlofAanvraag> getAlleVerlofAanvragen(GregorianCalendar begindatum, GregorianCalendar einddatum) {
 		if (verlofaanvragen.isEmpty()) {
 			return verlofaanvragen;
-		}else return verlofaanvragen.stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum))).collect(Collectors.toList());
+		}else return getVerlofaanvragen().stream().filter(v -> (v.getStartdatum().before(einddatum) && v.getEinddatum().after(begindatum))).collect(Collectors.toList());
 	}
 	
 	public List<VerlofAanvraag> getOpenstaandeVerlofaanvragenJaar(int jaartal){
 		if (verlofaanvragen.isEmpty()) {
-			return getAlleVerlofAanvragen();
-		}else return verlofaanvragen.stream().filter(v -> (v.geefJaarStartdatum() == jaartal || v.geefJaarEinddatum() == jaartal)).filter(va -> va.getToestand().equals(Toestand.INGEDIEND) || va.getToestand().equals(Toestand.GOEDGEKEURD)).distinct().collect(Collectors.toList());
+			return verlofaanvragen;
+		}else return getVerlofaanvragen().stream().filter(v -> (v.geefJaarStartdatum() == jaartal || v.geefJaarEinddatum() == jaartal)).filter(va -> va.getToestand().equals(Toestand.INGEDIEND) || va.getToestand().equals(Toestand.GOEDGEKEURD)).distinct().collect(Collectors.toList());
 	}
 
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
 		if (jaarlijksverlof != null) {
 			if (jaarlijksverlof.getWerknemer().equals(this) && !heeftReedsJaarlijksVerlof(jaarlijksverlof.getJaar())) {
-				jaarlijkseverloven.add(jaarlijksverlof);
+				getJaarlijkseverloven().add(jaarlijksverlof);
 
 			} else
 				throw new IllegalArgumentException(
@@ -323,7 +323,7 @@ public class Werknemer implements Serializable {
 	
 	public boolean heeftReedsJaarlijksVerlof(int jaartal){
 		boolean heeftVerlofJaar = false;
-		for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
+		for (JaarlijksVerlof jaarlijksVerlof : getJaarlijkseverloven()) {
 			if (jaarlijksVerlof.getJaar() == jaartal){
 				heeftVerlofJaar = true;
 				break;
