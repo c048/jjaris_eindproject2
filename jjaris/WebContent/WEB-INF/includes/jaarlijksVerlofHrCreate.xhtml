@@ -11,8 +11,8 @@
 			<ui:define name="title">Jaarlijks Verlof Toevoegen</ui:define>
 			<ui:define name="content">
 				<div id="content-wrapper">
-					<h:form>
-						<h:panelGrid id="feestdag" columns="2">
+					<h:form class="contentForm_1">
+						<h:panelGrid class="inputPanel_1" id="feestdag" columns="2">
 				
 							<h:outputLabel for="txtPersoneelsNr" value="Personeels Nr: ">#{jaarlijkseverlofbeheer.personeelsNr}</h:outputLabel>
 							<h:outputLabel for="txtPersoneelsNaam" value="Personeels Voornaam: ">#{jaarlijkseverlofbeheer.voornaam}</h:outputLabel>
@@ -34,7 +34,7 @@
 
 						</h:panelGrid>
 					</h:form>
-					<h:messages style="color:red;"></h:messages>
+					<h:messages class="errorBox_1"></h:messages>
 				</div>
 			</ui:define>
 		</ui:composition>

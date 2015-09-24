@@ -9,7 +9,7 @@
 			<ui:define name="title">Create team</ui:define>
 			<ui:define name="content">
 				<div id="content-wrapper">
-					<h:form>
+					<h:form class="contentForm_1">
 						<h:outputLabel for="teamNaam" value="Naam Team: "></h:outputLabel>
 						<h:inputText id="teamNaam" value="#{createTeamBack.naam}"></h:inputText>
 						<br></br>
@@ -24,7 +24,7 @@
 						<h:commandButton value="Annuleren"
 							action="#{createTeamBack.annuleren}" immediate="true"></h:commandButton>
 					</h:form>
-					<h:messages style="color:red;"></h:messages>
+					<h:messages class="errorBox_1"></h:messages>
 				</div>
 			</ui:define>
 		</ui:composition>

@@ -14,78 +14,77 @@
 		<ui:define name="title">Jaarlijke verloven(Hr)</ui:define>
 		<ui:define name="content">
 			<div id="content-wrapper">
-<h:form>		
-		<h:panelGrid id="feestdag" columns="4">	
-			<h4>FEESTDAGEN</h4>
-			<h:inputHidden value="legeFGrid1-2" id="legeFGrid1-2" />
-			<h:inputHidden value="legeFGrid1-3" id="legeFGrid1-3" />
-			<h:inputHidden value="legeFGrid1-4" id="legeFGrid1-4" />
-			
+<h3>FEESTDAGEN</h3>
+<h:form class="contentForm_1">		
+		<h:panelGrid class="inputPanel_1" id="feestdag" columns="4">	
 			<h:outputLabel for="txtFOmschrijving" value="Omschrijving"></h:outputLabel>
 			<h:inputText id="txtFOmschrijving"  value="#{collectievesluiting.omschrijvingF}"></h:inputText>
 			<h:inputHidden value="legeFGrid2-3" id="legeFGrid2-3" />
 			<h:inputHidden value="legeFGrid2-4" id="legeFGrid2-4" />	
-			
+		</h:panelGrid>	
+		<h:panelGrid class="inputPanel_1" columns="4">
 			<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
 			<h:outputLabel for="txtFDag" value="Dag"></h:outputLabel>
 			<h:outputLabel for="txtFMaand" value="Maand"></h:outputLabel>	
 			<h:outputLabel for="txtFJaar" value="Jaar"></h:outputLabel>	
 			
-			<h:outputText for="txtFDatum" value="Datum"></h:outputText>
-			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumFDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
-			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumFMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
-			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumFJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>
-			
-			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
+			<h:outputLabel for="txtFDatum" value="Datum"></h:outputLabel>
+			<h:inputText id="txtFDag" class="columnTiny_2" value="#{collectievesluiting.startdatumFDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
+			<h:inputText id="txtFMaand" class="columnTiny_2" value="#{collectievesluiting.startdatumFMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
+			<h:inputText id="txtFJaar" class="columnMedium_1" value="#{collectievesluiting.startdatumFJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>
+		</h:panelGrid>	
+		<h:panelGrid class="inputPanel_1" columns="4">
+			<h:outputLabel for="txtFTerugkerend" value="Terugkerend?"></h:outputLabel>
 			<h:selectBooleanCheckbox id="txtFTerugkerend" value="#{collectievesluiting.terugkerendF}" />
 			<h:inputHidden value="legeFGrid5-3" id="legeFGrid5-3" />
 			<h:commandButton value="Toevoegen" action="#{collectievesluiting.voegFeestdagToe}"></h:commandButton>
-	</h:panelGrid>
+		</h:panelGrid>
 	<br/><br/>
-	<h:dataTable value="#{collectievesluiting.feestdagen}" var="tmp">
+	<h:dataTable value="#{collectievesluiting.feestdagen}" var="tmp" class="dataTable_1" columnClasses="column_1,column_1">
 	<f:facet name="caption"> <b>Overzicht van ingegeven Feestdagen van dit Jaar</b></f:facet>
 		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
 		<h:column><f:facet name="header">Feestdatum</f:facet>#{tmp.datumStr}</h:column>
 	</h:dataTable>
-		
-	<h:panelGrid id="CollectieveVerlof" columns="4">	
-			<h4>COLLECTIVEVERLOF</h4>
-			<h:inputHidden value="legeGrid1-2" id="legeGrid1-2" />
-			<h:inputHidden value="legeGrid1-3" id="legeGrid1-3" />
-			<h:inputHidden value="legeGrid1-4" id="legeGrid1-4" />
-			
+	
+	<h3>COLLECTIVEVERLOF</h3>		
+	<h:panelGrid class="inputPanel_1" id="CollectieveVerlof" columns="4">
 			<h:outputLabel for="txtCVOmschrijving" value="Omschrijving"></h:outputLabel>
 			<h:inputText id="txtCVOmschrijving"  value="#{collectievesluiting.omschrijvingCV}"></h:inputText>
 			<h:inputHidden value="legeGrid2-3" id="legeGrid2-3" />
 			<h:inputHidden value="legeGrid2-4" id="legeGrid2-4" />	
+			
+		</h:panelGrid>	
+		<h:panelGrid class="inputPanel_1" columns="4">
 			
 			<h:inputHidden value="legeGrid3-1" id="legeGrid3-1" />
 			<h:outputLabel for="txtCVBDag" value="Dag"></h:outputLabel>
 			<h:outputLabel for="txtCVBMaand" value="Maand"></h:outputLabel>	
 			<h:outputLabel for="txtCVBJaar" value="Jaar"></h:outputLabel>	
 			
-			<h:outputText for="txtCVBeginDatum" value="Begin Datum"></h:outputText>
-			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumCVDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
-			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
-			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>			
+			<h:outputLabel for="txtCVBeginDatum" value="Begin Datum"></h:outputLabel>
+			<h:inputText id="txtCVBDag" class="columnTiny_2" value="#{collectievesluiting.startdatumCVDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
+			<h:inputText id="txtCVBMaand" class="columnTiny_2" value="#{collectievesluiting.startdatumCVMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
+			<h:inputText id="txtCVBJaar" class="columnMedium_1" value="#{collectievesluiting.startdatumCVJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>			
 			
 			<h:inputHidden value="legeGrid5-1" id="legeGrid5-1" />
 			<h:outputLabel for="txtCVEDag" value="Dag"></h:outputLabel>
 			<h:outputLabel for="txtCVEMaand" value="Maand"></h:outputLabel>	
 			<h:outputLabel for="txtCVEJaar" value="Jaar"></h:outputLabel>	
 			
-			<h:outputText for="txtCVEindDatum" value="Eind Datum"></h:outputText>
-			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumCVDag}" converterMessage="Dag moet een getal zijn" ></h:inputText>
-			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumCVMaand}" converterMessage="Maand moet een getal zijn" ></h:inputText>
-			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumCVJaar}" converterMessage="Jaar moet een getal zijn" ></h:inputText>
+			<h:outputLabel for="txtCVEindDatum" value="Eind Datum"></h:outputLabel>
+			<h:inputText id="txtCVEDag" class="columnTiny_2" value="#{collectievesluiting.einddatumCVDag}" converterMessage="Dag moet een getal zijn" ></h:inputText>
+			<h:inputText id="txtCVEMaand" class="columnTiny_2" value="#{collectievesluiting.einddatumCVMaand}" converterMessage="Maand moet een getal zijn" ></h:inputText>
+			<h:inputText id="txtCVEJaar" class="columnMedium_1" value="#{collectievesluiting.einddatumCVJaar}" converterMessage="Jaar moet een getal zijn" ></h:inputText>
 			
-			<h:outputText for="txtCVTerugkerend" value="terugkerend?"></h:outputText>
+		</h:panelGrid>	
+		<h:panelGrid class="inputPanel_1" columns="4">
+			<h:outputLabel for="txtCVTerugkerend" value="Terugkerend?"></h:outputLabel>
 			<h:selectBooleanCheckbox id="txtCVTerugkerend" value="#{collectievesluiting.terugkerendCV}" />
 			<h:inputHidden value="legeCVGrid6-3" id="legeCVGrid6-3" />
 			<h:commandButton value="Toevoegen" action="#{collectievesluiting.voegCollectieveVerlofToe}"></h:commandButton>
 		</h:panelGrid>
 	<br/><br/>
-	<h:dataTable value="#{collectievesluiting.collectieveVerloven}" var="tmp">
+	<h:dataTable value="#{collectievesluiting.collectieveVerloven}" var="tmp"  class="dataTable_1" columnClasses="column_1,column_1,column_1">
 	<f:facet name="caption"> <b>Overzicht van ingegeven Collective Verloven van dit Jaar</b></f:facet>
 		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
 		<h:column><f:facet name="header">Begin Datum</f:facet>#{tmp.begindatum}</h:column> 
@@ -96,7 +95,7 @@
 			
 	<h:commandButton value="Terug" action="#{collectievesluiting.terugAction}"></h:commandButton>
 	</h:form>
-	<h:messages style="color:red;"></h:messages>
+	<h:messages class="errorBox_1"></h:messages>
 				</div>
 		</ui:define>
 	</ui:composition>

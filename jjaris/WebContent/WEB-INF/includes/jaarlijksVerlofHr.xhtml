@@ -10,7 +10,7 @@
 		<ui:define name="title">Jaarlijke verloven(Hr)</ui:define>
 		<ui:define name="content">
 			<div id="content-wrapper">
-				<h:form>
+				<h:form class="contentForm_1">
 					<h:outputLabel id="lblJaarlijksverlof" value="Jaarlijks verlof">
 					</h:outputLabel>
 					<br></br>
@@ -28,7 +28,7 @@
 					<h:commandButton Id="btnZoekJaarlijksVerlof" value="Zoek"
 						action="#{jaarlijks.zoek()}"></h:commandButton>
 					<br />
-					<h:dataTable value="#{jaarlijks.delijst2}" var="tmp">
+					<h:dataTable value="#{jaarlijks.delijst2}" var="tmp" class="dataTable_1" columnClasses="column_1,column_1,column_1,column_1,column_1,column_1,column_1">
 						<h:column>
 							<f:facet name="header">personeelsNummer</f:facet>
 							#{tmp.werknemer.personeelsnummer}
