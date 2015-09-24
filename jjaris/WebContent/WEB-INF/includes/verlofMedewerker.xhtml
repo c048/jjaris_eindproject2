@@ -13,29 +13,30 @@
 			<ui:define name="content">
 				<div id="content-wrapper">
 					<h2>Nieuwe verlofaanvraag indienen</h2>
-					<h:form>
-						<h:panelGrid id="panel" columns="4">
-						<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
+					<h:form class="contentForm_1">
+						<h:panelGrid id="panel" columns="4" class="inputPanel_1">
+							<h:inputHidden value="legeFGrid3-1" id="legeFGrid3-1" />
 							<h:outputLabel for="txtFDag1" value="Dag"></h:outputLabel>
 							<h:outputLabel for="txtFMaand1" value="Maand"></h:outputLabel>	
 							<h:outputLabel for="txtFJaar1" value="Jaar"></h:outputLabel>	
 							
-							<h:outputText for="txtFDatum1" value="Begin Datum"></h:outputText>
-							<h:inputText id="txtFDag1"  value="#{verlofaanvraag.startDag}" converterMessage="Geef een nummer in voor de startdag tussen 1 en 31"></h:inputText>
-							<h:inputText id="txtFMaand1"  value="#{verlofaanvraag.startMaand}" converterMessage="Geef een nummer in voor de start maand tussen 1 en 12"></h:inputText>
-							<h:inputText id="txtFJaar1"  value="#{verlofaanvraag.startJaar}" converterMessage="Geef een nummer in van 4cijfers voor het startjaar"></h:inputText>
+							<h:outputLabel for="txtFDatum1" value="Begin Datum"></h:outputLabel>
+							<h:inputText id="txtFDag1" class="columnTiny_2" value="#{verlofaanvraag.startDag}" converterMessage="Geef een nummer in voor de startdag tussen 1 en 31"></h:inputText>
+							<h:inputText id="txtFMaand1" class="columnTiny_2" value="#{verlofaanvraag.startMaand}" converterMessage="Geef een nummer in voor de start maand tussen 1 en 12"></h:inputText>
+							<h:inputText id="txtFJaar1" class="columnMedium_1" value="#{verlofaanvraag.startJaar}" converterMessage="Geef een nummer in van 4cijfers voor het startjaar"></h:inputText>
 				
 							<h:inputHidden value="legeFGrid3-2" id="legeFGrid3-2" />
 							<h:outputLabel for="txtFDag2" value="Dag"></h:outputLabel>
 							<h:outputLabel for="txtFMaand2" value="Maand"></h:outputLabel>	
 							<h:outputLabel for="txtFJaar2" value="Jaar"></h:outputLabel>	
 							
-							<h:outputText for="txtFDatum2" value="Eind Datum"></h:outputText>
-							<h:inputText id="txtFDag2"  value="#{verlofaanvraag.eindDag}" converterMessage="Geef een nummer in voor de einddag tussen 1 en 31"></h:inputText>
-							<h:inputText id="txtFMaand2"  value="#{verlofaanvraag.eindMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
-							<h:inputText id="txtFJaar2"  value="#{verlofaanvraag.eindJaar}" converterMessage="Geef een nummer in van vier cijfers voor het eindjaar"></h:inputText>
-							
-							
+							<h:outputLabel for="txtFDatum2" value="Eind Datum"></h:outputLabel>
+							<h:inputText id="txtFDag2" class="columnTiny_2" value="#{verlofaanvraag.eindDag}" converterMessage="Geef een nummer in voor de einddag tussen 1 en 31"></h:inputText>
+							<h:inputText id="txtFMaand2" class="columnTiny_2" value="#{verlofaanvraag.eindMaand}" converterMessage="Geef een nummer in voor de eindmaand tussen 1 en 12"></h:inputText>
+							<h:inputText id="txtFJaar2" class="columnMedium_1" value="#{verlofaanvraag.eindJaar}" converterMessage="Geef een nummer in van vier cijfers voor het eindjaar"></h:inputText>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="4" class="inputPanel_1">
 							<h:outputLabel value="Toestand" id="toestand"></h:outputLabel>
 								<h:selectOneMenu id="menu" value="#{verlofaanvraag.toestand}" >
 				            		<f:selectItems value="#{toestandBack.toestandLijst}" />
@@ -46,8 +47,8 @@
 						</h:panelGrid>
 					</h:form>
 					<h2>Overzicht aangevraagde en goedgekeurde verlofdagen</h2>
-					<h:form>
-						<h:dataTable value="#{verlofaanvraag.aanvragen}" var="va">
+					<h:form class="contentForm_1">
+						<h:dataTable value="#{verlofaanvraag.aanvragen}" var="va" class="dataTable_1" columnClasses="column_1,column_1,column_1,column_1,column_1,columnEnd_1">
 			    			<h:column>
 			    				<!-- column header -->
 			    				<f:facet name="header">ID</f:facet>
@@ -78,27 +79,25 @@
 			    				<f:facet name="header">Annuleren</f:facet>
 			    				<h:commandButton value="Annuleer Verlof" action="#{verlofaanvraag.annuleren(va.id)}"></h:commandButton>
 			    			</h:column>
-			    		</h:dataTable>		
+			    		</h:dataTable>	
+			    		
+						<h:dataTable value="#{verlofaanvraag.jaarlijkseVerloven}" var="jaarlijksVerlof" class="dataTable_1" columnClasses="column_1,column_1,columnEnd_1">
+							<h:column>
+								<f:facet name="header">Jaarlijks verlof Jaar</f:facet>
+								#{jaarlijksVerlof.jaar}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Totaal verlofdagen</f:facet>
+								#{jaarlijksVerlof.aantalDagen}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Resterende verlofdagen</f:facet>
+								#{verlofaanvraag.getResterendeVerlofdagen(jaarlijksVerlof.jaar)}
+							</h:column>
+						</h:dataTable>	
 					</h:form>	
 					
-					
-					<h:dataTable value="#{verlofaanvraag.jaarlijkseVerloven}" var="jaarlijksVerlof">
-					<h:column>
-					<f:facet name="header">Jaarlijks verlof Jaar</f:facet>
-					#{jaarlijksVerlof.jaar}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Totaal verlofdagen</f:facet>
-					#{jaarlijksVerlof.aantalDagen}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Resterende verlofdagen</f:facet>
-					#{verlofaanvraag.getResterendeVerlofdagen(jaarlijksVerlof.jaar)}
-					</h:column>
-					</h:dataTable>
-					
-					
-					<h:messages style="color:red;"></h:messages>
+					<h:messages class="errorBox_1"></h:messages>
 				</div>
 			</ui:define>
 		</ui:composition>

@@ -231,7 +231,23 @@ input[type='submit']:hover {
 	padding: 2px 0 4px 0;
 }
 
+textarea {
+	resize: none;
+}
+
+.smallTextArea_1 {
+	resize: none;
+}
+
 /* Main Content */
+
+/* start Utils */
+
+.topAligner {
+	vertical-align: top;
+}
+
+/* end Utils */
 
 .login-panel {
 	background-color: #efefef;
