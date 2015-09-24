@@ -5,6 +5,8 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 
@@ -34,9 +36,9 @@ public class Team implements Serializable {
 	}
 
 	public void setNaam(String naam) {
-		if(naam != null && !naam.trim().equals("")){
-		this.naam = naam;
-		}else{
+		if (naam != null && !naam.trim().equals("")) {
+			this.naam = naam;
+		} else {
 			throw new IllegalArgumentException("De naam van het team mag niet null of een spatie zijn");
 		}
 	}
@@ -59,7 +61,7 @@ public class Team implements Serializable {
 
 	public Werknemer getTeamlid(int personeelsnummer) {
 		Werknemer w = null;
-		for (Werknemer werknemer : teamleden) {
+		for (Werknemer werknemer : getTeamleden()) {
 			if (werknemer.getPersoneelsnummer() == personeelsnummer) {
 				w = werknemer;
 				break;
@@ -69,6 +71,10 @@ public class Team implements Serializable {
 	}
 
 	public List<Werknemer> getTeamleden() {
+		if (teamleden != null) {
+			this.teamleden = this.teamleden.stream().distinct().collect(Collectors.toList());
+		}
+
 		return this.teamleden;
 	}
 
@@ -113,7 +119,7 @@ public class Team implements Serializable {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> persoonlijkeaanvraag = new ArrayList<VerlofAanvraag>();
 
-		for (Werknemer w : teamleden) {
+		for (Werknemer w : getTeamleden()) {
 			persoonlijkeaanvraag.addAll(w.getVerlofaanvragen());
 		}
 
@@ -137,7 +143,7 @@ public class Team implements Serializable {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
 
-		for (Werknemer w : teamleden) {
+		for (Werknemer w : getTeamleden()) {
 			tmpList.addAll(w.getVerlofaanvragen());
 
 		}
@@ -163,7 +169,7 @@ public class Team implements Serializable {
 	public List<VerlofAanvraag> getVerlofAanvragen(Calendar startdatum, Calendar einddatum, Toestand toestand, int personeelsnummer) {
 		List<VerlofAanvraag> TeamAanVraag = new ArrayList<VerlofAanvraag>();
 		List<VerlofAanvraag> tmpList = new ArrayList<VerlofAanvraag>();
-		for (Werknemer w : teamleden) {
+		for (Werknemer w : getTeamleden()) {
 			if (w.getPersoneelsnummer() == personeelsnummer) {
 				tmpList.addAll(w.getVerlofaanvragen());
 			}
@@ -194,8 +200,7 @@ public class Team implements Serializable {
 	 * @param teamlid
 	 */
 	public void verwijderTeamlid(Werknemer teamlid) {
-
-		teamleden.remove(teamlid);
+		getTeamleden().remove(teamlid);
 	}
 
 	/**
@@ -205,7 +210,7 @@ public class Team implements Serializable {
 	 * @return
 	 */
 	public boolean zitWerknemerInTeam(Werknemer werknemer) {
-		if (teamleden != null && !teamleden.isEmpty() && teamleden.contains(werknemer)) {
+		if (getTeamleden() != null && !teamleden.isEmpty() && teamleden.contains(werknemer)) {
 			return true;
 		} else {
 			return false;
