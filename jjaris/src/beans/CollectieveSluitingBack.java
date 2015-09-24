@@ -32,8 +32,9 @@ public class CollectieveSluitingBack implements Serializable {
 	
 	@Inject
 	private LoginBack loginBack;
+	@Inject
+	private ParameterBack params;
 	
-	@Digits(integer=4,fraction=0, message="Vul één geldig nummer a.u.b.")
 	private int startdatumFJaar;
 	private int startdatumFMaand;
 	private int startdatumFDag;
@@ -71,7 +72,9 @@ public class CollectieveSluitingBack implements Serializable {
 			setFacesMessage("Incorrect datum  gegevens");
 			
 		}
-			
+		
+		params.reset();
+		reset();
 		loginBack.changePage("collectieveSluitingHr");
 		return null;
 
@@ -93,6 +96,8 @@ public class CollectieveSluitingBack implements Serializable {
 			
 		}
 		
+		reset();
+		params.reset();
 		loginBack.changePage("collectieveSluitingHr");
 		return null;
 	}
@@ -115,6 +120,8 @@ public class CollectieveSluitingBack implements Serializable {
 	}
 	
 	public String terugAction(){
+		reset();
+		params.reset();
 		loginBack.changePage("medewerkersHr");
 		return null;
 	}
@@ -230,6 +237,29 @@ public class CollectieveSluitingBack implements Serializable {
 		fMsg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		FacesContext.getCurrentInstance().addMessage(null, fMsg);
 		FacesContext.getCurrentInstance().renderResponse();
+	}
+	
+	public void reset(){
+		
+		startdatumFJaar=0;
+		startdatumFMaand=0;
+		startdatumFDag=0;
+		
+		startdatumCVJaar=0;
+		startdatumCVMaand=0;
+		startdatumCVDag=0;
+		
+		einddatumCVJaar=0;
+		einddatumCVMaand=0;
+		einddatumCVDag=0;
+		
+
+		omschrijvingF=null;
+		omschrijvingCV=null;
+		
+		terugkerendF=false;
+		terugkerendCV=false;
+		
 	}
 	
 }
