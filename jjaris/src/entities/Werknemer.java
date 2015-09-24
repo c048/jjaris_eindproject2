@@ -38,7 +38,7 @@ public class Werknemer implements Serializable {
 
 	public Werknemer() {
 		jaarlijkseverloven = new ArrayList<JaarlijksVerlof>();
-		verlofaanvragen = new ArrayList<VerlofAanvraag>();
+		verlofaanvragen = new ArrayList<VerlofAanvraag>(); 
 	}
 
 	public int getPersoneelsnummer() {
