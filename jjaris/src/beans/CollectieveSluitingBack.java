@@ -86,8 +86,13 @@ public class CollectieveSluitingBack implements Serializable {
 		try {
 			DatumBuilder  csBegindatum=new DatumBuilder(startdatumCVDag, startdatumCVMaand, startdatumCVJaar);
 			DatumBuilder  csEinddatum=new DatumBuilder(einddatumCVDag, einddatumCVMaand, einddatumCVJaar);
-			if(omschrijvingCV!=null && !omschrijvingCV.equals(""))
-				dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
+			
+			if(omschrijvingCV!=null && !omschrijvingCV.equals("")) {
+				if(csEinddatum.buildCalendar().after((Calendar)csBegindatum.buildCalendar() ))
+						dao.voegCollectieveVerlofToe(csBegindatum.buildCalendar(), csEinddatum.buildCalendar(),omschrijvingCV, terugkerendCV);
+				else
+					setFacesMessage("Begin datum moet voor eind datum liggen   ");
+			}
 			else
 				setFacesMessage("Omschrijving moet ingevuld zijn  ");
 		}
