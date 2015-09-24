@@ -24,6 +24,8 @@ public class LoginBack implements Serializable {
 	private String paswoord;
 	@Inject
 	private WerknemerDAO wDao;
+	@Inject
+	private ParameterBack params;
 	private String component;
 
 	// @Inject
@@ -67,6 +69,11 @@ public class LoginBack implements Serializable {
 	public String changePage(String page) {
 		setComponent(page);
 		return null;
+	}
+	
+	public String resetChangePage(String page) {
+		params.reset();
+		return changePage(page);
 	}
 
 	public String login() {

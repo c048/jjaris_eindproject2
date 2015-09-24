@@ -135,6 +135,7 @@ public class MedewerkersHrBack implements Serializable {
 	}
 
 	public String createMedewerker() {
+		backIsBack.reset();
 		loginBack.changePage("medewerkerHrManage");
 		return null;
 	}
