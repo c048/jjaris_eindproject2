@@ -157,6 +157,7 @@ public class VerlofMedewerkerBack implements Serializable {
 				verlof.append("\n is aangevraagd");
 				SendMail.SendEmail(user.getIngelogdeWerknemer().getTeam().getTeamverantwoordelijke().getEmail(),	
 					"Verlofaanvraag gewijzigd", verlof.toString());
+				resetParameters();
 		} catch (IllegalArgumentException iae) {
 			FacesMessage msg = new FacesMessage(iae.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
