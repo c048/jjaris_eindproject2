@@ -59,6 +59,7 @@ public class VerlofMedewerkerBack implements Serializable {
 	
 	
 	public List<JaarlijksVerlof> getJaarlijkseVerloven(){
+		//System.out.println(user.getIngelogdeWerknemer().getJaarlijkseverloven().size() + "**************************");
 		return user.getIngelogdeWerknemer().getJaarlijkseverloven();
 	}
 	

@@ -133,6 +133,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<JaarlijksVerlof> getJaarlijkseverloven() {
+		jaarlijkseverloven = jaarlijkseverloven.stream().distinct().collect(Collectors.toList());
 		return jaarlijkseverloven;
 	}
 
@@ -143,7 +144,7 @@ public class Werknemer implements Serializable {
 			// jaarlijkse verloven een andere ID gekregen en deze zouden anders
 			// dubbel in de lijst kunnen komen
 			for (JaarlijksVerlof jaarlijksVerlof : jaarlijkseverloven) {
-				if (!this.jaarlijkseverloven.contains(jaarlijksVerlof)) {
+				if (!getJaarlijkseverloven().contains(jaarlijksVerlof)) {
 					voegJaarlijksVerlofToe(jaarlijksVerlof);
 				}
 			}
@@ -152,6 +153,7 @@ public class Werknemer implements Serializable {
 	}
 
 	public List<VerlofAanvraag> getVerlofaanvragen() {
+		verlofaanvragen = verlofaanvragen.stream().distinct().collect(Collectors.toList());
 		return verlofaanvragen;
 	}
 
@@ -302,8 +304,8 @@ public class Werknemer implements Serializable {
 	
 	public List<VerlofAanvraag> getOpenstaandeVerlofaanvragenJaar(int jaartal){
 		if (verlofaanvragen.isEmpty()) {
-			return verlofaanvragen;
-		}else return verlofaanvragen.stream().filter(v -> (v.geefJaarStartdatum() == jaartal || v.geefJaarEinddatum() == jaartal)).filter(va -> va.getToestand().equals(Toestand.INGEDIEND) || va.getToestand().equals(Toestand.GOEDGEKEURD)).collect(Collectors.toList());
+			return getAlleVerlofAanvragen();
+		}else return verlofaanvragen.stream().filter(v -> (v.geefJaarStartdatum() == jaartal || v.geefJaarEinddatum() == jaartal)).filter(va -> va.getToestand().equals(Toestand.INGEDIEND) || va.getToestand().equals(Toestand.GOEDGEKEURD)).distinct().collect(Collectors.toList());
 	}
 
 	public void voegJaarlijksVerlofToe(JaarlijksVerlof jaarlijksverlof) {
