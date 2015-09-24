@@ -32,9 +32,9 @@
 			<h:outputLabel for="txtFJaar" value="Jaar"></h:outputLabel>	
 			
 			<h:outputText for="txtFDatum" value="Datum"></h:outputText>
-			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumFDag}"></h:inputText>
-			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumFMaand}"></h:inputText>
-			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumFJaar}"></h:inputText>
+			<h:inputText id="txtFDag"  value="#{collectievesluiting.startdatumFDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
+			<h:inputText id="txtFMaand"  value="#{collectievesluiting.startdatumFMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
+			<h:inputText id="txtFJaar"  value="#{collectievesluiting.startdatumFJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>
 			
 			<h:outputText for="txtFTerugkerend" value="terugkerend?"></h:outputText>
 			<h:selectBooleanCheckbox id="txtFTerugkerend" value="#{collectievesluiting.terugkerendF}" />
@@ -65,9 +65,9 @@
 			<h:outputLabel for="txtCVBJaar" value="Jaar"></h:outputLabel>	
 			
 			<h:outputText for="txtCVBeginDatum" value="Begin Datum"></h:outputText>
-			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumCVDag}"></h:inputText>
-			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}"></h:inputText>
-			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}"></h:inputText>			
+			<h:inputText id="txtCVBDag"  value="#{collectievesluiting.startdatumCVDag}" converterMessage="Dag moet een getal zijn"></h:inputText>
+			<h:inputText id="txtCVBMaand"  value="#{collectievesluiting.startdatumCVMaand}" converterMessage="Maand moet een getal zijn"></h:inputText>
+			<h:inputText id="txtCVBJaar"  value="#{collectievesluiting.startdatumCVJaar}" converterMessage="Jaar moet een getal zijn"></h:inputText>			
 			
 			<h:inputHidden value="legeGrid5-1" id="legeGrid5-1" />
 			<h:outputLabel for="txtCVEDag" value="Dag"></h:outputLabel>
@@ -75,9 +75,9 @@
 			<h:outputLabel for="txtCVEJaar" value="Jaar"></h:outputLabel>	
 			
 			<h:outputText for="txtCVEindDatum" value="Eind Datum"></h:outputText>
-			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumCVDag}"></h:inputText>
-			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumCVMaand}"></h:inputText>
-			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumCVJaar}"></h:inputText>
+			<h:inputText id="txtCVEDag"  value="#{collectievesluiting.einddatumCVDag}" converterMessage="Dag moet een getal zijn" ></h:inputText>
+			<h:inputText id="txtCVEMaand"  value="#{collectievesluiting.einddatumCVMaand}" converterMessage="Maand moet een getal zijn" ></h:inputText>
+			<h:inputText id="txtCVEJaar"  value="#{collectievesluiting.einddatumCVJaar}" converterMessage="Jaar moet een getal zijn" ></h:inputText>
 			
 			<h:outputText for="txtCVTerugkerend" value="terugkerend?"></h:outputText>
 			<h:selectBooleanCheckbox id="txtCVTerugkerend" value="#{collectievesluiting.terugkerendCV}" />
