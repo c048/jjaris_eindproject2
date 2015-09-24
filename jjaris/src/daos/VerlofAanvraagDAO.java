@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -151,10 +152,15 @@ public class VerlofAanvraagDAO {
 		
 		return (List<VerlofAanvraag>) query.getResultList();
 	}
-		
+	
+	@PreDestroy
+	public void SluitAf(){
+		em.close();
+	}
 		
 }
 	
+
 	
 
 	//Niet doen dus

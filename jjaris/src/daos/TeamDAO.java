@@ -2,6 +2,7 @@ package daos;
 
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -169,6 +170,11 @@ public class TeamDAO {
 
 		return query.getResultList();
 
+	}
+	
+	@PreDestroy
+	public void SluitAf(){
+		em.close();
 	}
 
 }

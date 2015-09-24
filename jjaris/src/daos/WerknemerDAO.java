@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
@@ -267,6 +268,11 @@ public class WerknemerDAO {
 
 		return query.getResultList();
 
+	}
+	
+	@PreDestroy
+	public void SluitAf(){
+		em.close();
 	}
 
 }

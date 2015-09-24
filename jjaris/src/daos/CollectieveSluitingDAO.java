@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import entities.CollectiefVerlof;
 import entities.Feestdag;
 //.
+
 
 @ApplicationScoped
 public class CollectieveSluitingDAO {
@@ -116,7 +118,11 @@ public class CollectieveSluitingDAO {
 			em.persist(collectieveVerlof);
 		}
 
-
+	}
+	
+	@PreDestroy
+	public void SluitAf(){
+		em.close();
 	}
 	
 }
