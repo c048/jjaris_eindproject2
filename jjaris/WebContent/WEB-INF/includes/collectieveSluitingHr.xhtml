@@ -41,7 +41,7 @@
 		</h:panelGrid>
 	<br/><br/>
 	<h:dataTable value="#{collectievesluiting.feestdagen}" var="tmp" class="dataTable_1" columnClasses="column_1,column_1">
-	<f:facet name="caption"> <b>Overzicht van ingegeven Feestdagen van dit Jaar</b></f:facet>
+	<f:facet name="caption"> <b>Overzicht van ingegeven Feestdagen vanaf dit Jaar</b></f:facet>
 		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
 		<h:column><f:facet name="header">Feestdatum</f:facet>#{tmp.datumStr}</h:column>
 	</h:dataTable>
@@ -85,7 +85,7 @@
 		</h:panelGrid>
 	<br/><br/>
 	<h:dataTable value="#{collectievesluiting.collectieveVerloven}" var="tmp"  class="dataTable_1" columnClasses="column_1,column_1,column_1">
-	<f:facet name="caption"> <b>Overzicht van ingegeven Collective Verloven van dit Jaar</b></f:facet>
+	<f:facet name="caption"> <b>Overzicht van ingegeven Collective Verloven vanaf dit Jaar</b></f:facet>
 		<h:column><f:facet name="header">Omschrijving</f:facet>#{tmp.omschrijving}</h:column>
 		<h:column><f:facet name="header">Begin Datum</f:facet>#{tmp.begindatum}</h:column> 
 		<h:column><f:facet name="header">Eind Datum</f:facet>#{tmp.einddatum}</h:column>
