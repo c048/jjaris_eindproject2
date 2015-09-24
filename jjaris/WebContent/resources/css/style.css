@@ -239,6 +239,21 @@ textarea {
 	resize: none;
 }
 
+.innerTable_1 {
+	width:100%;
+}
+
+.innerTable_1 th {
+	color: #00B4CC;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #00B4CC;
+}
+
+.innerTable_1 td {
+	padding: 5px;
+	width: 50%;
+}
+
 /* Main Content */
 
 /* start Utils */

@@ -35,14 +35,14 @@
 						<h:column>
 							<f:facet name="header">Teamleden</f:facet>
 
-							<h:dataTable value="#{tmpTeam.getTeamleden()}" var="tmpTeamlid">
+							<h:dataTable value="#{tmpTeam.getTeamleden()}" var="tmpTeamlid" class="innerTable_1">
 								<h:column>
 									<f:facet name="header">Nr en volledige naam</f:facet>    	
 						      	#{tmpTeamlid.personeelsnummer}&nbsp;#{tmpTeamlid.volledigeNaam}
 						    </h:column>
 								<h:column>
-									<f:facet name="header">Teamverantwoordelijke</f:facet>    	
-						      	#{tmpTeamlid.isVerantwoordelijke()}
+									<f:facet name="header">Teamverantwoordelijke</f:facet> 
+								${tmpTeamlid.checkVerantwoordelijke()}
 						    </h:column>
 
 
@@ -52,8 +52,7 @@
 
 						<h:column>
 							<f:facet name="header">HR</f:facet>
-							#{tmpTeam.HR}
-							<c:if test="${tmpTeam.HR eq true}">HR</c:if>
+							#{tmpTeam.checkHr()}
 						</h:column>
 						<h:column>
 							<f:facet name="header">Wijzigen Team</f:facet>

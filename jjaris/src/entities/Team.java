@@ -83,6 +83,14 @@ public class Team implements Serializable {
 			this.teamleden = teamleden;
 		}
 	}
+	
+	public String checkHr() {
+		if(getHR()) {
+			return "HR";
+		} else {
+			return null;
+		}
+	}
 
 	public Werknemer getTeamverantwoordelijke() {
 		return this.teamverantwoordelijke;

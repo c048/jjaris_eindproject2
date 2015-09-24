@@ -189,6 +189,14 @@ public class Werknemer implements Serializable {
 		}
 		return false;
 	}
+	
+	public String checkVerantwoordelijke() {
+		if(isVerantwoordelijke()) {
+			return "ja";
+		} else {
+			return null;
+		}
+	}
 
 	public boolean isHR() {
 		return team.isHr();
